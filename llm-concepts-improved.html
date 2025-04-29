@@ -5,18 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LLM Concepts</title>
     <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #6b8cb2;
+            --accent: #ff9e3d;
+            --background: #f5f7fa;
+            --text: #333;
+            --light-text: #666;
+            --code-bg: #f0f2f5;
+            --border: #ddd;
+            --success: #4CAF50;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             max-width: 900px;
             margin: 0 auto;
             padding: 20px;
-            color: #333;
+            color: var(--text);
+            background-color: var(--background);
+        }
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
         }
         h1 {
-            color: #2c3e50;
             text-align: center;
             margin-bottom: 30px;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            font-weight: 300;
         }
         h2 {
             color: #2c3e50;
@@ -280,8 +303,12 @@
     </style>
 </head>
 <body>
-    <h1>Understanding Large Language Models: From Prompt to Response</h1>
-
+    <header>
+        <div class="intro-section">
+            <h1>Introduction to Large Language Models</h1>
+            <div class="subtitle">Understanding Large Language Models: From Prompt to Response</div>
+        </div>
+    </header>
     <!-- New Introduction Section -->
     <div class="intro-section">
         <p>Large Language Models (LLMs) are sophisticated AI systems trained on vast amounts of text data that can understand, generate, and manipulate human language. These powerful tools form the foundation of modern AI applications like chatbots, content generators, and virtual assistants. The following sections explain the key concepts needed to effectively work with LLMs in production-grade applications.</p>
