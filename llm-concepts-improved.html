@@ -281,6 +281,11 @@
 </head>
 <body>
     <h1>Understanding Large Language Models: From Prompt to Response</h1>
+
+    <!-- New Introduction Section -->
+    <div class="intro-section">
+        <p>Large Language Models (LLMs) are sophisticated AI systems trained on vast amounts of text data that can understand, generate, and manipulate human language. These powerful tools form the foundation of modern AI applications like chatbots, content generators, and virtual assistants. The following sections explain the key concepts needed to effectively work with LLMs in production-grade applications.</p>
+    </div>
     
     <div class="concept-section">
         <h2>1. Context Window: The Container of Information</h2>
@@ -371,7 +376,7 @@
     <div class="concept-section">
         <h2>4. Logits: Making Predictions</h2>
         
-        <p><span class="highlight">Concept:</span> <strong>Logits</strong> are raw numerical scores the model assigns to each possible next token before making its final selection.</p>
+        <p><span class="highlight">Concept:</span> <strong>Logits</strong> are raw numerical scores the model assigns to each possible next token before making its final selection. The text generation process has two phases: First, the model processes your prompt to calculate these logits, which are then converted to probabilities for each potential next word. This calculation phase is deterministic - identical inputs always produce the same probability distribution. Second, the model selects tokens from this distribution, either predictably (by always choosing the highest-probability token) or with controlled randomness to balance accuracy with creativity.</p>
         
         <p><span class="highlight">Everyday Example:</span> When completing "The capital of France is ____," a model assigns high scores to relevant answers like "Paris" and low scores to irrelevant options like "banana."</p>
         
@@ -429,7 +434,7 @@
                 <div style="margin-top: 30px; display: flex; gap: 20px;">
                     <div style="flex: 1; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background-color: #f1f9fe;">
                         <h4 style="margin-top: 0;">Temperature</h4>
-                        <p><strong>Modifies the probability distribution itself</strong></p>
+                        <p><strong>Modifies the probability distribution itself. Lower temperatures make the model more deterministic, leading to predictable outputs, while higher temperatures introduce more randomness and creativity</strong></p>
                         <ul>
                             <li><strong>Low (0.2):</strong> Makes likely tokens even more likely</li>
                             <li><strong>High (1.0):</strong> Makes distribution more uniform</li>
@@ -444,7 +449,7 @@
                             <li><strong>topP = 0.9:</strong> Only "Paris", "Lyon", "Nice" considered (95% cumulative)</li>
                             <li><strong>topP = 0.8:</strong> Only "Paris" considered (80% cumulative)</li>
                         </ul>
-                        <div style="font-size: 0.9em; font-style: italic;">Adapts to different probability distributions</div>
+                        <div style="font-size: 0.9em; font-style: italic;">It's more flexible than top-K because it dynamically adjusts the number of tokens based on their probabilities</div>
                     </div>
                     
                     <div style="flex: 1; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background-color: #f1f9fe;">
