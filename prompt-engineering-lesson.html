@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Engineering for High School Students</title>
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #6b8cb2;
+            --accent: #ff9e3d;
+            --background: #f5f7fa;
+            --text: #333;
+            --light-text: #666;
+            --code-bg: #f0f2f5;
+            --border: #ddd;
+            --success: #4CAF50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--background);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            font-weight: 300;
+        }
+        
+        main {
+            padding: 40px 0;
+        }
+        
+        section {
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+        }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .code-block {
+            background-color: var(--code-bg);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .example {
+            background-color: #f9f9f9;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .prompt-example {
+            background-color: #e9f0f9;
+            border-left: 4px solid var(--secondary);
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .response-example {
+            background-color: #f0f9e9;
+            border-left: 4px solid #7cb342;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .quiz-container {
+            background-color: #f0f2f5;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .quiz-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .quiz-options {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .quiz-option {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .quiz-option:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .quiz-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+        
+        .quiz-button:hover {
+            background-color: var(--secondary);
+        }
+        
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .correct {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        
+        .incorrect {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+        
+        .interactive-demo {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            background-color: white;
+        }
+        
+        .demo-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            height: 100px;
+        }
+        
+        .demo-button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .demo-button:hover {
+            background-color: #e08c35;
+        }
+        
+        .demo-output {
+            background-color: #f9f9f9;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 15px;
+            min-height: 100px;
+        }
+        
+        .note {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .diagram {
+            display: block;
+            margin: 25px auto;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid var(--border);
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--code-bg);
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .progress-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 5px;
+            background-color: #f0f0f0;
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--accent);
+            width: 0;
+        }
+        
+        .tab-container {
+            margin: 20px 0;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .tab-button {
+            padding: 10px 15px;
+            background-color: #f0f2f5;
+            border: none;
+            cursor: pointer;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            margin-right: 5px;
+        }
+        
+        .tab-button.active {
+            background-color: white;
+            border: 1px solid var(--border);
+            border-bottom: none;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-top: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <h1>Prompt Engineering for AI Applications</h1>
+            <div class="subtitle">Master the art and science of effective prompts</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="introduction">
+            <h2>Introduction</h2>
+            <p>Welcome to this lesson on prompt engineering! Today, we'll explore how to effectively communicate with artificial intelligence models to get the best possible results for your applications.</p>
+            
+            <p>Prompt engineering is a crucial skill in the AI era. By the end of this 30-minute lesson, you'll understand how to craft effective prompts that can help you build sophisticated AI applications, even without extensive programming knowledge.</p>
+            
+            <p>We'll cover everything from basic concepts to advanced techniques, with a focus on practical examples that you can apply immediately. Let's get started!</p>
+        </section>
+
+        <section id="fundamentals">
+            <h2>1. Fundamentals of Prompting</h2>
+            
+            <h3>What are Prompts?</h3>
+            <p>A <strong>prompt</strong> is the input you provide to an AI system to elicit a specific output. Think of it as a conversation starter or an instruction that guides the AI's response.</p>
+            
+            <p>In technical terms, a prompt is a sequence of tokens (words, characters, or subwords) that provides context and instructions to a language model.</p>
+            
+            <div class="example">
+                <div class="prompt-example">
+                    <strong>Simple Prompt:</strong> "What is machine learning?"
+                </div>
+                <div class="prompt-example">
+                    <strong>More Detailed Prompt:</strong> "Explain machine learning to a high school student in 3 paragraphs, covering supervised learning, unsupervised learning, and reinforcement learning."
+                </div>
+            </div>
+            
+            <h3>How Prompts Work</h3>
+            <p>When you submit a prompt to an AI model like Claude, it processes your input and generates a response based on patterns it learned during training. The model tries to predict what would be the most appropriate continuation of the text.</p>
+            
+            <p>Small changes in how you phrase a prompt can lead to dramatically different results. This is why prompt engineering is both an art and a science.</p>
+            
+            <h3>The Input-Output Relationship</h3>
+            <p>Let's see how different prompts can lead to different outputs, even when asking for similar information:</p>
+            
+            <div class="example">
+                <div class="prompt-example">
+                    <strong>Vague Prompt:</strong> "Tell me about this property."
+                </div>
+                <div class="response-example">
+                    <strong>Response:</strong> "I'd be happy to help, but I need more information about which property you're referring to. Could you provide details such as the address, type of property, or specific aspects you're interested in learning about?"
+                </div>
+                
+                <div class="prompt-example">
+                    <strong>Specific Prompt:</strong> "Analyze 123 Main St property for a potential grocery store location. Consider the 4,000 sq ft space, $8,000 monthly rent, and nearby coffee shops and residential apartments."
+                </div>
+                <div class="response-example">
+                    <strong>Response:</strong> "This 4,000 sq ft property at 123 Main St shows potential as a grocery store location. The $8,000 monthly rent ($24/sq ft annually) is reasonable for retail space. The nearby coffee shops suggest decent foot traffic, while residential apartments provide a built-in customer base. The size is appropriate for a small to mid-sized grocery operation. Consider conducting a demographic analysis and traffic study before making a final decision."
+                </div>
+            </div>
+            
+            <h3>Introduction to Prompt Engineering Libraries</h3>
+            <p>Several Python libraries can help structure and manage prompts more effectively:</p>
+            
+            <ul>
+                <li><strong>LangChain</strong>: A framework for developing applications powered by language models, with tools for prompt management, chains, and agents.</li>
+                <li><strong>Jinja Templates</strong>: A template engine that allows for dynamic prompt creation with variables and conditional logic.</li>
+                <li><strong>Pydantic</strong>: A data validation library that helps structure inputs and outputs when working with language models.</li>
+            </ul>
+            
+            <div class="code-block">
+import langchain
+from langchain.prompts import PromptTemplate
+from langchain.llms import Bedrock
+
+# Initialize the LLM (Claude 3.7 Sonnet)
+llm = Bedrock(
+    model_id="anthropic.claude-3-7-sonnet-20250219",
+    region_name="us-west-2",
+    model_kwargs={"temperature": 0.7, "max_tokens": 1000}
+)
+
+# Create a prompt template
+template = """
+Analyze this potential grocery store location:
+Address: {address}
+Neighborhood demographics: {demographics}
+Nearby competition: {competition}
+
+Provide a brief analysis of the site's potential.
+"""
+
+prompt = PromptTemplate(
+    input_variables=["address", "demographics", "competition"],
+    template=template,
+)
+
+# Example inputs
+location_data = {
+    "address": "123 Main St, Springfield, IL",
+    "demographics": "Mixed-income area, growing population of young families",
+    "competition": "One small convenience store within 1 mile"
+}
+
+# Generate the full prompt
+full_prompt = prompt.format(**location_data)
+print("Generated prompt:")
+print(full_prompt)
+
+# Get response from LLM
+response = llm(full_prompt)
+print("\nLLM Response:")
+print(response)
+            </div>
+            
+            <div class="interactive-demo">
+                <h3>Interactive Prompt Laboratory</h3>
+                <p>Try modifying this prompt to see how it affects the potential response:</p>
+                <textarea class="demo-input" id="promptInput">Analyze this potential grocery store location:
+Address: 456 Oak Avenue, Chicago, IL
+Neighborhood demographics: [EDIT THIS]
+Nearby competition: [EDIT THIS]
+
+Provide a brief analysis of the site's potential.</textarea>
+                <button class="demo-button" onclick="simulatePromptResponse()">Simulate Response</button>
+                <div class="demo-output" id="promptOutput">The response will appear here...</div>
+            </div>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">Which of the following is most likely to produce a specific, useful response from an AI model?</div>
+                <ul class="quiz-options">
+                    <li class="quiz-option" onclick="selectOption(this, 0)">A) What do you think?</li>
+                    <li class="quiz-option" onclick="selectOption(this, 0)">B) Tell me about market research.</li>
+                    <li class="quiz-option" onclick="selectOption(this, 1)">C) Analyze the potential market for an organic grocery store in Austin, TX. Consider local demographics, competition, and provide 3 specific recommendations.</li>
+                    <li class="quiz-option" onclick="selectOption(this, 0)">D) I need help with a business project.</li>
+                </ul>
+                <div class="quiz-feedback" id="quiz1Feedback"></div>
+            </div>
+        </section>
+
+        <section id="prompt-structure">
+            <h2>2. Prompt Structure and Components</h2>
+            
+            <h3>Anatomy of a Prompt</h3>
+            <p>Effective prompts typically include several key components:</p>
+            
+            <ul>
+                <li><strong>Instructions</strong>: Clear directions about what the AI should do</li>
+                <li><strong>Context</strong>: Background information necessary for the task</li>
+                <li><strong>Examples</strong>: Demonstrations of desired input-output pairs</li>
+                <li><strong>Output Format</strong>: Specification of how the response should be structured</li>
+            </ul>
+            
+            <div class="example">
+                <strong>Well-structured prompt:</strong>
+                <div class="prompt-example">
+                    <strong>Instructions:</strong> Analyze this lease document and extract key information.<br>
+                    <strong>Context:</strong> This is a commercial lease for a retail space in a shopping mall.<br>
+                    <strong>Examples:</strong> For the lease term, you should extract both the start date and duration.<br>
+                    <strong>Output Format:</strong> Present the information in a structured format with categories for Lease Term, Monthly Rent, Security Deposit, and Allowed Uses.
+                </div>
+            </div>
+            
+            <h3>Writing Clear Instructions</h3>
+            <p>Clear instructions are specific, unambiguous, and focused on exactly what you want the AI to do:</p>
+            
+            <div class="example">
+                <div class="prompt-example">
+                    <strong>Vague:</strong> "Tell me about this construction document."
+                </div>
+                <div class="prompt-example">
+                    <strong>Clear:</strong> "Identify and list all structural specifications in this construction document that relate to earthquake safety requirements."
+                </div>
+            </div>
+            
+            <h3>Providing Relevant Context</h3>
+            <p>Context helps the AI understand the background and purpose of your request:</p>
+            
+            <div class="example">
+                <div class="prompt-example">
+                    <strong>Without Context:</strong> "Summarize this document."
+                </div>
+                <div class="prompt-example">
+                    <strong>With Context:</strong> "You are analyzing a market research report for a grocery chain considering expansion into Seattle. Summarize the key market trends and competitive landscape described in this document."
+                </div>
+            </div>
+            
+            <h3>Using Jinja Templates for Dynamic Prompts</h3>
+            <p>Jinja templates allow you to create flexible prompts with variables and conditional logic:</p>
+            
+            <div class="code-block">
+from langchain.prompts import PromptTemplate
+from langchain.llms import Bedrock
+import jinja2
+
+# Initialize the LLM
+llm = Bedrock(
+    model_id="anthropic.claude-3-7-sonnet-20250219",
+    region_name="us-west-2",
+    model_kwargs={"temperature": 0.3, "max_tokens": 1000}
+)
+
+# Create a Jinja2 environment
+env = jinja2.Environment()
+
+# Define a more complex template using Jinja2 syntax
+jinja_template = """
+{% if is_commercial %}
+You are analyzing a commercial lease document.
+{% else %}
+You are analyzing a residential lease document.
+{% endif %}
+
+Document excerpt: {{ document_text }}
+
+Please extract the following information:
+1. Lease term length
+2. Monthly payment amount
+3. {% if is_commercial %}Permitted use of property{% else %}Pet policy{% endif %}
+4. Termination conditions
+
+Format your response in a structured way.
+"""
+
+# Create the template object
+template = env.from_string(jinja_template)
+
+# Example document text
+document_text = "Lease Agreement: Term of 36 months commencing January 1, 2025. Tenant shall pay $2,500 monthly. Commercial use limited to retail operations. Early termination requires 60 days notice and 2 months penalty payment."
+
+# Render the template with different variables
+commercial_prompt = template.render(
+    is_commercial=True,
+    document_text=document_text
+)
+
+# Using the rendered template with LangChain
+response = llm(commercial_prompt)
+print("Commercial Lease Analysis:")
+print(response)
+
+# Create a residential version for comparison
+residential_prompt = template.render(
+    is_commercial=False,
+    document_text=document_text
+)
+
+print("\nSame document analyzed as residential lease:")
+print(llm(residential_prompt))
+            </div>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">Which of these is NOT typically a core component of a well-structured prompt?</div>
+                <ul class="quiz-options">
+                    <li class="quiz-option" onclick="selectOption(this, 0)">A) Clear instructions</li>
+                    <li class="quiz-option" onclick="selectOption(this, 0)">B) Relevant context</li>
+                    <li class="quiz-option" onclick="selectOption(this, 1)">C) Model parameters</li>
+                    <li class="quiz-option" onclick="selectOption(this, 0)">D) Output format specification</li>
+                </ul>
+                <div class="quiz-feedback" id="quiz2Feedback"></div>
+            </div>
+            
+            <div class="interactive-demo">
+                <h3>Build Your Own Structured Prompt</h3>
+                <p>Arrange these components in the recommended order for a well-structured prompt:</p>
+                <div id="promptComponents" style="display: flex; flex-direction: column;">
+                    <div style="padding: 10px; margin: 5px; background: #e0e0e0; cursor: move;" draggable="true">Output format: Present findings in a table with columns for Item, Risk Level, and Recommendation</div>
+                    <div style="padding: 10px; margin: 5px; background: #e0e0e0; cursor: move;" draggable="true">Context: You are an expert construction inspector reviewing plans for a 15-story residential building in a seismic zone</div>
+                    <div style="padding: 10px; margin: 5px; background: #e0e0e0; cursor: move;" draggable="true">Examples: For foundation issues, indicate "High Risk" if reinforcement is insufficient</div>
+                    <div style="padding: 10px; margin: 5px; background: #e0e0e0; cursor: move;" draggable="true">Instructions: Identify potential structural safety issues in these building plans</div>
+                </div>
+                <button class="demo-button" onclick="checkPromptOrder()" style="margin-top: 15px;">Check Order</button>
+                <div class="demo-output" id="orderOutput">Arrange the prompt components in the recommended order...</div>
+            </div>
+        </section>
+
+        <section id="basic-techniques">
+            <h2>3. Basic Prompt Design Techniques</h2>
+            
+            <h3>Zero-shot, One-shot, and Few-shot Prompting</h3>
+            <p>These techniques refer to how many examples you include in your prompt:</p>
+            
+            <ul>
+                <li><strong>Zero-shot</strong>: No examples provided, just instructions</li>
+                <li><strong>One-shot</strong>: A single example demonstrating the desired behavior</li>
+                <li><strong>Few-shot</strong>: Multiple examples that establish a pattern</li>
+            </ul>
+            
+            <div class="example">
+                <strong>Zero-shot prompt:</strong>
+                <div class="prompt-example">
+                    Classify this grocery store review sentiment as positive, negative, or neutral: "The produce selection was impressive, but prices were higher than I expected and the checkout lines were too long."
+                </div>
+                
+                <strong>One-shot prompt:</strong>
+                <div class="prompt-example">
+                    Classify grocery store review sentiments as positive, negative, or neutral.
+                    
+                    Example:
+                    Review: "Great selection but the store was messy and understaffed."
+                    Classification: Neutral
+                    
+                    Review: "The produce selection was impressive, but prices were higher than I expected and the checkout lines were too long."
+                    Classification:
+                </div>
+                
+                <strong>Few-shot prompt:</strong>
+                <div class="prompt-example">
+                    Classify grocery store review sentiments as positive, negative, or neutral.
+                    
+                    Examples:
+                    Review: "Great selection but the store was messy and understaffed."
+                    Classification: Neutral
+                    
+                    Review: "I'll never shop here again. Rude staff and expired products."
+                    Classification: Negative
+                    
+                    Review: "Absolutely love this store! Fresh produce and amazing customer service."
+                    Classification: Positive
+                    
+                    Review: "The produce selection was impressive, but prices were higher than I expected and the checkout lines were too long."
+                    Classification:
+                </div>
+            </div>
+            
+            <h3>Role-based Prompting</h3>
+            <p>Assigning a specific role or persona to the AI can dramatically improve results for specialized tasks:</p>
+            
+            <div class="example">
+                <div class="prompt-example">
+                    <strong>Without role:</strong> "Review this architectural design and provide feedback."
+                </div>
+                <div class="prompt-example">
+                    <strong>With role:</strong> "You are an experienced structural engineer with 20 years of experience in high-rise construction projects. Review this architectural design for a 30-story building and identify potential structural weaknesses or safety concerns."
+                </div>
+            </div>
+            
+            <h3>Constraint-based Prompting</h3>
+            <p>Setting explicit boundaries and limitations helps control the output:</p>
+            
+            <div class="example">
+                <div class="prompt-example">
+                    <strong>Without constraints:</strong> "Write a market analysis report for a new organic grocery store."
+                </div>
+                <div class="prompt-example">
+                    <strong>With constraints:</strong> "Write a market analysis report for a new organic grocery store with these requirements:
+                    - Maximum 300 words
+                    - Focus only on demographic analysis and competition
+                    - Include exactly 3 actionable recommendations
+                    - Use bullet points for key insights
+                    - Avoid technical jargon"
+                </div>
+            </div>
+            
+            <h3>System Prompts vs. User Prompts</h3>
+            <p>Many AI systems distinguish between system prompts (which set up the context and behavior) and user prompts (the specific request):</p>
+            
+            <div class="example">
+                <div class="prompt-example">
+                    <strong>System prompt:</strong> "You are a real estate market analyst specializing in commercial properties. You provide concise, data-driven analyses with actionable insights."
+                </div>
+                <div class="prompt-example">
+                    <strong>User prompt:</strong> "Evaluate this potential grocery store location at 123 Main Street, with 15,000 residents within a 1-mile radius and two competing stores nearby."
+                </div>
+            </div>
+            
+            <div class="code-block">
+from langchain.prompts import PromptTemplate
+from langchain.llms import Bedrock
+from pydantic import BaseModel, Field
+from typing import List
+
+# Initialize the LLM
+llm = Bedrock(
+    model_id="anthropic.claude-3-7-sonnet-20250219",
+    region_name="us-west-2",
+    model_kwargs={"temperature": 0.5}
+)
+
+# Pydantic model for structured output
+class MarketInsight(BaseModel):
+    key_finding: str = Field(description="Main insight about the market")
+    customer_segment: str = Field(description="Primary customer demographic")
+    competitor_threat_level: str = Field(description="Low, Medium, or High")
+    recommendations: List[str] = Field(description="List of action recommendations")
+
+# Zero-shot prompt
+zero_shot_template = """
+Analyze the market for organic grocery stores in Austin, Texas.
+Provide key finding, primary customer segment, competitor threat level, and recommendations.
+"""
+
+# One-shot prompt
+one_shot_template = """
+Analyze the market for organic grocery stores in Austin, Texas.
+Provide key finding, primary customer segment, competitor threat level, and recommendations.
+
+Example analysis:
+Key Finding: Portland's organic food market is growing at 15% annually
+Customer Segment: Health-conscious millennials with disposable income
+Competitor Threat Level: Medium
+Recommendations: 
+- Focus on locally-sourced produce
+- Implement a mobile app for delivery
+- Create membership program
+
+Your analysis for Austin:
+"""
+
+# Few-shot prompt
+few_shot_template = """
+Analyze the market for organic grocery stores in Austin, Texas.
+Provide key finding, primary customer segment, competitor threat level, and recommendations.
+
+Example analysis 1:
+Key Finding: Portland's organic food market is growing at 15% annually
+Customer Segment: Health-conscious millennials with disposable income
+Competitor Threat Level: Medium
+Recommendations: 
+- Focus on locally-sourced produce
+- Implement a mobile app for delivery
+- Create membership program
+
+Example analysis 2:
+Key Finding: Chicago's organic sector is saturated in northern neighborhoods
+Customer Segment: Upper-middle class families with young children
+Competitor Threat Level: High
+Recommendations:
+- Differentiate with prepared organic meals
+- Target underserved southern neighborhoods
+- Develop educational programs about organic benefits
+
+Your analysis for Austin:
+"""
+
+# Run all three prompts and compare
+print("ZERO-SHOT RESULTS:")
+print(llm(zero_shot_template))
+
+print("\nONE-SHOT RESULTS:")
+print(llm(one_shot_template))
+
+print("\nFEW-SHOT RESULTS:")
+print(llm(few_shot_template))
+
+# Using Pydantic for structured output (more advanced)
+from langchain.output_parsers import PydanticOutputParser
+
+parser = PydanticOutputParser(pydantic_object=MarketInsight)
+
+structured_prompt = PromptTemplate(
+    template="Analyze the market for organic grocery stores in Austin, Texas.\n{format_instructions}\n",
+    input_variables=[],
+    partial_variables={"format_instructions": parser.get_format_instructions()}
+)
+
+structured_output = llm(structured_prompt.format())
+parsed_output = parser.parse(structured_output)
+print("\nSTRUCTURED OUTPUT WITH PYDANTIC:")
+print(f"Key Finding: {parsed_output.key_finding}")
+print(f"Customer Segment: {parsed_output.customer_segment}")
+print(f"Threat Level: {parsed_output.competitor_threat_level}")
+print("Recommendations:")
+for rec in parsed_output.recommendations:
+    print(f"- {rec}")
+            </div>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">When would a few-shot prompting approach be most beneficial?</div>
+                <ul class="quiz-options">
+                    <li class="quiz-option" onclick="selectOption(this, 0)">A) When you need a very brief, simple answer</li>
+                    <li class="quiz-option" onclick="selectOption(this, 1)">B) When you need the AI to understand a specific format or pattern for its responses</li>
+                    <li class="quiz-option" onclick="selectOption(this, 0)">C) When you want the AI to be completely creative</li>
