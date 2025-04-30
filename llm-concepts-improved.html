@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LLM Concepts</title>
+    <link rel="stylesheet" href="course-nav.css">
+    <link rel="stylesheet" href="course-index.css">
     <style>
         :root {
             --primary: #4a6fa5;
@@ -26,15 +28,14 @@
             color: var(--text);
             background-color: var(--background);
         }
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 30px 0;
-            text-align: center;
-        }
         h1 {
             text-align: center;
             margin-bottom: 30px;
+            margin-top: 40px;
+            color: #2980b9;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            padding-top: 20px;
         }
         .subtitle {
             font-size: 1.2rem;
@@ -52,6 +53,14 @@
             padding: 20px;
             border-radius: 8px;
             background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .course-description {
+            background-color: #eaf2f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .visual-container {
@@ -303,14 +312,11 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="intro-section">
-            <h1>Introduction to Large Language Models</h1>
-            <div class="subtitle">Understanding Large Language Models: From Prompt to Response</div>
-        </div>
-    </header>
-    <!-- New Introduction Section -->
-    <div class="intro-section">
+    <h1>Introduction to Large Language Models</h1>
+
+    <!-- Introduction Section -->
+    <div class="course-description">
+        <h2>Understanding Large Language Models: From Prompt to Response</h2>
         <p>Large Language Models (LLMs) are sophisticated AI systems trained on vast amounts of text data that can understand, generate, and manipulate human language. These powerful tools form the foundation of modern AI applications like chatbots, content generators, and virtual assistants. The following sections explain the key concepts needed to effectively work with LLMs in production-grade applications.</p>
     </div>
     
@@ -769,6 +775,45 @@
                     explanation.style.display = 'block';
                 });
             });
+        });
+    </script>
+    <script src="course-nav.js"></script>
+    <script src="course-index.js"></script>
+    <script>
+        // Function to toggle the navigation index
+        function toggleNav() {
+            const navContent = document.getElementById('navContent');
+            navContent.classList.toggle('hidden');
+            
+            // Update button text
+            const navToggle = document.querySelector('.nav-toggle');
+            if (navContent.classList.contains('hidden')) {
+                navToggle.textContent = '☰';
+            } else {
+                navToggle.textContent = '✕';
+            }
+        }
+        
+        // Add IDs to sections for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add IDs to concept sections
+            const sections = document.querySelectorAll('.concept-section');
+            if (sections.length >= 1) {
+                sections[0].id = 'context-window';
+                if (sections.length >= 2) sections[1].id = 'tokenization';
+                if (sections.length >= 3) sections[2].id = 'embeddings';
+                if (sections.length >= 4) sections[3].id = 'temperature';
+                if (sections.length >= 5) sections[4].id = 'response-format';
+                if (sections.length >= 6) sections[5].id = 'model-selection';
+            }
+            
+            // Add ID to quiz section
+            const quizSection = document.querySelector('.quiz-section');
+            if (quizSection) quizSection.id = 'quiz-section';
+            
+            // Add ID to intro section
+            const courseDescription = document.querySelector('.course-description');
+            if (courseDescription) courseDescription.id = 'introduction';
         });
     </script>
 </body>

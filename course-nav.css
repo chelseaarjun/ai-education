@@ -1,0 +1,226 @@
+/* Course Navigation Styles */
+.course-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #2c3e50;
+    color: white;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.course-nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 50px;
+    box-sizing: border-box;
+}
+
+.course-nav-logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.course-nav-logo:hover {
+    color: #ff9e3d;
+}
+
+.course-nav-menu {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    height: 50px;
+}
+
+.course-nav-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.course-nav-dropdown-btn {
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 8px 15px;
+    font-size: 1rem;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 36px;
+    box-sizing: border-box;
+}
+
+.course-nav-dropdown-btn:hover {
+    background-color: #34495e;
+}
+
+.course-nav-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    z-index: 1001;
+    right: 0;
+    top: 100%;
+    margin-top: 5px;
+    
+    /* Add transition for smooth appearance/disappearance */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0s linear 0.2s;
+}
+
+.course-nav-dropdown-item {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #eee;
+}
+
+.course-nav-dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.course-nav-dropdown-item.available {
+    color: #2980b9;
+    font-weight: bold;
+}
+
+.course-nav-dropdown-item.coming-soon {
+    color: #7f8c8d;
+    cursor: not-allowed;
+}
+
+.course-nav-dropdown-item.coming-soon span {
+    font-size: 12px;
+    background-color: #95a5a6;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+
+/* Create a pseudo-element to extend the hover area */
+.course-nav-dropdown::after {
+    content: '';
+    position: absolute;
+    height: 20px;
+    width: 100%;
+    bottom: -20px;
+    left: 0;
+    z-index: 0;
+}
+
+/* Show dropdown on hover with delay */
+.course-nav-dropdown:hover .course-nav-dropdown-content {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+/* Keep dropdown visible when hovering over the content */
+.course-nav-dropdown-content:hover {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+.course-nav-dropdown-item:hover:not(.coming-soon) {
+    background-color: #f5f7fa;
+}
+
+/* Home button */
+.course-nav-home {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.course-nav-home:hover {
+    background-color: #34495e;
+}
+
+/* Mobile menu button */
+.course-nav-mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .course-nav-menu {
+        display: none;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        background-color: #2c3e50;
+        flex-direction: column;
+        padding: 10px 0;
+    }
+    
+    .course-nav-menu.active {
+        display: flex;
+    }
+    
+    .course-nav-mobile-toggle {
+        display: block;
+    }
+    
+    .course-nav-dropdown {
+        width: 100%;
+    }
+    
+    .course-nav-dropdown-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .course-nav-dropdown-content {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        margin-top: 0;
+        background-color: #34495e;
+    }
+    
+    .course-nav-dropdown-item {
+        color: white;
+        border-bottom: 1px solid #2c3e50;
+    }
+    
+    .course-nav-home {
+        width: 100%;
+        text-align: center;
+        display: block;
+    }
+}
+
+/* Add padding to body to account for fixed navbar */
+body {
+    padding-top: 50px;
+}
