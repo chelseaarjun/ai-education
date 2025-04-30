@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prompt Engineering for AI Applications</title>
-    <link rel="stylesheet" href="course-nav.css">
-    <link rel="stylesheet" href="course-index.css">
+    <link rel="stylesheet" href="../assets/css/course-nav.css">
+    <link rel="stylesheet" href="../assets/css/course-index.css">
     <style>
         :root {
             --primary: #4a6fa5;
@@ -283,11 +283,19 @@
 </head>
 <body>  
     <!-- Navigation Index will be added by course-index.js -->    
-    <h1>Prompt Engineering Guide</h1>
+    <header>
+        <div class="container">
+            <h1>Prompt Engineering Guide</h1>
+            <div class="subtitle">Master the art and science of effective prompts</div>
+            <div style="position: absolute; top: 20px; right: 20px;">
+                <a href="../index.html" style="color: white; text-decoration: none; font-size: 14px; opacity: 0.8; background-color: rgba(0,0,0,0.2); padding: 5px 10px; border-radius: 4px;">← Back to Home</a>
+            </div>
+        </div>
+    </header>
     
     <main class="container">
         <div class="course-description" id="introduction">
-            <h2>Master the art and science of effective prompts</h2>
+            <h2>Introduction to Prompt Engineering</h2>
             <p>Welcome to this guide on prompt engineering! Today, you'll explore how to effectively communicate with artificial intelligence models like Claude and Amazon Bedrock to get the best possible results for your applications.</p>
             
             <p>Prompt engineering is a crucial skill in the AI era. By the end of this 30-minute lesson, you'll understand how to craft effective prompts that can help you build sophisticated AI applications, even without extensive programming knowledge.</p>
@@ -960,8 +968,8 @@
         </section>
     </main>
 
-    <script src="course-nav.js"></script>
-    <script src="course-index.js"></script>
+    <script src="../assets/js/course-nav.js"></script>
+    <script src="../assets/js/course-index.js"></script>
     <script>
         // Function to toggle the navigation index
         function toggleNav() {

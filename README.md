@@ -6,6 +6,18 @@ A comprehensive educational resource for learning about Large Language Models (L
 
 This repository contains interactive web-based lessons designed to teach fundamental concepts about Large Language Models and prompt engineering. The materials are suitable for students, developers, and professionals looking to understand how LLMs work and how to effectively interact with them.
 
+## Repository Structure
+
+```
+ai-education/
+├── assets/
+│   ├── css/           # Stylesheet files
+│   ├── js/            # JavaScript files
+│   └── images/        # Images and diagrams
+├── pages/             # Individual lesson pages
+└── index.html         # Main course homepage
+```
+
 ## Contents
 
 ### 1. LLM Concepts Lesson
@@ -14,10 +26,9 @@ An in-depth exploration of how Large Language Models work, covering:
 - **Context Windows**: Understanding token limitations and management
 - **Tokenization**: How text is broken down for processing
 - **Embeddings**: Semantic understanding and vector representations
-- **Logits & Token Selection**: How models generate text responses
+- **Temperature & Sampling**: How models generate text responses
 - **Response Formatting**: Structured vs. unstructured outputs
-- **Reasoning Capabilities**: How models break down complex problems
-- **Model Specifications**: Detailed information about Claude 3.7 Sonnet
+- **Model Selection**: Choosing the right model for your application
 
 ### 2. Prompt Engineering Lesson
 A practical guide to crafting effective prompts, including:
@@ -28,8 +39,18 @@ A practical guide to crafting effective prompts, including:
   - Zero-shot, one-shot, and few-shot prompting
   - Role-based prompting
   - Constraint-based prompting
-  - System vs. user prompts
-- **Advanced Techniques**: Using libraries like LangChain, Jinja templates, and Pydantic
+- **Advanced Techniques**:
+  - Chain-of-thought prompting
+  - Prompt chaining
+  - ReAct (Reasoning and Acting)
+  - RAG (Retrieval Augmented Generation)
+
+### 3. Open Source Tools (Coming Soon)
+An overview of key open-source libraries and frameworks for building AI applications:
+
+- **Core LLM Frameworks**: LangChain, LlamaIndex, Langfuse
+- **General Purpose Libraries**: FastAPI, Streamlit, Pydantic, Jinja2
+- **Integration with AWS Bedrock**
 
 ## Features
 

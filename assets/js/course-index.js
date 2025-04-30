@@ -3,7 +3,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Create the index HTML based on the page
     function createIndex() {
         // Get the current page
-        const currentPage = window.location.pathname.split('/').pop();
+        let currentPage = window.location.pathname.split('/').pop();
+        
+        // Handle pages in the pages directory
+        if (window.location.pathname.includes('/pages/')) {
+            currentPage = currentPage;
+        }
         
         // Define the index content based on the page
         let indexContent = '';
@@ -82,6 +87,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 </li>
                 <li><a href="#additional-libraries" class="nav-link">Additional Libraries</a></li>
             `;
+            
+            // Back to home link is now added directly in the HTML
         }
         
         // Create the index HTML
