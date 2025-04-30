@@ -3,21 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LLM Concepts</title>
-    <!-- Same CSS as in original index.html -->
+    <title>AI Foundations Course</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2980b9;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .course-description {
+            background-color: #eaf2f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .navigation {
+            text-align: center;
+            margin: 30px 0;
+            padding: 15px;
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .nav-button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .nav-button:hover {
+            background-color: #2980b9;
+        }
+        .module-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .part {
+            flex: 1;
+            min-width: 300px;
+        }
+        .module {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+        }
+        .module h3 {
+            margin-top: 0;
+            color: #3498db;
+        }
+        .module.coming-soon {
+            border-left: 4px solid #95a5a6;
+            opacity: 0.8;
+        }
+        .module.coming-soon h3 {
+            color: #7f8c8d;
+        }
+        .module.coming-soon::after {
+            content: "Coming Soon";
+            background-color: #95a5a6;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            float: right;
+        }
+        .ai-evolution {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .ai-timeline {
+            margin-top: 20px;
+            position: relative;
+        }
+        .ai-timeline::before {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 4px;
+            background-color: #3498db;
+            left: 20px;
+            top: 0;
+        }
+        .timeline-item {
+            margin-left: 50px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #3498db;
+            left: -36px;
+            top: 5px;
+        }
+        .timeline-year {
+            font-weight: bold;
+            color: #3498db;
+        }
+        .genai-section {
+            background-color: #e8f8f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid #1abc9c;
+        }
+    </style>
 </head>
 <body>
-    <h1>Understanding Large Language Models: From Prompt to Response</h1>
+    <h1>AI Foundations Course</h1>
+    
+    <div class="course-description">
+        <h2>Welcome to AI Foundations</h2>
+        <p>This comprehensive course explores the key concepts needed to build production-grade AI applications. hrough a combination of theoretical foundations and practical applications, you'll build the skills necessary to understand and create AI-powered solutions.</p>
+    </div>
     
     <!-- Navigation Menu -->
-    <div style="text-align: center; margin: 30px 0; padding: 15px; background-color: #f0f7ff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <div class="navigation">
         <h3>Course Navigation</h3>
-        <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px;">
-            <a href="llm-concepts-improved.html" style="padding: 10px 20px; background-color: #3498db; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">LLM Concepts</a>
-            <a href="prompt-engineering-guide.html" style="padding: 10px 20px; background-color: #3498db; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Prompting Strategies</a>
+        <div class="nav-buttons">
+            <a href="llm-concepts-improved.html" class="nav-button">Introduction to LLMs</a>
+            <a href="prompt-engineering-guide.html" class="nav-button">Prompt Engineering Guide</a>
         </div>
     </div>
     
-    <!-- Original content continues below... -->
+    <!-- Generative AI Overview Section -->
+    <div class="genai-section">
+        <h2>Understanding Generative AI</h2>
+        
+        <p>Generative AI represents the cutting edge of artificial intelligence technology, enabling machines to generate, create, and manipulate diverse types of content - from text and code to images, audio, and video.</p>
+        
+        <p>At its core, generative AI systems can produce new, original content rather than simply analyzing or classifying existing data. This revolutionary capability is transforming how we interact with technology and opening up new possibilities across industries.</p>
+        
+        <h3>Key Components of Generative AI:</h3>
+        
+        <h4>Foundation Models</h4>
+        <p>Foundation models are large-scale, general-purpose AI models trained on vast and diverse datasets. These models develop a deep, flexible understanding of language, vision, reasoning, and other domains, serving as the backbone for various specialized applications.</p>
+        
+        <h4>Large Language Models (LLMs)</h4>
+        <p>LLMs like GPT-4o, Claude 3.7, and Amazon's Titan represent a prominent class of foundation models that excel at natural language tasks. These models can understand and generate human-like text, making them powerful tools for applications ranging from content creation to code generation.</p>
+        
+        <h4>Multimodal Models</h4>
+        <p>The latest generation of foundation models (as of 2025) can process and generate multiple types of data simultaneously - understanding images, text, audio, and video in an integrated way. This multimodal capability enables more natural and comprehensive AI applications.</p>
+        
+        <h3>Adapting Foundation Models:</h3>
+        <p>While foundation models provide powerful general-purpose capabilities, they typically need adaptation for specific applications. The three primary techniques for customizing these models are:</p>
+        
+        <ol>
+            <li><strong>Prompt Engineering:</strong> The art of crafting text instructions to guide the model toward desired outputs. Advanced prompting techniques include few-shot learning, chain-of-thought prompting, and retrieval-augmented generation (RAG) - where models are connected to external knowledge sources to enhance their responses with accurate, up-to-date information.</li>
+            
+            <li><strong>Agents:</strong> AI systems that can autonomously perform complex tasks by combining reasoning capabilities with external tools and persistent memory. Agents can decompose problems, plan solutions, execute actions, and learn from feedback, enabling more sophisticated applications than prompt engineering alone.</li>
+            
+            <li><strong>Fine-Tuning:</strong> The process of retraining models on domain-specific data to specialize them for particular tasks or industries. Advanced approaches include parameter-efficient fine-tuning and context distillation. <em>(Note: Fine-tuning is outside the scope of this introductory course but is mentioned for completeness.)</em></li>
+        </ol>
+    </div>
+    
+    <!-- AI Evolution Timeline -->
+    <div class="ai-evolution">
+        <h2>The Evolution of Artificial Intelligence</h2>
+        <p>AI has evolved dramatically over the decades, with each phase building on the innovations of previous generations.</p>
+        
+        <div class="ai-timeline">
+            <div class="timeline-item">
+                <span class="timeline-year">1950s-1960s:</span>
+                <p><strong>Early Artificial Intelligence</strong> - The field of AI emerges with the development of basic algorithms and the exploration of symbolic reasoning. The term "Artificial Intelligence" is coined at the Dartmouth Conference in 1956.</p>
+            </div>
+            
+            <div class="timeline-item">
+                <span class="timeline-year">1990s-2000s:</span>
+                <p><strong>Machine Learning (ML)</strong> - Advancements lead to the creation of predictive models that can learn from historical data to make future predictions. ML enables computers to improve their performance on tasks through experience.</p>
+            </div>
+            
+            <div class="timeline-item">
+                <span class="timeline-year">2010s:</span>
+                <p><strong>Deep Learning</strong> - A subset of ML that uses artificial neural networks inspired by the human brain to automatically extract complex patterns from large datasets in a hierarchical manner. Deep learning powers breakthroughs in image recognition, natural language processing, and other domains.</p>
+            </div>
+            
+            <div class="timeline-item">
+                <span class="timeline-year">2017-2022:</span>
+                <p><strong>Generative AI (GenAI)</strong> - Building upon deep learning, generative models enable machines to create original content across various modalities. Transformer architectures fundamentally change NLP capabilities.</p>
+            </div>
+            
+            <div class="timeline-item">
+                <span class="timeline-year">2023-2025:</span>
+                <p><strong>Multimodal Foundation Models</strong> - The latest generation of models can seamlessly work across different types of data (text, images, audio), enabling new applications and more natural human-AI interactions.</p>
+            </div>
+            
+            <div class="timeline-item">
+                <span class="timeline-year">2024-2025:</span>
+                <p><strong>Agent-Based Systems & AI Reasoning</strong> - Models are increasingly capable of complex reasoning, task decomposition, and autonomous action through agent frameworks that combine multiple AI capabilities.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Course Modules -->
+    <h2>Course Structure</h2>
+    <div class="module-container">
+        <div class="part">
+            <h2>Part 1: Foundational Concepts</h2>
+            
+            <div class="module">
+                <h3>Introduction to Large Language Models</h3>
+                <p>Learn about the architecture, capabilities, and limitations of Large Language Models. Understand the fundamental concepts behind these powerful AI systems that are driving innovation across industries.</p>
+                <p><a href="llm-concepts-improved.html" class="nav-button">Start Module</a></p>
+            </div>
+            
+            <div class="module">
+                <h3>Prompt Engineering Guide</h3>
+                <p>Master the art of effectively communicating with AI models through carefully crafted prompts. Learn strategies and techniques to get the most accurate and useful responses from language models.</p>
+                <p><a href="prompt-engineering-guide.html" class="nav-button">Start Module</a></p>
+            </div>
+            
+            <div class="module coming-soon">
+                <h3>Introduction to Agents</h3>
+                <p>Explore how AI agents can autonomously perform complex tasks by combining multiple capabilities. Learn about frameworks like ReAct that enable reasoning and action in AI systems.</p>
+            </div>
+            
+            <div class="module coming-soon">
+                <h3>Introduction to LLMOps</h3>
+                <p>Understand the operational aspects of deploying and maintaining LLM-based applications. Learn best practices for monitoring, updating, and scaling AI systems in production environments.</p>
+            </div>
+        </div>
+        
+        <div class="part">
+            <h2>Part 2: Building AI Applications</h2>
+            
+            <div class="module coming-soon">
+                <h3>Open Source Tools & Frameworks</h3>
+                <p>Discover the wide range of open-source tools available for building AI applications. Learn about frameworks like LangChain, LangGraph, LangFuse and others that enable developers to create powerful AI solutions.</p>
+            </div>
+            
+            <div class="module coming-soon">
+                <h3>AWS Bedrock Services</h3>
+                <p>Learn how to leverage Amazon's Bedrock platform for using foundation models, managing prompts and building Agents</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
