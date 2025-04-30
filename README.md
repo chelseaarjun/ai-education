@@ -2,8 +2,6 @@
 
 A comprehensive educational resource for learning about Large Language Models (LLMs) and effective prompt engineering techniques.
 
-![AI Education Banner](https://via.placeholder.com/800x200/4a6fa5/ffffff?text=AI+Education)
-
 ## Overview
 
 This repository contains interactive web-based lessons designed to teach fundamental concepts about Large Language Models and prompt engineering. The materials are suitable for students, developers, and professionals looking to understand how LLMs work and how to effectively interact with them.
