@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Source Tools & Frameworks for AWS Bedrock</title>
+    <link rel="stylesheet" href="course-nav.css">
+    <link rel="stylesheet" href="course-index.css">
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #6b8cb2;
+            --accent: #ff9e3d;
+            --background: #f5f7fa;
+            --text: #333;
+            --light-text: #666;
+            --code-bg: #f0f2f5;
+            --border: #ddd;
+            --success: #4CAF50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 40px;
+            color: #2980b9;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            padding-top: 20px;
+        }
+        .module-introduction {
+            background-color: #eaf2f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .course-description {
+            background-color: #eaf2f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        /* Navigation styles moved to course-nav.css */
+        .section {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .library {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+        }
+        .library h3 {
+            margin-top: 0;
+            color: #3498db;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .library-tag {
+            font-size: 14px;
+            background-color: #e1f0fa;
+            color: #3498db;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-weight: normal;
+        }
+        .library-details {
+            display: flex;
+            margin-top: 15px;
+            gap: 20px;
+        }
+        .library-details .features {
+            flex: 2;
+        }
+        .library-details .links {
+            flex: 1;
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .features ul {
+            margin-top: 5px;
+            padding-left: 20px;
+        }
+        .features li {
+            margin-bottom: 8px;
+        }
+        .library-code {
+            background-color: #f1f2f6;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+        .reference-section {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+        .reference-list {
+            column-count: 2;
+            column-gap: 30px;
+        }
+        .reference-item {
+            margin-bottom: 15px;
+            break-inside: avoid;
+        }
+        .note-box {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        .note-box p {
+            margin: 0;
+        }
+        code {
+            background-color: #f8f8f8;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Open Source Tools & Frameworks for AWS Bedrock</h1>
+    
+    <!-- Module Introduction -->
+    <div class="course-description">
+        <h2>Introduction</h2>
+        <p>AWS Bedrock provides a powerful platform for building generative AI applications, but complementing it with open-source tools can significantly enhance your development workflow, add capabilities, and improve productivity. This module explores key MIT and Apache-licensed libraries that work seamlessly with AWS Bedrock services.</p>
+        <p>We'll focus on two categories of libraries:</p>
+        <ol>
+            <li><strong>Core LLM Framework Libraries</strong> - Specialized frameworks for building LLM applications</li>
+            <li><strong>General Purpose Libraries</strong> - Tools that facilitate development, deployment and monitoring</li>
+        </ol>
+    </div>
+    
+    <!-- Core LLM Frameworks Section -->
+    <div class="section">
+        <h2>Core LLM Framework Libraries</h2>
+        <p>These specialized frameworks form the foundation of modern LLM application development. They provide abstractions, patterns, and tools specifically designed for working with large language models.</p>
+        
+        <div class="library">
+            <h3>LangChain <span class="library-tag">MIT License</span></h3>
+            <p>LangChain is the industry standard framework for building LLM applications, offering a comprehensive toolkit for creating context-aware, reasoning-based AI systems.</p>
+            
+            <div class="library-details">
+                <div class="features">
+                    <h4>Key Features:</h4>
+                    <ul>
+                        <li><strong>AWS Bedrock Integration</strong> - Direct support via the <code>langchain-aws</code> package, providing optimized connections to Bedrock models and knowledge bases</li>
+                        <li><strong>Composable Chains</strong> - Build complex workflows by chaining together LLM calls, retrievers, and tools</li>
+                        <li><strong>RAG Support</strong> - Comprehensive tools for implementing Retrieval Augmented Generation</li>
+                        <li><strong>Agent Framework</strong> - Create autonomous agents that can reason and use tools to complete tasks</li>
+                    </ul>
+                </div>
+                <div class="links">
+                    <h4>Resources:</h4>
+                    <ul>
+                        <li><a href="https://github.com/langchain-ai/langchain" target="_blank">GitHub Repository</a></li>
+                        <li><a href="https://python.langchain.com/" target="_blank">Documentation</a></li>
+                        <li><a href="https://python.langchain.com/docs/integrations/llms/bedrock" target="_blank">Bedrock Integration</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="library-code">
+                <pre><code># Example: Using LangChain with AWS Bedrock
+from langchain_aws import ChatBedrock
+
+# Initialize the Bedrock chat model
+llm = ChatBedrock(
+    model="anthropic.claude-3-sonnet-20240229-v1:0",
+    region_name="us-east-1"
+)
+
+# Create a simple conversation
+response = llm.invoke("What are three key benefits of using AWS Bedrock?")
+print(response.content)</code></pre>
+            </div>
+        </div>
+        
+        <div class="library">
+            <h3>LlamaIndex <span class="library-tag">MIT License</span></h3>
+            <p>LlamaIndex is a data framework specialized in connecting LLMs to external data sources, with powerful capabilities for data ingestion, indexing, and retrieval.</p>
+            
+            <div class="library-details">
+                <div class="features">
+                    <h4>Key Features:</h4>
+                    <ul>
+                        <li><strong>Data Connectors</strong> - Extensive collection of connectors for various data sources (PDFs, APIs, databases, etc.)</li>
+                        <li><strong>Query Engines</strong> - Sophisticated engines for retrieving relevant information from your data</li>
+                        <li><strong>AWS Bedrock Support</strong> - Seamless integration with Bedrock models and knowledge bases</li>
+                        <li><strong>Multi-Modal Support</strong> - Ability to work with text, images, and structured data</li>
+                    </ul>
+                </div>
+                <div class="links">
+                    <h4>Resources:</h4>
+                    <ul>
+                        <li><a href="https://github.com/run-llama/llama_index" target="_blank">GitHub Repository</a></li>
+                        <li><a href="https://docs.llamaindex.ai/" target="_blank">Documentation</a></li>
+                        <li><a href="https://docs.llamaindex.ai/en/stable/examples/llm/bedrock.html" target="_blank">Bedrock Examples</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="library-code">
+                <pre><code># Example: Using LlamaIndex with AWS Bedrock
+from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
+from llama_index.llms.bedrock import Bedrock
+
+# Initialize Bedrock LLM
+llm = Bedrock(
+    model="anthropic.claude-3-sonnet-20240229-v1",
+    region_name="us-east-1"
+)
+
+# Load and index documents
+documents = SimpleDirectoryReader("./data").load_data()
+index = VectorStoreIndex.from_documents(documents)
+
+# Create query engine with Bedrock LLM
+query_engine = index.as_query_engine(llm=llm)
+response = query_engine.query("What key information is in these documents?")</code></pre>
+            </div>
+        </div>
+        
+        <div class="library">
+            <h3>Langfuse <span class="library-tag">MIT License</span></h3>
+            <p>Langfuse is a comprehensive observability platform for LLM applications, providing powerful tools for tracing, evaluating, and analyzing your AI systems.</p>
+            
+            <div class="library-details">
+                <div class="features">
+                    <h4>Key Features:</h4>
+                    <ul>
+                        <li><strong>Tracing</strong> - Detailed visibility into every step of your LLM application's execution</li>
+                        <li><strong>Evaluation Framework</strong> - Tools for assessing response quality, accuracy, and relevance</li>
+                        <li><strong>Cost Tracking</strong> - Monitor token usage and associated costs across your application</li>
+                        <li><strong>Framework Integrations</strong> - Seamless integration with LangChain, LlamaIndex, and other frameworks</li>
+                    </ul>
+                </div>
+                <div class="links">
+                    <h4>Resources:</h4>
+                    <ul>
+                        <li><a href="https://github.com/langfuse/langfuse" target="_blank">GitHub Repository</a></li>
+                        <li><a href="https://langfuse.com/docs" target="_blank">Documentation</a></li>
+                        <li><a href="https://langfuse.com/docs/integrations/frameworks/langchain" target="_blank">LangChain Integration</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="library-code">
+                <pre><code># Example: Using Langfuse with LangChain and AWS Bedrock
+import langfuse
+from langchain_aws import ChatBedrock
+from langchain_core.callbacks import LangfuseCallbackHandler
+
+# Initialize Langfuse
+langfuse.init(
+    public_key="pk-lf-...",
+    secret_key="sk-lf-...",
+)
+
+# Set up Langfuse callback
+handler = LangfuseCallbackHandler()
+
+# Initialize Bedrock chat model with tracing
+llm = ChatBedrock(
+    model="anthropic.claude-3-sonnet-20240229-v1:0",
+    region_name="us-east-1",
+    callbacks=[handler]
+)
+
+# Traced conversation
+response = llm.invoke("What are the benefits of LLM observability?")</code></pre>
+            </div>
+        </div>
+    </div>
+    
+    <!-- General Purpose Libraries Section -->
+    <div class="section">
+        <h2>General Purpose Libraries</h2>
+        <p>These libraries provide essential functionality for building, deploying, and maintaining production-grade AI applications with AWS Bedrock.</p>
+        
+        <div class="library">
+            <h3>FastAPI <span class="library-tag">MIT License</span></h3>
+            <p>FastAPI is a modern, high-performance web framework for building APIs with Python, ideal for creating robust backends for your AI applications.</p>
+            
+            <div class="library-details">
+                <div class="features">
+                    <h4>Key Features:</h4>
+                    <ul>
+                        <li><strong>High Performance</strong> - Built on Starlette and Pydantic, FastAPI is one of the fastest Python frameworks available</li>
+                        <li><strong>Automatic Documentation</strong> - Interactive API documentation generated automatically</li>
+                        <li><strong>Type Validation</strong> - Built-in request and response validation based on Python type hints</li>
+                        <li><strong>Asynchronous Support</strong> - First-class support for async/await, essential for handling LLM requests efficiently</li>
+                    </ul>
+                </div>
+                <div class="links">
+                    <h4>Resources:</h4>
+                    <ul>
+                        <li><a href="https://github.com/tiangolo/fastapi" target="_blank">GitHub Repository</a></li>
+                        <li><a href="https://fastapi.tiangolo.com/" target="_blank">Documentation</a></li>
+                        <li><a href="https://fastapi.tiangolo.com/tutorial/async/" target="_blank">Async Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="library-code">
+                <pre><code># Example: Creating a Bedrock-powered API with FastAPI
+from fastapi import FastAPI, Body
+from pydantic import BaseModel
+import boto3
+import json
+
+app = FastAPI(title="Bedrock AI API")
+
+# Set up Bedrock client
+bedrock_runtime = boto3.client(
+    service_name="bedrock-runtime",
+    region_name="us-east-1"
+)
+
+class PromptRequest(BaseModel):
+    prompt: str
+    max_tokens: int = 500
+
+@app.post("/generate")
+async def generate_text(request: PromptRequest):
+    response = bedrock_runtime.invoke_model(
+        modelId="anthropic.claude-3-sonnet-20240229-v1",
+        body=json.dumps({
+            "prompt": request.prompt,
+            "max_tokens_to_sample": request.max_tokens
+        })
+    )
+    return {"generated_text": json.loads(response["body"])["completion"]}</code></pre>
+            </div>
+        </div>
+        
+        <div class="library">
+            <h3>Streamlit <span class="library-tag">Apache 2.0</span></h3>
+            <p>Streamlit is a rapid application development framework that turns data scripts into shareable web applications, perfect for creating interactive AI demos and internal tools.</p>
+            
+            <div class="library-details">
+                <div class="features">
+                    <h4>Key Features:</h4>
+                    <ul>
+                        <li><strong>Python-First</strong> - Build web apps using only Python, no front-end experience required</li>
+                        <li><strong>Interactive Widgets</strong> - Rich set of UI components for building intuitive interfaces</li>
+                        <li><strong>Rapid Development</strong> - Create and iterate on applications in minutes rather than days</li>
+                        <li><strong>AWS Integration</strong> - Easy to deploy on AWS and integrate with Bedrock services</li>
+                    </ul>
+                </div>
+                <div class="links">
+                    <h4>Resources:</h4>
+                    <ul>
+                        <li><a href="https://github.com/streamlit/streamlit" target="_blank">GitHub Repository</a></li>
+                        <li><a href="https://docs.streamlit.io/" target="_blank">Documentation</a></li>
+                        <li><a href="https://aws.amazon.com/blogs/machine-learning/deploy-a-streamlit-application-powered-by-amazon-bedrock-using-aws-amplify-hosting/" target="_blank">AWS Deployment Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="library-code">
+                <pre><code># Example: Building a Bedrock-powered app with Streamlit
+import streamlit as st
+import boto3
+import json
+
+# Set up Bedrock client
+bedrock_runtime = boto3.client(
+    service_name="bedrock-runtime",
+    region_name="us-east-1"
+)
+
+st.title("AWS Bedrock Text Generator")
+
+# User input
+prompt = st.text_area("Enter your prompt:", height=150)
+model = st.selectbox(
+    "Select a model:",
+    ["anthropic.claude-3-sonnet-20240229-v1", "anthropic.claude-3-haiku-20240307-v1:0"]
+)
+
+# Generate button
+if st.button("Generate Response"):
+    with st.spinner("Generating..."):
+        response = bedrock_runtime.invoke_model(
+            modelId=model,
+            body=json.dumps({
+                "prompt": prompt,
+                "max_tokens_to_sample": 500
+            })
+        )
+        result = json.loads(response["body"])["completion"]
+        
+    st.subheader("Generated Response:")
+    st.write(result)</code></pre>
+            </div>
+        </div>
+        
+        <div class="library">
+            <h3>Pydantic <span class="library-tag">MIT License</span></h3>
+            <p>Pydantic is a data validation library that uses Python type annotations to validate, serialize, and deserialize data, critical for ensuring safe and predictable handling of LLM outputs.</p>
+            
+            <div class="library-details">
+                <div class="features">
+                    <h4>Key Features:</h4>
+                    <ul>
+                        <li><strong>Data Validation</strong> - Enforce type constraints, field requirements, and custom validations</li>
+                        <li><strong>LLM Output Parsing</strong> - Transform unstructured LLM outputs into structured data</li>
+                        <li><strong>JSON Schema Generation</strong> - Automatically generate schemas for documentation and validation</li>
+                        <li><strong>Strong Integration</strong> - Works seamlessly with FastAPI and other web frameworks</li>
+                    </ul>
+                </div>
+                <div class="links">
+                    <h4>Resources:</h4>
+                    <ul>
+                        <li><a href="https://github.com/pydantic/pydantic" target="_blank">GitHub Repository</a></li>
+                        <li><a href="https://docs.pydantic.dev/" target="_blank">Documentation</a></li>
+                        <li><a href="https://python.langchain.com/docs/modules/model_io/output_parsers/pydantic" target="_blank">LangChain Integration</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="library-code">
+                <pre><code># Example: Parsing LLM outputs with Pydantic
+from pydantic import BaseModel, Field
+from langchain_aws import ChatBedrock
+from langchain.output_parsers import PydanticOutputParser
+
+# Define the output schema
+class Product(BaseModel):
+    name: str = Field(description="Name of the product")
+    description: str = Field(description="Brief description of the product")
+    price: float = Field(description="Product price in USD")
+    category: str = Field(description="Product category")
+
+# Set up the parser
+parser = PydanticOutputParser(pydantic_object=Product)
+
+# Create the prompt template
+template = """
+Generate a product based on the following description: {description}
+
+{format_instructions}
+"""
+
+# Format instructions for the LLM
+format_instructions = parser.get_format_instructions()
+
+# Initialize Bedrock model
+llm = ChatBedrock(
+    model="anthropic.claude-3-sonnet-20240229-v1:0",
+    region_name="us-east-1"
+)
+
+# Generate and parse response
+response = llm.invoke(
+    template.format(
+        description="A smart home device for monitoring energy usage",
+        format_instructions=format_instructions
+    )
+)
+
+# Parse the response into a Product object
+product = parser.parse(response.content)
+print(f"Name: {product.name}")
+print(f"Price: ${product.price}")</code></pre>
+            </div>
+        </div>
+        
+        <div class="library">
+            <h3>Jinja2 <span class="library-tag">BSD License</span></h3>
+            <p>Jinja2 is a template engine for Python that enables the dynamic generation of text, perfect for creating sophisticated prompts for LLMs.</p>
+            
+            <div class="library-details">
+                <div class="features">
+                    <h4>Key Features:</h4>
+                    <ul>
+                        <li><strong>Template Inheritance</strong> - Create base prompts that can be extended and customized</li>
+                        <li><strong>Conditional Logic</strong> - Include or exclude sections based on context</li>
+                        <li><strong>Variable Substitution</strong> - Dynamically insert values into your prompts</li>
+                        <li><strong>Macro Support</strong> - Create reusable prompt components</li>
+                    </ul>
+                </div>
+                <div class="links">
+                    <h4>Resources:</h4>
+                    <ul>
+                        <li><a href="https://github.com/pallets/jinja" target="_blank">GitHub Repository</a></li>
+                        <li><a href="https://jinja.palletsprojects.com/" target="_blank">Documentation</a></li>
+                        <li><a href="https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/jinja2" target="_blank">LangChain Integration</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="library-code">
+                <pre><code># Example: Dynamic prompt generation with Jinja2
+from langchain.prompts import PromptTemplate
+from langchain_aws import ChatBedrock
+import boto3
+
+# Complex Jinja2 template for generating prompts
+template = """
+{%- if use_persona %}
+You are a {{ persona }} with {{ years_experience }} years of experience in {{ industry }}.
+{%- else %}
+You are an AI assistant helping with {{ task }}.
+{%- endif %}
+
+I need you to {{ action }} the following {{ content_type }}:
+
+{{ content }}
+
+{%- if specific_instructions %}
+Please follow these specific guidelines:
+{% for instruction in specific_instructions %}
+- {{ instruction }}
+{% endfor %}
+{%- endif %}
+
+{%- if output_format %}
+Format your response as {{ output_format }}.
+{%- endif %}
+"""
+
+# Create prompt template with Jinja2
+prompt = PromptTemplate.from_template(
+    template=template,
+    template_format="jinja2"
+)
+
+# Initialize Bedrock model
+llm = ChatBedrock(
+    model="anthropic.claude-3-sonnet-20240229-v1:0",
+    region_name="us-east-1"
+)
+
+# Example prompt variables
+prompt_variables = {
+    "use_persona": True,
+    "persona": "technical product manager",
+    "years_experience": 8,
+    "industry": "cloud computing",
+    "task": "document review",
+    "action": "analyze",
+    "content_type": "product requirements",
+    "content": "Build a serverless AI application using AWS Bedrock and Lambda.",
+    "specific_instructions": [
+        "Identify any unclear requirements",
+        "Suggest improvements",
+        "Estimate complexity (Low/Medium/High)"
+    ],
+    "output_format": "bullet points"
+}
+
+# Generate the formatted prompt
+formatted_prompt = prompt.format(**prompt_variables)
+
+# Get response from Bedrock
+response = llm.invoke(formatted_prompt)
+print(response.content)</code></pre>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Additional Libraries Reference Section -->
+    <div class="reference-section">
+        <h2>Additional Open Source Libraries</h2>
+        <p>The following MIT and Apache licensed libraries are also valuable for AWS Bedrock applications:</p>
+        
+        <div class="reference-list">
+            <div class="reference-item">
+                <h4>FAISS (Facebook AI Similarity Search)</h4>
+                <p>High-performance vector similarity search library, ideal for custom vector solutions.</p>
+                <p><a href="https://github.com/facebookresearch/faiss" target="_blank">GitHub Repository</a></p>
+            </div>
+            
+            <div class="reference-item">
+                <h4>CrewAI</h4>
+                <p>Framework for orchestrating multiple AI agents in collaborative workflows.</p>
+                <p><a href="https://github.com/joaomdmoura/crewAI" target="_blank">GitHub Repository</a></p>
+            </div>
+            
+            <div class="reference-item">
+                <h4>Ragas</h4>
+                <p>Evaluation framework specifically designed for RAG systems.</p>
+                <p><a href="https://github.com/explodinggradients/ragas" target="_blank">GitHub Repository</a></p>
+            </div>
+            
+            <div class="reference-item">
+                <h4>DSPy</h4>
+                <p>Programming framework for optimizing LLM prompts systematically.</p>
+                <p><a href="https://github.com/stanfordnlp/dspy" target="_blank">GitHub Repository</a></p>
+            </div>
+            
+            <div class="reference-item">
+                <h4>OpenLLMetry</h4>
+                <p>OpenTelemetry-based observability specifically for LLM applications.</p>
+                <p><a href="https://github.com/traceloop/openllmetry" target="_blank">GitHub Repository</a></p>
+            </div>
+            
+            <div class="reference-item">
+                <h4>Giskard</h4>
+                <p>AI testing framework for identifying vulnerabilities in LLM applications.</p>
+                <p><a href="https://github.com/Giskard-AI/giskard" target="_blank">GitHub Repository</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="note-box">
+        <p><strong>Note:</strong> All libraries mentioned in this module are under MIT or Apache licensing, making them suitable for both commercial and open-source projects. When building production applications with AWS Bedrock, these libraries provide complementary functionality while maintaining licensing flexibility.</p>
+    </div>
+    
+    <script src="course-nav.js"></script>
+    <script src="course-index.js"></script>
+    <script>
+        // Function to toggle the navigation index
+        function toggleNav() {
+            const navContent = document.getElementById('navContent');
+            navContent.classList.toggle('hidden');
+            
+            // Update button text
+            const navToggle = document.querySelector('.nav-toggle');
+            if (navContent.classList.contains('hidden')) {
+                navToggle.textContent = '☰';
+            } else {
+                navToggle.textContent = '✕';
+            }
+        }
+    </script>
+</body>
+</html>
