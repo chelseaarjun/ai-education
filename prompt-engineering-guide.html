@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Engineering for AI Applications</title>
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #6b8cb2;
+            --accent: #ff9e3d;
+            --background: #f5f7fa;
+            --text: #333;
+            --light-text: #666;
+            --code-bg: #f0f2f5;
+            --border: #ddd;
+            --success: #4CAF50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--background);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            font-weight: 300;
+        }
+        
+        main {
+            padding: 40px 0;
+        }
+        
+        section {
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            scroll-margin-top: 20px;
+        }
+        
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+        }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        /* Code Blocks */
+        .code-block {
+            background-color: var(--code-bg);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent);
+            white-space: pre-wrap;
+        }
+        
+        /* Examples */
+        .example {
+            background-color: #f9f9f9;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .prompt-example {
+            background-color: #e9f0f9;
+            border-left: 4px solid var(--secondary);
+            padding: 15px;
+            margin: 15px 0;
+            white-space: pre-line;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .response-example {
+            background-color: #f0f9e9;
+            border-left: 4px solid #7cb342;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        /* Quiz Components */
+        .quiz-container {
+            background-color: #f0f2f5;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .quiz-question {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .quiz-options {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .quiz-option {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .quiz-option:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .quiz-option.selected {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .quiz-option.correct {
+            background-color: #dff0d8;
+            border-color: #4CAF50;
+            color: #3c763d;
+        }
+        
+        .quiz-option.incorrect {
+            background-color: #f2dede;
+            border-color: #d9534f;
+            color: #a94442;
+        }
+        
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--primary);
+            display: none;
+        }
+        
+        /* Interactive Components */
+        .interactive-demo {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            background-color: white;
+        }
+        
+        .demo-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            height: 100px;
+        }
+        
+        .demo-button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .demo-button:hover {
+            background-color: #e08c35;
+        }
+        
+        .demo-output {
+            background-color: #f9f9f9;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 15px;
+            min-height: 100px;
+        }
+        
+        /* Notes and Callouts */
+        .note {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        /* Diagrams */
+        .diagram {
+            display: block;
+            margin: 25px auto;
+            max-width: 100%;
+            text-align: center;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 10px;
+            overflow: hidden;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid var(--border);
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--code-bg);
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        /* Navigation Index */
+        .nav-index {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-toggle {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 250px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 10px;
+            display: none;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .nav-content.active {
+            display: block;
+        }
+        
+        .nav-content h3 {
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .nav-content ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .nav-content li {
+            margin-bottom: 5px;
+        }
+        
+        .nav-link {
+            display: block;
+            padding: 8px;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .nav-link:hover {
+            background-color: var(--background);
+        }
+        
+        .nav-link.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .nav-subsection {
+            margin-left: 15px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Index -->
+    <div class="nav-index">
+        <button class="nav-toggle" onclick="toggleNav()">☰</button>
+        <div class="nav-content" id="navContent">
+            <h3>Contents</h3>
+            <ul>
+                <li><a href="#introduction" class="nav-link">1. Introduction</a></li>
+                <li><a href="#prompt-anatomy" class="nav-link">2. Anatomy of a Prompt</a></li>
+                <li><a href="#basic-techniques" class="nav-link">3. Basic Techniques</a>
+                    <ul class="nav-subsection">
+                        <li><a href="#shot-prompting" class="nav-link">Zero/One/Few-shot</a></li>
+                        <li><a href="#role-based" class="nav-link">Role-based</a></li>
+                        <li><a href="#constraint-based" class="nav-link">Constraint-based</a></li>
+                        <li><a href="#format-control" class="nav-link">Format Control</a></li>
+                        <li><a href="#system-prompts" class="nav-link">System Prompts</a></li>
+                    </ul>
+                </li>
+                <li><a href="#advanced-techniques" class="nav-link">4. Advanced Techniques</a>
+                    <ul class="nav-subsection">
+                        <li><a href="#chain-of-thought" class="nav-link">Chain-of-thought</a></li>
+                        <li><a href="#prompt-chaining" class="nav-link">Prompt Chaining</a></li>
+                        <li><a href="#react" class="nav-link">ReAct</a></li>
+                        <li><a href="#rag" class="nav-link">RAG</a></li>
+                    </ul>
+                </li>
+                <li><a href="#practical-application" class="nav-link">5. Practical Application</a></li>
+                <li><a href="#summary" class="nav-link">6. Best Practices</a></li>
+                <li><a href="#resources" class="nav-link">7. Resources</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <h1>Prompt Engineering for AI Applications</h1>
+            <div class="subtitle">Master the art and science of effective prompts</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="introduction">
+            <h2>Introduction to Prompt Engineering</h2>
+            <p>Welcome to this guide on prompt engineering! Today, you'll explore how to effectively communicate with artificial intelligence models like Claude and Amazon Bedrock to get the best possible results for your applications.</p>
+            
+            <p>Prompt engineering is a crucial skill in the AI era. By the end of this 30-minute lesson, you'll understand how to craft effective prompts that can help you build sophisticated AI applications, even without extensive programming knowledge.</p>
+            
+            <div class="diagram">
+                <svg width="800" height="300" viewBox="0 0 800 300">
+                    <!-- Background -->
+                    <rect x="0" y="0" width="800" height="300" fill="#f8f9fa" rx="10" ry="10"/>
+                    
+                    <!-- Boxes -->
+                    <rect x="100" y="100" width="180" height="100" fill="#e9f0f9" stroke="#4a6fa5" stroke-width="2" rx="5" ry="5"/>
+                    <rect x="310" y="100" width="180" height="100" fill="#f0e9f9" stroke="#6b4ca5" stroke-width="2" rx="5" ry="5"/>
+                    <rect x="520" y="100" width="180" height="100" fill="#f0f9e9" stroke="#4ca56b" stroke-width="2" rx="5" ry="5"/>
+                    
+                    <!-- Arrows -->
+                    <path d="M280 150 L310 150" stroke="#666" stroke-width="2"/>
+                    <polygon points="310,150 303,146 303,154" fill="#666"/>
+                    
+                    <path d="M490 150 L520 150" stroke="#666" stroke-width="2"/>
+                    <polygon points="520,150 513,146 513,154" fill="#666"/>
+                    
+                    <!-- Text -->
+                    <text x="190" y="150" text-anchor="middle" fill="#333" font-size="16" font-weight="bold">Input</text>
+                    <text x="190" y="175" text-anchor="middle" fill="#666" font-size="14">(Prompt)</text>
+                    
+                    <text x="400" y="150" text-anchor="middle" fill="#333" font-size="16" font-weight="bold">AI Model</text>
+                    <text x="400" y="175" text-anchor="middle" fill="#666" font-size="14">(Processing)</text>
+                    
+                    <text x="610" y="150" text-anchor="middle" fill="#333" font-size="16" font-weight="bold">Output</text>
+                    <text x="610" y="175" text-anchor="middle" fill="#666" font-size="14">(Response)</text>
+                    
+                    <text x="400" y="50" text-anchor="middle" fill="#4a6fa5" font-size="20" font-weight="bold">Prompt Engineering Overview</text>
+                </svg>
+            </div>
+            
+            <h3>What are Prompts?</h3>
+            <p>A <strong>prompt</strong> is the input you provide to an AI system to elicit a specific output. Think of it as the interface between human intent and AI capability—they're how we communicate what we want the model to do.</p>
+            
+            <p>In technical terms, a prompt is a sequence of tokens (words, characters, or subwords) that provides context and instructions to a language model.</p>
+            
+            <div class="example">
+                <div class="prompt-example"><strong>Simple Prompt:</strong> 
+"What is machine learning?"</div>
+                <div class="prompt-example"><strong>More Detailed Prompt:</strong> 
+"Explain machine learning to a high school student in 3 paragraphs, covering supervised learning, unsupervised learning, and reinforcement learning."</div>
+            </div>
+            
+            <h3>Why Prompt Engineering Matters</h3>
+            <ul>
+                <li><strong>Precision</strong>: Well-crafted prompts yield more accurate and useful outputs</li>
+                <li><strong>Efficiency</strong>: Better prompts reduce iterations and token usage, saving time and costs</li>
+                <li><strong>Consistency</strong>: Systematic prompting leads to more predictable results</li>
+                <li><strong>Capability Unlocking</strong>: Many advanced AI capabilities are accessible only through proper prompting</li>
+            </ul>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">Which of these is NOT a benefit of effective prompt engineering?</div>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">1. Reduced computational requirements for the model</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">2. More accurate responses</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">3. Fewer iterations to get desired results</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">4. Better predictability of outputs</li>
+                </ul>
+                <div class="quiz-feedback">
+                    <strong>Explanation:</strong> While good prompts may save tokens, they don't change the computational needs of the underlying model. Better prompts can improve accuracy, reduce the number of iterations, and make outputs more predictable, but they don't reduce the fundamental computational requirements of the AI model itself.
+                </div>
+            </div>
+            
+            <h3>The Prompt Engineering Mindset</h3>
+            <p>Successful prompt engineers think from both perspectives:</p>
+            <ul>
+                <li>As the <strong>human</strong>: What exact information or action do I need?</li>
+                <li>As the <strong>AI model</strong>: What instructions and context will help it understand my intent?</li>
+            </ul>
+            <p>This dual perspective helps bridge the gap between human expectations and how AI systems actually process information.</p>
+            
+
+            <section id="prompt-anatomy">
+                <h2>Anatomy of an Effective Prompt</h2>
+                
+                <div class="diagram">
+                    <svg width="800" height="400" viewBox="0 0 800 400">
+                        <!-- Background -->
+                        <rect x="0" y="0" width="800" height="400" fill="#f8f9fa" rx="10" ry="10"></rect>
+                        
+                        <!-- Title -->
+                        <text x="400" y="40" text-anchor="middle" fill="#4a6fa5" font-size="22" font-weight="bold">Anatomy of a Prompt</text>
+                        
+                        <!-- Main Container -->
+                        <rect x="100" y="70" width="600" height="300" fill="white" stroke="#ddd" stroke-width="2" rx="10" ry="10"></rect>
+                        
+                        <!-- Component Sections -->
+                        <rect x="120" y="90" width="560" height="60" fill="#e9f0f9" stroke="#4a6fa5" stroke-width="2" rx="5" ry="5"></rect>
+                        <text x="130" y="115" fill="#4a6fa5" font-size="16" font-weight="bold">INSTRUCTIONS</text>
+                        <text x="130" y="135" fill="#333" font-size="14">Explicit directions on what to do</text>
+                        
+                        <rect x="120" y="160" width="560" height="60" fill="#f0e9f9" stroke="#6b4ca5" stroke-width="2" rx="5" ry="5"></rect>
+                        <text x="130" y="185" fill="#6b4ca5" font-size="16" font-weight="bold">CONTEXT</text>
+                        <text x="130" y="205" fill="#333" font-size="14">Background information the model needs</text>
+                        
+                        <rect x="120" y="230" width="560" height="60" fill="#f9e9f0" stroke="#a54c6b" stroke-width="2" rx="5" ry="5"></rect>
+                        <text x="130" y="255" fill="#a54c6b" font-size="16" font-weight="bold">INPUT EXAMPLES</text>
+                        <text x="130" y="275" fill="#333" font-size="14">Demonstrations of desired patterns</text>
+                        
+                        <rect x="120" y="300" width="560" height="60" fill="#e9f9f0" stroke="#4ca56b" stroke-width="2" rx="5" ry="5"></rect>
+                        <text x="130" y="325" fill="#4ca56b" font-size="16" font-weight="bold">OUTPUT FORMAT</text>
+                        <text x="130" y="345" fill="#333" font-size="14">Specification of how responses should be structured</text>
+                    </svg>
+                </div>
+                
+                <h3>Core Components</h3>
+                <p>An effective prompt typically contains:</p>
+                
+                <ol>
+                    <li><strong>Clear Instructions</strong>: Explicit directions on what to do</li>
+                    <li><strong>Relevant Context</strong>: Background information the model needs</li>
+                    <li><strong>Input Examples</strong>: Demonstrations of desired patterns (when needed)</li>
+                    <li><strong>Output Format</strong>: Specification of how responses should be structured</li>
+                </ol>
+                
+                <div class="code-block">
+    Example Basic Prompt Structure:
+    
+    [INSTRUCTION]: Create a summary of the following customer feedback
+    [CONTEXT]: This feedback is from a user of our mobile banking app
+    [INPUT]: "The app keeps crashing when I try to deposit checks using my camera. Otherwise it's pretty good and I like the new transfer feature."
+    [OUTPUT FORMAT]: Provide a 2-sentence summary followed by bullet points for key issues and one positive aspect.
+                </div>
+                
+                <h3>Clarity and Precision</h3>
+                <p>The <strong>Instructions</strong> component is where you need to:</p>
+                <ul>
+                    <li>Be specific about what you want</li>
+                    <li>Eliminate ambiguity and vague language</li>
+                    <li>Use precise verbs that direct the model's behavior</li>
+                    <li>Break complex requests into clear steps</li>
+                </ul>
+                
+                <div class="example">
+                    <strong>Try It Yourself:</strong> Copy these prompts into Claude and compare the results:
+                    
+                    <div class="prompt-example"><strong>Vague prompt:</strong>
+    Tell me about data structures.</div>
+                    
+                    <div class="prompt-example"><strong>Precise prompt:</strong>
+    Explain three fundamental data structures (arrays, linked lists, and hash tables) used in software engineering. For each one, provide:
+    1. A one-sentence definition
+    2. Its primary strengths and weaknesses 
+    3. One common use case in modern applications</div>
+                </div>
+                
+                <h3>Context Window Management</h3>
+                <p>The <strong>Context</strong> component provides background, but models like Claude have a limited context window (the amount of text they can consider at once). Keep these principles in mind:</p>
+                
+                <ul>
+                    <li>Put the most important instructions at the beginning or end of your prompt (primacy and recency effects)</li>
+                    <li>For complex tasks, break them into sequential prompts</li>
+                    <li>Consider what context is actually necessary vs. what's extraneous</li>
+                </ul>
+                
+                <div class="note">
+                    <strong>Important:</strong> Each model has a specific context window size. Claude 3.7 Sonnet can process up to 200,000 tokens, while other models may have smaller limits. Be mindful of this when designing prompts that include large documents or extensive context.
+                </div>
+        </section>
+
+        <section id="basic-techniques">
+            <h2>Essential Prompt Design Techniques</h2>
+            
+            <h3 id="shot-prompting">Zero-shot, One-shot, and Few-shot Prompting</h3>
+            <p>These techniques relate to the <strong>Input Examples</strong> component of a prompt structure and determine how many examples you include:</p>
+            
+            <ul>
+                <li><strong>Zero-shot</strong>: No examples provided, just instructions</li>
+                <li><strong>One-shot</strong>: A single example demonstrating the desired behavior</li>
+                <li><strong>Few-shot</strong>: Multiple examples that establish a pattern</li>
+            </ul>
+            
+            <div class="example">
+                <strong>Zero-shot prompting</strong> asks the model to perform a task without examples:
+                <div class="prompt-example">
+                    Classify this review as positive, negative, or neutral:
+                    "The service was quick but the food was cold when it arrived."
+                </div>
+                
+                <strong>One-shot prompting</strong> provides a single example:
+                <div class="prompt-example">
+                    Here's an example of classifying sentiment:
+                    Review: "The interface is confusing and buggy." 
+                    Classification: Negative
+
+                    Now classify this review:
+                    "The service was quick but the food was cold when it arrived."
+                </div>
+                
+                <strong>Few-shot prompting</strong> gives multiple examples:
+                <div class="prompt-example">
+                    Here are some examples of sentiment classification:
+
+                    Review: "The interface is confusing and buggy."
+                    Classification: Negative
+
+                    Review: "Amazing product, works exactly as advertised!"
+                    Classification: Positive
+
+                    Review: "Shipping was fast but packaging was minimal."
+                    Classification: Neutral
+
+                    Now classify this review:
+                    "The service was quick but the food was cold when it arrived."
+                </div>
+                
+                <div class="note">
+                    <strong>When to use:</strong> Few-shot prompting is especially useful when you need the AI to recognize specific patterns or follow a particular format that might not be obvious from instructions alone.
+                </div>
+            </div>
+            
+            <div class="interactive-demo">
+                <h3>Try It Yourself: Shot Prompting</h3>
+                <p>Copy each of these prompting patterns into Claude and compare how the responses differ in confidence and specificity.</p>
+            </div>
+            
+            <h3 id="role-based">Role-based Prompting</h3>
+            <p>Role-based prompting focuses on the <strong>Instructions</strong> and <strong>Context</strong> components by assigning a specific role or persona to the AI:</p>
+            
+            <div class="example">
+                <div class="prompt-example">
+                    <strong>Without role:</strong><br>
+                    Review this architectural design and provide feedback.
+                </div>
+                
+                <div class="prompt-example">
+                    <strong>With role:</strong><br>
+                    <span style="color: #4a6fa5">You are an experienced structural engineer with 20 years of experience in high-rise construction projects.</span> Review this architectural design for a 30-story building and identify potential structural weaknesses or safety concerns.
+                </div>
+            </div>
+            
+            <p>Roles provide implicit context about:</p>
+            <ul>
+                <li><strong>Expertise level</strong>: "You are a senior data scientist specializing in natural language processing..."</li>
+                <li><strong>Communication style</strong>: "You are a science teacher explaining concepts to 10-year-old students..."</li>
+                <li><strong>Perspective</strong>: "You are a security analyst reviewing code for vulnerabilities..."</li>
+                <li><strong>Domain knowledge</strong>: "You are a cardiologist interpreting ECG results..."</li>
+            </ul>
+            
+            <p><strong>Common effective roles:</strong></p>
+            <ul>
+                <li><strong>Subject matter experts</strong>: "You are a real estate attorney specializing in commercial leases..."</li>
+                <li><strong>Teachers/explainers</strong>: "You are a patient mathematics tutor helping a struggling student..."</li>
+                <li><strong>Critics/evaluators</strong>: "You are an experienced code reviewer looking for performance issues..."</li>
+                <li><strong>Process facilitators</strong>: "You are a project manager breaking down complex tasks..."</li>
+            </ul>
+            
+            <h3 id="constraint-based">Constraint-based Prompting</h3>
+            <p>Constraint-based prompting relates to both the <strong>Instructions</strong> and <strong>Output Format</strong> components and helps set boundaries to focus the AI's responses:</p>
+            
+            <div class="example">
+                <div class="prompt-example">
+                    <strong>Without constraints:</strong><br>
+                    Explain quantum computing.
+                </div>
+                
+                <div class="prompt-example">
+                    <strong>With constraints:</strong><br>
+                    Explain quantum computing to a high school student. Your explanation should:
+                    <span style="color: #4a6fa5">- Be under 200 words</span>
+                    <span style="color: #4a6fa5">- Avoid mathematical formulas</span>
+                    <span style="color: #4a6fa5">- Use only analogies a teenager would understand</span>
+                    <span style="color: #4a6fa5">- Include exactly three practical applications</span>
+                </div>
+            </div>
+            
+            <p><strong>Effective constraints include:</strong></p>
+            <ul>
+                <li><strong>Length limits</strong>: "Keep your response under 100 words"</li>
+                <li><strong>Format requirements</strong>: "Structure your answer as a numbered list"</li>
+                <li><strong>Complexity levels</strong>: "Explain this at a 9th-grade reading level"</li>
+                <li><strong>Conceptual boundaries</strong>: "Focus only on security implications, not performance"</li>
+            </ul>
+            
+            <h3 id="format-control">Format Control Techniques</h3>
+            <p>Format control focuses on the <strong>Output Format</strong> component and ensures responses are structured in a specific way:</p>
+            
+            <div class="example">
+                <div class="prompt-example">
+                    <strong>Without format control:</strong><br>
+                    Analyze this sales data for Q1 2024.
+                </div>
+                
+                <div class="prompt-example">
+                    <strong>With format control:</strong><br>
+                    Analyze this sales data for Q1 2024. <span style="color: #4a6fa5">Format your response as follows:
+                    
+                    # Executive Summary
+                    [2-3 sentence overview]
+                    
+                    ## Key Metrics
+                    - Revenue: [value]
+                    - Growth: [percentage]
+                    - Top Product: [product name]
+                    
+                    ## Recommendations
+                    1. [First recommendation]
+                    2. [Second recommendation]
+                    3. [Third recommendation]</span>
+                </div>
+            </div>
+            
+            <p>Format control techniques include:</p>
+            <ul>
+                <li>Specifying document structure (headers, sections)</li>
+                <li>Requesting specific data formats (JSON, CSV, tables)</li>
+                <li>Defining response templates with placeholders</li>
+                <li>Using markdown or other formatting languages</li>
+            </ul>
+            
+            <h3 id="system-prompts">System vs. User Prompts</h3>
+            <p>In models like Claude, you can separate prompts into system and user components:</p>
+            
+            <div class="note">
+                <p><strong>Important distinction:</strong> While role-based prompts assign a "character" or expertise level to the AI, system prompts are a technical feature that establishes persistent behavior patterns for the entire conversation. A system prompt can contain a role, but it can also contain other instructions about how the AI should respond throughout the interaction.</p>
+            </div>
+            
+            <div class="example">
+                <div class="prompt-example">
+                    <strong>System prompt:</strong> You are a technical documentation specialist who excels at creating clear, concise explanations of complex topics. Always provide examples when explaining concepts. Format code snippets with proper syntax highlighting. When uncertain, acknowledge limitations rather than guessing.
+                </div>
+                <div class="prompt-example">
+                    <strong>User prompt:</strong> Explain how Kubernetes pods communicate with each other within a cluster.
+                </div>
+            </div>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">Which prompting technique would be best for ensuring a specific output structure with categories and formatting?</div>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">1. Zero-shot prompting</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">2. Role-based prompting</li>
+                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">3. Format control prompting</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">4. System prompting</li>
+                </ul>
+                <div class="quiz-feedback">
+                    Answer: 3. Format control prompting is specifically designed to ensure outputs follow a precise structure and organization.
+                </div>
+            </div>
+        </section>
+
+        <section id="advanced-techniques">
+            <h2>Advanced Techniques</h2>
+            
+            <h3 id="chain-of-thought">Chain-of-thought Prompting</h3>
+            <p>This technique encourages the model to show its reasoning process step-by-step:</p>
+            
+            <div class="example">
+                <div class="prompt-example">
+                    <strong>Standard prompt:</strong><br>
+                    If a store has 120 apples and sells 30% on Monday, then sells 40% of the remaining apples on Tuesday, how many apples are left?
+                </div>
+                
+                <div class="prompt-example">
+                    <strong>Chain-of-thought prompt:</strong><br>
+                    Problem: If a store has 120 apples and sells 30% on Monday, then sells 40% of the remaining apples on Tuesday, how many apples are left?
+
+                    Solve this step-by-step, showing your work for each stage of the calculation.
+                </div>
+            </div>
+            
+            <div class="diagram">
+                <svg width="800" height="200" viewBox="0 0 800 200">
+                    <!-- Background -->
+                    <rect x="0" y="0" width="800" height="200" fill="#f8f9fa" rx="10" ry="10"></rect>
+                    
+                    <!-- Boxes -->
+                    <rect x="50" y="80" width="120" height="50" fill="#e9f0f9" stroke="#4a6fa5" stroke-width="2" rx="5" ry="5"></rect>
+                    <rect x="200" y="80" width="120" height="50" fill="#f0e9f9" stroke="#6b4ca5" stroke-width="2" rx="5" ry="5"></rect>
+                    <rect x="350" y="80" width="120" height="50" fill="#f9e9f0" stroke="#a54c6b" stroke-width="2" rx="5" ry="5"></rect>
+                    <rect x="500" y="80" width="120" height="50" fill="#e9f9f0" stroke="#4ca56b" stroke-width="2" rx="5" ry="5"></rect>
+                    <rect x="650" y="80" width="100" height="50" fill="#fff8e1" stroke="#ff9e3d" stroke-width="2" rx="5" ry="5"></rect>
+                    
+                    <!-- Text -->
+                    <text x="110" y="110" text-anchor="middle" fill="#333" font-size="14">Initial Problem</text>
+                    <text x="260" y="110" text-anchor="middle" fill="#333" font-size="14">Step 1</text>
+                    <text x="410" y="110" text-anchor="middle" fill="#333" font-size="14">Step 2</text>
+                    <text x="560" y="110" text-anchor="middle" fill="#333" font-size="14">Step 3</text>
+                    <text x="700" y="110" text-anchor="middle" fill="#333" font-size="14">Solution</text>
+                    
+                    <!-- Arrows -->
+                    <path d="M170 105 L200 105" stroke="#666" stroke-width="2"></path>
+                    <polygon points="200,105 193,101 193,109" fill="#666"></polygon>
+                    
+                    <path d="M320 105 L350 105" stroke="#666" stroke-width="2"></path>
+                    <polygon points="350,105 343,101 343,109" fill="#666"></polygon>
+                    
+                    <path d="M470 105 L500 105" stroke="#666" stroke-width="2"></path>
+                    <polygon points="500,105 493,101 493,109" fill="#666"></polygon>
+                    
+                    <path d="M620 105 L650 105" stroke="#666" stroke-width="2"></path>
+                    <polygon points="650,105 643,101 643,109" fill="#666"></polygon>
+                    
+                    <text x="400" y="40" text-anchor="middle" fill="#4a6fa5" font-size="20" font-weight="bold">Chain of Thought</text>
+                </svg>
+            </div>
+            
+            <p>Benefits include:</p>
+            <ul>
+                <li>More accurate results for complex reasoning</li>
+                <li>Transparent decision-making</li>
+                <li>Easier error detection</li>
+                <li>Educational value</li>
+            </ul>
+            
+            <h3 id="prompt-chaining">Prompt Chaining</h3>
+            <p>Breaking complex tasks into a sequence of simpler prompts:</p>
+            
+            <div class="example">
+                <strong>Implementation approaches:</strong>
+                
+                <div class="prompt-example">
+                    <strong>1. Manual chaining (human in the loop):</strong><br>
+                    <u>First prompt:</u> "Extract the key metrics from this quarterly report."<br>
+                    <u>Human reviews results</u><br>
+                    <u>Second prompt:</u> "Based on these metrics [paste first results], identify the three most concerning trends."<br>
+                    <u>Human reviews results</u><br>
+                    <u>Third prompt:</u> "For each trend [paste second results], recommend two specific actions the company could take."
+                </div>
+                
+                <div class="prompt-example">
+                    <strong>2. Programmatic chaining (automated):</strong><br>
+                    <div class="code-block">
+from langchain.prompts import PromptTemplate
+from langchain.llms import Bedrock
+
+# Initialize the LLM
+llm = Bedrock(model_id="anthropic.claude-3-7-sonnet-20250219")
+
+# First prompt template: Extract metrics
+metrics_template = """
+Extract all financial metrics from this quarterly report:
+{report_text}
+
+Format as a JSON object with metric names as keys and values as numbers.
+"""
+metrics_prompt = PromptTemplate(
+    input_variables=["report_text"],
+    template=metrics_template
+)
+
+# Second prompt template: Identify trends
+trends_template = """
+Based on these metrics:
+{metrics_json}
+
+Identify the three most concerning trends. Format as a numbered list.
+"""
+trends_prompt = PromptTemplate(
+    input_variables=["metrics_json"],
+    template=trends_template
+)
+
+# Third prompt template: Recommendations
+recommendations_template = """
+For each of these concerning trends:
+{trends_list}
+
+Recommend two specific actions the company could take to address each trend.
+Format as a bulleted list under each trend number.
+"""
+recommendations_prompt = PromptTemplate(
+    input_variables=["trends_list"],
+    template=recommendations_template
+)
+
+# Chain execution
+report_text = "..." # Your report text here
+metrics_result = llm(metrics_prompt.format(report_text=report_text))
+trends_result = llm(trends_prompt.format(metrics_json=metrics_result))
+final_result = llm(recommendations_prompt.format(trends_list=trends_result))
+                    </div>
+                </div>
+                
+                <div class="prompt-example">
+                    <strong>3. Hybrid approach (automated with checkpoints):</strong><br>
+                    Combination of automated chaining with human review at critical decision points, particularly useful for high-stakes applications where oversight is necessary.
+                </div>
+            </div>
+            
+            <h3 id="react">ReAct (Reason + Act)</h3>
+            <p>ReAct combines reasoning with actions in an iterative process:</p>
+            
+            <div class="diagram">
+                <svg width="800" height="300" viewBox="0 0 800 300">
+                    <!-- Background -->
+                    <rect x="0" y="0" width="800" height="300" fill="#f8f9fa" rx="10" ry="10"></rect>
+                    
+                    <!-- Title -->
+                    <text x="400" y="40" text-anchor="middle" fill="#4a6fa5" font-size="20" font-weight="bold">ReAct: Reason + Act</text>
+                    
+                    <!-- Circle with 4 segments -->
+                    <circle cx="400" cy="170" r="120" fill="none" stroke="#ddd" stroke-width="2"></circle>
+                    
+                    <!-- Segments -->
+                    <path d="M400 50 A120 120 0 0 1 520 170" fill="#e9f0f9" stroke="#4a6fa5" stroke-width="2"></path>
+                    <path d="M520 170 A120 120 0 0 1 400 290" fill="#f0e9f9" stroke="#6b4ca5" stroke-width="2"></path>
+                    <path d="M400 290 A120 120 0 0 1 280 170" fill="#f9e9f0" stroke="#a54c6b" stroke-width="2"></path>
+                    <path d="M280 170 A120 120 0 0 1 400 50" fill="#e9f9f0" stroke="#4ca56b" stroke-width="2"></path>
+                    
+                    <!-- Text in segments -->
+                    <text x="400" y="100" text-anchor="middle" fill="#4a6fa5" font-size="16" font-weight="bold">THINK</text>
+                    <text x="400" y="120" text-anchor="middle" fill="#333" font-size="12">Analyze the problem</text>
+                    
+                    <text x="470" y="170" text-anchor="middle" fill="#6b4ca5" font-size="16" font-weight="bold">ACT</text>
+                    <text x="470" y="190" text-anchor="middle" fill="#333" font-size="12">Take a specific action</text>
+                    
+                    <text x="400" y="240" text-anchor="middle" fill="#a54c6b" font-size="16" font-weight="bold">OBSERVE</text>
+                    <text x="400" y="260" text-anchor="middle" fill="#333" font-size="12">Evaluate the results</text>
+                    
+                    <text x="330" y="170" text-anchor="middle" fill="#4ca56b" font-size="16" font-weight="bold">DECIDE</text>
+                    <text x="330" y="190" text-anchor="middle" fill="#333" font-size="12">Plan next steps</text>
+                    
+                    <!-- Circle at center -->
+                    <circle cx="400" cy="170" r="30" fill="white" stroke="#ff9e3d" stroke-width="2"></circle>
+                    <text x="400" y="175" text-anchor="middle" fill="#ff9e3d" font-size="14" font-weight="bold">ReAct</text>
+                    
+                    <!-- Curved arrows -->
+                    <path d="M430 60 Q450 80 460 100" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="2,2"></path>
+                    <polygon points="460,100 456,93 464,93" fill="#333"></polygon>
+                    
+                    <path d="M500 200 Q480 220 460 240" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="2,2"></path>
+                    <polygon points="460,240 456,233 464,233" fill="#333"></polygon>
+                    
+                    <path d="M370 280 Q350 260 340 240" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="2,2"></path>
+                    <polygon points="340,240 336,233 344,233" fill="#333"></polygon>
+                    
+                    <path d="M300 140 Q320 120 340 100" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="2,2"></path>
+                    <polygon points="340,100 336,93 344,93" fill="#333"></polygon>
+                </svg>
+            </div>
+            
+            <div class="example">
+                <div class="prompt-example">
+                    You are helping debug a Python application. For each error:
+                    1. THINK: Analyze what might be causing the error
+                    2. ACT: Suggest a specific code change
+                    3. OBSERVE: Consider what effect this change would have
+                    4. DECIDE: Determine if this resolves the issue or if further changes are needed
+
+                    Error: "TypeError: cannot unpack non-iterable int object"
+                </div>
+                
+                <div class="note">
+                    The ReAct pattern is especially useful for:
+                    <ul>
+                        <li>Complex problem-solving</li>
+                        <li>Troubleshooting</li>
+                        <li>Decision-making with multiple factors</li>
+                        <li>Self-correcting processes</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 id="rag">Retrieval-augmented Generation (RAG)</h3>
+            <p>RAG enhances prompts with relevant information retrieved from external sources:</p>
+            
+            <div class="example">
+                <div class="prompt-example">
+                    I'll provide information about our company's return policy, then ask you to answer a customer question based ONLY on this information.
+
+                    Policy: "Items can be returned within 30 days with receipt for full refund. After 30 days but before 60 days, store credit is offered. Electronics have a 15-day return window. Sale items are final sale."
+
+                    Customer question: "I bought a sweater on clearance three weeks ago, but it has a tear in the seam. Can I return it?"
+                </div>
+            </div>
+            
+            <div class="diagram">
+                <img src="RAG.png" alt="RAG System Architecture showing Document Storage → Retrieval → Context Integration → Response Generation" width="800" />
+            </div>
+            
+            <p>Key components of a RAG system:</p>
+            <ul>
+                <li>Document storage and indexing</li>
+                <li>Retrieval mechanism</li>
+                <li>Context integration</li>
+                <li>Response generation</li>
+            </ul>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">Which prompting technique is best suited for multi-step problem solving that requires both reasoning and taking specific actions?</div>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">1. Few-shot prompting</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">2. Chain-of-thought prompting</li>
+                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">3. ReAct prompting</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">4. RAG prompting</li>
+                </ul>
+                <div class="quiz-feedback">
+                    Answer: 3. ReAct (Reasoning + Acting) prompting specifically combines reasoning steps with action steps in an iterative process, making it ideal for complex problem solving.
+                </div>
+            </div>
+        </section>
+
+        <section id="practical-application">
+            <h2>Practical Application</h2>
+            
+            <h3>Decision Framework for Technique Selection</h3>
+            
+            <div class="diagram">
+                <svg width="800" height="500" viewBox="0 0 800 500">
+                    <!-- Background -->
+                    <rect x="0" y="0" width="800" height="500" fill="#f8f9fa" rx="10" ry="10"></rect>
+                    
+                    <!-- Title -->
+                    <text x="400" y="40" text-anchor="middle" fill="#4a6fa5" font-size="20" font-weight="bold">Simple Decision Flowchart for Prompting Techniques</text>
+                    
+                    <!-- Q1 -->
+                    <rect x="300" y="140" width="200" height="40" fill="white" stroke="#4a6fa5" stroke-width="2" rx="5" ry="5"></rect>
+                    <text x="400" y="165" text-anchor="middle" fill="#333" font-size="12">Is the task straightforward?</text>
+                    
+                    <!-- Zero-shot -->
+                    <rect x="550" y="140" width="120" height="40" fill="#e9f0f9" stroke="#4a6fa5" stroke-width="2" rx="5" ry="5"></rect>
+                    <text x="610" y="165" text-anchor="middle" fill="#333" font-size="12">Zero-shot</text>
+                    
+                    <!-- Q2 -->
+                    <rect x="300" y="210" width="200" height="40" fill="white" stroke="#6b4ca5" stroke-width="2" rx="5" ry="5"></rect>
+                    <text x="400" y="235" text-anchor="middle" fill="#333" font-size="12">Need specific examples?</text>
+                    
+                    <!-- Few-shot -->
+                    <rect x="550" y="210" width="120" height="40" fill="#f0e9f9" stroke="#6b4ca5" stroke-width="2" rx="5" ry="5"></rect>
+                    <text x="610" y="235" text-anchor="middle" fill="#333" font-size="12">Few-shot</text>
+                    
+                    <!-- Q3 -->
+                    <rect x="300" y="280" width="200" height="40" fill="white" stroke="#a54c6b" stroke-width="2" rx="5" ry="5"></rect>
+                    <text x="400" y="305" text-anchor="middle" fill="#333" font-size="12">Need complex reasoning?</text>
+                    
+                    <!-- Chain-of-thought -->
+                    <rect x="550" y="280" width="120" height="40" fill="#f9e9f0" stroke="#a54c6b" stroke-width="2" rx="5" ry="5"></rect>
+                    <text x="610" y="305" text-anchor="middle" fill="#333" font-size="12">Chain-of-thought</text>
+                    
+                    <!-- Q4 -->
+                    <rect x="300" y="350" width="200" height="40" fill="white" stroke="#4ca56b" stroke-width="2" rx="5" ry="5"></rect>
+                    <text x="400" y="375" text-anchor="middle" fill="#333" font-size="12">Task has multiple steps?</text>
+                    
+                    <!-- Prompt Chaining / ReAct -->
+                    <rect x="550" y="330" width="120" height="40" fill="#e9f9f0" stroke="#4ca56b" stroke-width="2" rx="5" ry="5"></rect>
+                    <text x="610" y="355" text-anchor="middle" fill="#333" font-size="12">Prompt Chaining</text>
+                    
+                    <rect x="550" y="380" width="120" height="40" fill="#fff8e1" stroke="#ff9e3d" stroke-width="2" rx="5" ry="5"></rect>
+                    <text x="610" y="405" text-anchor="middle" fill="#333" font-size="12">ReAct</text>
+                    
+                    <!-- Q5 -->
+                    <rect x="300" y="420" width="200" height="40" fill="white" stroke="#4a6fa5" stroke-width="2" rx="5" ry="5"></rect>
+                    <text x="400" y="445" text-anchor="middle" fill="#333" font-size="12">Need external knowledge?</text>
+                    
+                    <!-- RAG -->
+                    <rect x="550" y="420" width="120" height="40" fill="#e9f0f9" stroke="#4a6fa5" stroke-width="2" rx="5" ry="5"></rect>
+                    <text x="610" y="445" text-anchor="middle" fill="#333" font-size="12">RAG</text>
+                    
+                    
+                    <!-- Yes arrows -->
+                    <path d="M500 160 L550 160" stroke="#4a6fa5" stroke-width="1.5"></path>
+                    <polygon points="550,160 543,156 543,164" fill="#4a6fa5"></polygon>
+                    <text x="515" y="155" fill="#4a6fa5" font-size="12">Yes</text>
+                    
+                    <path d="M500 230 L550 230" stroke="#6b4ca5" stroke-width="1.5"></path>
+                    <polygon points="550,230 543,226 543,234" fill="#6b4ca5"></polygon>
+                    <text x="515" y="225" fill="#6b4ca5" font-size="12">Yes</text>
+                    
+                    <path d="M500 300 L550 300" stroke="#a54c6b" stroke-width="1.5"></path>
+                    <polygon points="550,300 543,296 543,304" fill="#a54c6b"></polygon>
+                    <text x="515" y="295" fill="#a54c6b" font-size="12">Yes</text>
+                    
+                    <path d="M500 350 L530 350 L530 350 L550 350" stroke="#4ca56b" stroke-width="1.5"></path>
+                    <polygon points="550,350 543,346 543,354" fill="#4ca56b"></polygon>
+                    <text x="515" y="345" fill="#4ca56b" font-size="12">Yes</text>
+                    
+                    <path d="M500 370 L530 370 L530 380 L550 380" stroke="#4ca56b" stroke-width="1.5"></path>
+                    <text x="530" y="375" fill="#4ca56b" font-size="10">+Actions</text>
+                    
+                    <path d="M500 440 L550 440" stroke="#4a6fa5" stroke-width="1.5"></path>
+                    <polygon points="550,440 543,436 543,444" fill="#4a6fa5"></polygon>
+                    <text x="515" y="435" fill="#4a6fa5" font-size="12">Yes</text>
+                    
+                    <!-- No arrows -->
+                    <path d="M400 180 L400 210" stroke="#666" stroke-width="1.5"></path>
+                    <polygon points="400,210 396,203 404,203" fill="#666"></polygon>
+                    <text x="410" y="195" fill="#666" font-size="12">No</text>
+                    
+                    <path d="M400 250 L400 280" stroke="#666" stroke-width="1.5"></path>
+                    <polygon points="400,280 396,273 404,273" fill="#666"></polygon>
+                    <text x="410" y="265" fill="#666" font-size="12">No</text>
+                    
+                    <path d="M400 320 L400 350" stroke="#666" stroke-width="1.5"></path>
+                    <polygon points="400,350 396,343 404,343" fill="#666"></polygon>
+                    <text x="410" y="335" fill="#666" font-size="12">No</text>
+                    
+                    <path d="M400 390 L400 420" stroke="#666" stroke-width="1.5"></path>
+                    <polygon points="400,420 396,413 404,413" fill="#666"></polygon>
+                    <text x="410" y="405" fill="#666" font-size="12">No</text>
+                </svg>
+            </div>
+            
+            <div class="note">
+                <p><strong>Important:</strong> These techniques are not mutually exclusive. You can combine multiple approaches for more effective prompts. For example, you might use role-based prompting with chain-of-thought and format control for a complex analytical task.</p>
+            </div>
+            
+            <div class="example">
+                <strong>Combined Techniques Example:</strong>
+                <div class="prompt-example">
+                    <span style="color: #4a6fa5">[Role-based]</span> You are an experienced data analyst specializing in retail market trends.
+                    
+                    <span style="color: #ff9e3d">[Few-shot]</span> Here's an example of how to analyze sales data:
+                    Raw data: "Q1: $1.2M, Q2: $1.5M, Q3: $1.3M, Q4: $2.1M"
+                    Analysis: "Annual revenue was $6.1M with strongest performance in Q4 (34.4% of annual), likely due to holiday sales. Q2 showed 25% growth from Q1, while Q3 declined by 13.3% from Q2."
+                    
+                    <span style="color: #4CAF50">[Chain-of-thought]</span> Please analyze this data step-by-step:
+                    Raw data: "Jan: $425K, Feb: $390K, Mar: $470K, Apr: $510K, May: $495K"
+                    
+                    <span style="color: #7cb342">[Format control]</span> Present your analysis in this format:
+                    1. Total revenue
+                    2. Month-over-month growth rates
+                    3. Strongest and weakest months
+                    4. Key insights (3 bullet points)
+                </div>
+            </div>
+            
+            <h3>Common Pitfalls and Solutions</h3>
+            
+            <table>
+                <tr>
+                    <th>Pitfall</th>
+                    <th>Description</th>
+                    <th>Impact</th>
+                    <th>Solution</th>
+                </tr>
+                <tr>
+                    <td>Prompt Ambiguity</td>
+                    <td>Instructions open to multiple interpretations</td>
+                    <td>Model answers a different question than intended or provides incomplete responses</td>
+                    <td>Use specific verbs and clear success criteria</td>
+                </tr>
+                <tr>
+                    <td>Overconstraining</td>
+                    <td>Too many requirements, creating conflicts</td>
+                    <td>Model struggles to satisfy all constraints, leading to suboptimal responses</td>
+                    <td>Prioritize constraints and remove unnecessary ones</td>
+                </tr>
+                <tr>
+                    <td>Context Overload</td>
+                    <td>Providing too much information</td>
+                    <td>Key instructions get lost in noise or exceed context window</td>
+                    <td>Focus on relevant context only</td>
+                </tr>
+                <tr>
+                    <td>Inadequate Priming</td>
+                    <td>Not establishing the right initial framework or mindset</td>
+                    <td>Model lacks necessary context to generate appropriate responses</td>
+                    <td>Begin with clear role and purpose statements</td>
+                </tr>
+                <tr>
+                    <td>Hallucination Risk</td>
+                    <td>Not constraining the model to known information</td>
+                    <td>Model generates plausible but incorrect information</td>
+                    <td>Request citations or add phrases like "if you're unsure, say so" or "indicate your confidence level for each claim"</td>
+                </tr>
+            </table>
+            
+            <h3>Measuring Prompt Effectiveness</h3>
+            
+            <p>Evaluate your prompts based on:</p>
+            
+            <ol>
+                <li><strong>Accuracy</strong>: Does the response correctly address the request?</li>
+                <li><strong>Completeness</strong>: Does it cover all aspects of what was asked?</li>
+                <li><strong>Relevance</strong>: Does it stay focused on the specific task?</li>
+                <li><strong>Efficiency</strong>: How many tokens/iterations were required?</li>
+                <li><strong>Consistency</strong>: Do similar prompts produce similarly good results?</li>
+            </ol>
+            
+            <div class="note">
+                <p>For systematic evaluation, create a prompt testing framework:</p>
+                <ul>
+                    <li>Define benchmark tasks</li>
+                    <li>Create evaluation criteria</li>
+                    <li>Measure against baselines</li>
+                    <li>Iterate based on results</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="summary">
+            <h2>Best Practices Summary</h2>
+            
+            <h3>Core Prompting Principles</h3>
+            <ul>
+                <li><strong>Be specific and clear</strong> about exactly what you want the AI to do</li>
+                <li><strong>Structure matters</strong> - organize your prompt with clear components (instructions, context, examples, format)</li>
+                <li><strong>Show, don't just tell</strong> - use examples to demonstrate the desired output format and style</li>
+                <li><strong>One task at a time</strong> - break complex requests into sequential prompts</li>
+                <li><strong>Iterate and refine</strong> - treat prompt engineering as an experimental process</li>
+            </ul>
+            
+            <h3>Technique Selection Guide</h3>
+            <ul>
+                <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; text-align: left;">
+                    <thead>
+                      <tr>
+                        <th>Technique</th>
+                        <th>When to Use</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Zero-shot</td>
+                        <td>Simple, direct queries with no need for examples</td>
+                      </tr>
+                      <tr>
+                        <td>Few-shot</td>
+                        <td>Tasks that benefit from format or style examples</td>
+                      </tr>
+                      <tr>
+                        <td>Chain-of-thought</td>
+                        <td>Complex reasoning, math, logic, or explanations needed</td>
+                      </tr>
+                      <tr>
+                        <td>Prompt Chaining</td>
+                        <td>Multi-step tasks requiring output from one prompt as input to the next</td>
+                      </tr>
+                      <tr>
+                        <td>ReAct</td>
+                        <td>Tasks that combine reasoning with action or tool-use (e.g., search, tools)</td>
+                      </tr>
+                      <tr>
+                        <td>RAG</td>
+                        <td>Tasks needing accurate, up-to-date, or domain-specific external information</td>
+                      </tr>
+                    </tbody>
+                  </table>                  
+            </ul>
+            
+            <h3>Optimization Tips</h3>
+            <ul>
+                <li><strong>Start simple</strong> and add complexity only as needed</li>
+                <li><strong>Test systematically</strong> rather than changing multiple variables at once</li>
+                <li><strong>Document successful patterns</strong> for reuse across similar tasks</li>
+                <li><strong>Consider token efficiency</strong> by removing unnecessary context or instructions</li>
+                <li><strong>Combine techniques</strong> when appropriate for more sophisticated tasks</li>
+            </ul>
+            
+            <div class="note">
+                <p>With practice, you'll develop an intuition for which approaches work best in different situations, allowing you to effectively harness the power of models like Claude and Amazon Bedrock for your applications.</p>
+            </div>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">Which prompting techniques would be most effective when you need to ensure a logical, step-by-step solution to a complex mathematical problem?</div>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">1. Role-based + Format control</li>
+                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">2. Chain-of-thought + Constraint-based</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">3. Few-shot + ReAct</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">4. Zero-shot + RAG</li>
+                </ul>
+                <div class="quiz-feedback">
+                    Answer: 2. Chain-of-thought prompting encourages step-by-step reasoning, while constraint-based prompting helps focus the solution approach and format. These techniques work well together for complex mathematical problems.
+                </div>
+            </div>
+        </section>
+
+        <section id="resources">
+            <h2>Additional Resources</h2>
+            
+            <ul>
+                <li><a href="https://docs.anthropic.com/en/prompt-library/library" target="_blank">Anthropic's Claude Prompt Library</a></li>
+                <li><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank">Anthropic's Claude Prompt Guide</a></li>
+                <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-engineering-guidelines.html" target="_blank">Amazon Bedrock Documentation</a></li>
+                <li><a href="https://www.promptingguide.ai/" target="_blank">Prompt Engineering Guide by DAIR.AI</a></li>
+                <li><a href="https://python.langchain.com/docs/concepts/prompt_templates/" target="_blank">LangChain Prompt Templates</a></li>
+                <li><a href="https://www.kaggle.com/code/kaggle/prompt-engineering-for-developers-course" target="_blank">Kaggle Prompt Engineering for Developers</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <script>
+        // Function to handle quiz option selection
+        function selectQuizOption(option) {
+            // Get the parent quiz container
+            const quizContainer = option.closest('.quiz-container');
+            
+            // Get all options in this quiz
+            const options = quizContainer.querySelectorAll('.quiz-option');
+            
+            // Remove selected class from all options
+            options.forEach(opt => {
+                opt.classList.remove('selected');
+                opt.classList.remove('correct');
+                opt.classList.remove('incorrect');
+            });
+            
+            // Add selected class to clicked option
+            option.classList.add('selected');
+            
+            // Check if the answer is correct
+            const isCorrect = option.getAttribute('data-correct') === 'true';
+            
+            // Add appropriate class based on correctness
+            if (isCorrect) {
+                option.classList.add('correct');
+            } else {
+                option.classList.add('incorrect');
+            }
+            
+            // Show feedback
+            const feedback = quizContainer.querySelector('.quiz-feedback');
+            if (feedback) {
+                feedback.style.display = 'block';
+            }
+        }
+        
+        function simulatePromptResponse() {
+            // Functionality for interactive prompt demos
+            const promptInput = document.getElementById('promptInput');
+            const promptOutput = document.getElementById('promptOutput');
+            promptOutput.textContent = "Simulated AI response would appear here based on your prompt.";
+        }
+        
+        function checkPromptOrder() {
+            // Functionality for drag-and-drop prompt component ordering
+            const orderOutput = document.getElementById('orderOutput');
+            orderOutput.textContent = "Suggested order: 1. Instructions, 2. Context, 3. Examples, 4. Output Format";
+        }
+        
+        function toggleNav() {
+            const navContent = document.getElementById('navContent');
+            navContent.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
