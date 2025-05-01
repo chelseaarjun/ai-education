@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <a href="${rootPath}index.html" class="course-nav-home">Home</a>
                 
                 <div class="course-nav-dropdown">
-                    <button class="course-nav-dropdown-btn">Part 1: Foundations</button>
+                    <button class="course-nav-dropdown-btn">Part 1: Foundational Concepts</button>
                     <div class="course-nav-dropdown-content">
                         <a href="${rootPath}pages/llm-concepts-improved.html" class="course-nav-dropdown-item available">LLM Concepts</a>
                         <a href="${rootPath}pages/prompt-engineering-guide.html" class="course-nav-dropdown-item available">Prompting Strategies</a>
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 
                 <div class="course-nav-dropdown">
-                    <button class="course-nav-dropdown-btn">Part 2: Building</button>
+                    <button class="course-nav-dropdown-btn">Part 2: Building AI Applications</button>
                     <div class="course-nav-dropdown-content">
                         <a href="${rootPath}pages/open-source-tools.html" class="course-nav-dropdown-item available">Open Source Tools</a>
                         <a href="#" class="course-nav-dropdown-item coming-soon">AWS Bedrock <span>Coming Soon</span></a>

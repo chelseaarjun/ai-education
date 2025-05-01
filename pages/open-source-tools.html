@@ -68,6 +68,7 @@
             border-radius: 8px;
             margin-bottom: 30px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            scroll-margin-top: 70px;
         }
         /* Navigation styles moved to course-nav.css */
         .section {
@@ -76,6 +77,7 @@
             border-radius: 8px;
             margin-bottom: 30px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            scroll-margin-top: 70px;
         }
         .library {
             background-color: #f8f9fa;
@@ -83,6 +85,7 @@
             border-radius: 5px;
             margin-bottom: 20px;
             border-left: 4px solid #3498db;
+            scroll-margin-top: 70px;
         }
         .library h3 {
             margin-top: 0;
@@ -133,6 +136,7 @@
             padding: 20px;
             border-radius: 8px;
             margin-top: 40px;
+            scroll-margin-top: 70px;
         }
         .reference-list {
             column-count: 2;
@@ -164,8 +168,8 @@
     <h1>Open Source Tools & Frameworks for AWS Bedrock</h1>
     
     <!-- Module Introduction -->
-    <div class="course-description">
-        <h2>Building AI applications with open source libraries</h2>
+    <div class="course-description" id="introduction">
+        <h2 style="scroll-margin-top: 70px;">Introduction</h2>
         <p>AWS Bedrock provides a powerful platform for building generative AI applications, but complementing it with open-source tools can significantly enhance your development workflow, add capabilities, and improve productivity. This module explores key MIT and Apache-licensed libraries that work seamlessly with AWS Bedrock services.</p>
         <p>We'll focus on two categories of libraries:</p>
         <ol>
@@ -175,12 +179,12 @@
     </div>
     
     <!-- Core LLM Frameworks Section -->
-    <div class="section">
-        <h2>Core LLM Framework Libraries</h2>
+    <div class="section" id="core-frameworks">
+        <h2 style="scroll-margin-top: 70px;">Core LLM Framework Libraries</h2>
         <p>These specialized frameworks form the foundation of modern LLM application development. They provide abstractions, patterns, and tools specifically designed for working with large language models.</p>
         
         <div class="library">
-            <h3>LangChain <span class="library-tag">MIT License</span></h3>
+            <h3 id="langchain" style="scroll-margin-top: 70px;">LangChain <span class="library-tag">MIT License</span></h3>
             <p>LangChain is the industry standard framework for building LLM applications, offering a comprehensive toolkit for creating context-aware, reasoning-based AI systems.</p>
             
             <div class="library-details">
@@ -220,7 +224,7 @@ print(response.content)</code></pre>
         </div>
         
         <div class="library">
-            <h3>LlamaIndex <span class="library-tag">MIT License</span></h3>
+            <h3 id="llamaindex" style="scroll-margin-top: 70px;">LlamaIndex <span class="library-tag">MIT License</span></h3>
             <p>LlamaIndex is a data framework specialized in connecting LLMs to external data sources, with powerful capabilities for data ingestion, indexing, and retrieval.</p>
             
             <div class="library-details">
@@ -265,7 +269,7 @@ response = query_engine.query("What key information is in these documents?")</co
         </div>
         
         <div class="library">
-            <h3>Langfuse <span class="library-tag">MIT License</span></h3>
+            <h3 id="langfuse" style="scroll-margin-top: 70px;">Langfuse <span class="library-tag">MIT License</span></h3>
             <p>Langfuse is a comprehensive observability platform for LLM applications, providing powerful tools for tracing, evaluating, and analyzing your AI systems.</p>
             
             <div class="library-details">
@@ -317,12 +321,12 @@ response = llm.invoke("What are the benefits of LLM observability?")</code></pre
     </div>
     
     <!-- General Purpose Libraries Section -->
-    <div class="section">
-        <h2>General Purpose Libraries</h2>
+    <div class="section" id="general-purpose">
+        <h2 style="scroll-margin-top: 70px;">General Purpose Libraries</h2>
         <p>These libraries provide essential functionality for building, deploying, and maintaining production-grade AI applications with AWS Bedrock.</p>
         
         <div class="library">
-            <h3>FastAPI <span class="library-tag">MIT License</span></h3>
+            <h3 id="fastapi" style="scroll-margin-top: 70px;">FastAPI <span class="library-tag">MIT License</span></h3>
             <p>FastAPI is a modern, high-performance web framework for building APIs with Python, ideal for creating robust backends for your AI applications.</p>
             
             <div class="library-details">
@@ -378,7 +382,7 @@ async def generate_text(request: PromptRequest):
         </div>
         
         <div class="library">
-            <h3>Streamlit <span class="library-tag">Apache 2.0</span></h3>
+            <h3 id="streamlit" style="scroll-margin-top: 70px;">Streamlit <span class="library-tag">Apache 2.0</span></h3>
             <p>Streamlit is a rapid application development framework that turns data scripts into shareable web applications, perfect for creating interactive AI demos and internal tools.</p>
             
             <div class="library-details">
@@ -440,7 +444,7 @@ if st.button("Generate Response"):
         </div>
         
         <div class="library">
-            <h3>Pydantic <span class="library-tag">MIT License</span></h3>
+            <h3 id="pydantic" style="scroll-margin-top: 70px;">Pydantic <span class="library-tag">MIT License</span></h3>
             <p>Pydantic is a data validation library that uses Python type annotations to validate, serialize, and deserialize data, critical for ensuring safe and predictable handling of LLM outputs.</p>
             
             <div class="library-details">
@@ -511,7 +515,7 @@ print(f"Price: ${product.price}")</code></pre>
         </div>
         
         <div class="library">
-            <h3>Jinja2 <span class="library-tag">BSD License</span></h3>
+            <h3 id="jinja2" style="scroll-margin-top: 70px;">Jinja2 <span class="library-tag">BSD License</span></h3>
             <p>Jinja2 is a template engine for Python that enables the dynamic generation of text, perfect for creating sophisticated prompts for LLMs.</p>
             
             <div class="library-details">
@@ -605,8 +609,8 @@ print(response.content)</code></pre>
     </div>
     
     <!-- Additional Libraries Reference Section -->
-    <div class="reference-section">
-        <h2>Additional Open Source Libraries</h2>
+    <div class="reference-section" id="additional-libraries">
+        <h2 style="scroll-margin-top: 70px;">Additional Open Source Libraries</h2>
         <p>The following MIT and Apache licensed libraries are also valuable for AWS Bedrock applications:</p>
         
         <div class="reference-list">

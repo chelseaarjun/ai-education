@@ -20,12 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <li><a href="#introduction" class="nav-link">Introduction</a></li>
                 <li><a href="#genai-section" class="nav-link">Understanding Generative AI</a></li>
                 <li><a href="#ai-evolution" class="nav-link">Evolution of AI</a></li>
-                <li><a href="#course-structure" class="nav-link">Course Structure</a>
-                    <ul class="nav-subsection">
-                        <li><a href="#part1" class="nav-link">Part 1: Foundational Concepts</a></li>
-                        <li><a href="#part2" class="nav-link">Part 2: Building AI Applications</a></li>
-                    </ul>
-                </li>
+                <li><a href="#course-structure" class="nav-link">Course Structure</a></li>
             `;
         } else if (currentPage === 'llm-concepts-improved.html') {
             indexTitle = 'LLM Concepts';
