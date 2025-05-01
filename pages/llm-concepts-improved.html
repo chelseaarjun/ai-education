@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../assets/css/course-nav.css">
     <link rel="stylesheet" href="../assets/css/course-index.css">
     <link rel="stylesheet" href="../assets/css/mobile-fixes.css">
+    <link rel="stylesheet" href="../assets/css/introduction-fix.css">
     <style>
         :root {
             --primary: #4a6fa5;
@@ -321,11 +322,19 @@
     </style>
 </head>
 <body>
-    <h1>Introduction to Large Language Models</h1>
+
+    <header>
+        <div class="container">
+            <h1>Introduction to Large Language Models</h1>
+            <div class="subtitle">Understanding Large Language Models: From Prompt to Response</div>
+            <div style="position: absolute; top: 20px; right: 20px;">
+                <a href="../index.html" style="color: white; text-decoration: none; font-size: 14px; opacity: 0.8; background-color: rgba(0,0,0,0.2); padding: 5px 10px; border-radius: 4px;">← Back to Home</a>
+            </div>
+        </div>
+    </header>
     
     <!-- Introduction Section -->
-    <div class="course-description">
-        <h2>Understanding Large Language Models: From Prompt to Response</h2>
+    <div class="course-description" id="introduction">
         <p>Large Language Models (LLMs) are sophisticated AI systems trained on vast amounts of text data that can understand, generate, and manipulate human language. These powerful tools form the foundation of modern AI applications like chatbots, content generators, and virtual assistants. The following sections explain the key concepts needed to effectively work with LLMs in production-grade applications.</p>
     </div>
     
