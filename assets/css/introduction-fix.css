@@ -1,0 +1,26 @@
+/* Fix for introduction anchors */
+#introduction {
+    scroll-margin-top: 70px !important;
+}
+
+header {
+    scroll-margin-top: 70px !important;
+}
+
+.course-description {
+    scroll-margin-top: 70px !important;
+}
+
+/* Create a top anchor for all pages */
+body::before {
+    content: "";
+    display: block;
+    height: 1px;
+    margin-top: -70px;
+    visibility: hidden;
+    pointer-events: none;
+    scroll-margin-top: 70px;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+}

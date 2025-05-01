@@ -134,6 +134,18 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Add IDs to sections if they don't have them
         addSectionIds();
+        
+        // Add click handler for introduction link
+        const introLinks = document.querySelectorAll('a[href="#introduction"]');
+        introLinks.forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
     }
     
     // Add IDs to sections that don't have them
@@ -151,6 +163,29 @@ document.addEventListener('DOMContentLoaded', function() {
         const firstSection = document.querySelector('section:not([id])');
         if (firstSection) {
             firstSection.id = 'introduction';
+        }
+        
+        // Ensure there's always an introduction ID at the top of the page
+        if (!document.getElementById('introduction')) {
+            // Look for course-description div first
+            const courseDesc = document.querySelector('.course-description');
+            if (courseDesc) {
+                courseDesc.id = 'introduction';
+            } else {
+                // If no course-description, add ID to the first main element or body
+                const mainElement = document.querySelector('main') || document.body;
+                
+                // Create a hidden anchor at the top
+                const introAnchor = document.createElement('div');
+                introAnchor.id = 'introduction';
+                introAnchor.style.position = 'absolute';
+                introAnchor.style.top = '70px'; // Account for fixed header
+                introAnchor.style.visibility = 'hidden';
+                introAnchor.style.height = '1px';
+                
+                // Insert at the beginning of main or body
+                mainElement.insertBefore(introAnchor, mainElement.firstChild);
+            }
         }
         
         // Add specific IDs for index.html
