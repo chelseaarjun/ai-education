@@ -1,0 +1,114 @@
+/* Mobile-specific fixes and enhancements */
+
+/* General mobile improvements */
+@media (max-width: 768px) {
+    /* Improve readability on mobile */
+    body {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    
+    /* Adjust container padding */
+    .container {
+        padding: 0 15px;
+    }
+    
+    /* Make headers more compact */
+    header {
+        padding: 30px 0 !important;
+    }
+    
+    h1 {
+        font-size: 2rem !important;
+        padding-top: 10px !important;
+    }
+    
+    .subtitle {
+        font-size: 1rem !important;
+    }
+    
+    /* Adjust section padding */
+    section {
+        padding: 20px 15px !important;
+        margin-bottom: 25px !important;
+    }
+    
+    /* Make code blocks scroll horizontally */
+    pre, code, .library-code {
+        max-width: 100%;
+        overflow-x: auto;
+        white-space: pre;
+        word-wrap: normal;
+    }
+    
+    /* Adjust diagrams and visuals */
+    .diagram, .visual-container {
+        overflow-x: auto;
+        max-width: 100%;
+    }
+    
+    svg {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Fix quiz containers */
+    .quiz-container {
+        padding: 15px !important;
+    }
+    
+    .quiz-option {
+        padding: 12px !important;
+    }
+    
+    /* Improve library details layout */
+    .library-details {
+        flex-direction: column;
+    }
+    
+    .library-details .features,
+    .library-details .links {
+        flex: 1;
+        width: 100%;
+    }
+    
+    .library-details .links {
+        margin-top: 15px;
+    }
+    
+    /* Fix reference section */
+    .reference-list {
+        column-count: 1 !important;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    /* Further reduce padding */
+    section, .library, .course-description {
+        padding: 15px 12px !important;
+    }
+    
+    /* Smaller headings */
+    h2 {
+        font-size: 1.5rem !important;
+    }
+    
+    h3 {
+        font-size: 1.3rem !important;
+    }
+    
+    /* Adjust token containers */
+    .token-container {
+        flex-wrap: wrap;
+    }
+    
+    .token, .token-alt {
+        margin-bottom: 5px;
+    }
+    
+    /* Fix embedding space */
+    .embedding-space {
+        height: 250px !important;
+    }
+}

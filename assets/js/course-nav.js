@@ -50,4 +50,40 @@ document.addEventListener('DOMContentLoaded', function() {
             navMenu.classList.toggle('active');
         });
     }
+    
+    // Make dropdowns clickable on mobile
+    const dropdowns = document.querySelectorAll('.course-nav-dropdown');
+    
+    dropdowns.forEach(function(dropdown) {
+        const button = dropdown.querySelector('.course-nav-dropdown-btn');
+        
+        button.addEventListener('click', function(e) {
+            // Only handle click on mobile view
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                
+                // Close all other dropdowns
+                dropdowns.forEach(function(otherDropdown) {
+                    if (otherDropdown !== dropdown) {
+                        otherDropdown.classList.remove('active');
+                    }
+                });
+                
+                // Toggle this dropdown
+                dropdown.classList.toggle('active');
+            }
+        });
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+            // If click is outside the nav menu and the menu is open
+            if (!e.target.closest('.course-nav-menu') && 
+                !e.target.closest('.course-nav-mobile-toggle') && 
+                navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+            }
+        }
+    });
 });

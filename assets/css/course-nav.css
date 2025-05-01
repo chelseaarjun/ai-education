@@ -172,15 +172,37 @@
 
 /* Responsive styles */
 @media (max-width: 768px) {
+    .course-nav {
+        height: auto;
+    }
+    
+    .course-nav-container {
+        padding: 0 15px;
+        height: 50px;
+    }
+    
+    .course-nav-logo {
+        font-size: 1rem;
+        max-width: 70%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
     .course-nav-menu {
         display: none;
-        position: absolute;
+        position: fixed;
         top: 50px;
         left: 0;
         width: 100%;
+        height: auto;
+        max-height: calc(100vh - 50px);
+        overflow-y: auto;
         background-color: #2c3e50;
         flex-direction: column;
-        padding: 10px 0;
+        padding: 0;
+        z-index: 1005;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.2);
     }
     
     .course-nav-menu.active {
@@ -189,15 +211,21 @@
     
     .course-nav-mobile-toggle {
         display: block;
+        padding: 10px;
+        font-size: 1.3rem;
     }
     
     .course-nav-dropdown {
         width: 100%;
+        margin: 0;
     }
     
     .course-nav-dropdown-btn {
         width: 100%;
         justify-content: center;
+        padding: 12px 15px;
+        font-size: 16px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
     }
     
     .course-nav-dropdown-content {
@@ -206,16 +234,38 @@
         box-shadow: none;
         margin-top: 0;
         background-color: #34495e;
+        display: none;
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* Show dropdown content when parent is clicked */
+    .course-nav-dropdown.active .course-nav-dropdown-content {
+        display: block;
     }
     
     .course-nav-dropdown-item {
         color: white;
         border-bottom: 1px solid #2c3e50;
+        padding: 12px 20px;
+        font-size: 14px;
     }
     
     .course-nav-home {
         width: 100%;
         text-align: center;
+        display: block;
+        padding: 12px 15px;
+        font-size: 16px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    /* Fix for hover behavior on mobile */
+    .course-nav-dropdown:hover .course-nav-dropdown-content {
+        display: none;
+    }
+    
+    .course-nav-dropdown.active:hover .course-nav-dropdown-content {
         display: block;
     }
 }
@@ -223,4 +273,23 @@
 /* Add padding to body to account for fixed navbar */
 body {
     padding-top: 50px;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Additional mobile-specific styles */
+@media (max-width: 480px) {
+    .course-nav-logo {
+        font-size: 0.9rem;
+    }
+    
+    .course-nav-mobile-toggle {
+        padding: 8px;
+    }
+    
+    /* Improve tap targets */
+    .course-nav-dropdown-item, 
+    .course-nav-home,
+    .course-nav-dropdown-btn {
+        padding: 14px 15px;
+    }
 }

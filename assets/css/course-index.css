@@ -95,13 +95,45 @@ h1 {
         bottom: 20px;
         top: auto;
         left: 20px;
+        z-index: 1010; /* Higher than top nav to ensure visibility */
+    }
+    
+    .nav-toggle {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        opacity: 0.9;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.3);
     }
     
     .nav-content {
         position: absolute;
         bottom: 60px;
         left: 0;
-        width: 80vw;
+        width: 85vw;
         max-width: 300px;
+        max-height: 70vh; /* Limit height on mobile */
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+    }
+    
+    .nav-content h3 {
+        font-size: 16px;
+        padding-bottom: 8px;
+        margin-bottom: 8px;
+    }
+    
+    .nav-link {
+        padding: 10px 8px; /* Larger touch target */
+        font-size: 14px;
+    }
+    
+    .nav-subsection {
+        margin-left: 10px;
+        padding-left: 5px !important;
+    }
+    
+    /* Fix for scrolling issues on mobile */
+    body {
+        overflow-x: hidden;
     }
 }

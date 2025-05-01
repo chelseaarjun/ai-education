@@ -115,6 +115,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     navToggle.textContent = '✕';
                 }
+                
+                // Close the content when clicking a link on mobile
+                if (window.innerWidth <= 768) {
+                    const navLinks = document.querySelectorAll('.nav-content .nav-link');
+                    navLinks.forEach(function(link) {
+                        link.addEventListener('click', function() {
+                            // Small delay to allow the browser to navigate to the anchor
+                            setTimeout(function() {
+                                navContent.classList.add('hidden');
+                                navToggle.textContent = '☰';
+                            }, 100);
+                        });
+                    });
+                }
             };
         }
         
