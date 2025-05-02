@@ -79,6 +79,32 @@
     padding-left: 10px !important;
 }
 
+.nav-sublist {
+    padding-left: 20px;
+    list-style-type: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.nav-sublist li {
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+.nav-sublist a {
+    color: #555;
+    text-decoration: none;
+    transition: color 0.2s;
+    display: block;
+    padding: 4px 8px;
+}
+
+.nav-sublist a:hover {
+    color: #3498db;
+    background-color: #f5f7fa;
+    border-radius: 4px;
+}
+
 /* Adjust header spacing for all pages */
 h1, h2, h3, h4, h5, h6 {
     scroll-margin-top: 70px !important;

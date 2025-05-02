@@ -30,8 +30,15 @@
             color: var(--text);
             background-color: var(--background);
         }
-        h1, h2, h3, h4 {
+        h3, h4 {
             color: #2c3e50;
+        }
+
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+            margin-top: 0;
         }
         
         h1 {
@@ -180,37 +187,37 @@
         </ol>
     </div>
     
-    <!-- Core LLM Frameworks Section -->
-    <div class="section" id="core-frameworks">
-        <h2 style="scroll-margin-top: 70px;">Core LLM Framework Libraries</h2>
-        <p>These specialized frameworks form the foundation of modern LLM application development. They provide abstractions, patterns, and tools specifically designed for working with large language models.</p>
+    <!-- Core LLM Frameworks Section with new libraries added -->
+<div class="section" id="core-frameworks">
+    <h2 style="scroll-margin-top: 70px;">Core LLM Framework Libraries</h2>
+    <p>These specialized frameworks form the foundation of modern LLM application development. They provide abstractions, patterns, and tools specifically designed for working with large language models.</p>
+    
+    <div class="library">
+        <h3 id="langchain" style="scroll-margin-top: 70px;">LangChain <span class="library-tag">MIT License</span></h3>
+        <p>LangChain is the industry standard framework for building LLM applications, offering a comprehensive toolkit for creating context-aware, reasoning-based AI systems.</p>
         
-        <div class="library">
-            <h3 id="langchain" style="scroll-margin-top: 70px;">LangChain <span class="library-tag">MIT License</span></h3>
-            <p>LangChain is the industry standard framework for building LLM applications, offering a comprehensive toolkit for creating context-aware, reasoning-based AI systems.</p>
-            
-            <div class="library-details">
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li><strong>AWS Bedrock Integration</strong> - Direct support via the <code>langchain-aws</code> package, providing optimized connections to Bedrock models and knowledge bases</li>
-                        <li><strong>Composable Chains</strong> - Build complex workflows by chaining together LLM calls, retrievers, and tools</li>
-                        <li><strong>RAG Support</strong> - Comprehensive tools for implementing Retrieval Augmented Generation</li>
-                        <li><strong>Agent Framework</strong> - Create autonomous agents that can reason and use tools to complete tasks</li>
-                    </ul>
-                </div>
-                <div class="links">
-                    <h4>Resources:</h4>
-                    <ul>
-                        <li><a href="https://github.com/langchain-ai/langchain" target="_blank">GitHub Repository</a></li>
-                        <li><a href="https://python.langchain.com/" target="_blank">Documentation</a></li>
-                        <li><a href="https://python.langchain.com/docs/integrations/llms/bedrock" target="_blank">Bedrock Integration</a></li>
-                    </ul>
-                </div>
+        <div class="library-details">
+            <div class="features">
+                <h4>Key Features:</h4>
+                <ul>
+                    <li><strong>AWS Bedrock Integration</strong> - Direct support via the <code>langchain-aws</code> package, providing optimized connections to Bedrock models and knowledge bases</li>
+                    <li><strong>Composable Chains</strong> - Build complex workflows by chaining together LLM calls, retrievers, and tools</li>
+                    <li><strong>RAG Support</strong> - Comprehensive tools for implementing Retrieval Augmented Generation</li>
+                    <li><strong>Agent Framework</strong> - Create autonomous agents that can reason and use tools to complete tasks</li>
+                </ul>
             </div>
-            
-            <div class="library-code">
-                <pre><code># Example: Using LangChain with AWS Bedrock
+            <div class="links">
+                <h4>Resources:</h4>
+                <ul>
+                    <li><a href="https://github.com/langchain-ai/langchain" target="_blank">GitHub Repository</a></li>
+                    <li><a href="https://python.langchain.com/" target="_blank">Documentation</a></li>
+                    <li><a href="https://python.langchain.com/docs/integrations/llms/bedrock" target="_blank">Bedrock Integration</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="library-code">
+            <pre><code># Example: Using LangChain with AWS Bedrock
 from langchain_aws import ChatBedrock
 
 # Initialize the Bedrock chat model
@@ -222,35 +229,83 @@ llm = ChatBedrock(
 # Create a simple conversation
 response = llm.invoke("What are three key benefits of using AWS Bedrock?")
 print(response.content)</code></pre>
+        </div>
+    </div>
+    
+    <div class="library">
+        <h3 id="langgraph" style="scroll-margin-top: 70px;">LangGraph <span class="library-tag">MIT License</span></h3>
+        <p>LangGraph is a low-level orchestration framework for building controllable, stateful agents that can handle complex tasks with exceptional reliability.</p>
+        
+        <div class="library-details">
+            <div class="features">
+                <h4>Key Features:</h4>
+                <ul>
+                    <li><strong>Stateful Design</strong> - Persist context for long-running workflows, maintaining conversational history across sessions</li>
+                    <li><strong>Controllable Workflows</strong> - Build diverse control flows including single agent, multi-agent, hierarchical, and sequential patterns</li>
+                    <li><strong>Human-in-the-Loop</strong> - Add moderation checks and approval mechanisms to steer agent actions</li>
+                    <li><strong>Streaming Support</strong> - First-class token-by-token streaming for real-time visibility into agent reasoning</li>
+                </ul>
+            </div>
+            <div class="links">
+                <h4>Resources:</h4>
+                <ul>
+                    <li><a href="https://github.com/langchain-ai/langgraph" target="_blank">GitHub Repository</a></li>
+                    <li><a href="https://langchain-ai.github.io/langgraph/" target="_blank">Documentation</a></li>
+                    <li><a href="https://blog.langchain.dev/langgraph-studio-the-first-agent-ide/" target="_blank">LangGraph Studio</a></li>
+                </ul>
             </div>
         </div>
         
-        <div class="library">
-            <h3 id="llamaindex" style="scroll-margin-top: 70px;">LlamaIndex <span class="library-tag">MIT License</span></h3>
-            <p>LlamaIndex is a data framework specialized in connecting LLMs to external data sources, with powerful capabilities for data ingestion, indexing, and retrieval.</p>
-            
-            <div class="library-details">
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li><strong>Data Connectors</strong> - Extensive collection of connectors for various data sources (PDFs, APIs, databases, etc.)</li>
-                        <li><strong>Query Engines</strong> - Sophisticated engines for retrieving relevant information from your data</li>
-                        <li><strong>AWS Bedrock Support</strong> - Seamless integration with Bedrock models and knowledge bases</li>
-                        <li><strong>Multi-Modal Support</strong> - Ability to work with text, images, and structured data</li>
-                    </ul>
-                </div>
-                <div class="links">
-                    <h4>Resources:</h4>
-                    <ul>
-                        <li><a href="https://github.com/run-llama/llama_index" target="_blank">GitHub Repository</a></li>
-                        <li><a href="https://docs.llamaindex.ai/" target="_blank">Documentation</a></li>
-                        <li><a href="https://docs.llamaindex.ai/en/stable/examples/llm/bedrock.html" target="_blank">Bedrock Examples</a></li>
-                    </ul>
-                </div>
+        <div class="library-code">
+            <pre><code># Example: Creating a ReAct agent with LangGraph
+from langgraph.prebuilt import create_react_agent
+
+# Define a simple tool
+def search(query: str):
+    """Call to search for information."""
+    if "aws" in query.lower() or "bedrock" in query.lower():
+        return "AWS Bedrock is a fully managed service for foundation models."
+    return "No information found."
+
+# Create a ReAct agent
+agent = create_react_agent(
+    "anthropic.claude-3-sonnet-20240229-v1",
+    tools=[search]
+)
+
+# Invoke the agent with a question
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "What is AWS Bedrock?"}]}
+)</code></pre>
+        </div>
+    </div>
+    
+    <div class="library">
+        <h3 id="llamaindex" style="scroll-margin-top: 70px;">LlamaIndex <span class="library-tag">MIT License</span></h3>
+        <p>LlamaIndex is a data framework specialized in connecting LLMs to external data sources, with powerful capabilities for data ingestion, indexing, and retrieval.</p>
+        
+        <div class="library-details">
+            <div class="features">
+                <h4>Key Features:</h4>
+                <ul>
+                    <li><strong>Data Connectors</strong> - Extensive collection of connectors for various data sources (PDFs, APIs, databases, etc.)</li>
+                    <li><strong>Query Engines</strong> - Sophisticated engines for retrieving relevant information from your data</li>
+                    <li><strong>AWS Bedrock Support</strong> - Seamless integration with Bedrock models and knowledge bases</li>
+                    <li><strong>Multi-Modal Support</strong> - Ability to work with text, images, and structured data</li>
+                </ul>
             </div>
-            
-            <div class="library-code">
-                <pre><code># Example: Using LlamaIndex with AWS Bedrock
+            <div class="links">
+                <h4>Resources:</h4>
+                <ul>
+                    <li><a href="https://github.com/run-llama/llama_index" target="_blank">GitHub Repository</a></li>
+                    <li><a href="https://docs.llamaindex.ai/" target="_blank">Documentation</a></li>
+                    <li><a href="https://docs.llamaindex.ai/en/stable/examples/llm/bedrock.html" target="_blank">Bedrock Examples</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="library-code">
+            <pre><code># Example: Using LlamaIndex with AWS Bedrock
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
 from llama_index.llms.bedrock import Bedrock
 
@@ -267,35 +322,248 @@ index = VectorStoreIndex.from_documents(documents)
 # Create query engine with Bedrock LLM
 query_engine = index.as_query_engine(llm=llm)
 response = query_engine.query("What key information is in these documents?")</code></pre>
+        </div>
+    </div>
+    
+    <div class="library">
+        <h3 id="faiss" style="scroll-margin-top: 70px;">FAISS <span class="library-tag">MIT License</span></h3>
+        <p>FAISS (Facebook AI Similarity Search) is a high-performance library for efficient similarity search and clustering of dense vectors, essential for building scalable retrieval systems.</p>
+        
+        <div class="library-details">
+            <div class="features">
+                <h4>Key Features:</h4>
+                <ul>
+                    <li><strong>Scalable Vector Search</strong> - Handles datasets from millions to billions of vectors efficiently</li>
+                    <li><strong>High Performance</strong> - Optimized algorithms for fast similarity search with both CPU and GPU support</li>
+                    <li><strong>Vector Compression</strong> - Advanced techniques like Product Quantization to reduce memory requirements</li>
+                    <li><strong>Multiple Distance Metrics</strong> - Support for L2 distance, inner product, and cosine similarity</li>
+                </ul>
+            </div>
+            <div class="links">
+                <h4>Resources:</h4>
+                <ul>
+                    <li><a href="https://github.com/facebookresearch/faiss" target="_blank">GitHub Repository</a></li>
+                    <li><a href="https://faiss.ai/" target="_blank">Documentation</a></li>
+                    <li><a href="https://engineering.fb.com/2017/03/29/data-infrastructure/faiss-a-library-for-efficient-similarity-search/" target="_blank">Introduction</a></li>
+                </ul>
             </div>
         </div>
         
-        <div class="library">
-            <h3 id="langfuse" style="scroll-margin-top: 70px;">Langfuse <span class="library-tag">MIT License</span></h3>
-            <p>Langfuse is a comprehensive observability platform for LLM applications, providing powerful tools for tracing, evaluating, and analyzing your AI systems.</p>
-            
-            <div class="library-details">
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li><strong>Tracing</strong> - Detailed visibility into every step of your LLM application's execution</li>
-                        <li><strong>Evaluation Framework</strong> - Tools for assessing response quality, accuracy, and relevance</li>
-                        <li><strong>Cost Tracking</strong> - Monitor token usage and associated costs across your application</li>
-                        <li><strong>Framework Integrations</strong> - Seamless integration with LangChain, LlamaIndex, and other frameworks</li>
-                    </ul>
-                </div>
-                <div class="links">
-                    <h4>Resources:</h4>
-                    <ul>
-                        <li><a href="https://github.com/langfuse/langfuse" target="_blank">GitHub Repository</a></li>
-                        <li><a href="https://langfuse.com/docs" target="_blank">Documentation</a></li>
-                        <li><a href="https://langfuse.com/docs/integrations/frameworks/langchain" target="_blank">LangChain Integration</a></li>
-                    </ul>
-                </div>
+        <div class="library-code">
+            <pre><code># Example: Using FAISS for vector similarity search
+import numpy as np
+import faiss
+
+# Create some example data (128-dimensional vectors)
+dimension = 128
+nb_vectors = 10000
+vectors = np.random.random((nb_vectors, dimension)).astype('float32')
+query_vector = np.random.random((1, dimension)).astype('float32')
+
+# Create a FAISS index
+index = faiss.IndexFlatL2(dimension)
+index.add(vectors)
+
+# Search for the 5 nearest neighbors
+k = 5
+distances, indices = index.search(query_vector, k)
+
+print(f"Nearest neighbor indices: {indices}")
+print(f"Distances: {distances}")</code></pre>
+        </div>
+    </div>
+    
+    <div class="library">
+        <h3 id="crewai" style="scroll-margin-top: 70px;">CrewAI <span class="library-tag">MIT License</span></h3>
+        <p>CrewAI is a framework for orchestrating multiple AI agents in collaborative workflows, allowing them to work together to solve complex tasks.</p>
+        
+        <div class="library-details">
+            <div class="features">
+                <h4>Key Features:</h4>
+                <ul>
+                    <li><strong>Multi-Agent Collaboration</strong> - Enables creation of agent teams with specialized roles and responsibilities</li>
+                    <li><strong>Task Orchestration</strong> - Coordinate complex workflows across multiple agents</li>
+                    <li><strong>AWS Bedrock Support</strong> - Compatible with Bedrock models for enterprise-grade agent capabilities</li>
+                    <li><strong>Local LLM Integration</strong> - Supports running with local models via Ollama and other providers</li>
+                </ul>
             </div>
-            
-            <div class="library-code">
-                <pre><code># Example: Using Langfuse with LangChain and AWS Bedrock
+            <div class="links">
+                <h4>Resources:</h4>
+                <ul>
+                    <li><a href="https://github.com/crewAIInc/crewAI" target="_blank">GitHub Repository</a></li>
+                    <li><a href="https://docs.crewai.com/" target="_blank">Documentation</a></li>
+                    <li><a href="https://community.crewai.com/" target="_blank">Community</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="library-code">
+            <pre><code># Example: Creating a collaborative agent crew with CrewAI
+from crewai import Agent, Task, Crew
+from langchain_aws import BedrockChat
+
+# Initialize the Bedrock model
+bedrock = BedrockChat(
+    model="anthropic.claude-3-sonnet-20240229-v1",
+    region_name="us-east-1"
+)
+
+# Create specialized agents
+researcher = Agent(
+    role="Research Analyst",
+    goal="Find the latest information on AWS Bedrock features",
+    backstory="You are an AI expert specializing in cloud technologies",
+    llm=bedrock
+)
+
+writer = Agent(
+    role="Technical Writer",
+    goal="Create clear documentation on AWS Bedrock",
+    backstory="You are a skilled technical writer with AWS expertise",
+    llm=bedrock
+)
+
+# Define tasks for each agent
+research_task = Task(
+    description="Research the latest AWS Bedrock features and capabilities",
+    agent=researcher
+)
+
+document_task = Task(
+    description="Create comprehensive documentation based on research findings",
+    agent=writer,
+    dependencies=[research_task]
+)
+
+# Form a crew and execute the tasks
+crew = Crew(
+    agents=[researcher, writer],
+    tasks=[research_task, document_task]
+)
+
+result = crew.kickoff()</code></pre>
+        </div>
+    </div>
+    
+    <div class="library">
+        <h3 id="unstructured" style="scroll-margin-top: 70px;">Unstructured <span class="library-tag">Apache 2.0 License</span></h3>
+        <p>Unstructured is a library for extracting and processing content from raw documents across multiple formats, essential for building robust data ingestion pipelines for LLMs.</p>
+        
+        <div class="library-details">
+            <div class="features">
+                <h4>Key Features:</h4>
+                <ul>
+                    <li><strong>Multi-Format Support</strong> - Process PDF, DOCX, HTML, images, and 25+ other document formats</li>
+                    <li><strong>Content Extraction</strong> - Extract text, tables, and metadata from various document types</li>
+                    <li><strong>Document Partitioning</strong> - Split documents into meaningful chunks for LLM consumption</li>
+                    <li><strong>RAG Pipeline Integration</strong> - Seamlessly fits into retrieval-augmented generation workflows</li>
+                </ul>
+            </div>
+            <div class="links">
+                <h4>Resources:</h4>
+                <ul>
+                    <li><a href="https://github.com/Unstructured-IO/unstructured" target="_blank">GitHub Repository</a></li>
+                    <li><a href="https://docs.unstructured.io/" target="_blank">Documentation</a></li>
+                    <li><a href="https://pypi.org/project/unstructured/" target="_blank">PyPI Package</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="library-code">
+            <pre><code># Example: Processing a document with Unstructured
+from unstructured.partition.auto import partition
+
+# Process a document file and extract elements
+elements = partition("path/to/document.pdf")
+
+# Extract text content from elements
+text_content = [element.text for element in elements]
+
+# Print the first few elements
+for i, element in enumerate(elements[:5]):
+    print(f"Element {i} - Type: {type(element).__name__}")
+    print(f"Content: {element.text[:150]}...")
+    print("-" * 50)</code></pre>
+        </div>
+    </div>
+
+    <div class="library">
+        <h3 id="modelcontextprotocol" style="scroll-margin-top: 70px;">ModelContextProtocol <span class="library-tag">MIT License</span></h3>
+        <p>ModelContextProtocol is a standardized interface for working with context-aware LLMs, providing a unified approach to tracking and managing context windows across different models.</p>
+        
+        <div class="library-details">
+            <div class="features">
+                <h4>Key Features:</h4>
+                <ul>
+                    <li><strong>Context Management</strong> - Track and optimize token usage in LLM context windows</li>
+                    <li><strong>Cross-Model Compatibility</strong> - Consistent interface across different LLM providers</li>
+                    <li><strong>Context Prioritization</strong> - Intelligent handling of context when approaching token limits</li>
+                    <li><strong>AWS Bedrock Integration</strong> - Support for Bedrock models and their specific context requirements</li>
+                </ul>
+            </div>
+            <div class="links">
+                <h4>Resources:</h4>
+                <ul>
+                    <li><a href="https://github.com/microsoft/modelcontextprotocol" target="_blank">GitHub Repository</a></li>
+                    <li><a href="https://modelcontextprotocol.github.io/" target="_blank">Documentation</a></li>
+                    <li><a href="https://pypi.org/project/modelcontextprotocol/" target="_blank">PyPI Package</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="library-code">
+            <pre><code># Example: Managing context with ModelContextProtocol
+from modelcontextprotocol import ContextManager
+from langchain_aws import ChatBedrock
+
+# Initialize the Bedrock model
+llm = ChatBedrock(
+    model="anthropic.claude-3-sonnet-20240229-v1:0",
+    region_name="us-east-1"
+)
+
+# Create a context manager for the model
+context_manager = ContextManager(llm)
+
+# Add content to the context
+context_manager.add_to_context("User query: How can I implement RAG with AWS Bedrock?")
+context_manager.add_to_context("Additional context: User is building a Q&A system.")
+
+# Get the complete context
+full_context = context_manager.get_context()
+
+# Check token usage
+tokens_used = context_manager.get_token_count()
+print(f"Tokens used: {tokens_used}")</code></pre>
+        </div>
+    </div>
+    
+    <div class="library">
+        <h3 id="langfuse" style="scroll-margin-top: 70px;">Langfuse <span class="library-tag">MIT License</span></h3>
+        <p>Langfuse is a comprehensive observability platform for LLM applications, providing powerful tools for tracing, evaluating, and analyzing your AI systems.</p>
+        
+        <div class="library-details">
+            <div class="features">
+                <h4>Key Features:</h4>
+                <ul>
+                    <li><strong>Tracing</strong> - Detailed visibility into every step of your LLM application's execution</li>
+                    <li><strong>Evaluation Framework</strong> - Tools for assessing response quality, accuracy, and relevance</li>
+                    <li><strong>Cost Tracking</strong> - Monitor token usage and associated costs across your application</li>
+                    <li><strong>Framework Integrations</strong> - Seamless integration with LangChain, LlamaIndex, and other frameworks</li>
+                </ul>
+            </div>
+            <div class="links">
+                <h4>Resources:</h4>
+                <ul>
+                    <li><a href="https://github.com/langfuse/langfuse" target="_blank">GitHub Repository</a></li>
+                    <li><a href="https://langfuse.com/docs" target="_blank">Documentation</a></li>
+                    <li><a href="https://langfuse.com/docs/integrations/frameworks/langchain" target="_blank">LangChain Integration</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="library-code">
+            <pre><code># Example: Using Langfuse with LangChain and AWS Bedrock
 import langfuse
 from langchain_aws import ChatBedrock
 from langchain_core.callbacks import LangfuseCallbackHandler
@@ -318,41 +586,41 @@ llm = ChatBedrock(
 
 # Traced conversation
 response = llm.invoke("What are the benefits of LLM observability?")</code></pre>
-            </div>
         </div>
     </div>
+</div>
+
+<!-- General Purpose Libraries Section -->
+<div class="section" id="general-purpose">
+    <h2 style="scroll-margin-top: 70px;">General Purpose Libraries</h2>
+    <p>These libraries provide essential functionality for building, deploying, and maintaining production-grade AI applications with AWS Bedrock.</p>
     
-    <!-- General Purpose Libraries Section -->
-    <div class="section" id="general-purpose">
-        <h2 style="scroll-margin-top: 70px;">General Purpose Libraries</h2>
-        <p>These libraries provide essential functionality for building, deploying, and maintaining production-grade AI applications with AWS Bedrock.</p>
+    <div class="library">
+        <h3 id="fastapi" style="scroll-margin-top: 70px;">FastAPI <span class="library-tag">MIT License</span></h3>
+        <p>FastAPI is a modern, high-performance web framework for building APIs with Python, ideal for creating robust backends for your AI applications.</p>
         
-        <div class="library">
-            <h3 id="fastapi" style="scroll-margin-top: 70px;">FastAPI <span class="library-tag">MIT License</span></h3>
-            <p>FastAPI is a modern, high-performance web framework for building APIs with Python, ideal for creating robust backends for your AI applications.</p>
-            
-            <div class="library-details">
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li><strong>High Performance</strong> - Built on Starlette and Pydantic, FastAPI is one of the fastest Python frameworks available</li>
-                        <li><strong>Automatic Documentation</strong> - Interactive API documentation generated automatically</li>
-                        <li><strong>Type Validation</strong> - Built-in request and response validation based on Python type hints</li>
-                        <li><strong>Asynchronous Support</strong> - First-class support for async/await, essential for handling LLM requests efficiently</li>
-                    </ul>
-                </div>
-                <div class="links">
-                    <h4>Resources:</h4>
-                    <ul>
-                        <li><a href="https://github.com/tiangolo/fastapi" target="_blank">GitHub Repository</a></li>
-                        <li><a href="https://fastapi.tiangolo.com/" target="_blank">Documentation</a></li>
-                        <li><a href="https://fastapi.tiangolo.com/tutorial/async/" target="_blank">Async Guide</a></li>
-                    </ul>
-                </div>
+        <div class="library-details">
+            <div class="features">
+                <h4>Key Features:</h4>
+                <ul>
+                    <li><strong>High Performance</strong> - Built on Starlette and Pydantic, FastAPI is one of the fastest Python frameworks available</li>
+                    <li><strong>Automatic Documentation</strong> - Interactive API documentation generated automatically</li>
+                    <li><strong>Type Validation</strong> - Built-in request and response validation based on Python type hints</li>
+                    <li><strong>Asynchronous Support</strong> - First-class support for async/await, essential for handling LLM requests efficiently</li>
+                </ul>
             </div>
-            
-            <div class="library-code">
-                <pre><code># Example: Creating a Bedrock-powered API with FastAPI
+            <div class="links">
+                <h4>Resources:</h4>
+                <ul>
+                    <li><a href="https://github.com/tiangolo/fastapi" target="_blank">GitHub Repository</a></li>
+                    <li><a href="https://fastapi.tiangolo.com/" target="_blank">Documentation</a></li>
+                    <li><a href="https://fastapi.tiangolo.com/tutorial/async/" target="_blank">Async Guide</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="library-code">
+            <pre><code># Example: Creating a Bedrock-powered API with FastAPI
 from fastapi import FastAPI, Body
 from pydantic import BaseModel
 import boto3
@@ -380,35 +648,35 @@ async def generate_text(request: PromptRequest):
         })
     )
     return {"generated_text": json.loads(response["body"])["completion"]}</code></pre>
+        </div>
+    </div>
+    
+    <div class="library">
+        <h3 id="streamlit" style="scroll-margin-top: 70px;">Streamlit <span class="library-tag">Apache 2.0</span></h3>
+        <p>Streamlit is a rapid application development framework that turns data scripts into shareable web applications, perfect for creating interactive AI demos and internal tools.</p>
+        
+        <div class="library-details">
+            <div class="features">
+                <h4>Key Features:</h4>
+                <ul>
+                    <li><strong>Python-First</strong> - Build web apps using only Python, no front-end experience required</li>
+                    <li><strong>Interactive Widgets</strong> - Rich set of UI components for building intuitive interfaces</li>
+                    <li><strong>Rapid Development</strong> - Create and iterate on applications in minutes rather than days</li>
+                    <li><strong>AWS Integration</strong> - Easy to deploy on AWS and integrate with Bedrock services</li>
+                </ul>
+            </div>
+            <div class="links">
+                <h4>Resources:</h4>
+                <ul>
+                    <li><a href="https://github.com/streamlit/streamlit" target="_blank">GitHub Repository</a></li>
+                    <li><a href="https://docs.streamlit.io/" target="_blank">Documentation</a></li>
+                    <li><a href="https://aws.amazon.com/blogs/machine-learning/deploy-a-streamlit-application-powered-by-amazon-bedrock-using-aws-amplify-hosting/" target="_blank">AWS Deployment Guide</a></li>
+                </ul>
             </div>
         </div>
         
-        <div class="library">
-            <h3 id="streamlit" style="scroll-margin-top: 70px;">Streamlit <span class="library-tag">Apache 2.0</span></h3>
-            <p>Streamlit is a rapid application development framework that turns data scripts into shareable web applications, perfect for creating interactive AI demos and internal tools.</p>
-            
-            <div class="library-details">
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li><strong>Python-First</strong> - Build web apps using only Python, no front-end experience required</li>
-                        <li><strong>Interactive Widgets</strong> - Rich set of UI components for building intuitive interfaces</li>
-                        <li><strong>Rapid Development</strong> - Create and iterate on applications in minutes rather than days</li>
-                        <li><strong>AWS Integration</strong> - Easy to deploy on AWS and integrate with Bedrock services</li>
-                    </ul>
-                </div>
-                <div class="links">
-                    <h4>Resources:</h4>
-                    <ul>
-                        <li><a href="https://github.com/streamlit/streamlit" target="_blank">GitHub Repository</a></li>
-                        <li><a href="https://docs.streamlit.io/" target="_blank">Documentation</a></li>
-                        <li><a href="https://aws.amazon.com/blogs/machine-learning/deploy-a-streamlit-application-powered-by-amazon-bedrock-using-aws-amplify-hosting/" target="_blank">AWS Deployment Guide</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="library-code">
-                <pre><code># Example: Building a Bedrock-powered app with Streamlit
+        <div class="library-code">
+            <pre><code># Example: Building a Bedrock-powered app with Streamlit
 import streamlit as st
 import boto3
 import json
@@ -439,38 +707,38 @@ if st.button("Generate Response"):
             })
         )
         result = json.loads(response["body"])["completion"]
+    
+st.subheader("Generated Response:")
+st.write(result)</code></pre>
+        </div>
+    </div>
+    
+    <div class="library">
+        <h3 id="pydantic" style="scroll-margin-top: 70px;">Pydantic <span class="library-tag">MIT License</span></h3>
+        <p>Pydantic is a data validation library that uses Python type annotations to validate, serialize, and deserialize data, critical for ensuring safe and predictable handling of LLM outputs.</p>
         
-    st.subheader("Generated Response:")
-    st.write(result)</code></pre>
+        <div class="library-details">
+            <div class="features">
+                <h4>Key Features:</h4>
+                <ul>
+                    <li><strong>Data Validation</strong> - Enforce type constraints, field requirements, and custom validations</li>
+                    <li><strong>LLM Output Parsing</strong> - Transform unstructured LLM outputs into structured data</li>
+                    <li><strong>JSON Schema Generation</strong> - Automatically generate schemas for documentation and validation</li>
+                    <li><strong>Strong Integration</strong> - Works seamlessly with FastAPI and other web frameworks</li>
+                </ul>
+            </div>
+            <div class="links">
+                <h4>Resources:</h4>
+                <ul>
+                    <li><a href="https://github.com/pydantic/pydantic" target="_blank">GitHub Repository</a></li>
+                    <li><a href="https://docs.pydantic.dev/" target="_blank">Documentation</a></li>
+                    <li><a href="https://python.langchain.com/docs/modules/model_io/output_parsers/pydantic" target="_blank">LangChain Integration</a></li>
+                </ul>
             </div>
         </div>
         
-        <div class="library">
-            <h3 id="pydantic" style="scroll-margin-top: 70px;">Pydantic <span class="library-tag">MIT License</span></h3>
-            <p>Pydantic is a data validation library that uses Python type annotations to validate, serialize, and deserialize data, critical for ensuring safe and predictable handling of LLM outputs.</p>
-            
-            <div class="library-details">
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li><strong>Data Validation</strong> - Enforce type constraints, field requirements, and custom validations</li>
-                        <li><strong>LLM Output Parsing</strong> - Transform unstructured LLM outputs into structured data</li>
-                        <li><strong>JSON Schema Generation</strong> - Automatically generate schemas for documentation and validation</li>
-                        <li><strong>Strong Integration</strong> - Works seamlessly with FastAPI and other web frameworks</li>
-                    </ul>
-                </div>
-                <div class="links">
-                    <h4>Resources:</h4>
-                    <ul>
-                        <li><a href="https://github.com/pydantic/pydantic" target="_blank">GitHub Repository</a></li>
-                        <li><a href="https://docs.pydantic.dev/" target="_blank">Documentation</a></li>
-                        <li><a href="https://python.langchain.com/docs/modules/model_io/output_parsers/pydantic" target="_blank">LangChain Integration</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="library-code">
-                <pre><code># Example: Parsing LLM outputs with Pydantic
+        <div class="library-code">
+            <pre><code># Example: Parsing LLM outputs with Pydantic
 from pydantic import BaseModel, Field
 from langchain_aws import ChatBedrock
 from langchain.output_parsers import PydanticOutputParser
@@ -513,35 +781,35 @@ response = llm.invoke(
 product = parser.parse(response.content)
 print(f"Name: {product.name}")
 print(f"Price: ${product.price}")</code></pre>
+        </div>
+    </div>
+    
+    <div class="library">
+        <h3 id="jinja2" style="scroll-margin-top: 70px;">Jinja2 <span class="library-tag">BSD License</span></h3>
+        <p>Jinja2 is a template engine for Python that enables the dynamic generation of text, perfect for creating sophisticated prompts for LLMs.</p>
+        
+        <div class="library-details">
+            <div class="features">
+                <h4>Key Features:</h4>
+                <ul>
+                    <li><strong>Template Inheritance</strong> - Create base prompts that can be extended and customized</li>
+                    <li><strong>Conditional Logic</strong> - Include or exclude sections based on context</li>
+                    <li><strong>Variable Substitution</strong> - Dynamically insert values into your prompts</li>
+                    <li><strong>Macro Support</strong> - Create reusable prompt components</li>
+                </ul>
+            </div>
+            <div class="links">
+                <h4>Resources:</h4>
+                <ul>
+                    <li><a href="https://github.com/pallets/jinja" target="_blank">GitHub Repository</a></li>
+                    <li><a href="https://jinja.palletsprojects.com/" target="_blank">Documentation</a></li>
+                    <li><a href="https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/jinja2" target="_blank">LangChain Integration</a></li>
+                </ul>
             </div>
         </div>
         
-        <div class="library">
-            <h3 id="jinja2" style="scroll-margin-top: 70px;">Jinja2 <span class="library-tag">BSD License</span></h3>
-            <p>Jinja2 is a template engine for Python that enables the dynamic generation of text, perfect for creating sophisticated prompts for LLMs.</p>
-            
-            <div class="library-details">
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li><strong>Template Inheritance</strong> - Create base prompts that can be extended and customized</li>
-                        <li><strong>Conditional Logic</strong> - Include or exclude sections based on context</li>
-                        <li><strong>Variable Substitution</strong> - Dynamically insert values into your prompts</li>
-                        <li><strong>Macro Support</strong> - Create reusable prompt components</li>
-                    </ul>
-                </div>
-                <div class="links">
-                    <h4>Resources:</h4>
-                    <ul>
-                        <li><a href="https://github.com/pallets/jinja" target="_blank">GitHub Repository</a></li>
-                        <li><a href="https://jinja.palletsprojects.com/" target="_blank">Documentation</a></li>
-                        <li><a href="https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/jinja2" target="_blank">LangChain Integration</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="library-code">
-                <pre><code># Example: Dynamic prompt generation with Jinja2
+        <div class="library-code">
+            <pre><code># Example: Dynamic prompt generation with Jinja2
 from langchain.prompts import PromptTemplate
 from langchain_aws import ChatBedrock
 import boto3
@@ -606,57 +874,87 @@ formatted_prompt = prompt.format(**prompt_variables)
 # Get response from Bedrock
 response = llm.invoke(formatted_prompt)
 print(response.content)</code></pre>
-            </div>
         </div>
     </div>
+</div>
     
-    <!-- Additional Libraries Reference Section -->
-    <div class="reference-section" id="additional-libraries">
-        <h2 style="scroll-margin-top: 70px;">Additional Open Source Libraries</h2>
-        <p>The following MIT and Apache licensed libraries are also valuable for AWS Bedrock applications:</p>
-        
-        <div class="reference-list">
-            <div class="reference-item">
-                <h4>FAISS (Facebook AI Similarity Search)</h4>
-                <p>High-performance vector similarity search library, ideal for custom vector solutions.</p>
-                <p><a href="https://github.com/facebookresearch/faiss" target="_blank">GitHub Repository</a></p>
-            </div>
-            
-            <div class="reference-item">
-                <h4>CrewAI</h4>
-                <p>Framework for orchestrating multiple AI agents in collaborative workflows.</p>
-                <p><a href="https://github.com/joaomdmoura/crewAI" target="_blank">GitHub Repository</a></p>
-            </div>
-            
-            <div class="reference-item">
-                <h4>Ragas</h4>
-                <p>Evaluation framework specifically designed for RAG systems.</p>
-                <p><a href="https://github.com/explodinggradients/ragas" target="_blank">GitHub Repository</a></p>
-            </div>
-            
-            <div class="reference-item">
-                <h4>DSPy</h4>
-                <p>Programming framework for optimizing LLM prompts systematically.</p>
-                <p><a href="https://github.com/stanfordnlp/dspy" target="_blank">GitHub Repository</a></p>
-            </div>
-            
-            <div class="reference-item">
-                <h4>OpenLLMetry</h4>
-                <p>OpenTelemetry-based observability specifically for LLM applications.</p>
-                <p><a href="https://github.com/traceloop/openllmetry" target="_blank">GitHub Repository</a></p>
-            </div>
-            
-            <div class="reference-item">
-                <h4>Giskard</h4>
-                <p>AI testing framework for identifying vulnerabilities in LLM applications.</p>
-                <p><a href="https://github.com/Giskard-AI/giskard" target="_blank">GitHub Repository</a></p>
-            </div>
-        </div>
-    </div>
+   <!-- Additional Libraries Reference Section - Converted to Table Format -->
+   <div class="reference-section" id="additional-libraries">
+    <h2 style="scroll-margin-top: 70px;">Additional Open Source Libraries</h2>
+    <p>The following MIT and Apache licensed libraries are also valuable for AWS Bedrock applications:</p>
     
-    <div class="note-box">
-        <p><strong>Note:</strong> All libraries mentioned in this module are under MIT or Apache licensing, making them suitable for both commercial and open-source projects. When building production applications with AWS Bedrock, these libraries provide complementary functionality while maintaining licensing flexibility.</p>
-    </div>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr style="background-color: #e1f0fa; border-bottom: 2px solid #3498db;">
+                <th style="padding: 12px 15px; text-align: left;">Library</th>
+                <th style="padding: 12px 15px; text-align: left;">Description</th>
+                <th style="padding: 12px 15px; text-align: left;">License</th>
+                <th style="padding: 12px 15px; text-align: left;">Repository</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 12px 15px;"><strong>Ragas</strong></td>
+                <td style="padding: 12px 15px;">Evaluation framework specifically designed for RAG systems.</td>
+                <td style="padding: 12px 15px;">Apache 2.0</td>
+                <td style="padding: 12px 15px;"><a href="https://github.com/explodinggradients/ragas" target="_blank">GitHub Repository</a></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ddd; background-color: #f9f9f9;">
+                <td style="padding: 12px 15px;"><strong>DSPy</strong></td>
+                <td style="padding: 12px 15px;">Programming framework for optimizing LLM prompts systematically.</td>
+                <td style="padding: 12px 15px;">Apache 2.0</td>
+                <td style="padding: 12px 15px;"><a href="https://github.com/stanfordnlp/dspy" target="_blank">GitHub Repository</a></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 12px 15px;"><strong>OpenLLMetry</strong></td>
+                <td style="padding: 12px 15px;">OpenTelemetry-based observability specifically for LLM applications.</td>
+                <td style="padding: 12px 15px;">Apache 2.0</td>
+                <td style="padding: 12px 15px;"><a href="https://github.com/traceloop/openllmetry" target="_blank">GitHub Repository</a></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ddd; background-color: #f9f9f9;">
+                <td style="padding: 12px 15px;"><strong>Giskard</strong></td>
+                <td style="padding: 12px 15px;">AI testing framework for identifying vulnerabilities in LLM applications.</td>
+                <td style="padding: 12px 15px;">Apache 2.0</td>
+                <td style="padding: 12px 15px;"><a href="https://github.com/Giskard-AI/giskard" target="_blank">GitHub Repository</a></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 12px 15px;"><strong>Guidance</strong></td>
+                <td style="padding: 12px 15px;">Library for controlling LLM text generation with structured templates.</td>
+                <td style="padding: 12px 15px;">MIT</td>
+                <td style="padding: 12px 15px;"><a href="https://github.com/guidance-ai/guidance" target="_blank">GitHub Repository</a></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ddd; background-color: #f9f9f9;">
+                <td style="padding: 12px 15px;"><strong>Instructor</strong></td>
+                <td style="padding: 12px 15px;">Library for structured outputs from LLMs using Pydantic schemas.</td>
+                <td style="padding: 12px 15px;">Apache 2.0</td>
+                <td style="padding: 12px 15px;"><a href="https://github.com/jxnl/instructor" target="_blank">GitHub Repository</a></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 12px 15px;"><strong>Supabase</strong></td>
+                <td style="padding: 12px 15px;">Open source Firebase alternative with built-in vector database capabilities.</td>
+                <td style="padding: 12px 15px;">Apache 2.0</td>
+                <td style="padding: 12px 15px;"><a href="https://github.com/supabase/supabase" target="_blank">GitHub Repository</a></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ddd; background-color: #f9f9f9;">
+                <td style="padding: 12px 15px;"><strong>Hugging Face Transformers</strong></td>
+                <td style="padding: 12px 15px;">Library providing thousands of pre-trained models for natural language processing tasks.</td>
+                <td style="padding: 12px 15px;">Apache 2.0</td>
+                <td style="padding: 12px 15px;"><a href="https://github.com/huggingface/transformers" target="_blank">GitHub Repository</a></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 12px 15px;"><strong>Ollama</strong></td>
+                <td style="padding: 12px 15px;">Tool for running large language models locally with an easy-to-use API.</td>
+                <td style="padding: 12px 15px;">MIT</td>
+                <td style="padding: 12px 15px;"><a href="https://github.com/ollama/ollama" target="_blank">GitHub Repository</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="note-box">
+    <p><strong>Note:</strong> All libraries mentioned in this module are under MIT or Apache licensing, making them suitable for both commercial and open-source projects. When building production applications with AWS Bedrock, these libraries provide complementary functionality while maintaining licensing flexibility.</p>
+</div>
+
     
     <script src="../assets/js/course-nav.js"></script>
     <script src="../assets/js/course-index.js"></script>

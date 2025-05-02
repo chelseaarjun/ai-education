@@ -17,70 +17,93 @@ document.addEventListener('DOMContentLoaded', function() {
         if (currentPage === 'index.html' || currentPage === '') {
             indexTitle = 'Course Contents';
             indexContent = `
-                <li><a href="#introduction" class="nav-link">Introduction</a></li>
-                <li><a href="#genai-section" class="nav-link">Understanding Generative AI</a></li>
-                <li><a href="#ai-evolution" class="nav-link">Evolution of AI</a></li>
-                <li><a href="#course-structure" class="nav-link">Course Structure</a></li>
+                <li><a href="#introduction" class="nav-link">1. Introduction</a></li>
+                <li><a href="#genai-section" class="nav-link">2. Understanding Generative AI</a></li>
+                <li><a href="#ai-evolution" class="nav-link">3. Evolution of AI</a></li>
+                <li><a href="#course-structure" class="nav-link">4. Course Structure</a></li>
             `;
         } else if (currentPage === 'llm-concepts-improved.html') {
             indexTitle = 'LLM Concepts';
             indexContent = `
-                <li><a href="#introduction" class="nav-link">Introduction</a></li>
-                <li><a href="#context-window" class="nav-link">1. Context Window</a></li>
-                <li><a href="#tokenization" class="nav-link">2. Tokenization</a></li>
-                <li><a href="#embeddings" class="nav-link">3. Embeddings</a></li>
-                <li><a href="#temperature" class="nav-link">4. Temperature & Sampling</a></li>
-                <li><a href="#response-format" class="nav-link">5. Response Formats</a></li>
-                <li><a href="#model-selection" class="nav-link">6. Model Selection</a></li>
-                <li><a href="#quiz-section" class="nav-link">Knowledge Check</a></li>
+                <li><a href="#introduction" class="nav-link">1. Introduction</a></li>
+                <li><a href="#context-window" class="nav-link">2. Context Window</a></li>
+                <li><a href="#tokenization" class="nav-link">3. Tokenization</a></li>
+                <li><a href="#embeddings" class="nav-link">4. Embeddings</a></li>
+                <li><a href="#temperature" class="nav-link">5. Temperature & Sampling</a></li>
+                <li><a href="#response-format" class="nav-link">6. Response Formats</a></li>
+                <li><a href="#model-selection" class="nav-link">7. Model Selection</a></li>
+                <li><a href="#quiz-section" class="nav-link">8. Knowledge Check</a></li>
             `;
         } else if (currentPage === 'prompt-engineering-guide.html') {
             indexTitle = 'Contents';
             indexContent = `
                 <li><a href="#introduction" class="nav-link">1. Introduction</a></li>
-                <li><a href="#prompt-anatomy" class="nav-link">2. Anatomy of a Prompt</a>
+                <li><a href="#prompt-overview" class="nav-link">2. Prompt Engineering Overview</a>
                     <ul class="nav-subsection" style="PADDING-LEFT: 12px">
-                        <li><a href="#core-principles" class="nav-link">2.1 Core Prompting Principles</a></li>
+                        <li><a href="#prompt-overview" class="nav-link">2.1 What are Prompts?</a></li>
+                        <li><a href="#prompt-overview" class="nav-link">2.2 Why Prompt Engineering Matters</a></li>
+                        <li><a href="#prompt-overview" class="nav-link">2.3 The Prompt Engineering Mindset</a></li>
                     </ul>
                 </li>
-                <li><a href="#basic-techniques" class="nav-link">3. Basic Techniques</a>
+                <li><a href="#prompt-anatomy" class="nav-link">3. Anatomy of an Effective Prompt</a>
                     <ul class="nav-subsection" style="PADDING-LEFT: 12px">
-                        <li><a href="#shot-prompting" class="nav-link">3.1 Zero/One/Few-shot</a></li>
-                        <li><a href="#role-based" class="nav-link">3.2 Instruction-based</a></li>
-                        <li><a href="#constraint-based" class="nav-link">3.3 Constraint-based</a></li>
+                        <li><a href="#core-principles" class="nav-link">3.1 Core Prompting Principles</a></li>
                     </ul>
                 </li>
-                <li><a href="#advanced-techniques" class="nav-link">4. Advanced Techniques</a>
+                <li><a href="#basic-techniques" class="nav-link">4. Essential Prompt Design Techniques</a>
                     <ul class="nav-subsection" style="PADDING-LEFT: 12px">
-                        <li><a href="#chain-of-thought" class="nav-link">4.1 Chain-of-thought</a></li>
-                        <li><a href="#prompt-chaining" class="nav-link">4.2 Prompt Chaining</a></li>
-                        <li><a href="#react" class="nav-link">4.3 ReAct</a></li>
-                        <li><a href="#rag" class="nav-link">4.4 RAG</a></li>
+                        <li><a href="#shot-prompting" class="nav-link">4.1 Zero/One/Few-shot</a></li>
+                        <li><a href="#role-based" class="nav-link">4.2 Instruction-based</a></li>
+                        <li><a href="#constraint-based" class="nav-link">4.3 Constraint-based</a></li>
                     </ul>
                 </li>
-                <li><a href="#practical-application" class="nav-link">5. Practical Application</a></li>
-                <li><a href="#resources" class="nav-link">6. Resources</a></li>
+                <li><a href="#advanced-techniques" class="nav-link">5. Advanced Techniques</a>
+                    <ul class="nav-subsection" style="PADDING-LEFT: 12px">
+                        <li><a href="#chain-of-thought" class="nav-link">5.1 Chain-of-thought</a></li>
+                        <li><a href="#prompt-chaining" class="nav-link">5.2 Prompt Chaining</a></li>
+                        <li><a href="#react" class="nav-link">5.3 ReAct</a></li>
+                        <li><a href="#rag" class="nav-link">5.4 RAG</a></li>
+                    </ul>
+                </li>
+                <li><a href="#practical-application" class="nav-link">6. Practical Application</a></li>
+                <li><a href="#resources" class="nav-link">7. Resources</a></li>
             `;
         } else if (currentPage === 'open-source-tools.html') {
             indexTitle = 'Open Source Tools';
             indexContent = `
-                <li><a href="#introduction" class="nav-link">Introduction</a></li>
-                <li><a href="#core-frameworks" class="nav-link">Core LLM Frameworks</a>
+                <li><a href="#introduction" class="nav-link">1. Introduction</a></li>
+                <li><a href="#core-frameworks" class="nav-link">2. Core LLM Frameworks</a>
                     <ul class="nav-subsection">
-                        <li><a href="#langchain" class="nav-link">LangChain</a></li>
-                        <li><a href="#llamaindex" class="nav-link">LlamaIndex</a></li>
-                        <li><a href="#langfuse" class="nav-link">Langfuse</a></li>
+                        <li><a href="#langchain" class="nav-link">2.1 LangChain</a></li>
+                        <li><a href="#langgraph" class="nav-link">2.2 LangGraph</a></li>
+                        <li><a href="#llamaindex" class="nav-link">2.3 LlamaIndex</a></li>
+                        <li><a href="#faiss" class="nav-link">2.4 FAISS</a></li>
+                        <li><a href="#crewai" class="nav-link">2.5 CrewAI</a></li>
+                        <li><a href="#unstructured" class="nav-link">2.6 Unstructured</a></li>
+                        <li><a href="#modelcontextprotocol" class="nav-link">2.7 ModelContextProtocol</a></li>
+                        <li><a href="#langfuse" class="nav-link">2.8 Langfuse</a></li>
                     </ul>
                 </li>
-                <li><a href="#general-purpose" class="nav-link">General Purpose Libraries</a>
+                <li><a href="#general-purpose" class="nav-link">3. General Purpose Libraries</a>
                     <ul class="nav-subsection">
-                        <li><a href="#fastapi" class="nav-link">FastAPI</a></li>
-                        <li><a href="#streamlit" class="nav-link">Streamlit</a></li>
-                        <li><a href="#pydantic" class="nav-link">Pydantic</a></li>
-                        <li><a href="#jinja2" class="nav-link">Jinja2</a></li>
+                        <li><a href="#fastapi" class="nav-link">3.1 FastAPI</a></li>
+                        <li><a href="#streamlit" class="nav-link">3.2 Streamlit</a></li>
+                        <li><a href="#pydantic" class="nav-link">3.3 Pydantic</a></li>
+                        <li><a href="#jinja2" class="nav-link">3.4 Jinja2</a></li>
                     </ul>
                 </li>
-                <li><a href="#additional-libraries" class="nav-link">Additional Libraries</a></li>
+                <li><a href="#additional-libraries" class="nav-link">4. Additional Libraries</a></li>
+            `;
+        } else if (currentPage === 'introduction-to-agents.html') {
+            indexTitle = 'Introduction to Agents';
+            indexContent = `
+                <li><a href="#introduction" class="nav-link">1. Introduction</a></li>
+                <li><a href="#fundamentals" class="nav-link">2. Fundamentals of AI Agents</a></li>
+                <li><a href="#components" class="nav-link">3. Key Components of Agents</a></li>
+                <li><a href="#frameworks" class="nav-link">4. Agent Frameworks</a></li>
+                <li><a href="#applications" class="nav-link">5. Real-World Applications</a></li>
+                <li><a href="#challenges" class="nav-link">6. Challenges and Limitations</a></li>
+                <li><a href="#future" class="nav-link">7. Future Directions</a></li>
             `;
             
             // Back to home link is now added directly in the HTML

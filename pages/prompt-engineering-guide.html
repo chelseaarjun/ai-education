@@ -288,23 +288,22 @@
     <header>
         <div class="container">
             <h1>Prompt Engineering Guide</h1>
-            <div class="subtitle">Master the art and science of effective prompts</div>
             <div style="position: absolute; top: 20px; right: 20px;">
-                <a href="../index.html" style="color: white; text-decoration: none; font-size: 14px; opacity: 0.8; background-color: rgba(0,0,0,0.2); padding: 5px 10px; border-radius: 4px;">← Back to Home</a>
             </div>
         </div>
     </header>
     
     <main class="container">
         <div class="course-description" id="introduction" style="scroll-margin-top: 70px;">
-            <h2>Introduction to Prompt Engineering</h2>
+            <h2>Master the art and science of effective prompts</h2>
             <p>Welcome to this guide on prompt engineering! Today, you'll explore how to effectively communicate with artificial intelligence models like Claude and Amazon Bedrock to get the best possible results for your applications.</p>
             
-            <p>Prompt engineering is a crucial skill in the AI era. By the end of this 30-minute lesson, you'll understand how to craft effective prompts that can help you build sophisticated AI applications, even without extensive programming knowledge.</p>
+            <p>Prompt engineering is a crucial skill in the AI era. By the end of this lesson, you'll understand how to craft effective prompts that can help you build sophisticated AI applications, even without extensive programming knowledge.</p>
         </div>
         
-        <section>
-            
+        <section id="prompt-overview">
+            <h2>Prompt Engineering Overview</h2>
+
             <div class="diagram">
                 <svg width="800" height="300" viewBox="0 0 800 300">
                     <!-- Background -->
@@ -332,7 +331,6 @@
                     <text x="610" y="150" text-anchor="middle" fill="#333" font-size="16" font-weight="bold">Output</text>
                     <text x="610" y="175" text-anchor="middle" fill="#666" font-size="14">(Response)</text>
                     
-                    <text x="400" y="50" text-anchor="middle" fill="#4a6fa5" font-size="20" font-weight="bold">Prompt Engineering Overview</text>
                 </svg>
             </div>
             
@@ -378,8 +376,10 @@
             <p>This dual perspective helps bridge the gap between human expectations and how AI systems actually process information.</p>
             
 
-            <section id="prompt-anatomy">
-                <h2>Anatomy of an Effective Prompt</h2>
+        </section>
+        
+        <section id="prompt-anatomy">
+            <h2>Anatomy of an Effective Prompt</h2>
                 
                 <div class="diagram">
                     <svg width="800" height="400" viewBox="0 0 800 400">
@@ -766,7 +766,7 @@
             </div>
             
             <div class="diagram">
-                <img src="RAG.png" alt="RAG System Architecture showing Document Storage → Retrieval → Context Integration → Response Generation" width="800" />
+                <img src="../assets/images/RAG.png" alt="RAG System Architecture showing Document Storage → Retrieval → Context Integration → Response Generation" width="800" />
             </div>
             
             <p>Key components of a RAG system:</p>
@@ -966,6 +966,7 @@
                 <li><a href="https://www.promptingguide.ai/" target="_blank">Prompt Engineering Guide by DAIR.AI</a></li>
                 <li><a href="https://python.langchain.com/docs/concepts/prompt_templates/" target="_blank">LangChain Prompt Templates</a></li>
                 <li><a href="https://www.kaggle.com/code/kaggle/prompt-engineering-for-developers-course" target="_blank">Kaggle Prompt Engineering for Developers</a></li>
+                <li><a href="https://www.promptingguide.ai/" target="_blank">Prompt Engineering Guide</a></li>
             </ul>
         </section>
     </main>
@@ -973,6 +974,21 @@
     <script src="../assets/js/course-nav.js"></script>
     <script src="../assets/js/course-index.js"></script>
     <script>
+        // Function to toggle the navigation index
+        function toggleNav() {
+            const navContent = document.getElementById('navContent');
+            navContent.classList.toggle('hidden');
+            
+            // Update button text
+            const navToggle = document.querySelector('.nav-toggle');
+            if (navContent.classList.contains('hidden')) {
+                navToggle.textContent = '☰';
+            } else {
+                navToggle.textContent = '✕';
+            }
+        }
+
+        
         // Function to toggle the navigation index
         function toggleNav() {
             const navContent = document.getElementById('navContent');
