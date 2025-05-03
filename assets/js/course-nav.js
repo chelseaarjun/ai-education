@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="course-nav-dropdown-content">
                         <a href="${rootPath}pages/llm-concepts-improved.html" class="course-nav-dropdown-item available">LLM Concepts</a>
                         <a href="${rootPath}pages/prompt-engineering-guide.html" class="course-nav-dropdown-item available">Prompting Strategies</a>
-                        <a href="#" class="course-nav-dropdown-item coming-soon">Agents <span>Coming Soon</span></a>
+                        <a href="${rootPath}pages/introduction-to-agents.html" class="course-nav-dropdown-item available">Agents</a>
                         <a href="#" class="course-nav-dropdown-item coming-soon">LLMOps <span>Coming Soon</span></a>
                     </div>
                 </div>

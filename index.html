@@ -9,39 +9,13 @@
     <link rel="stylesheet" href="assets/css/mobile-fixes.css">
     <link rel="stylesheet" href="assets/css/introduction-fix.css">
     <style>
-        :root {
-            --primary: #4a6fa5;
-            --secondary: #6b8cb2;
-            --accent: #ff9e3d;
-            --background: #f5f7fa;
-            --text: #333;
-            --light-text: #666;
-            --code-bg: #f0f2f5;
-            --border: #ddd;
-            --success: #4CAF50;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            color: var(--text);
-            background-color: var(--background);
-        }
-        h1, h2, h3, h4 {
-            color: #2c3e50;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            margin-top: 40px;
-            color: #2980b9;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-            padding-top: 20px;
-        }
+        /* Remove the following blocks, as they are now in course-index.css:
+        :root { ... }
+        body { ... }
+        h1, h2, h3, h4 { ... }
+        h1 { ... }
+        */
+        /* Keep only page-specific styles below: */
         .course-description {
             background-color: #eaf2f8;
             padding: 20px;
@@ -78,13 +52,20 @@
         }
         .module-container {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 30px;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 40px;
+            width: 100%;
+            max-width: none;
+            margin: 30px 0 0 0;
+            box-sizing: border-box;
         }
         .part {
-            flex: 1;
-            min-width: 300px;
+            flex: 0 1 48%;
+            min-width: 340px;
+            max-width: 540px;
+            box-sizing: border-box;
+            background: none;
         }
         .module {
             background-color: white;
@@ -161,134 +142,152 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             border-left: 4px solid #1abc9c;
         }
+        @media (max-width: 1000px) {
+            .module-container {
+                flex-direction: column;
+                gap: 20px;
+                max-width: 98vw;
+            }
+            .part {
+                max-width: 100%;
+                min-width: 0;
+            }
+        }
+        .part-header {
+            border-bottom: none !important;
+            box-shadow: none !important;
+            padding-bottom: 0 !important;
+        }
     </style>
 </head>
-<body>
-    <h1>AI Foundations Course</h1>
-    
-    <div class="course-description">
-        <h2>Welcome to AI Foundations</h2>
-        <p>This comprehensive course explores the key concepts needed to build production-grade AI applications. Through a combination of theoretical foundations and practical applications, you'll build the skills necessary to understand and create AI-powered solutions.</p>
-    </div>
-    
-    <!-- Main content starts here -->
-    
-    <!-- Generative AI Overview Section -->
-    <div class="genai-section">
-        <h2>Understanding Generative AI</h2>
-        
-        <p>Generative AI represents the cutting edge of artificial intelligence technology, enabling machines to generate, create, and manipulate diverse types of content - from text and code to images, audio, and video.</p>
-        
-        <p>At its core, generative AI systems can produce new, original content rather than simply analyzing or classifying existing data. This revolutionary capability is transforming how we interact with technology and opening up new possibilities across industries.</p>
-        
-        <h3>Key Components of Generative AI:</h3>
-        
-        <h4>Foundation Models</h4>
-        <p>Foundation models are large-scale, general-purpose AI models trained on vast and diverse datasets. These models develop a deep, flexible understanding of language, vision, reasoning, and other domains, serving as the backbone for various specialized applications.</p>
-        
-        <h4>Large Language Models (LLMs)</h4>
-        <p>LLMs like GPT-4o, Claude 3.7, and Amazon's Titan represent a prominent class of foundation models that excel at natural language tasks. These models can understand and generate human-like text, making them powerful tools for applications ranging from content creation to code generation.</p>
-        
-        <h4>Multimodal Models</h4>
-        <p>The latest generation of foundation models (as of 2025) can process and generate multiple types of data simultaneously - understanding images, text, audio, and video in an integrated way. This multimodal capability enables more natural and comprehensive AI applications.</p>
-        
-        <h3>Adapting Foundation Models:</h3>
-        <p>While foundation models provide powerful general-purpose capabilities, they typically need adaptation for specific applications. The three primary techniques for customizing these models are:</p>
-        
-        <ol>
-            <li><strong>Prompt Engineering:</strong> The art of crafting text instructions to guide the model toward desired outputs. Advanced prompting techniques include few-shot learning, chain-of-thought prompting, and retrieval-augmented generation (RAG) - where models are connected to external knowledge sources to enhance their responses with accurate, up-to-date information.</li>
-            
-            <li><strong>Agents:</strong> AI systems that can autonomously perform complex tasks by combining reasoning capabilities with external tools and persistent memory. Agents can decompose problems, plan solutions, execute actions, and learn from feedback, enabling more sophisticated applications than prompt engineering alone.</li>
-            
-            <li><strong>Fine-Tuning:</strong> The process of retraining models on domain-specific data to specialize them for particular tasks or industries. Advanced approaches include parameter-efficient fine-tuning and context distillation. <em>(Note: Fine-tuning is outside the scope of this introductory course but is mentioned for completeness.)</em></li>
-        </ol>
-    </div>
-    
-    <!-- AI Evolution Timeline -->
-    <div class="ai-evolution">
-        <h2>The Evolution of Artificial Intelligence</h2>
-        <p>AI has evolved dramatically over the decades, with each phase building on the innovations of previous generations.</p>
-        
-        <div class="ai-timeline">
-            <div class="timeline-item">
-                <span class="timeline-year">1950s-1960s:</span>
-                <p><strong>Early Artificial Intelligence</strong> - The field of AI emerges with the development of basic algorithms and the exploration of symbolic reasoning. The term "Artificial Intelligence" is coined at the Dartmouth Conference in 1956.</p>
-            </div>
-            
-            <div class="timeline-item">
-                <span class="timeline-year">1990s-2000s:</span>
-                <p><strong>Machine Learning (ML)</strong> - Advancements lead to the creation of predictive models that can learn from historical data to make future predictions. ML enables computers to improve their performance on tasks through experience.</p>
-            </div>
-            
-            <div class="timeline-item">
-                <span class="timeline-year">2010s:</span>
-                <p><strong>Deep Learning</strong> - A subset of ML that uses artificial neural networks inspired by the human brain to automatically extract complex patterns from large datasets in a hierarchical manner. Deep learning powers breakthroughs in image recognition, natural language processing, and other domains.</p>
-            </div>
-            
-            <div class="timeline-item">
-                <span class="timeline-year">2017-2022:</span>
-                <p><strong>Generative AI (GenAI)</strong> - Building upon deep learning, generative models enable machines to create original content across various modalities. Transformer architectures fundamentally change NLP capabilities.</p>
-            </div>
-            
-            <div class="timeline-item">
-                <span class="timeline-year">2023-2025:</span>
-                <p><strong>Multimodal Foundation Models</strong> - The latest generation of models can seamlessly work across different types of data (text, images, audio), enabling new applications and more natural human-AI interactions.</p>
-            </div>
-            
-            <div class="timeline-item">
-                <span class="timeline-year">2024-2025:</span>
-                <p><strong>Agent-Based Systems & AI Reasoning</strong> - Models are increasingly capable of complex reasoning, task decomposition, and autonomous action through agent frameworks that combine multiple AI capabilities.</p>
-            </div>
+<body>    
+    <div class="content-inner">
+        <h1>AI Foundations Course</h1>
+
+        <div class="course-description">
+            <h2>Welcome to AI Foundations</h2>
+            <p>This comprehensive course explores the key concepts needed to build production-grade AI applications. Through a combination of theoretical foundations and practical applications, you'll build the skills necessary to understand and create AI-powered solutions.</p>
         </div>
-    </div>
-    
-    <!-- Course Modules -->
-    <h2>Course Structure</h2>
-    <div class="module-container">
-        <div class="part">
-            <h2>Part 1: Foundational Concepts</h2>
+        
+        <!-- Main content starts here -->
+        
+        <!-- Generative AI Overview Section -->
+        <div class="genai-section">
+            <h2>Understanding Generative AI</h2>
             
-            <div class="module">
-                <h3>Introduction to Large Language Models</h3>
-                <p>Learn about the architecture, capabilities, and limitations of Large Language Models. Understand the fundamental concepts behind these powerful AI systems that are driving innovation across industries.</p>
-                <p><a href="pages/llm-concepts-improved.html" class="nav-button">Start Module</a></p>
-            </div>
+            <p>Generative AI represents the cutting edge of artificial intelligence technology, enabling machines to generate, create, and manipulate diverse types of content - from text and code to images, audio, and video.</p>
             
-            <div class="module">
-                <h3>Prompt Engineering Guide</h3>
-                <p>Master the art of effectively communicating with AI models through carefully crafted prompts. Learn strategies and techniques to get the most accurate and useful responses from language models.</p>
-                <p><a href="pages/prompt-engineering-guide.html" class="nav-button">Start Module</a></p>
-            </div>
+            <p>At its core, generative AI systems can produce new, original content rather than simply analyzing or classifying existing data. This revolutionary capability is transforming how we interact with technology and opening up new possibilities across industries.</p>
             
-            <div class="module">
-                <h3>Introduction to Agents</h3>
-                <p>Explore how AI agents can autonomously perform complex tasks by combining multiple capabilities. Learn about frameworks like ReAct that enable reasoning and action in AI systems.</p>
-                <p><a href="pages/introduction-to-agents.html" class="nav-button">Start Module</a></p>
-            </div>
+            <h3>Key Components of Generative AI:</h3>
             
-            <div class="module coming-soon">
-                <h3>Introduction to LLMOps</h3>
-                <p>Understand the operational aspects of deploying and maintaining LLM-based applications. Learn best practices for monitoring, updating, and scaling AI systems in production environments.</p>
+            <h4>Foundation Models</h4>
+            <p>Foundation models are large-scale, general-purpose AI models trained on vast and diverse datasets. These models develop a deep, flexible understanding of language, vision, reasoning, and other domains, serving as the backbone for various specialized applications.</p>
+            
+            <h4>Large Language Models (LLMs)</h4>
+            <p>LLMs like GPT-4o, Claude 3.7, and Amazon's Titan represent a prominent class of foundation models that excel at natural language tasks. These models can understand and generate human-like text, making them powerful tools for applications ranging from content creation to code generation.</p>
+            
+            <h4>Multimodal Models</h4>
+            <p>The latest generation of foundation models (as of 2025) can process and generate multiple types of data simultaneously - understanding images, text, audio, and video in an integrated way. This multimodal capability enables more natural and comprehensive AI applications.</p>
+            
+            <h3>Adapting Foundation Models:</h3>
+            <p>While foundation models provide powerful general-purpose capabilities, they typically need adaptation for specific applications. The three primary techniques for customizing these models are:</p>
+            
+            <ol>
+                <li><strong>Prompt Engineering:</strong> The art of crafting text instructions to guide the model toward desired outputs. Advanced prompting techniques include few-shot learning, chain-of-thought prompting, and retrieval-augmented generation (RAG) - where models are connected to external knowledge sources to enhance their responses with accurate, up-to-date information.</li>
+                
+                <li><strong>Agents:</strong> AI systems that can autonomously perform complex tasks by combining reasoning capabilities with external tools and persistent memory. Agents can decompose problems, plan solutions, execute actions, and learn from feedback, enabling more sophisticated applications than prompt engineering alone.</li>
+                
+                <li><strong>Fine-Tuning:</strong> The process of retraining models on domain-specific data to specialize them for particular tasks or industries. Advanced approaches include parameter-efficient fine-tuning and context distillation. <em>(Note: Fine-tuning is outside the scope of this introductory course but is mentioned for completeness.)</em></li>
+            </ol>
+        </div>
+        
+        <!-- AI Evolution Timeline -->
+        <div class="ai-evolution">
+            <h2>The Evolution of Artificial Intelligence</h2>
+            <p>AI has evolved dramatically over the decades, with each phase building on the innovations of previous generations.</p>
+            
+            <div class="ai-timeline">
+                <div class="timeline-item">
+                    <span class="timeline-year">1950s-1960s:</span>
+                    <p><strong>Early Artificial Intelligence</strong> - The field of AI emerges with the development of basic algorithms and the exploration of symbolic reasoning. The term "Artificial Intelligence" is coined at the Dartmouth Conference in 1956.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <span class="timeline-year">1990s-2000s:</span>
+                    <p><strong>Machine Learning (ML)</strong> - Advancements lead to the creation of predictive models that can learn from historical data to make future predictions. ML enables computers to improve their performance on tasks through experience.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <span class="timeline-year">2010s:</span>
+                    <p><strong>Deep Learning</strong> - A subset of ML that uses artificial neural networks inspired by the human brain to automatically extract complex patterns from large datasets in a hierarchical manner. Deep learning powers breakthroughs in image recognition, natural language processing, and other domains.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <span class="timeline-year">2017-2022:</span>
+                    <p><strong>Generative AI (GenAI)</strong> - Building upon deep learning, generative models enable machines to create original content across various modalities. Transformer architectures fundamentally change NLP capabilities.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <span class="timeline-year">2023-2025:</span>
+                    <p><strong>Multimodal Foundation Models</strong> - The latest generation of models can seamlessly work across different types of data (text, images, audio), enabling new applications and more natural human-AI interactions.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <span class="timeline-year">2024-2025:</span>
+                    <p><strong>Agent-Based Systems & AI Reasoning</strong> - Models are increasingly capable of complex reasoning, task decomposition, and autonomous action through agent frameworks that combine multiple AI capabilities.</p>
+                </div>
             </div>
         </div>
         
-        <div class="part">
-            <h2>Part 2: Building AI Applications</h2>
-            
-            <div class="module coming-soon">
-                <h3>AWS Bedrock Services</h3>
-                <p>Explore Amazon's Bedrock platform for building and scaling generative AI applications. Learn how to leverage managed foundation models, fine-tuning capabilities, and integration with other AWS services.</p>
+        <!-- Course Modules -->
+        <h2>Course Structure</h2>
+        <div class="module-container">
+            <div class="part">
+                <h2 class="part-header">Part 1: Foundational Concepts</h2>
+                
+                <div class="module">
+                    <h3>Introduction to Large Language Models</h3>
+                    <p>Learn about the architecture, capabilities, and limitations of Large Language Models. Understand the fundamental concepts behind these powerful AI systems that are driving innovation across industries.</p>
+                    <p><a href="pages/llm-concepts-improved.html" class="nav-button">Start Module</a></p>
+                </div>
+                
+                <div class="module">
+                    <h3>Prompt Engineering Guide</h3>
+                    <p>Master the art of effectively communicating with AI models through carefully crafted prompts. Learn strategies and techniques to get the most accurate and useful responses from language models.</p>
+                    <p><a href="pages/prompt-engineering-guide.html" class="nav-button">Start Module</a></p>
+                </div>
+                
+                <div class="module">
+                    <h3>Introduction to Agents</h3>
+                    <p>Explore how AI agents can autonomously perform complex tasks by combining multiple capabilities. Learn about frameworks like ReAct that enable reasoning and action in AI systems.</p>
+                    <p><a href="pages/introduction-to-agents.html" class="nav-button">Start Module</a></p>
+                </div>
+                
+                <div class="module coming-soon">
+                    <h3>Introduction to LLMOps</h3>
+                    <p>Understand the operational aspects of deploying and maintaining LLM-based applications. Learn best practices for monitoring, updating, and scaling AI systems in production environments.</p>
+                </div>
             </div>
             
-            <div class="module">
-                <h3>Open Source Tools & Frameworks</h3>
-                <p>Explore key open-source libraries that complement AWS Bedrock services. Learn how frameworks like LangChain, LangFuse, CrewAI can streamline development, and how general-purpose tools like FastAPI, Streamlit, and Pydantic help build production-ready AI applications.</p>
-                <p><a href="pages/open-source-tools.html" class="nav-button">Start Module</a></p>
-            </div>
-            
-            <div class="module coming-soon">
-                <h3>Prompt-Driven Development (Vibe Coding)</h3>
-                <p>Master the emerging discipline of using natural language prompts to generate, modify, and maintain software. Learn how to effectively communicate with AI coding assistants to accelerate development workflows, troubleshoot issues, and build entire applications through collaborative human-AI programming.</p>
+            <div class="part">
+                <h2 class="part-header">Part 2: Building AI Applications</h2>
+                
+                <div class="module coming-soon">
+                    <h3>AWS Bedrock Services</h3>
+                    <p>Explore Amazon's Bedrock platform for building and scaling generative AI applications. Learn how to leverage managed foundation models, fine-tuning capabilities, and integration with other AWS services.</p>
+                </div>
+                
+                <div class="module">
+                    <h3>Open Source Tools & Frameworks</h3>
+                    <p>Explore key open-source libraries that complement AWS Bedrock services. Learn how frameworks like LangChain, LangFuse, CrewAI can streamline development, and how general-purpose tools like FastAPI, Streamlit, and Pydantic help build production-ready AI applications.</p>
+                    <p><a href="pages/open-source-tools.html" class="nav-button">Start Module</a></p>
+                </div>
+                
+                <div class="module coming-soon">
+                    <h3>Prompt-Driven Development (Vibe Coding)</h3>
+                    <p>Master the emerging discipline of using natural language prompts to generate, modify, and maintain software. Learn how to effectively communicate with AI coding assistants to accelerate development workflows, troubleshoot issues, and build entire applications through collaborative human-AI programming.</p>
+                </div>
             </div>
         </div>
     </div>

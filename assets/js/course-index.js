@@ -112,7 +112,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create the index HTML
         const indexHTML = `
         <div class="nav-index">
-            <button class="nav-toggle" onclick="toggleNav()">☰</button>
             <div class="nav-content" id="navContent">
                 <h3>${indexTitle}</h3>
                 <ul>
@@ -124,36 +123,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Add the index to the page
         document.body.insertAdjacentHTML('afterbegin', indexHTML);
-        
-        // Add the toggle function if it doesn't exist
-        if (typeof window.toggleNav !== 'function') {
-            window.toggleNav = function() {
-                const navContent = document.getElementById('navContent');
-                navContent.classList.toggle('hidden');
-                
-                // Update button text
-                const navToggle = document.querySelector('.nav-toggle');
-                if (navContent.classList.contains('hidden')) {
-                    navToggle.textContent = '☰';
-                } else {
-                    navToggle.textContent = '✕';
-                }
-                
-                // Close the content when clicking a link on mobile
-                if (window.innerWidth <= 768) {
-                    const navLinks = document.querySelectorAll('.nav-content .nav-link');
-                    navLinks.forEach(function(link) {
-                        link.addEventListener('click', function() {
-                            // Small delay to allow the browser to navigate to the anchor
-                            setTimeout(function() {
-                                navContent.classList.add('hidden');
-                                navToggle.textContent = '☰';
-                            }, 100);
-                        });
-                    });
-                }
-            };
-        }
         
         // Add IDs to sections if they don't have them
         addSectionIds();
