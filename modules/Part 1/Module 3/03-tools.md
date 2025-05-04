@@ -24,15 +24,15 @@ Tools transform a passive text generator into an active agent by providing:
 - External system integration
 - Output verification mechanisms
 
-## 2.2 Types of Tools and Integration Patterns
+## 2.2 Types of External Environment Interactions
 
-| Integration Pattern | Description | When to Use | Example |
-|-------------------|-------------|-------------|----------|
-| Direct Function Calling | Agent executes local functions | Simple operations with no external dependencies | Calculator, text formatting, local data processing |
-| External API Calls | Agent connects to external services | Real-time data needs or specialized capabilities | Weather services, news feeds, translation APIs |
-| Database Retrieval | Agent queries databases for information | Working with persistent structured data | Customer records, product catalogs, transaction history |
-| Code Execution | Agent generates and runs code | Complex computational tasks requiring flexibility | Data analysis, visualization generation, algorithm implementation |
-| Webhook Integrations | Agent triggers external workflows | When actions need to occur in other systems | Sending emails, updating CRM systems, posting to social media |
+| Interaction Pattern      | Description                                 | When to Use                                   | Example                                              |
+|-------------------------|---------------------------------------------|-----------------------------------------------|------------------------------------------------------|
+| Direct Function         | Agent executes local functions              | Simple operations with no external dependencies| Calculator, text formatting, local data processing   |
+| External                | Agent connects to APIs or triggers workflows| Real-time data, integrations, or external actions| MCP Servers, Weather API, Slack Webhooks|
+| Database Retrieval      | Agent queries databases for information     | Working with persistent structured data        | Customer records, product catalogs, transaction history |
+| Code Execution          | Agent generates and runs code               | Complex computational tasks requiring flexibility | Data analysis, visualization generation, algorithm implementation |
+| Human Interaction       | Agent collaborates or escalates to a human  | Tasks requiring judgment, approval, or clarification | Escalating support tickets, requesting user input, human-in-the-loop review |
 
 ## 2.3 Key Principles for Building Agent Tools
 

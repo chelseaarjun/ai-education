@@ -158,6 +158,54 @@
             box-shadow: none !important;
             padding-bottom: 0 !important;
         }
+        .course-overview {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .parts-overview-container {
+            display: flex;
+            gap: 40px;
+            margin: 30px 0;
+        }
+        .part-overview {
+            flex: 1;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .key-outcomes {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f0f7ff;
+            border-radius: 6px;
+        }
+        .key-outcomes h4 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .key-outcomes ul {
+            margin: 10px 0 0 0;
+            padding-left: 20px;
+        }
+        .key-outcomes li {
+            margin: 8px 0;
+        }
+        /* Responsive design for mobile devices */
+        @media (max-width: 1000px) {
+            .parts-overview-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .part-overview {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>    
@@ -168,8 +216,6 @@
             <h2>Welcome to AI Foundations</h2>
             <p>This comprehensive course explores the key concepts needed to build production-grade AI applications. Through a combination of theoretical foundations and practical applications, you'll build the skills necessary to understand and create AI-powered solutions.</p>
         </div>
-        
-        <!-- Main content starts here -->
         
         <!-- Generative AI Overview Section -->
         <div class="genai-section">
@@ -239,12 +285,30 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Course Modules -->
-        <h2>Course Structure</h2>
+
+        <!-- Course Structure Overview -->
+        <div class="course-overview">
+            <h2>Course Structure</h2>
+            <p>This course is designed specifically for software and data engineers working in retail and real estate operations. Through a carefully structured learning path, you'll gain both theoretical knowledge and practical skills needed to build production-grade AI applications.</p>
+        </div>
+
+        <!-- Module Container with Part 1 and Part 2 -->
         <div class="module-container">
             <div class="part">
                 <h2 class="part-header">Part 1: Foundational Concepts</h2>
+                <div class="module">
+                    <p>Master the core concepts of modern AI development. Starting from fundamentals, you'll progressively build knowledge of language models, prompt engineering, and AI agents - essential building blocks for creating AI applications.</p>
+                    
+                    <div class="key-outcomes">
+                        <h4>Key Outcomes:</h4>
+                        <ul>
+                            <li>Understand how LLMs get to work</li>
+                            <li>Master effective prompt writing</li>
+                            <li>Learn to fundamentals of AI agents</li>
+                            <li>Understand best practices for AI operations</li>
+                        </ul>
+                    </div>
+                </div>
                 
                 <div class="module">
                     <h3>Introduction to Large Language Models</h3>
@@ -253,15 +317,15 @@
                 </div>
                 
                 <div class="module">
-                    <h3>Prompt Engineering Guide</h3>
+                    <h3>Prompt Engineering & Management Guide</h3>
                     <p>Master the art of effectively communicating with AI models through carefully crafted prompts. Learn strategies and techniques to get the most accurate and useful responses from language models.</p>
                     <p><a href="pages/prompt-engineering-guide.html" class="nav-button">Start Module</a></p>
                 </div>
                 
                 <div class="module">
-                    <h3>Introduction to Agents</h3>
+                    <h3>Fundamentals of Congnitgive Language Agents</h3>
                     <p>Explore how AI agents can autonomously perform complex tasks by combining multiple capabilities. Learn about frameworks like ReAct that enable reasoning and action in AI systems.</p>
-                    <p><a href="pages/introduction-to-agents.html" class="nav-button">Start Module</a></p>
+                    <p><a href="pages/part1-module3-agents.html" class="nav-button">Start Module</a></p>
                 </div>
                 
                 <div class="module coming-soon">
@@ -272,9 +336,28 @@
             
             <div class="part">
                 <h2 class="part-header">Part 2: Building AI Applications</h2>
+                <div class="module">
+                    <p>Apply your foundational knowledge to build production-grade AI applications. Learn to use AWS Bedrock services alongside popular open-source tools, starting with Model Context Protocol (MCP) and progressing to complete end-to-end solutions.</p>
+                    
+                    <div class="key-outcomes">
+                        <h4>Key Outcomes:</h4>
+                        <ul>
+                            <li>Understand what, why and how of MCP</li>
+                            <li>Overview of AWS Bedrock Offerings</li>
+                            <li>Integrate essential open-source AI tools</li>
+                            <li>Build an end-to-end application</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="module">
+                    <h3>Developer's Guide to Model Context Protocol</h3>
+                    <p>Learn how to use MCP to build robust, maintainable AI applications. Understand the core principles of MCP, its integration with AWS Bedrock, and how it enables standardized communication between AI models and tools.</p>
+                    <p><a href="pages/developers-guide-to-mcp.html" class="nav-button">Start Module</a></p>
+                </div>
                 
                 <div class="module coming-soon">
-                    <h3>AWS Bedrock Services</h3>
+                    <h3>AWS Bedrock Service Offerings</h3>
                     <p>Explore Amazon's Bedrock platform for building and scaling generative AI applications. Learn how to leverage managed foundation models, fine-tuning capabilities, and integration with other AWS services.</p>
                 </div>
                 
@@ -285,7 +368,7 @@
                 </div>
                 
                 <div class="module coming-soon">
-                    <h3>Prompt-Driven Development (Vibe Coding)</h3>
+                    <h3>Vibe Code and Build an end to endAI Agent</h3>
                     <p>Master the emerging discipline of using natural language prompts to generate, modify, and maintain software. Learn how to effectively communicate with AI coding assistants to accelerate development workflows, troubleshoot issues, and build entire applications through collaborative human-AI programming.</p>
                 </div>
             </div>

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 3: AI Agents</title>
+    <link rel="stylesheet" href="../assets/css/course-nav.css">
+    <link rel="stylesheet" href="../assets/css/course-index.css">
+    <link rel="stylesheet" href="../assets/css/mobile-fixes.css">
+    <link rel="stylesheet" href="../assets/css/introduction-fix.css">
+    <style>
+        /* --- Module Nav Bar --- */
+        .module-nav {
+            position: fixed;
+            top: 50px; /* height of global nav bar */
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            background: #f5f7fa;
+            padding: 20px 0 14px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .module-nav-btn {
+            background: none;
+            border: none;
+            color: #4a6fa5;
+            font-size: 1.15rem;
+            padding: 12px 32px;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .module-nav-btn.active {
+            background: #4a6fa5;
+            color: #fff;
+            font-weight: bold;
+        }
+        .module-nav-btn:focus-visible {
+            outline: 2px solid #4a6fa5;
+        }
+
+        /* --- Section Navigation Buttons --- */
+        .section-nav-btns {
+            display: flex;
+            justify-content: space-between;
+            margin: 32px 0 0 0;
+        }
+        .section-nav-btns button {
+            background: #4a6fa5;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 24px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .section-nav-btns button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* --- Content Layout --- */
+        .content-inner {
+            padding-top: 110px;
+            margin-left: 300px; /* 220px sidebar + 80px gap */
+            max-width: calc(85% - 220px - 80px);
+            width: 85%;
+        }
+        @media (max-width: 900px) {
+            .content-inner {
+                margin-left: 0;
+                max-width: 95%;
+                width: 95%;
+                padding-top: 120px;
+            }
+            .module-sidebar {
+                display: none;
+            }
+        }
+        @media (max-width: 600px) {
+            .module-nav {
+                flex-direction: column;
+                gap: 0;
+                justify-content: flex-start;
+                padding: 10px 0 6px 0;
+            }
+            .module-nav-btn {
+                border-radius: 0;
+                width: 100%;
+                text-align: left;
+                padding: 12px 18px;
+            }
+            .content-inner {
+                padding-top: 120px;
+            }
+        }
+
+        /* --- Sidebar --- */
+        .module-sidebar {
+            position: fixed;
+            top: 110px;
+            left: 0;
+            width: 220px;
+            height: calc(100vh - 110px);
+            background: #f7fafd;
+            border-right: 1px solid #e0e0e0;
+            padding: 28px 12px 24px 28px;
+            overflow-y: auto;
+            z-index: 900;
+            font-size: 1rem;
+        }
+        .module-sidebar h4 {
+            margin-top: 0;
+            color: #4a6fa5;
+            font-size: 1.05rem;
+            margin-bottom: 12px;
+        }
+        .module-sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .module-sidebar li {
+            margin-bottom: 10px;
+        }
+        .module-sidebar a {
+            color: #333;
+            text-decoration: none;
+            padding: 6px 8px;
+            border-radius: 4px;
+            display: block;
+            transition: background 0.2s, color 0.2s;
+        }
+        .module-sidebar a.active {
+            background: #4a6fa5;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* --- Quiz Styles --- */
+        .quiz-container {
+            background-color: #f0f2f5;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        .quiz-question {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .quiz-options {
+            list-style-type: none;
+            padding: 0;
+        }
+        .quiz-option {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .quiz-option:hover {
+            background-color: #f5f5f5;
+        }
+        .quiz-option.selected {
+            background-color: #4a6fa5;
+            color: white;
+        }
+        .quiz-option.correct {
+            background-color: #dff0d8;
+            border-color: #4CAF50;
+            color: #3c763d;
+        }
+        .quiz-option.incorrect {
+            background-color: #f2dede;
+            border-color: #d9534f;
+            color: #a94442;
+        }
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #4a6fa5;
+            display: none;
+        }
+
+        /* --- Code Example Styles --- */
+        .code-examples-row {
+            display: flex;
+            gap: 24px;
+            margin: 24px 0;
+        }
+        .code-example-col {
+            flex: 1 1 0;
+            min-width: 0;
+        }
+        .code-example-col pre {
+            overflow-x: auto;
+            max-width: 100%;
+        }
+        .code-example-header {
+            font-weight: bold;
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+            color: #4a6fa5;
+        }
+        .code-highlight {
+            background: #fffbe6;
+            border-left: 4px solid #ff9e3d;
+            padding-left: 6px;
+            margin-left: -6px;
+            display: inline-block;
+        }
+        @media (max-width: 900px) {
+            .code-examples-row {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+
+        /* --- Table Styles --- */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+        }
+        th, td {
+            border: 1px solid #bcd2ee;
+        }
+        th {
+            background: #e9f0f9;
+            color: #2c3e50;
+            font-weight: bold;
+            padding: 14px 10px;
+        }
+        td {
+            padding: 13px 10px;
+        }
+        tr:nth-child(even) td {
+            background: #f7fafd;
+        }
+        tr:last-child td {
+            border-bottom: 1px solid #bcd2ee;
+        }
+    </style>
+</head>
+<body>
+    <nav class="module-nav">
+        <button class="module-nav-btn" data-section="fundamentals">Fundamentals</button>
+        <button class="module-nav-btn" data-section="memory">Memory</button>
+        <button class="module-nav-btn" data-section="tools">Tools</button>
+        <button class="module-nav-btn" data-section="decision-cycle">Decision Cycle</button>
+    </nav>
+    <nav class="module-sidebar"></nav>
+    <div class="content-inner">
+        <h1>Module 3: Congnitgive Language Agents</h1>
+        <section id="fundamentals" class="module-section">
+            <h2>Fundamentals of AI Agents</h2>
+            <h3>What is an AI Agent?</h3>
+            <p>An AI agent is a software system that can have persistent memory, interact with its external environment, reason, and take actions to achieve specific goals — often autonomously.</p>
+            <p>Agents have three essential components:</p>
+            <ul>
+                <li><strong>Tools:</strong> Agents can use external tools (APIs, calculators, search engines) to interact with the external environment.</li>
+                <li><strong>Memory:</strong> Agents remember past actions, user preferences, or important facts (short-term and long-term).</li>
+                <li><strong>Planning:</strong> Agents use an LLM as their brain and repeat the <b>decision cycle</b> (Observe → Plan → Act) as needed until an end state is reached.</li>
+            </ul>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Traditional Workflow</th>
+                        <th>Prompt-Enhanced LLM Application</th>
+                        <th>Agentic Application</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><b>Flexibility</b></td><td>Rigid, fixed steps</td><td>Flexible output, but fixed process</td><td>Dynamic, adapts steps and tools</td></tr>
+                    <tr><td><b>Use of Tools</b></td><td>Manual or pre-coded</td><td>Limited (via prompt)</td><td>Can autonomously select and use tools</td></tr>
+                    <tr><td><b>Memory</b></td><td>Minimal, often stateless</td><td>Short-term (context window)</td><td>Short-term and long-term, episodic, etc.</td></tr>
+                    <tr><td><b>Decision Cycle</b></td><td>Predefined logic</td><td>LLM-based, but single-shot</td><td>Multi-step, iterative, goal-driven</td></tr>
+                </tbody>
+            </table>
+            <h3>Example: Document Extraction</h3>
+            <ul>
+                <li><strong>Traditional Workflow:</strong> Extracts fixed fields from one type of document that always follows the same structure (e.g., always pulls "Name" and "Date" from a standard lease form).</li>
+                <li><strong>Prompt-Enhanced LLM Application:</strong> Can flexibly extract different fields based on the prompt, but still processes one document at a time and does not adapt its process or use external tools.</li>
+                <li><strong>Agentic Application:</strong> Can interact with tools to translate documents, convert between different document types, and extract relevant fields—even adapting its approach based on the document's structure or missing information.</li>
+            </ul>
+            <div class="code-examples-row">
+                <div class="code-example-col">
+                    <div class="code-example-header">Prompt-Enhanced LLM Application</div>
+                    <pre><code class="language-python">from langchain.llms import Bedrock
+<span class="code-highlight">from langchain.prompts import PromptTemplate</span>
+from langchain.chains import LLMChain
+
+# Initialize Bedrock LLM (replace with your model and credentials)
+llm = Bedrock(
+    model_id="anthropic.claude-v2",  # or "amazon.titan-text-lite-v1"
+    region_name="us-west-2"
+)
+
+# Define a prompt template for extracting fields
+<span class="code-highlight">prompt = PromptTemplate(
+    input_variables=["document"],
+    template="Extract the following fields from this lease document: Tenant Name, Lease Start Date, Rent Amount.\n\nDocument:\n{document}\n\nFields:"
+)</span>
+
+# Create a simple LLM chain
+<span class="code-highlight">chain = LLMChain(llm=llm, prompt=prompt)</span>
+
+# Example document
+doc = "This lease is made between John Doe and ACME Corp. Lease starts on 2024-07-01. Monthly rent is $2,500."
+
+# Run the chain
+result = chain.run(document=doc)
+print(result)
+</code></pre>
+                </div>
+                <div class="code-example-col">
+                    <div class="code-example-header">Agentic Application</div>
+                    <pre><code class="language-python">from langchain.llms import Bedrock
+<span class="code-highlight">from langchain.agents import initialize_agent, Tool</span>
+from langchain.tools import BaseTool
+
+# Example tool: Document field extractor
+<span class="code-highlight">class FieldExtractorTool(BaseTool):
+    name = "Field Extractor"
+    description = "Extracts fields from a lease document."
+    def _run(self, document: str):
+        # (In practice, use an LLM or regex; here, just a placeholder)
+        return "Tenant: John Doe, Start Date: 2024-07-01, Rent: $2,500"</span>
+
+# Example tool: Translator
+class TranslatorTool(BaseTool):
+    name = "Translator"
+    description = "Translates a document to English."
+    def _run(self, document: str):
+        # Placeholder for translation logic
+        return "Translated document: " + document
+
+# Initialize Bedrock LLM
+llm = Bedrock(
+    model_id="anthropic.claude-v2",
+    region_name="us-west-2"
+)
+
+# Register tools
+<span class="code-highlight">tools = [FieldExtractorTool(), TranslatorTool()]</span>
+
+# Initialize agent
+<span class="code-highlight">agent = initialize_agent(
+    tools=tools,
+    llm=llm,
+    agent_type="zero-shot-react-description"
+)</span>
+
+# Example: Document in another language
+doc = "Este contrato de arrendamiento es entre John Doe y ACME Corp. Comienza el 1 de julio de 2024. La renta mensual es de $2,500."
+
+# Run the agent
+result = agent.run(f"Extract the tenant, start date, and rent from this lease document: {doc}")
+print(result)
+</code></pre>
+                </div>
+            </div>
+            <h3>Quiz</h3>
+            <div class="quiz-container">
+                <div class="quiz-question">What is the primary difference between an LLM and an AI agent?</div>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">a) LLMs are less advanced than agents</li>
+                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">b) Agents actively take actions and use tools to achieve goals</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">c) LLMs cannot understand human language</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">d) Agents do not use language models</li>
+                </ul>
+                <div class="quiz-feedback">
+                    <strong>Explanation:</strong> b) Agents actively take actions and use tools to achieve goals.
+                </div>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-question">An agent receives a new sales report, analyzes the numbers to decide if inventory needs to be reordered, and then places an order if necessary.<br>True or False: AI agents are always fully autonomous and require no human intervention.</div>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">a) True</li>
+                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">b) False</li>
+                </ul>
+                <div class="quiz-feedback">
+                    <strong>Explanation:</strong> b) False. Many agents operate with varying degrees of autonomy and may require human oversight or intervention at different points in their operation.
+                </div>
+            </div>
+            <div class='section-nav-btns'>
+                <button id='back-fundamentals' disabled>Back</button>
+                <button id='next-fundamentals'>Next</button>
+            </div>
+        </section>
+        <section id="memory" class="module-section" style="display:none">
+            <h2>Memory: Retaining and Utilizing Information</h2>
+            <h3>What is Memory in AI Agents?</h3>
+            <p>Memory enables an agent to remember, reason, and act based on past interactions, knowledge, and goals. For chatbots and digital agents, memory is essential for holding context, learning from conversations, and improving over time.</p>
+            <p><strong>Analogy:</strong><br>Just as people remember recent conversations, facts, and how to perform tasks, agents use different types of memory to be helpful and context-aware.</p>
+            <hr>
+            <h3>Memory Types in Language Agents</h3>
+            <h4>1. Working Memory:  What the agent is thinking about right now</h4>
+            <p><strong>Definition:</strong><br>Working memory is the agent's "active desk"—it holds all the information the agent needs right now to make decisions and respond. This includes:</p>
+            <ul>
+                <li>The current user message and recent conversation history</li>
+                <li>Any goals or tasks the agent is working on</li>
+                <li>Facts or context retrieved from long-term memory for the current turn</li>
+            </ul>
+            <p><strong>Key Points:</strong></p>
+            <ul>
+                <li>Working memory is refreshed every decision cycle (e.g., each time the agent responds)</li>
+                <li>It is the main input to the LLM for generating a response</li>
+                <li>After the LLM responds, new information (actions, decisions, updated goals) is stored back in working memory for the next cycle</li>
+            </ul>
+            <p><strong>Analogy:</strong><br>Like having all the notes and materials you need on your desk while working on a homework assignment—everything you need right now is in front of you and easy to use.</p>
+            <hr>
+            <h4>2. Long-Term Memory: What the agent has experienced before and know as facts</h4>
+            <p>Long-term memory is where the agent stores information it may need in the future, even after the current conversation or task is over. It has two main types:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>What it Stores</th>
+                        <th>Example in Chatbots/Agents</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Episodic</strong></td><td>Recall what happened in previous chats or tasks</td><td>Specific experiences and events</td><td>Past conversations, user preferences, previous actions taken</td></tr>
+                    <tr><td><strong>Semantic</strong></td><td>Lookup facts or knowledge to answer questions or make decisions</td><td>General knowledge and facts</td><td>Company policies, product info, FAQs, world knowledge</td></tr>
+                </tbody>
+            </table>
+            <p><strong>Analogy:</strong><br>Episodic memory is like your chat history or diary; semantic memory is like your personal wiki or knowledge base.</p>
+            <hr>
+            <h4>3. Procedural Memory: How the agent knows what to do and how to do it</h4>
+            <p>Procedural memory is how the agent knows what to do and how to do it.</p>
+            <ul>
+                <li><strong>Implicit procedural memory:</strong> The skills and reasoning built into the LLM itself encoded in the model's weights.</li>
+                <li><strong>Explicit procedural memory:</strong> The agent's code, prompt templates, and programmed workflows (e.g., how to escalate a support ticket, how to call an API).</li>
+            </ul>
+            <p><strong>Key Points:</strong></p>
+            <ul>
+                <li>Procedural memory is set up by the agent designer (the developer).</li>
+                <li>It can be updated, but changes must be made carefully to avoid bugs or unintended behavior.</li>
+            </ul>
+            <p><strong>Analogy:</strong><br>Implicit is like knowing how to ride a bike; explicit is like following a recipe or checklist.</p>
+            <hr>
+            <h3>How These Memories Work Together</h3>
+            <ul>
+                <li><strong>Working memory</strong> is the "hub" for each decision: it brings in the current message, retrieves relevant info from long-term memory, and uses procedural memory to decide what to do.</li>
+                <li><strong>Episodic and semantic memory</strong> are "archives" the agent can search for relevant past events or facts.</li>
+                <li><strong>Procedural memory</strong> is the "how-to manual" and skillset the agent uses to act.</li>
+            </ul>
+            <hr>
+            <h4>Memory Architecture Visualization</h4>
+            <img src="../assets/images/Cognitive%20Agent%20Architecture.png" alt="Cognitive Agent Architecture" style="max-width:100%;margin:20px 0;">
+            <p><em>This diagram shows how working memory, long-term memory (episodic and semantic), and procedural memory interact in a language agent. Working memory is the central workspace, connecting the agent's reasoning, actions, and memory systems.</em></p>
+            <p><em>Adapted from the CoALA framework. For more, see <a href="https://arxiv.org/pdf/2309.02427" target="_blank">Cognitive Architectures for Language Agents</a>.</em></p>
+            <hr>
+            <h3>Practical Example (Chatbot Context)</h3>
+            <p><strong>User:</strong> "Last time I chatted, you gave me a troubleshooting tip. What was it?"</p>
+            <ul>
+                <li><strong>Agent's working memory:</strong> Holds the current question and user ID.</li>
+                <li><strong>Agent's episodic memory:</strong> Retrieves the specific advice or troubleshooting tip given in the previous conversation with this user.</li>
+                <li><strong>Agent's semantic memory:</strong> Knows general troubleshooting procedures and device information.</li>
+                <li><strong>Agent's procedural memory:</strong> Uses a programmed workflow to guide the user through troubleshooting steps.</li>
+            </ul>
+            <p><strong>Memory Type Breakdown:</strong></p>
+            <ul>
+                <li><strong>Episodic memory:</strong> "In your last chat, I suggested you restart your router."</li>
+                <li><strong>Semantic memory:</strong> "Restarting the router is a common fix for connectivity issues."</li>
+                <li><strong>Procedural memory:</strong> The step-by-step process the agent uses to walk the user through restarting the router.</li>
+            </ul>
+            <hr>
+            <h3>Quiz</h3>
+            <div class="quiz-container">
+                <div class="quiz-question">Which memory type is used for:</div>
+                <ol class="quiz-options">
+                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">Remembering the user's last support ticket?</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">Looking up the company's return policy?</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">Knowing how to guide a user through troubleshooting steps?</li>
+                </ol>
+                <div class="quiz-feedback">
+                    <strong>Explanation:</strong> Remembering the user's last support ticket is an example of episodic memory.
+                </div>
+            </div>
+            <hr>
+            <div class='section-nav-btns'>
+                <button id='back-memory'>Back</button>
+                <button id='next-memory'>Next</button>
+            </div>
+        </section>
+        <section id="tools" class="module-section" style="display:none">
+            <h2>Tools: Extending the Agent's Capabilities</h2>
+            <h3>2.1 Tools: Extending the Agent's Capabilities</h3>
+            <h4>What Are Tools in the Context of AI Agents?</h4>
+            <p>Tools are specialized functions that enable AI agents to perform specific tasks beyond text generation, connecting them to external systems and capabilities. They serve as the interface between an agent's decision-making capabilities and the real world.</p>
+            <p><strong>Key Analogy:</strong><br>An LLM is like a brain, and tools are its limbs and senses - they allow the agent to interact with and perceive the world around it.</p>
+            <h4>Why Tools Are Essential for Agent Capabilities</h4>
+            <p>LLMs have four key limitations that tools help overcome:</p>
+            <ol>
+                <li><strong>Knowledge Cutoff:</strong> LLMs only know information they were trained on</li>
+                <li><strong>Data Manipulation:</strong> LLMs struggle with complex calculations</li>
+                <li><strong>External Interaction:</strong> LLMs can't access current information or systems</li>
+                <li><strong>Verification:</strong> LLMs can't verify outputs against real-world data</li>
+            </ol>
+            <p>Tools transform a passive text generator into an active agent by providing:</p>
+            <ul>
+                <li>Real-time information access</li>
+                <li>Computational capabilities</li>
+                <li>External system integration</li>
+                <li>Output verification mechanisms</li>
+            </ul>
+            <h3>2.2 Types of External Environment Interactions</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Interaction Pattern</th>
+                        <th>Description</th>
+                        <th>When to Use</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Direct Function</td><td>Agent executes local functions</td><td>Simple operations with no external dependencies</td><td>Calculator, text formatting, local data processing</td></tr>
+                    <tr><td>External</td><td>Agent connects to APIs or triggers workflows</td><td>Real-time data, integrations, or external actions</td><td>MCP Servers, Weather API, Slack Webhooks</td></tr>
+                    <tr><td>Database Retrieval</td><td>Agent queries databases for information</td><td>Working with persistent structured data</td><td>Customer records, product catalogs, transaction history</td></tr>
+                    <tr><td>Code Execution</td><td>Agent generates and runs code</td><td>Complex computational tasks requiring flexibility</td><td>Data analysis, visualization generation, algorithm implementation</td></tr>
+                    <tr><td>Human Interaction</td><td>Agent collaborates or escalates to a human</td><td>Tasks requiring judgment, approval, or clarification</td><td>Escalating support tickets, requesting user input, human-in-the-loop review</td></tr>
+                </tbody>
+            </table>
+            <h3>2.3 Key Principles for Building Agent Tools</h3>
+            <p>Building effective tools for AI agents requires careful consideration of how agents interact with and understand tools. Here are five key principles:</p>
+            <h4>1. Speak the Agent's Language</h4>
+            <p>Design your tool description in clear natural language that helps the agent understand exactly when and how to use it.</p>
+            <ul>
+                <li>❌ "API for meteorological data retrieval"</li>
+                <li>✅ "Get current weather conditions for any location by city name or zip code"</li>
+            </ul>
+            <h4>2. Right-Size Your Tools</h4>
+            <p>Create tools that do one job well, not too granular (requiring too many calls) or too broad (causing confusion about purpose).</p>
+            <ul>
+                <li>❌ Generic "DatabaseTool"</li>
+                <li>✅ Specific tools like "CustomerLookup" and "OrderHistory" with clear, distinct purposes</li>
+            </ul>
+            <h4>3. Structure for Success</h4>
+            <p>Design inputs and outputs to make the agent's job easier, with intuitive parameter names and results formatted for easy reasoning.</p>
+            <ul>
+                <li>❌ Generic parameters like "input1" and "input2"</li>
+                <li>✅ Descriptive parameters like "sourceText" and "targetLanguage"</li>
+            </ul>
+            <h4>4. Fail Informatively</h4>
+            <p>Return helpful error messages that guide the agent toward correction rather than confusion.</p>
+            <ul>
+                <li>❌ "Error 404"</li>
+                <li>✅ "Location 'Atlantis' not found. Please provide a valid city name or zip code"</li>
+            </ul>
+            <h4>5. Prevent Hallucinations</h4>
+            <p>Provide factual, verifiable outputs that reduce the likelihood of the agent making things up.</p>
+            <ul>
+                <li>❌ Empty results that might lead to invented details</li>
+                <li>✅ "No information available about product XYZ-123"</li>
+            </ul>
+            <h3>Quiz</h3>
+            <div class="quiz-container">
+                <div class="quiz-question">Which combination of tools would be most essential for this agent?</div>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">A) Database Retrieval + External API Calls + Webhook Integrations</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">B) Code Execution + Direct Function Calling only</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">C) External API Calls + Code Execution only</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">D) Database Retrieval only</li>
+                </ul>
+                <div class="quiz-feedback">
+                    <strong>Explanation:</strong> A) Database Retrieval + External API Calls + Webhook Integrations is the most essential combination for this agent.
+                </div>
+            </div>
+            <div class='section-nav-btns'>
+                <button id='back-tools'>Back</button>
+                <button id='next-tools'>Next</button>
+            </div>
+        </section>
+        <section id="decision-cycle" class="module-section" style="display:none">
+            <h2>Decision Cycle: Observe, Plan, and Act</h2>
+            <p>In the context of AI agents for digital applications (like chatbots, virtual assistants, or workflow automation), the <strong>decision cycle</strong> is the repeating process an agent uses to understand, reason, and act—much like how a human knowledge worker would handle a task.</p>
+            <h3>What is the Decision Cycle?</h3>
+            <img src="../assets/images/Cognitive%20Language%20Agent.png" alt="Cognitive Language Agent Architecture" style="max-width:100%;margin:20px 0;">
+            <p><em>This diagram illustrates how the agent's memory, tools, and decision logic interact in a continuous decision cycle, enabling the agent to observe, plan, and act in digital environments.</em></p>
+            <p>The decision cycle is a loop where the agent:</p>
+            <ol>
+                <li><strong>Observes</strong> the current situation (e.g., receives a user message or new data).</li>
+                <li><strong>Plans</strong> what to do next by combining what it knows (memory), what it can do (tools), and the current goal.</li>
+                <li><strong>Acts</strong> by generating a response, calling a tool, retrieving information, or escalating to a human if needed.</li>
+            </ol>
+            <p>After acting, the agent updates its memory and starts the cycle again for the next input or task. The agent's "brain" (the LLM and its code) brings together memory and tools to decide the best next step in each cycle.</p>
+            <hr>
+            <h3>Separation of Responsibilities: Agent vs. LLM</h3>
+            <ul>
+                <li>The <strong>LLM</strong> is a powerful tool for language and reasoning, but it doesn't have persistent memory, tool access, or the ability to act autonomously.</li>
+                <li>The <strong>agent</strong> is a software system that wraps around the LLM, orchestrating when to call the LLM, what to ask, how to use the response, and how to interact with the environment (including databases, APIs, or human-in-the-loop steps).</li>
+            </ul>
+            <p><strong>Why This Matters:</strong><br>This separation allows for more robust, flexible, and safe AI systems. The agent can use the LLM as a component, while also integrating other capabilities and enforcing business logic or safety checks.</p>
+            <hr>
+            <h3>Building Agents: Do You Need a Library?</h3>
+            <p>You don't strictly need a library to build an agent—at its core, an agent is a software system that manages memory, tool use, and decision logic around an LLM. However, building a robust agent from scratch can be complex and time-consuming.</p>
+            <p><strong>Popular open-source agent frameworks include:</strong></p>
+            <ul>
+                <li><strong>LangChain</strong> (Python, JS): Modular framework for building LLM-powered agents with memory, tools, and workflows.</li>
+                <li><strong>CrewAI</strong>: Focuses on multi-agent collaboration and workflow orchestration.</li>
+                <li><strong>Autogen</strong> (Microsoft): For building multi-agent and tool-using systems.</li>
+            </ul>
+            <p>These libraries provide reusable components, integrations, and best practices, making it much easier and safer to build production-grade agents.</p>
+            <hr>
+            <h3>Example (Customer Support Chatbot)</h3>
+            <ol>
+                <li><strong>Observe:</strong> The user asks, "What's my order status?"</li>
+                <li><strong>Plan:</strong> The agent checks its memory for recent orders, decides it needs up-to-date info, and chooses to use an external tool (API) to fetch the order status.</li>
+                <li><strong>Act:</strong> The agent retrieves the status and replies, "Your order is out for delivery and should arrive today."</li>
+            </ol>
+            <p>The agent then updates its memory with this interaction, ready for the next question.</p>
+            <hr>
+            <h3>Quiz</h3>
+            <div class="quiz-container">
+                <div class="quiz-question">Which of the following best describes the agent decision cycle in a digital assistant?</div>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">A) The agent only responds to user input without using memory or tools</li>
+                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">B) The agent observes, plans, acts, and updates its memory in a repeating loop</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">C) The agent always escalates to a human for every task</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">D) The agent only uses pre-programmed responses</li>
+                </ul>
+                <div class="quiz-feedback">
+                    <strong>Explanation:</strong> B) The agent observes, plans, acts, and updates its memory in a repeating loop.
+                </div>
+            </div>
+            <hr>
+            <h3>Module 3 Summary</h3>
+            <p>In this module, you learned how modern AI agents are designed to go beyond simple text generation. You explored:</p>
+            <ul>
+                <li>The fundamentals of what makes an AI agent, including the importance of memory, tools, and the decision cycle</li>
+                <li>How agents use different types of memory (working, episodic, semantic, procedural) to remember, reason, and act</li>
+                <li>The various ways agents interact with external environments using tools and integration patterns</li>
+                <li>The decision cycle as the core loop that enables agents to observe, plan, act, and learn—mirroring the way human knowledge workers handle tasks</li>
+                <li>The importance of separating the agent's orchestration logic from the LLM's language and reasoning capabilities, and how frameworks like LangChain, CrewAI, and others can help you build robust, production-ready agents</li>
+            </ul>
+            <p>By understanding these concepts, you're now equipped to design and build AI agents that can autonomously assist, augment, or automate knowledge work in digital applications.</p>
+            <div class='section-nav-btns'>
+                <button id='back-decision-cycle'>Back</button>
+                <button id='next-decision-cycle' disabled>Next</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="../assets/js/course-nav.js"></script>
+    <script src="../assets/js/module-sidebar.js"></script>
+</body>
+</html> 

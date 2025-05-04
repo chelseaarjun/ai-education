@@ -6,16 +6,16 @@ An AI agent is a system that can perceive its environment, reason about it, and 
 
 - **Tools:** Agents can use external tools (APIs, calculators, search engines) to extend their capabilities.
 - **Memory:** Agents remember past actions, user preferences, or important facts (short-term and long-term).
-- **Brain:** Agents use an LLM as their brain and repeat the Observe → Reason → Act loop as needed until an end state is reached.
+- **Decision Cycle:** Agents use an LLM as their brain and repeat the Observe → Plan → Act loop as needed until an end state is reached.
 
 ## Traditional Workflows vs Prompt-Enhanced LLM Applications vs Agentic Applications
 
-| Feature/Approach     | Traditional Workflow         | Prompt-Enhanced LLM Application      | Agentic Application                     |
+| Feature/Approach     | Traditional Workflow        | Prompt-Enhanced LLM Application      | Agentic Application                     |
 |----------------------|-----------------------------|--------------------------------------|-----------------------------------------|
 | Flexibility          | Rigid, fixed steps          | Flexible output, but fixed process   | Dynamic, adapts steps and tools         |
 | Use of Tools         | Manual or pre-coded         | Limited (via prompt)                 | Can autonomously select and use tools   |
 | Memory               | Minimal, often stateless    | Short-term (context window)          | Short-term and long-term, episodic, etc.|
-| Reasoning            | Predefined logic            | LLM-based, but single-shot           | Multi-step, iterative, goal-driven      |
+| Decision Cycle       | Predefined logic            | LLM-based, but single-shot           | Multi-step, iterative, goal-driven      |
 
 ## Example: Document Extraction
 
