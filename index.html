@@ -41,15 +41,22 @@
         }
         .nav-button {
             padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
+            background-color: transparent;
+            color: #2980b9;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .nav-button.active {
+            background-color: #2980b9;
+            color: #fff;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(41,128,185,0.08);
         }
         .nav-button:hover {
-            background-color: #2980b9;
+            background-color: #eaf2f8;
+            color: #2980b9;
         }
         .module-container {
             display: flex;
@@ -213,11 +220,11 @@
     <!-- The global nav is injected by course-nav.js at the top of <body> -->
     <nav class="navigation">
         <div class="nav-buttons">
-            <a class="nav-button" href="#welcome">Welcome</a>
-            <a class="nav-button" href="#genai-section">Generative AI</a>
-            <a class="nav-button" href="#ai-evolution">AI Evolution</a>
-            <a class="nav-button" href="#course-structure">Course Structure</a>
-            <a class="nav-button" href="#module-container">Module Overview</a>
+            <a class="nav-button active" href="#welcome" id="nav-welcome">Welcome</a>
+            <a class="nav-button" href="#genai-section" id="nav-genai-section">Generative AI</a>
+            <a class="nav-button" href="#ai-evolution" id="nav-ai-evolution">AI Evolution</a>
+            <a class="nav-button" href="#course-structure" id="nav-course-structure">Course Structure</a>
+            <a class="nav-button" href="#module-container" id="nav-module-container">Module Overview</a>
         </div>
     </nav>
     <div class="content-inner">
@@ -401,6 +408,42 @@
                 navToggle.textContent = '✕';
             }
         }
+        // Section nav active highlight logic
+        (function() {
+            const sections = [
+                {id: 'welcome', nav: 'nav-welcome'},
+                {id: 'genai-section', nav: 'nav-genai-section'},
+                {id: 'ai-evolution', nav: 'nav-ai-evolution'},
+                {id: 'course-structure', nav: 'nav-course-structure'},
+                {id: 'module-container', nav: 'nav-module-container'}
+            ];
+            function onScroll() {
+                let scrollPos = window.scrollY || window.pageYOffset;
+                let found = false;
+                for (let i = sections.length - 1; i >= 0; i--) {
+                    const sec = document.getElementById(sections[i].id);
+                    if (sec && sec.getBoundingClientRect().top + window.scrollY - 120 <= scrollPos) {
+                        sections.forEach(s => document.getElementById(s.nav).classList.remove('active'));
+                        document.getElementById(sections[i].nav).classList.add('active');
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    sections.forEach(s => document.getElementById(s.nav).classList.remove('active'));
+                    document.getElementById(sections[0].nav).classList.add('active');
+                }
+            }
+            window.addEventListener('scroll', onScroll, {passive: true});
+            // Also update on click
+            document.querySelectorAll('.nav-button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    setTimeout(onScroll, 300);
+                });
+            });
+            // Initial highlight
+            window.addEventListener('DOMContentLoaded', onScroll);
+        })();
     </script>
 </body>
 </html>

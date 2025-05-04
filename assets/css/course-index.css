@@ -278,6 +278,8 @@ h1 {
 }
 
 .nav-button {
+    background: transparent;
+    color: #2980b9;
     padding: 10px 24px;
     font-size: 1.1rem;
     border-radius: 6px;
@@ -285,6 +287,21 @@ h1 {
     min-width: 120px;
     min-height: 0;
     box-sizing: border-box;
+    font-weight: bold;
+    border: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.nav-button.active {
+    background: #2980b9;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(41,128,185,0.08);
+}
+
+.nav-button:hover {
+    background: #eaf2f8;
+    color: #2980b9;
 }
 
 .content-inner > h1 {
