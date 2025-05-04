@@ -214,20 +214,24 @@
                 width: 100%;
             }
         }
+        /* Add smooth scrolling behavior to html */
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 <body>
     <!-- The global nav is injected by course-nav.js at the top of <body> -->
     <nav class="navigation">
         <div class="nav-buttons">
-            <a class="nav-button active" href="#welcome" id="nav-welcome">Welcome</a>
-            <a class="nav-button" href="#genai-section" id="nav-genai-section">Generative AI</a>
-            <a class="nav-button" href="#ai-evolution" id="nav-ai-evolution">AI Evolution</a>
-            <a class="nav-button" href="#course-structure" id="nav-course-structure">Course Structure</a>
-            <a class="nav-button" href="#module-container" id="nav-module-container">Module Overview</a>
+            <a class="nav-button active" href="#welcome" id="nav-welcome" data-section="welcome">Welcome</a>
+            <a class="nav-button" href="#understanding-genai" id="nav-genai-section" data-section="understanding-genai">Generative AI</a>
+            <a class="nav-button" href="#ai-evolution-title" id="nav-ai-evolution" data-section="ai-evolution-title">AI Evolution</a>
+            <a class="nav-button" href="#course-structure-title" id="nav-course-structure" data-section="course-structure-title">Course Structure</a>
         </div>
     </nav>
     <div class="content-inner">
+        <div id="welcome-spacer"></div>
         <h1 id="welcome">AI Foundations Course</h1>
 
         <div class="course-description">
@@ -237,7 +241,7 @@
         
         <!-- Generative AI Overview Section -->
         <div class="genai-section" id="genai-section">
-            <h2>Understanding Generative AI</h2>
+            <h2 id="understanding-genai">Understanding Generative AI</h2>
             
             <p>Generative AI represents the cutting edge of artificial intelligence technology, enabling machines to generate, create, and manipulate diverse types of content - from text and code to images, audio, and video.</p>
             
@@ -268,7 +272,7 @@
         
         <!-- AI Evolution Timeline -->
         <div class="ai-evolution" id="ai-evolution">
-            <h2>The Evolution of Artificial Intelligence</h2>
+            <h2 id="ai-evolution-title">The Evolution of Artificial Intelligence</h2>
             <p>AI has evolved dramatically over the decades, with each phase building on the innovations of previous generations.</p>
             
             <div class="ai-timeline">
@@ -306,7 +310,7 @@
 
         <!-- Course Structure Overview -->
         <div class="course-overview" id="course-structure">
-            <h2>Course Structure</h2>
+            <h2 id="course-structure-title">Course Structure</h2>
             <p>This course is designed specifically for software and data engineers working in retail and real estate operations. Through a carefully structured learning path, you'll gain both theoretical knowledge and practical skills needed to build production-grade AI applications.</p>
         </div>
 
@@ -412,21 +416,24 @@
         (function() {
             const sections = [
                 {id: 'welcome', nav: 'nav-welcome'},
-                {id: 'genai-section', nav: 'nav-genai-section'},
-                {id: 'ai-evolution', nav: 'nav-ai-evolution'},
-                {id: 'course-structure', nav: 'nav-course-structure'},
-                {id: 'module-container', nav: 'nav-module-container'}
+                {id: 'understanding-genai', nav: 'nav-genai-section'},
+                {id: 'ai-evolution-title', nav: 'nav-ai-evolution'},
+                {id: 'course-structure-title', nav: 'nav-course-structure'},
             ];
             function onScroll() {
                 let scrollPos = window.scrollY || window.pageYOffset;
+                const navOffset = getNavOffset();
                 let found = false;
                 for (let i = sections.length - 1; i >= 0; i--) {
                     const sec = document.getElementById(sections[i].id);
-                    if (sec && sec.getBoundingClientRect().top + window.scrollY - 120 <= scrollPos) {
-                        sections.forEach(s => document.getElementById(s.nav).classList.remove('active'));
-                        document.getElementById(sections[i].nav).classList.add('active');
-                        found = true;
-                        break;
+                    if (sec) {
+                        const secTop = sec.getBoundingClientRect().top + window.scrollY - navOffset;
+                        if (scrollPos >= secTop - 1) { // -1 for rounding
+                            sections.forEach(s => document.getElementById(s.nav).classList.remove('active'));
+                            document.getElementById(sections[i].nav).classList.add('active');
+                            found = true;
+                            break;
+                        }
                     }
                 }
                 if (!found) {
@@ -438,7 +445,7 @@
             // Also update on click
             document.querySelectorAll('.nav-button').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    setTimeout(onScroll, 300);
+                    setTimeout(onScroll, 350);
                 });
             });
             // Initial highlight
@@ -459,6 +466,59 @@
     }
     document.addEventListener('DOMContentLoaded', setIndexContentPadding);
     window.addEventListener('resize', setIndexContentPadding);
+    </script>
+    <!-- --- Improved scroll-margin and scroll spy logic for nav offset --- -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle navigation clicks
+        document.querySelectorAll('.nav-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('data-section');
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    const offset = getNavOffset();
+                    setTimeout(() => {
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }, 50); // Small delay to ensure proper calculation
+                }
+            });
+        });
+
+        // Set initial scroll margins
+        setSectionScrollMargin();
+    });
+
+    function getNavOffset() {
+        const courseNav = document.querySelector('.course-nav');
+        const sectionNav = document.querySelector('.navigation');
+        let pad = 0;
+        if (courseNav) pad += courseNav.offsetHeight;
+        if (sectionNav) pad += sectionNav.offsetHeight;
+        return pad + 16; // Increased buffer for better spacing
+    }
+
+    function setSectionScrollMargin() {
+        const margin = getNavOffset();
+        const sectionEls = [
+            document.getElementById('welcome'),
+            document.getElementById('understanding-genai'),
+            document.getElementById('ai-evolution-title'),
+            document.getElementById('course-structure-title'),
+        ].filter(Boolean);
+        sectionEls.forEach(el => {
+            if (el) {
+                el.style.scrollMarginTop = margin + 'px';
+            }
+        });
+    }
     </script>
 </body>
 </html>
