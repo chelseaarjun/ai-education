@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Foundations Course</title>
     <link rel="stylesheet" href="assets/css/course-nav.css">
+    <link rel="stylesheet" href="assets/css/module-nav-bar.css">
     <link rel="stylesheet" href="assets/css/course-index.css">
     <link rel="stylesheet" href="assets/css/mobile-fixes.css">
     <link rel="stylesheet" href="assets/css/introduction-fix.css">
@@ -209,6 +210,11 @@
     </style>
 </head>
 <body>    
+    <nav class="module-nav">
+        <button class="module-nav-btn" onclick="document.getElementById('genai-section').scrollIntoView({behavior: 'smooth'});">Understanding Generative AI</button>
+        <button class="module-nav-btn" onclick="document.getElementById('ai-evolution').scrollIntoView({behavior: 'smooth'});">The Evolution of AI</button>
+        <button class="module-nav-btn" onclick="document.getElementById('course-structure').scrollIntoView({behavior: 'smooth'});">Course Structure</button>
+    </nav>
     <div class="content-inner">
         <h1>AI Foundations Course</h1>
 
@@ -218,7 +224,7 @@
         </div>
         
         <!-- Generative AI Overview Section -->
-        <div class="genai-section">
+        <div class="genai-section" id="genai-section">
             <h2>Understanding Generative AI</h2>
             
             <p>Generative AI represents the cutting edge of artificial intelligence technology, enabling machines to generate, create, and manipulate diverse types of content - from text and code to images, audio, and video.</p>
@@ -249,7 +255,7 @@
         </div>
         
         <!-- AI Evolution Timeline -->
-        <div class="ai-evolution">
+        <div class="ai-evolution" id="ai-evolution">
             <h2>The Evolution of Artificial Intelligence</h2>
             <p>AI has evolved dramatically over the decades, with each phase building on the innovations of previous generations.</p>
             
@@ -287,7 +293,7 @@
         </div>
 
         <!-- Course Structure Overview -->
-        <div class="course-overview">
+        <div class="course-overview" id="course-structure">
             <h2>Course Structure</h2>
             <p>This course is designed specifically for software and data engineers working in retail and real estate operations. Through a carefully structured learning path, you'll gain both theoretical knowledge and practical skills needed to build production-grade AI applications.</p>
         </div>
@@ -375,7 +381,7 @@
         </div>
     </div>
     <script src="assets/js/course-nav.js"></script>
-    <script src="assets/js/course-index.js"></script>
+    <!-- <script src="assets/js/course-index.js"></script> -->
     <script>
         // Function to toggle the navigation index
         function toggleNav() {

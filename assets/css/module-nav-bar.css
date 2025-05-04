@@ -77,4 +77,8 @@
 }
 .section-nav-btns button:hover:not(:disabled) {
     background: #385a8a;
+}
+
+[id] {
+    scroll-margin-top: 120px;
 } 
