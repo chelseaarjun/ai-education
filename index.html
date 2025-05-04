@@ -218,6 +218,25 @@
         html {
             scroll-behavior: smooth;
         }
+        
+        .content-inner {
+            padding-top: var(--nav-height, 0px);
+        }
+
+        h1#welcome {
+            margin-top: 48px;
+            padding-top: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .content-inner {
+                padding-top: var(--nav-height-mobile, 0px);
+            }
+            h1#welcome {
+                margin-top: 64px;
+                padding-top: 24px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -231,7 +250,6 @@
         </div>
     </nav>
     <div class="content-inner">
-        <div id="welcome-spacer"></div>
         <h1 id="welcome">AI Foundations Course</h1>
 
         <div class="course-description">
@@ -457,26 +475,46 @@
         const courseNav = document.querySelector('.course-nav');
         const sectionNav = document.querySelector('.navigation');
         const contentInner = document.querySelector('.content-inner');
+        
         if (contentInner) {
             let pad = 0;
             if (courseNav) pad += courseNav.offsetHeight;
             if (sectionNav) pad += sectionNav.offsetHeight;
-            contentInner.style.paddingTop = (pad + 8) + 'px';
+            
+            // Add extra padding for mobile
+            const extraPad = window.innerWidth <= 768 ? 24 : 16;
+            document.documentElement.style.setProperty('--nav-height', (pad + extraPad) + 'px');
+            contentInner.style.paddingTop = (pad + extraPad) + 'px';
         }
     }
-    document.addEventListener('DOMContentLoaded', setIndexContentPadding);
-    window.addEventListener('resize', setIndexContentPadding);
-    </script>
-    <!-- --- Improved scroll-margin and scroll spy logic for nav offset --- -->
-    <script>
+
     document.addEventListener('DOMContentLoaded', function() {
+        // Initial setup
+        setIndexContentPadding();
+        
+        // Force initial scroll position after layout is complete
+        setTimeout(() => {
+            if (window.location.hash === '' || window.location.hash === '#welcome') {
+                window.scrollTo(0, 0);
+            }
+        }, 100);
+
         // Handle navigation clicks
         document.querySelectorAll('.nav-button').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('data-section');
-                const targetElement = document.getElementById(targetId);
                 
+                if (targetId === 'welcome') {
+                    setIndexContentPadding(); // Ensure padding is correct
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    return;
+                }
+
+                const targetElement = document.getElementById(targetId);
                 if (targetElement) {
                     const offset = getNavOffset();
                     setTimeout(() => {
@@ -487,7 +525,50 @@
                             top: offsetPosition,
                             behavior: 'smooth'
                         });
-                    }, 50); // Small delay to ensure proper calculation
+                    }, 50);
+                }
+            });
+        });
+
+        // Set initial scroll margins
+        setSectionScrollMargin();
+    });
+
+    // Update padding on resize
+    window.addEventListener('resize', setIndexContentPadding);
+    </script>
+    <!-- --- Improved scroll-margin and scroll spy logic for nav offset --- -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Force initial scroll to top
+        window.scrollTo(0, 0);
+
+        // Handle navigation clicks
+        document.querySelectorAll('.nav-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('data-section');
+                
+                if (targetId === 'welcome') {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    return;
+                }
+
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    const offset = getNavOffset();
+                    setTimeout(() => {
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }, 50);
                 }
             });
         });
