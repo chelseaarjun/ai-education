@@ -209,14 +209,19 @@
         }
     </style>
 </head>
-<body>    
-    <nav class="module-nav">
-        <button class="module-nav-btn" onclick="document.getElementById('genai-section').scrollIntoView({behavior: 'smooth'});">Understanding Generative AI</button>
-        <button class="module-nav-btn" onclick="document.getElementById('ai-evolution').scrollIntoView({behavior: 'smooth'});">The Evolution of AI</button>
-        <button class="module-nav-btn" onclick="document.getElementById('course-structure').scrollIntoView({behavior: 'smooth'});">Course Structure</button>
+<body>
+    <!-- The global nav is injected by course-nav.js at the top of <body> -->
+    <nav class="navigation">
+        <div class="nav-buttons">
+            <a class="nav-button" href="#welcome">Welcome</a>
+            <a class="nav-button" href="#genai-section">Generative AI</a>
+            <a class="nav-button" href="#ai-evolution">AI Evolution</a>
+            <a class="nav-button" href="#course-structure">Course Structure</a>
+            <a class="nav-button" href="#module-container">Module Overview</a>
+        </div>
     </nav>
     <div class="content-inner">
-        <h1>AI Foundations Course</h1>
+        <h1 id="welcome">AI Foundations Course</h1>
 
         <div class="course-description">
             <h2>Welcome to AI Foundations</h2>
@@ -299,7 +304,7 @@
         </div>
 
         <!-- Module Container with Part 1 and Part 2 -->
-        <div class="module-container">
+        <div class="module-container" id="module-container">
             <div class="part">
                 <h2 class="part-header">Part 1: Foundational Concepts</h2>
                 <div class="module">
@@ -319,19 +324,19 @@
                 <div class="module">
                     <h3>Introduction to Large Language Models</h3>
                     <p>Learn about the architecture, capabilities, and limitations of Large Language Models. Understand the fundamental concepts behind these powerful AI systems that are driving innovation across industries.</p>
-                    <p><a href="pages/llm-concepts-improved.html" class="nav-button">Start Module</a></p>
+                    <p><a href="pages/llm.html" class="nav-button">Start Module</a></p>
                 </div>
                 
                 <div class="module">
                     <h3>Prompt Engineering & Management Guide</h3>
                     <p>Master the art of effectively communicating with AI models through carefully crafted prompts. Learn strategies and techniques to get the most accurate and useful responses from language models.</p>
-                    <p><a href="pages/prompt-engineering-guide.html" class="nav-button">Start Module</a></p>
+                    <p><a href="pages/prompts.html" class="nav-button">Start Module</a></p>
                 </div>
                 
                 <div class="module">
                     <h3>Fundamentals of Congnitgive Language Agents</h3>
                     <p>Explore how AI agents can autonomously perform complex tasks by combining multiple capabilities. Learn about frameworks like ReAct that enable reasoning and action in AI systems.</p>
-                    <p><a href="pages/part1-module3-agents.html" class="nav-button">Start Module</a></p>
+                    <p><a href="pages/agents.html" class="nav-button">Start Module</a></p>
                 </div>
                 
                 <div class="module coming-soon">
@@ -370,7 +375,7 @@
                 <div class="module">
                     <h3>Open Source Tools & Frameworks</h3>
                     <p>Explore key open-source libraries that complement AWS Bedrock services. Learn how frameworks like LangChain, LangFuse, CrewAI can streamline development, and how general-purpose tools like FastAPI, Streamlit, and Pydantic help build production-ready AI applications.</p>
-                    <p><a href="pages/open-source-tools.html" class="nav-button">Start Module</a></p>
+                    <p><a href="pages/open-source.html" class="nav-button">Start Module</a></p>
                 </div>
                 
                 <div class="module coming-soon">

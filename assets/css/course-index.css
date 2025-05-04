@@ -19,6 +19,7 @@ body {
     max-width: none !important;
     margin: 0 !important;
     padding: 0 !important;
+    padding-top: 110px !important; /* 50px global nav + 60px section nav */
 }
 
 h1 {
@@ -244,9 +245,49 @@ h1 {
     margin-right: 0 !important;
 }
 
-/* Optional: For better readability, add a .content-inner class for inner max-width */
+/* Remove extra padding from .content-inner and ensure content starts below both navs */
 .content-inner {
     max-width: 900px;
     margin: 0 auto;
     width: 100%;
+    padding-top: 32px;
+}
+
+/* Ensure anchor targets are visible below the fixed navs */
+#genai-section, #ai-evolution, #course-structure, #module-container, #welcome {
+    scroll-margin-top: 110px;
+}
+
+.navigation {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    z-index: 900;
+    background-color: #f0f7ff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 0 0 8px 8px;
+    margin: 0 !important;
+    padding: 10px 0 6px 0;
+    line-height: normal;
+}
+
+.navigation .nav-buttons {
+    height: auto;
+    align-items: center;
+}
+
+.nav-button {
+    padding: 10px 24px;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    margin: 0 8px;
+    min-width: 120px;
+    min-height: 0;
+    box-sizing: border-box;
+}
+
+.content-inner > h1 {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
