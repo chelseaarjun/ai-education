@@ -1,0 +1,31 @@
+You are helping me develop an educational course on building production-grade AI applications.  I am a computer science professor creating a two part educational material for entry level software and data engineers, who are part of an organization which is responsible for site selection, location analytics, sales forecasting, market research, grocery competitor insights, lease negotiation, lease administration, portfolio/asset management, store design (creating  and verifying documents such as Schematic Design, Design Development, Construction Design), Construction and Launch of grocery stores.  
+
+Part 1 focuses on foundational concepts and is split into 4 modules 
+1. Understanding Large Language Models
+2. Prompt Engineering Guide
+3. Practical Guide to Building Agents
+4. Introduction to LLMOps
+
+Part 2 is focused on building production grade applications using AWS Bedrock services and compatible Open Source projects. Part 2 is split into 3 modules,
+1. Developer's Guide to MCP
+2. AWS Bedrock Building Blocks
+3. Practical Guide to Building Agents: Open Source Tools & Frameworks
+4. Capstone Project via Prompt-Driven Development (Vibe Coding) using Amazon Q Developer, VSCode and CLine
+
+I would like keep Part 1 modules to be focused on helping my audience understand the core concepts and foundational knowledge necessary for being able to build production grade AI applications and in Part 2 apply the knowledge learned in Part 1 and learn the specifics of how to build using first AWS Bedrock Services and the compatible Open Source technologies and finally build a capstone/hackathon project to build an end to end AI agents 
+I need your help to:
+1. Create engaging and interactive material that explains foundational concepts in easy to understand ways.
+2. Balance written material with visual cues, images and diagrams to explain concepts
+3. Use analogy when applicable to explain complicated concepts
+4. Create exercises for students to practice with theoretical knowledge they are learning
+5. Develop assessment questions to test understanding as they progress through the material
+6. Each module should be max 20 minutes long to teach
+7. Assume audience have no prior knowledge expect the knowledge they are progressively learning as part of the course. For example, when developing Part 2 material you can assume they have gained knowledge from Part 1. Or when developing Part 1 module 3 they know the concepts from Part 1 module 1 & 2. 
+
+Note that I'm specifically focusing on open source tools that are:
+1. Truly open source (MIT or Apache licensed)
+2. Directly complementary to AWS Bedrock services
+3. Suitable for production-grade applications
+4. Currently actively maintained
+
+Here is the  Please help me develop these materials for each module step by step, first think critically and ask me if you have any clarifying questions, second discuss the outline of the module, third discuss the material for one section at and time and finally once material for all section are finalized create HTML page that for the module that is consistent with pages in this repo 
