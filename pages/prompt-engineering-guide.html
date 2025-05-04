@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prompt Engineering for AI Applications</title>
     <link rel="stylesheet" href="../assets/css/course-nav.css">
+    <link rel="stylesheet" href="../assets/css/module-nav-bar.css">
+    <link rel="stylesheet" href="../assets/css/module-sidebar.css">
+    <link rel="stylesheet" href="../assets/css/code-examples.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
     <link rel="stylesheet" href="../assets/css/course-index.css">
     <link rel="stylesheet" href="../assets/css/mobile-fixes.css">
     <link rel="stylesheet" href="../assets/css/introduction-fix.css">
@@ -226,10 +230,19 @@
         }
     </style>
 </head>
-<body>  
-    <h1>Module 2: Prompt Engineering Guide</h1>
+<body>
+    <nav class="module-nav">
+        <button class="module-nav-btn" data-section="prompt-overview">Prompt Overview</button>
+        <button class="module-nav-btn" data-section="prompt-anatomy">Prompt Anatomy</button>
+        <button class="module-nav-btn" data-section="basic-techniques">Basic Techniques</button>
+        <button class="module-nav-btn" data-section="advanced-techniques">Advanced Techniques</button>
+        <button class="module-nav-btn" data-section="practical-application">Practical Application</button>
+        <button class="module-nav-btn" data-section="resources">Resources</button>
+    </nav>
+    <nav class="module-sidebar"></nav>
     <div class="content-inner">
         <div class="course-description" id="introduction" style="scroll-margin-top: 70px;">
+            <h1>Module 2: Prompt Engineering Guide</h1>
             <h2>Master the art and science of effective prompts</h2>
             <p>Welcome to this guide on prompt engineering! Today, you'll explore how to effectively communicate with artificial intelligence models like Claude and Amazon Bedrock to get the best possible results for your applications.</p>
             <p>Prompt engineering is a crucial skill in the AI era. By the end of this lesson, you'll understand how to craft effective prompts that can help you build sophisticated AI applications, even without extensive programming knowledge.</p>
@@ -308,7 +321,10 @@
             </ul>
             <p>This dual perspective helps bridge the gap between human expectations and how AI systems actually process information.</p>
             
-
+            <div class="section-nav-btns">
+                <button id="back-prompt-overview" disabled>Back</button>
+                <button id="next-prompt-overview">Next</button>
+            </div>
         </section>
         
         <section id="prompt-anatomy">
@@ -383,6 +399,10 @@
                 <div class="note">
                     <p>With practice, you'll develop an intuition for which approaches work best in different situations, allowing you to effectively harness the power of models like Claude and Amazon Bedrock for your applications.</p>
                 </div>
+            <div class="section-nav-btns">
+                <button id="back-prompt-anatomy">Back</button>
+                <button id="next-prompt-anatomy">Next</button>
+            </div>
         </section>
 
         <section id="basic-techniques">
@@ -508,6 +528,10 @@
                 <div class="quiz-feedback">
                     Answer: 3. Format control prompting is specifically designed to ensure outputs follow a precise structure and organization.
                 </div>
+            </div>
+            <div class="section-nav-btns">
+                <button id="back-basic-techniques">Back</button>
+                <button id="next-basic-techniques">Next</button>
             </div>
         </section>
 
@@ -722,6 +746,10 @@
                     Answer: 3. ReAct (Reasoning + Acting) prompting specifically combines reasoning steps with action steps in an iterative process, making it ideal for complex problem solving.
                 </div>
             </div>
+            <div class="section-nav-btns">
+                <button id="back-advanced-techniques">Back</button>
+                <button id="next-advanced-techniques">Next</button>
+            </div>
         </section>
 
         <section id="practical-application">
@@ -887,6 +915,10 @@
                     Answer: 2. Chain-of-thought prompting encourages step-by-step reasoning, while constraint-based prompting helps focus the solution approach and format. These techniques work well together for complex mathematical problems.
                 </div>
             </div>
+            <div class="section-nav-btns">
+                <button id="back-practical-application">Back</button>
+                <button id="next-practical-application">Next</button>
+            </div>
         </section>
 
         <section id="resources">
@@ -901,10 +933,14 @@
                 <li><a href="https://www.kaggle.com/code/kaggle/prompt-engineering-for-developers-course" target="_blank">Kaggle Prompt Engineering for Developers</a></li>
                 <li><a href="https://www.promptingguide.ai/" target="_blank">Prompt Engineering Guide</a></li>
             </ul>
+            <div class="section-nav-btns">
+                <button id="back-resources">Back</button>
+                <button id="next-resources" disabled>Next</button>
+            </div>
         </section>
     </div>
     <script src="../assets/js/course-nav.js"></script>
-    <script src="../assets/js/course-index.js"></script>
+    <script src="../assets/js/module-sidebar.js"></script>
     <script src="../assets/js/quiz.js"></script>
 </body>
 </html>

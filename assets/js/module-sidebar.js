@@ -1,9 +1,10 @@
 // Reusable module sidebar and section navigation logic
-const sectionIds = ['fundamentals', 'memory', 'tools', 'decision-cycle'];
+let sectionIds = [];
 
 function showSection(id) {
     sectionIds.forEach(sid => {
-        document.getElementById(sid).style.display = (sid === id) ? '' : 'none';
+        const el = document.getElementById(sid);
+        if (el) el.style.display = (sid === id) ? '' : 'none';
     });
     // Update hash if needed
     if (window.location.hash !== '#' + id) {
@@ -98,30 +99,45 @@ function scrollToSectionTop(sectionId) {
     }
 }
 
-// Button event listeners for section nav btns
-sectionIds.forEach((id, idx) => {
-    const backBtn = document.getElementById('back-' + id);
-    const nextBtn = document.getElementById('next-' + id);
-    if (backBtn) {
-        backBtn.addEventListener('click', () => {
-            if (idx > 0) {
-                showSection(sectionIds[idx-1]);
-                scrollToSectionTop(sectionIds[idx-1]);
-            }
-        });
+// Hash navigation
+function handleHash() {
+    const hash = window.location.hash.replace('#','');
+    if (sectionIds.includes(hash)) {
+        showSection(hash);
+    } else if (sectionIds.length > 0) {
+        showSection(sectionIds[0]);
     }
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            if (idx < sectionIds.length-1) {
-                showSection(sectionIds[idx+1]);
-                scrollToSectionTop(sectionIds[idx+1]);
-            }
-        });
-    }
-});
+    setTimeout(highlightSidebar, 200);
+}
 
-// Module nav bar event listeners
-if (document.querySelectorAll('.module-nav-btn').length) {
+// DOMContentLoaded: build sectionIds and set up event listeners
+document.addEventListener('DOMContentLoaded', () => {
+    sectionIds = Array.from(document.querySelectorAll('.module-nav-btn[data-section]'))
+        .map(btn => btn.getAttribute('data-section'));
+
+    // Button event listeners for section nav btns
+    sectionIds.forEach((id, idx) => {
+        const backBtn = document.getElementById('back-' + id);
+        const nextBtn = document.getElementById('next-' + id);
+        if (backBtn) {
+            backBtn.addEventListener('click', () => {
+                if (idx > 0) {
+                    showSection(sectionIds[idx-1]);
+                    scrollToSectionTop(sectionIds[idx-1]);
+                }
+            });
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                if (idx < sectionIds.length-1) {
+                    showSection(sectionIds[idx+1]);
+                    scrollToSectionTop(sectionIds[idx+1]);
+                }
+            });
+        }
+    });
+
+    // Module nav bar event listeners
     document.querySelectorAll('.module-nav-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const section = this.getAttribute('data-section');
@@ -130,17 +146,7 @@ if (document.querySelectorAll('.module-nav-btn').length) {
             }
         });
     });
-}
 
-// Hash navigation
-function handleHash() {
-    const hash = window.location.hash.replace('#','');
-    if (sectionIds.includes(hash)) {
-        showSection(hash);
-    } else {
-        showSection(sectionIds[0]);
-    }
-    setTimeout(highlightSidebar, 200);
-}
-window.addEventListener('hashchange', handleHash);
-document.addEventListener('DOMContentLoaded', handleHash); 
+    handleHash();
+});
+window.addEventListener('hashchange', handleHash); 
