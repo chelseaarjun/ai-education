@@ -1,0 +1,65 @@
+/* Module Sidebar Styles */
+.module-sidebar {
+    position: fixed;
+    top: 110px;
+    left: 0;
+    width: 220px;
+    height: calc(100vh - 110px);
+    background: #f7fafd;
+    border-right: 1px solid #e0e0e0;
+    padding: 28px 12px 24px 28px;
+    overflow-y: auto;
+    z-index: 900;
+    font-size: 1rem;
+}
+.module-sidebar h4 {
+    margin-top: 0;
+    color: #4a6fa5;
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+}
+.module-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.module-sidebar li {
+    margin-bottom: 10px;
+}
+.module-sidebar a {
+    color: #333;
+    text-decoration: none;
+    padding: 6px 8px;
+    border-radius: 4px;
+    display: block;
+    transition: background 0.2s, color 0.2s;
+}
+.module-sidebar a.active {
+    background: #4a6fa5;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* --- Content Layout (sidebar-related) --- */
+.content-inner {
+    padding-top: 110px;
+    margin-left: 300px; /* 220px sidebar + 80px gap */
+    max-width: calc(85% - 220px - 80px);
+    width: 85%;
+}
+@media (max-width: 900px) {
+    .content-inner {
+        margin-left: 0;
+        max-width: 95%;
+        width: 95%;
+        padding-top: 120px;
+    }
+    .module-sidebar {
+        display: none;
+    }
+}
+@media (max-width: 600px) {
+    .content-inner {
+        padding-top: 120px;
+    }
+} 

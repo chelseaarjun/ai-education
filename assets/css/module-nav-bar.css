@@ -1,0 +1,48 @@
+/* Module Nav Bar Styles */
+.module-nav {
+    position: fixed;
+    top: 50px; /* height of global nav bar */
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    background: #f5f7fa;
+    padding: 20px 0 14px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.module-nav-btn {
+    background: none;
+    border: none;
+    color: #4a6fa5;
+    font-size: 1.15rem;
+    padding: 12px 32px;
+    border-radius: 6px 6px 0 0;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.module-nav-btn.active {
+    background: #4a6fa5;
+    color: #fff;
+    font-weight: bold;
+}
+.module-nav-btn:focus-visible {
+    outline: 2px solid #4a6fa5;
+}
+
+@media (max-width: 600px) {
+    .module-nav {
+        flex-direction: column;
+        gap: 0;
+        justify-content: flex-start;
+        padding: 10px 0 6px 0;
+    }
+    .module-nav-btn {
+        border-radius: 0;
+        width: 100%;
+        text-align: left;
+        padding: 12px 18px;
+    }
+} 
