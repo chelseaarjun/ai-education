@@ -445,5 +445,20 @@
             window.addEventListener('DOMContentLoaded', onScroll);
         })();
     </script>
+    <script>
+    function setIndexContentPadding() {
+        const courseNav = document.querySelector('.course-nav');
+        const sectionNav = document.querySelector('.navigation');
+        const contentInner = document.querySelector('.content-inner');
+        if (contentInner) {
+            let pad = 0;
+            if (courseNav) pad += courseNav.offsetHeight;
+            if (sectionNav) pad += sectionNav.offsetHeight;
+            contentInner.style.paddingTop = (pad + 8) + 'px';
+        }
+    }
+    document.addEventListener('DOMContentLoaded', setIndexContentPadding);
+    window.addEventListener('resize', setIndexContentPadding);
+    </script>
 </body>
 </html>

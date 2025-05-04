@@ -42,6 +42,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // Insert the navigation at the beginning of the body
     document.body.insertAdjacentHTML('afterbegin', navHTML);
     
+    // Utility: Set .content-inner padding-top to nav heights
+    function setContentInnerPadding() {
+        const courseNav = document.querySelector('.course-nav');
+        const moduleNav = document.querySelector('.module-nav');
+        const contentInner = document.querySelector('.content-inner');
+        if (contentInner) {
+            let pad = 0;
+            if (courseNav) pad += courseNav.offsetHeight;
+            if (moduleNav) pad += moduleNav.offsetHeight;
+            // Add a few px for safety
+            contentInner.style.paddingTop = (pad + 8) + 'px';
+        }
+    }
+    setContentInnerPadding();
+    window.addEventListener('resize', setContentInnerPadding);
+    
     // Mobile menu toggle functionality
     const mobileToggle = document.querySelector('.course-nav-mobile-toggle');
     const navMenu = document.querySelector('.course-nav-menu');

@@ -42,7 +42,7 @@
 
 /* --- Content Layout (sidebar-related) --- */
 .content-inner {
-    padding-top: 110px;
+    padding-top: 10px; /* fallback for no-JS */
     margin-left: 300px; /* 220px sidebar + 80px gap */
     max-width: calc(85% - 220px - 80px);
     width: 85%;
@@ -52,7 +52,7 @@
         margin-left: 0;
         max-width: 95%;
         width: 95%;
-        padding-top: 120px;
+        padding-top: 10px;
     }
     .module-sidebar {
         display: none;
@@ -60,6 +60,6 @@
 }
 @media (max-width: 600px) {
     .content-inner {
-        padding-top: 120px;
+        padding-top: 10px;
     }
 } 
