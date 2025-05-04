@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../assets/css/course-index.css">
     <link rel="stylesheet" href="../assets/css/mobile-fixes.css">
     <link rel="stylesheet" href="../assets/css/introduction-fix.css">
+    <link rel="stylesheet" href="../assets/css/quiz.css">
     <style>
         /* --- Module Nav Bar --- */
         .module-nav {
@@ -140,56 +141,6 @@
             background: #4a6fa5;
             color: #fff;
             font-weight: bold;
-        }
-
-        /* --- Quiz Styles --- */
-        .quiz-container {
-            background-color: #f0f2f5;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 25px 0;
-        }
-        .quiz-question {
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        .quiz-options {
-            list-style-type: none;
-            padding: 0;
-        }
-        .quiz-option {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 12px 15px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .quiz-option:hover {
-            background-color: #f5f5f5;
-        }
-        .quiz-option.selected {
-            background-color: #4a6fa5;
-            color: white;
-        }
-        .quiz-option.correct {
-            background-color: #dff0d8;
-            border-color: #4CAF50;
-            color: #3c763d;
-        }
-        .quiz-option.incorrect {
-            background-color: #f2dede;
-            border-color: #d9534f;
-            color: #a94442;
-        }
-        .quiz-feedback {
-            margin-top: 15px;
-            padding: 15px;
-            border-radius: 4px;
-            background-color: #f8f9fa;
-            border-left: 4px solid #4a6fa5;
-            display: none;
         }
 
         /* --- Code Example Styles --- */
@@ -661,5 +612,6 @@ print(result)
 
     <script src="../assets/js/course-nav.js"></script>
     <script src="../assets/js/module-sidebar.js"></script>
+    <script src="../assets/js/quiz.js"></script>
 </body>
 </html> 

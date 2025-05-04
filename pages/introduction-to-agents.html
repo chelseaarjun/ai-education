@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../assets/css/course-index.css">
     <link rel="stylesheet" href="../assets/css/mobile-fixes.css">
     <link rel="stylesheet" href="../assets/css/introduction-fix.css">
+    <link rel="stylesheet" href="../assets/css/quiz.css">
     <style>
         /* Remove the following blocks, as they are now in course-index.css:
         :root { ... }
@@ -402,62 +403,6 @@ print(result["output"])
     </div>
     <script src="../assets/js/course-nav.js"></script>
     <script src="../assets/js/course-index.js"></script>
-    <script>
-        // Function to toggle the navigation index
-        function toggleNav() {
-            const navContent = document.getElementById('navContent');
-            navContent.classList.toggle('hidden');
-            
-            // Update button text
-            const navToggle = document.querySelector('.nav-toggle');
-            if (navContent.classList.contains('hidden')) {
-                navToggle.textContent = '☰';
-            } else {
-                navToggle.textContent = '✕';
-            }
-        }
-        
-        // Function to handle quiz option selection
-        function selectQuizOption(option) {
-            // Get the parent quiz container
-            const quizContainer = option.closest('.quiz-container');
-            
-            // Get all options in this quiz
-            const options = quizContainer.querySelectorAll('.quiz-option');
-            
-            // Remove selected class from all options
-            options.forEach(opt => {
-                opt.classList.remove('selected');
-                opt.classList.remove('correct');
-                opt.classList.remove('incorrect');
-            });
-            
-            // Add selected class to clicked option
-            option.classList.add('selected');
-            
-            // Check if the answer is correct
-            const isCorrect = option.getAttribute('data-correct') === 'true';
-            
-            // Add appropriate class based on correctness
-            if (isCorrect) {
-                option.classList.add('correct');
-            } else {
-                option.classList.add('incorrect');
-            }
-            
-            // Show feedback
-            const feedback = quizContainer.querySelector('.quiz-feedback');
-            if (feedback) {
-                feedback.style.display = 'block';
-            }
-        }
-        
-        function simulateAgentResponse() {
-            // Functionality for interactive agent demos
-            const agentInput = document.getElementById('agentInput');
-            const agentOutput = document.getElementById('agentOutput');
-            agentOutput.textContent = "Simulated Agent response would appear here based on your input.";
-        }
-    </script>
+    <script src="../assets/js/quiz.js"></script>
 </body>
 </html>
