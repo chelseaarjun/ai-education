@@ -51,12 +51,39 @@ document.addEventListener('DOMContentLoaded', function() {
             let pad = 0;
             if (courseNav) pad += courseNav.offsetHeight;
             if (moduleNav) pad += moduleNav.offsetHeight;
-            // Add a few px for safety
-            contentInner.style.paddingTop = (pad + 8) + 'px';
+            // Add a small px for safety
+            contentInner.style.paddingTop = (pad + 2) + 'px';
         }
     }
-    setContentInnerPadding();
-    window.addEventListener('resize', setContentInnerPadding);
+
+    // Utility: Set scroll-margin-top on all section targets to nav heights
+    function setSectionScrollMargin() {
+        const courseNav = document.querySelector('.course-nav');
+        const moduleNav = document.querySelector('.module-nav');
+        let margin = 0;
+        if (courseNav) margin += courseNav.offsetHeight;
+        if (moduleNav) margin += moduleNav.offsetHeight;
+        margin += 2; // safety buffer
+        // All <section>, .module-section, and elements with an id
+        const sectionEls = [
+            ...document.querySelectorAll('section'),
+            ...document.querySelectorAll('.module-section'),
+            ...Array.from(document.querySelectorAll('[id]')).filter(el => el.tagName !== 'SECTION' && !el.classList.contains('module-section'))
+        ];
+        sectionEls.forEach(el => {
+            el.style.scrollMarginTop = margin + 'px';
+        });
+    }
+
+    // Use requestAnimationFrame to ensure navs/content are rendered
+    function setOffsetsAfterRender() {
+        requestAnimationFrame(() => {
+            setContentInnerPadding();
+            setSectionScrollMargin();
+        });
+    }
+    setOffsetsAfterRender();
+    window.addEventListener('resize', setOffsetsAfterRender);
     
     // Mobile menu toggle functionality
     const mobileToggle = document.querySelector('.course-nav-mobile-toggle');
@@ -103,4 +130,22 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    // On initial load, ensure offsets are set after navs and content are visible
+    setOffsetsAfterRender();
+
+    // Patch: After showing a section, re-run offsets after DOM updates
+    function rerunOffsetsAfterSectionChange() {
+        setTimeout(setOffsetsAfterRender, 0);
+    }
+    // Nav bar button clicks
+    document.querySelectorAll('.module-nav-btn').forEach(btn => {
+        btn.addEventListener('click', rerunOffsetsAfterSectionChange);
+    });
+    // Section nav btns (Back/Next)
+    document.querySelectorAll('.section-nav-btns button').forEach(btn => {
+        btn.addEventListener('click', rerunOffsetsAfterSectionChange);
+    });
+    // Hashchange (for anchor navigation)
+    window.addEventListener('hashchange', rerunOffsetsAfterSectionChange);
 });
