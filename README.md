@@ -1,5 +1,7 @@
 # AI Education: LLM Concepts & Prompt Engineering
 
+☕️ **Enjoying the course?** If you like the course and want to support my work (I'm a coffee lover!), consider [buying me a coffee](https://buymeacoffee.com/arjunasoknair). Your support is greatly appreciated!
+
 A comprehensive educational resource for learning about Large Language Models (LLMs) and effective prompt engineering techniques.
 
 ## Overview
