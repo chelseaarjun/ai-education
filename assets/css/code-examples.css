@@ -1,0 +1,33 @@
+/* Code Example Styles (shared) */
+.code-examples-row {
+    display: flex;
+    gap: 24px;
+    margin: 24px 0;
+}
+.code-example-col {
+    flex: 1 1 0;
+    min-width: 0;
+}
+.code-example-col pre {
+    overflow-x: auto;
+    max-width: 100%;
+}
+.code-example-header {
+    font-weight: bold;
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+    color: #4a6fa5;
+}
+.code-highlight {
+    background: #fffbe6;
+    border-left: 4px solid #ff9e3d;
+    padding-left: 6px;
+    margin-left: -6px;
+    display: inline-block;
+}
+@media (max-width: 900px) {
+    .code-examples-row {
+        flex-direction: column;
+        gap: 16px;
+    }
+} 
