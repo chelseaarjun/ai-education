@@ -303,7 +303,7 @@
         <button class="module-nav-btn" data-section="embeddings">Embeddings</button>
         <button class="module-nav-btn" data-section="temperature">Logits & Temperature</button>
         <button class="module-nav-btn" data-section="response-format">Response Format</button>
-        <button class="module-nav-btn" data-section="model-selection">Model Selection</button>
+        <button class="module-nav-btn" data-section="model-selection">LLM Evolution</button>
         <button class="module-nav-btn" data-section="quiz-section">Quiz</button>
     </nav>
     <div class="content-inner">
@@ -567,45 +567,116 @@
         </section>
         <section id="model-selection" class="module-section" style="display:none">
             <div class="concept-section">
-                <h2>6. Reasoning in Foundational Models</h2>
-                
-                <p><span class="highlight">Concept:</span> <strong>Reasoning</strong> is the model's ability to <strong>break down complex problems</strong> into smaller steps and <strong>chain together logical inferences</strong>.</p>
-                
-                <p><span class="highlight">Everyday Example:</span> Just as you might solve a math problem by working through it step-by-step, AI models "think" through problems by generating intermediate steps before reaching a conclusion.</p>
-                
-                <div class="visual-container">
-                    <div style="padding: 20px; background-color: #f8f9fa; border-radius: 8px; border: 1px solid #ddd;">
-                        <p><strong>Problem:</strong> "If a train travels 120 miles in 2 hours, how far will it travel in 5 hours?"</p>
-                        
-                        <p><strong>Step-by-step reasoning:</strong></p>
-                        <ol style="margin-left: 20px;">
-                            <li>Find speed: 120 miles ÷ 2 hours = 60 mph</li>
-                            <li>Calculate distance: 60 mph × 5 hours = 300 miles</li>
-                            <li>Answer: 300 miles</li>
-                        </ol>
-                        
-                        <p><strong>Key capabilities that enable reasoning:</strong></p>
-                        <ul style="margin-left: 20px;">
-                            <li><strong>Chain-of-thought processing:</strong> Breaking problems into logical steps</li>
-                            <li><strong>Self-correction:</strong> Evaluating and fixing errors in reasoning</li>
-                            <li><strong>Pattern application:</strong> Applying learned reasoning patterns to new domains</li>
-                            <li><strong>Problem decomposition:</strong> Breaking complex problems into manageable pieces</li>
-                        </ul>
-                        
-                        <div style="margin-top: 20px; padding: 15px; background-color: #e8f4fd; border-radius: 8px; border-left: 5px solid #3498db;">
-                            <h4 style="margin-top: 0;">Reasoning and Token Usage</h4>
-                            <p>When a model shows its reasoning:</p>
-                            <ul>
-                                <li>All reasoning steps count toward the <strong>context window limit</strong></li>
-                                <li>Each token in the reasoning process counts toward <strong>output token costs</strong></li>
-                                <li>Parameters like <strong>max_tokens</strong> and <strong>budget_tokens</strong> can control total output length and costs</li>
-                            </ul>
-                            <p>For example, the simple reasoning above used ~40 tokens, while more complex problems could use hundreds or thousands of tokens.</p>
-                        </div>
-                    </div>
+                <h2>6. LLM Evolution & Architectural Advances</h2>
+                <h4>Early LLM Development (2017-2022)</h4>
+                <p>The modern Large Language Model era began with the 2017 paper <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">"Attention Is All You Need,"</a> which introduced the Transformer architecture. This revolutionary approach replaced recurrent neural networks with three key innovations:</p>
+                <ul>
+                  <li><b>Self-attention mechanism</b>: Allowing models to connect related words regardless of distance</li>
+                  <li><b>Parallel processing</b>: Enabling simultaneous rather than sequential computation</li>
+                  <li><b>Flexible architecture</b>: Supporting various NLP tasks through encoder-decoder components</li>
+                </ul>
+                <p>Following this breakthrough, researchers discovered the "scaling law" phenomenon: model capabilities improve predictably when increasing parameters, training data, and computing power. This insight led to a rapid expansion in model size:</p>
+                <table>
+                  <thead><tr><th>Year</th><th>Model</th><th>Parameters</th><th>Key Advancement</th></tr></thead>
+                  <tbody>
+                    <tr><td>2018</td><td>BERT</td><td>340M</td><td>Bidirectional understanding</td></tr>
+                    <tr><td>2020</td><td>GPT-3</td><td>175B</td><td>Few-shot learning capabilities</td></tr>
+                    <tr><td>2022</td><td>PaLM</td><td>540B</td><td>Improved reasoning abilities</td></tr>
+                  </tbody>
+                </table>
+                <p>The scaling era culminated with the release of ChatGPT on November 30, 2022, which brought LLMs into mainstream use through its user-friendly interface and impressive capabilities.</p>
+                <h4>The Rise of Reasoning Models (2023-Present)</h4>
+                <p>Around 2023, a new generation of models emerged with enhanced reasoning abilities, representing a significant leap beyond simple pattern recognition. To build these reasoning models, training approaches evolved from basic transformer architectures to include explicit reasoning demonstrations, self-critique methods, and human feedback on multi-step solutions.</p>
+                <table>
+                  <thead><tr><th>Aspect</th><th>Description</th></tr></thead>
+                  <tbody>
+                    <tr><td><b>Key Capabilities</b></td><td>&bull; <b>Structured problem-solving</b>: Breaking down complex tasks into clear, logical steps<br>&bull; <b>Self-consistency checking</b>: Detecting and correcting contradictions in their own reasoning<br>&bull; <b>Extended reasoning chains</b>: Following longer, more complex logical arguments<br>&bull; <b>Understanding cause and effect</b>: Recognizing how events relate and influence outcomes</td></tr>
+                    <tr><td><b>Current Limitations</b></td><td>&bull; <b>Complex multi-step reasoning</b>: Still struggle with novel mathematical proofs and multi-constraint optimization<br>&bull; <b>Specialized domain knowledge</b>: Difficulty with advanced legal reasoning or medical diagnosis<br>&bull; <b>Spatial reasoning</b>: Inconsistent performance on complex physical systems or 3D visualization problems</td></tr>
+                    <tr><td><b>Notable Examples</b></td><td>&bull; <b>ChatGPT o1</b>: OpenAI's model with improved mathematical and logical reasoning<br>&bull; <b>Claude 3.7 Sonnet</b>: Anthropic's model with structured problem-solving capabilities<br>&bull; <b>DeepSeek-R1</b>: Notable for performance on academic reasoning benchmarks</td></tr>
+                    <tr><td><b>Real-World Impact</b></td><td>Higher accuracy on complex tasks, fewer hallucinations, and more reliable performance&mdash;making reasoning models the foundation for building autonomous AI agents</td></tr>
+                  </tbody>
+                </table>
+                <blockquote><b>Note:</b> When a model shows its reasoning, all reasoning steps count toward the context window limit and output token costs. Parameters like <b>max_tokens</b> and <b>budget_tokens</b> can control total output length and costs.</blockquote>
+                <div class="quiz-question">
+                  <p class="question-title">Quiz: Which training approach below is specifically designed to enhance an LLM's reasoning capabilities?</p>
+                  <ul class="quiz-options">
+                    <li class="quiz-option" data-correct="false">A) Next-token prediction</li>
+                    <li class="quiz-option" data-correct="true">B) Chain-of-thought training</li>
+                    <li class="quiz-option" data-correct="false">C) Masked language modeling</li>
+                    <li class="quiz-option" data-correct="false">D) Decoder-only architecture</li>
+                  </ul>
+                  <div class="quiz-feedback">
+                    <strong>Answer:</strong> B) Chain-of-thought training. This approach teaches models to break down problems into logical steps, improving their reasoning capabilities.
+                  </div>
                 </div>
-                
-                <p><span class="highlight">Practical Application:</span> For complex problems, prompt the model to <strong>show its work</strong> or <strong>think step-by-step</strong> to improve accuracy. This approach helps the model catch its own mistakes and produces more reliable answers.</p>
+                <h4>Current Limitations of LLMs</h4>
+                <p>Despite impressive advances, even today's most sophisticated models face significant challenges:</p>
+                <table>
+                  <thead><tr><th>Limitation Type</th><th>Description</th></tr></thead>
+                  <tbody>
+                    <tr><td><b>Hallucinations</b></td><td>Generate plausible but factually incorrect information; invent citations; blend facts with fiction</td></tr>
+                    <tr><td><b>Knowledge Boundaries</b></td><td>Fixed knowledge cutoffs; limited context windows (8K-200K tokens); inability to verify information</td></tr>
+                    <tr><td><b>Reasoning Limitations</b></td><td>Struggle with complex multi-step reasoning; limited mathematical capabilities; domain knowledge gaps</td></tr>
+                  </tbody>
+                </table>
+                <ul>
+                  <li><b>Struggle with complex multi-step reasoning</b> (e.g., solving novel mathematical proofs or multi-constraint optimization problems)</li>
+                  <li><b>Difficulty with tasks requiring specialized domain knowledge</b> (e.g., advanced legal reasoning or medical diagnosis)</li>
+                  <li><b>Inconsistent performance on spatial reasoning tasks</b> (e.g., complex physical systems or 3D visualization problems)</li>
+                </ul>
+                <div class="quiz-question">
+                  <p class="question-title">Assessment: Why do LLMs sometimes hallucinate information, and what approaches can developers take to mitigate this problem? (Select all that apply)</p>
+                  <ul class="quiz-options">
+                    <li class="quiz-option" data-correct="false">A) LLMs have perfect knowledge but choose to be creative</li>
+                    <li class="quiz-option" data-correct="true">B) The statistical nature of prediction sometimes generates plausible but incorrect information</li>
+                    <li class="quiz-option" data-correct="true">C) Using retrieval augmentation to ground model responses in verified sources</li>
+                    <li class="quiz-option" data-correct="false">D) Training models on larger datasets always eliminates hallucinations</li>
+                    <li class="quiz-option" data-correct="true">E) Implementing fact-checking components that verify model outputs</li>
+                  </ul>
+                  <div class="quiz-feedback">
+                    <strong>Answer:</strong> B, C, and E. Hallucinations occur due to the statistical nature of LLMs. Retrieval augmentation and fact-checking can help mitigate this issue.
+                  </div>
+                </div>
+                <h4>Building Applications with LLMs</h4>
+                <p>There are three primary approaches to building LLM applications, with increasing levels of sophistication:</p>
+                <table style="width:100%; margin-bottom: 24px; text-align:center;">
+                  <thead>
+                    <tr>
+                      <th style="width: 33%;">LLMs + Prompt Engineering</th>
+                      <th style="width: 33%;">LLMs + External Knowledge Integration</th>
+                      <th style="width: 34%;">Autonomous Agents</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><img src="../assets/images/llm-basic.png" alt="Basic LLM interaction with input and output" style="max-width:90%;margin:6px 0;"/></td>
+                      <td><img src="../assets/images/llm-knowledge.png" alt="LLM with external knowledge sources" style="max-width:90%;margin:6px 0;"/></td>
+                      <td><img src="../assets/images/agent-cycle.png" alt="Agent architecture with observation-action cycle" style="max-width:90%;margin:6px 0;"/></td>
+                    </tr>
+                    <tr>
+                      <td>Direct interaction with the LLM through carefully crafted prompts</td>
+                      <td>Augmenting LLMs with up-to-date information from databases, documents, or APIs</td>
+                      <td>Software systems with LLM "brains" that have memory, tools, and decision-making capabilities</td>
+                    </tr>
+                    <tr>
+                      <td>Text summarization, content generation, classification, translation</td>
+                      <td>Question answering over company data, site selection analysis using current market data</td>
+                      <td>Personalized assistants, automated research, complex workflows</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>These three approaches represent a continuum of complexity and capability that we'll explore in greater detail in subsequent modules.</p>
+                <h4>Future Research Directions</h4>
+                <p>The field is rapidly evolving beyond current LLM limitations, with several promising research directions that could transform how we build AI applications:</p>
+                <table>
+                  <thead><tr><th>Research Area</th><th>Description</th><th>Potential Real-World Impact</th><th>Reference</th></tr></thead>
+                  <tbody>
+                    <tr><td><b>Neuro-Symbolic Integration</b></td><td>Combining traditional symbolic systems with neural networks</td><td>Could enhance reasoning capabilities while maintaining interpretability</td><td><a href="https://arxiv.org/abs/2501.05435" target="_blank">Neuro-Symbolic AI in 2024: A Systematic Review</a></td></tr>
+                    <tr><td><b>JEPA (Joint Embedding Predictive Architecture)</b></td><td>Yann LeCun's approach focusing on predicting abstract representations rather than raw outputs</td><td>May enable more efficient learning with less data and better understanding of causality</td><td><a href="https://arxiv.org/abs/2403.00504" target="_blank">Learning and Leveraging World Models in Visual Representation Learning (2024)</a></td></tr>
+                    <tr><td><b>World Models</b></td><td>Systems that build internal representations of physical environments to predict outcomes and plan actions</td><td>Could enable AI to better understand physical reality and spatial relationships for robotics and embodied AI</td><td><a href="https://www.constellationr.com/blog-news/insights/physical-ai-world-foundation-models-will-move-forefront" target="_blank">Nvidia's Cosmos World Foundation Models (2025)</a></td></tr>
+                  </tbody>
+                </table>
+                <p>These research areas could address some of the current limitations of autonomous agents and reduce the engineering overhead for building systems that can work on complex tasks while interacting with both physical and digital worlds.</p>
             </div>
             <div class="section-nav-btns">
                 <button id="back-model-selection">Back</button>
