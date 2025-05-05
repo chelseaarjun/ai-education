@@ -243,7 +243,7 @@
     <!-- The global nav is injected by course-nav.js at the top of <body> -->
     <nav class="navigation">
         <div class="nav-buttons">
-            <a class="nav-button active" href="#welcome" id="nav-welcome" data-section="welcome">Welcome</a>
+            <a class="nav-button section-nav-button active" href="#welcome" id="nav-welcome" data-section="welcome">Welcome</a>
             <a class="nav-button" href="#understanding-genai" id="nav-genai-section" data-section="understanding-genai">Generative AI</a>
             <a class="nav-button" href="#ai-evolution-title" id="nav-ai-evolution" data-section="ai-evolution-title">AI Evolution</a>
             <a class="nav-button" href="#course-structure-title" id="nav-course-structure" data-section="course-structure-title">Course Structure</a>
@@ -390,10 +390,9 @@
                     </div>
                 </div>
                 
-                <div class="module">
+                <div class="module coming-soon">
                     <h3>Developer's Guide to Model Context Protocol</h3>
                     <p>Learn how to use MCP to build robust, maintainable AI applications. Understand the core principles of MCP, its integration with AWS Bedrock, and how it enables standardized communication between AI models and tools.</p>
-                    <p><a href="pages/developers-guide-to-mcp.html" class="nav-button">Start Module</a></p>
                 </div>
                 
                 <div class="module coming-soon">
@@ -461,7 +460,7 @@
             }
             window.addEventListener('scroll', onScroll, {passive: true});
             // Also update on click
-            document.querySelectorAll('.nav-button').forEach(btn => {
+            document.querySelectorAll('.section-nav-button').forEach(btn => {
                 btn.addEventListener('click', function() {
                     setTimeout(onScroll, 350);
                 });
@@ -500,7 +499,7 @@
         }, 100);
 
         // Handle navigation clicks
-        document.querySelectorAll('.nav-button').forEach(button => {
+        document.querySelectorAll('.section-nav-button').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('data-section');
@@ -544,7 +543,7 @@
         window.scrollTo(0, 0);
 
         // Handle navigation clicks
-        document.querySelectorAll('.nav-button').forEach(button => {
+        document.querySelectorAll('.section-nav-button').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('data-section');
