@@ -4,7 +4,7 @@ In the context of AI agents for digital applications (like chatbots, virtual ass
 
 ## What is the Decision Cycle?
 
-![Cognitive Language Agent Architecture](../../../assets/images/Cognitive%20Language%20Agent.png)
+<img src="../assets/images/agent-architecture.png" alt="Cognitive Agent Architecture" style="max-width:100%;margin:20px 0;">
 
 *This diagram illustrates how the agent's memory, tools, and decision logic interact in a continuous decision cycle, enabling the agent to observe, plan, and act in digital environments.*
 

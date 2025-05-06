@@ -1,0 +1,24 @@
+<svg width="500" height="320" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+  <!-- Arrows -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#888"/>
+    </marker>
+  </defs>
+  <!-- Circles -->
+  <circle cx="250" cy="60" r="45" fill="#e9f0f9" stroke="#4a6fa5" stroke-width="2"/>
+  <circle cx="410" cy="220" r="45" fill="#f9e9f0" stroke="#a54c6b" stroke-width="2"/>
+  <circle cx="90" cy="220" r="45" fill="#e9f9f0" stroke="#4ca56b" stroke-width="2"/>
+  <!-- Labels -->
+  <text x="250" y="65" text-anchor="middle" fill="#333" font-size="18" font-weight="bold">Observe</text>
+  <text x="410" y="225" text-anchor="middle" fill="#333" font-size="18" font-weight="bold">Plan</text>
+  <text x="90" y="225" text-anchor="middle" fill="#333" font-size="18" font-weight="bold">Act</text>
+  <!-- Arrows -->
+  <path d="M285,80 Q350,120 400,175" fill="none" stroke="#888" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M365,255 Q250,320 135,255" fill="none" stroke="#888" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M90,175 Q140,120 215,80" fill="none" stroke="#888" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- Descriptions -->
+  <text x="320" y="110" fill="#666" font-size="13" text-anchor="middle">Interpret & Plan</text>
+  <text x="250" y="305" fill="#666" font-size="13" text-anchor="middle">Execute</text>
+  <text x="180" y="110" fill="#666" font-size="13" text-anchor="middle">Assess Results</text>
+</svg>
