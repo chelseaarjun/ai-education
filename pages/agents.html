@@ -357,7 +357,32 @@ print(result)
             <h2>Decision Cycle: Observe, Plan, and Act</h2>
             <p>In the context of AI agents for digital applications (like chatbots, virtual assistants, or workflow automation), the <strong>decision cycle</strong> is the repeating process an agent uses to understand, reason, and act—much like how a human knowledge worker would handle a task.</p>
             <h3>What is the Decision Cycle?</h3>
-            <img src="../assets/images/Cognitive%20Language%20Agent.png" alt="Cognitive Language Agent Architecture" style="max-width:100%;margin:20px 0;">
+            <div style="display: flex; justify-content: center;">
+            <svg width="500" height="320" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+              <!-- Arrows -->
+              <defs>
+                <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                  <path d="M0,0 L0,6 L9,3 z" fill="#888"/>
+                </marker>
+              </defs>
+              <!-- Circles -->
+              <circle cx="250" cy="60" r="45" fill="#e9f0f9" stroke="#4a6fa5" stroke-width="2"/>
+              <circle cx="410" cy="220" r="45" fill="#f9e9f0" stroke="#a54c6b" stroke-width="2"/>
+              <circle cx="90" cy="220" r="45" fill="#e9f9f0" stroke="#4ca56b" stroke-width="2"/>
+              <!-- Labels -->
+              <text x="250" y="65" text-anchor="middle" fill="#333" font-size="18" font-weight="bold">Observe</text>
+              <text x="410" y="225" text-anchor="middle" fill="#333" font-size="18" font-weight="bold">Plan</text>
+              <text x="90" y="225" text-anchor="middle" fill="#333" font-size="18" font-weight="bold">Act</text>
+              <!-- Arrows -->
+              <path d="M290,80 Q375,120 400,175" fill="none" stroke="#888" stroke-width="2" marker-end="url(#arrow)"/>
+              <path d="M380,255 Q250,320 135,255" fill="none" stroke="#888" stroke-width="2" marker-end="url(#arrow)"/>
+              <path d="M90,175 Q115,120 200,80" fill="none" stroke="#888" stroke-width="2" marker-end="url(#arrow)"/>
+              <!-- Descriptions (moved for clarity) -->
+              <text x="390" y="120" fill="#666" font-size="13" text-anchor="start">Interpret &amp; Plan</text>
+              <text x="250" y="305" fill="#666" font-size="13" text-anchor="middle">Execute</text>
+              <text x="40" y="120" fill="#666" font-size="13" text-anchor="start">Assess Results</text>
+            </svg>
+            </div>
             <p><em>This diagram illustrates how the agent's memory, tools, and decision logic interact in a continuous decision cycle, enabling the agent to observe, plan, and act in digital environments.</em></p>
             <p>The decision cycle is a loop where the agent:</p>
             <ol>
