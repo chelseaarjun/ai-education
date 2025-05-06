@@ -642,26 +642,48 @@
                 <table style="width:100%; margin-bottom: 24px; text-align:center;">
                   <thead>
                     <tr>
-                      <th style="width: 33%;">LLMs + Prompt Engineering</th>
-                      <th style="width: 33%;">LLMs + External Knowledge Integration</th>
-                      <th style="width: 34%;">Autonomous Agents</th>
+                      <th style="width: 16%;">Attribute</th>
+                      <th style="width: 28%;">LLMs + Prompt Engineering</th>
+                      <th style="width: 28%;">LLMs + Prompt Engineering + External Knowledge</th>
+                      <th style="width: 28%;">Autonomous Agents</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
+                      <td><b>Visual</b></td>
                       <td><img src="../assets/images/llm-basic.png" alt="Basic LLM interaction with input and output" style="max-width:90%;margin:6px 0;"/></td>
                       <td><img src="../assets/images/llm-knowledge.png" alt="LLM with external knowledge sources" style="max-width:90%;margin:6px 0;"/></td>
                       <td><img src="../assets/images/agent-cycle.png" alt="Agent architecture with observation-action cycle" style="max-width:90%;margin:6px 0;"/></td>
                     </tr>
                     <tr>
-                      <td>Direct interaction with the LLM through carefully crafted prompts</td>
-                      <td>Augmenting LLMs with up-to-date information from databases, documents, or APIs</td>
-                      <td>Software systems with LLM "brains" that have memory, tools, and decision-making capabilities</td>
+                      <td><b>Description</b></td>
+                      <td>Directly interact with the LLM using carefully crafted prompts.</td>
+                      <td>Enhance LLMs with real-time or domain-specific information from external sources (databases, APIs, documents).</td>
+                      <td>Combine LLMs with tools, memory, and decision-making to create systems that can plan, act, and adapt autonomously.</td>
                     </tr>
                     <tr>
-                      <td>Text summarization, content generation, classification, translation</td>
-                      <td>Question answering over company data, site selection analysis using current market data</td>
-                      <td>Personalized assistants, automated research, complex workflows</td>
+                      <td><b>Best For</b></td>
+                      <td>Simple, self-contained tasks that rely on general knowledge.</td>
+                      <td>Information-rich tasks requiring up-to-date, specialized, or proprietary data.</td>
+                      <td>Complex, multi-step workflows that require reasoning, tool use, and adaptive planning.</td>
+                    </tr>
+                    <tr>
+                      <td><b>Use Cases</b></td>
+                      <td>Text summarization, content generation, classification, translation.</td>
+                      <td>Company data Q&amp;A, research over large document sets, market analysis.</td>
+                      <td>Personal assistants, automated research agents, workflow automation, multi-tool orchestration.</td>
+                    </tr>
+                    <tr>
+                      <td><b>Complexity</b></td>
+                      <td>Low</td>
+                      <td>Medium</td>
+                      <td>High</td>
+                    </tr>
+                    <tr>
+                      <td><b>Limitations</b></td>
+                      <td>Limited by model's context window and training data cutoff; cannot access new or proprietary information.</td>
+                      <td>Dependent on quality and freshness of external data; requires robust retrieval and integration.</td>
+                      <td>Increased system complexity; harder to debug; may have higher latency and operational overhead.</td>
                     </tr>
                   </tbody>
                 </table>
