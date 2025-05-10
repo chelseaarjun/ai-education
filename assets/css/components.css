@@ -114,4 +114,17 @@ li {
 
 body, html {
     font-family: var(--font-main);
+}
+
+.module-title {
+    color: var(--primary);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 0.2em;
+    margin-bottom: 1em;
+    font-weight: 700;
+}
+.section-title {
+    color: var(--primary);
+    margin-top: 1.5em;
+    font-weight: 600;
 } 

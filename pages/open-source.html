@@ -136,14 +136,17 @@
     <nav class="module-sidebar"></nav>
     <div class="content-inner">
         <section id="introduction" class="module-section">
-            <div class="course-description" id="introduction">
-                <h2>Open Source Tools & Frameworks for AWS Bedrock</h2>
-                <p>AWS Bedrock provides a powerful platform for building generative AI applications, but complementing it with open-source tools can significantly enhance your development workflow, add capabilities, and improve productivity. This module explores key MIT and Apache-licensed libraries that work seamlessly with AWS Bedrock services.</p>
-                <p>We'll focus on two categories of libraries:</p>
-                <ol>
-                    <li><strong>Core LLM Framework Libraries</strong> - Specialized frameworks for building LLM applications</li>
-                    <li><strong>General Purpose Libraries</strong> - Tools that facilitate development, deployment and monitoring</li>
-                </ol>
+            <div class="course-description">
+                <h2 class="module-title">Module: Open Source Tools & Frameworks for AWS Bedrock</h2>
+                <p>Welcome to this module! Here, you'll discover how open-source tools can supercharge your AWS Bedrock projects, streamline development, and add powerful new capabilities to your AI workflows.</p>
+                <h3 class="section-title">What You'll Learn</h3>
+                <p>In this module, you'll master the following key areas:</p>
+                <ul>
+                    <li><b>Core Frameworks:</b> Key open-source frameworks for building LLM applications</li>
+                    <li><b>Integration:</b> How to integrate AWS Bedrock with popular libraries</li>
+                    <li><b>Best Practices:</b> Using open-source tools in production</li>
+                    <li><b>Evaluation:</b> How to select the right tools for your needs</li>
+                </ul>
             </div>
             <div class='section-nav-btns'>
                 <button id='back-introduction' disabled>Back</button>
@@ -929,11 +932,38 @@ print(response.content)</code></pre>
         <section id="quiz-section" class="module-section" style="display:none">
             <div class="quiz-section">
                 <h2 class="quiz-title">Concept Check Questions</h2>
-                <!-- Add quiz containers here if you have quiz content -->
-            </div>
-            <div class='section-nav-btns'>
-                <button id='back-quiz-section'>Back</button>
-                <button id='next-quiz-section' disabled>Next</button>
+                <div class="quiz-container">
+                    <div class="quiz-question" id="q1">
+                        <p class="question-title">1. Which open-source library is best for building LLM-powered agents with memory and tool use?</p>
+                        <ul class="quiz-options">
+                            <li class="quiz-option" data-correct="true">A) LangChain</li>
+                            <li class="quiz-option" data-correct="false">B) FastAPI</li>
+                            <li class="quiz-option" data-correct="false">C) Jinja2</li>
+                            <li class="quiz-option" data-correct="false">D) Pydantic</li>
+                        </ul>
+                        <div class="quiz-feedback">
+                            <strong>Answer:</strong> A) LangChain. It provides a comprehensive agent framework for LLM applications.
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question" id="q2">
+                        <p class="question-title">2. What is the main benefit of using Retrieval-Augmented Generation (RAG) with AWS Bedrock?</p>
+                        <ul class="quiz-options">
+                            <li class="quiz-option" data-correct="false">A) It increases model size</li>
+                            <li class="quiz-option" data-correct="true">B) It grounds responses in external, up-to-date information</li>
+                            <li class="quiz-option" data-correct="false">C) It reduces API costs</li>
+                            <li class="quiz-option" data-correct="false">D) It disables tool use</li>
+                        </ul>
+                        <div class="quiz-feedback">
+                            <strong>Answer:</strong> B) RAG grounds model responses in external, up-to-date information, reducing hallucinations.
+                        </div>
+                    </div>
+                </div>
+                <div class='section-nav-btns'>
+                    <button id='back-quiz-section'>Back</button>
+                    <button id='next-quiz-section' disabled>Next</button>
+                </div>
             </div>
         </section>
     </div>
