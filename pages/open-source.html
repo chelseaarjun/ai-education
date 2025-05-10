@@ -4,117 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Source Tools & Frameworks for AWS Bedrock</title>
+    <!-- Base Styles -->
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    
+    <!-- Navigation -->
     <link rel="stylesheet" href="../assets/css/course-nav.css">
     <link rel="stylesheet" href="../assets/css/module-nav-bar.css">
     <link rel="stylesheet" href="../assets/css/module-sidebar.css">
+    
+    <!-- Components -->
     <link rel="stylesheet" href="../assets/css/code-examples.css">
     <link rel="stylesheet" href="../assets/css/tables.css">
-    <link rel="stylesheet" href="../assets/css/course-index.css">
-    <link rel="stylesheet" href="../assets/css/mobile-fixes.css">
-    <link rel="stylesheet" href="../assets/css/introduction-fix.css">
     <link rel="stylesheet" href="../assets/css/quiz.css">
+    
+    <!-- Responsive -->
+    <link rel="stylesheet" href="../assets/css/mobile-fixes.css">
+    
     <style>
-        .diagram {
-            display: block;
-            margin: 25px auto;
-            max-width: 100%;
-            text-align: center;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 10px;
-            overflow: hidden;
-        }
-
-        .course-description {
-            background: linear-gradient(135deg, #eaf2f8 0%, #f0f7ff 100%);
-            padding: 1.25rem;
-            padding-top: 1rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            margin-top: 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(74, 111, 165, 0.1);
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            margin-top: 0.5rem;
-            font-weight: 400;
-            color: var(--secondary);
-            line-height: 1.5;
-        }
-
-        /* Section content spacing */
-        section > *:first-child {
-            margin-top: 0;
-        }
-
-        section > p:first-of-type {
-            margin-top: 0.5rem;
-        }
-
-        /* Lists */
-        ul, ol {
-            margin-top: 0.5rem;
-            margin-bottom: 1rem;
-            padding-left: 1.5rem;
-        }
-
-        li {
-            margin-bottom: 0.5rem;
-            line-height: var(--line-height-body);
-        }
-
-        /* Examples and components spacing */
-        .example:first-child,
-        .prompt-example:first-child,
-        .response-example:first-child,
-        .crisp-component:first-child,
-        .interactive-demo:first-child {
-            margin-top: 0.5rem;
-        }
-
-        /* Code Blocks */
-        .code-block {
-            background-color: var(--code-bg);
-            padding: 1rem;
-            border-radius: 6px;
-            overflow-x: auto;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            margin: 1rem 0;
-            border-left: 4px solid var(--accent);
-            white-space: pre-wrap;
-            line-height: 1.5;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
-        
-        /* Examples */
-        .example {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .example:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-        }
-
         /* Library-specific styles */
         .library {
             background: white;
             padding: 1.25rem;
-            border-radius: 8px;
+            border-radius: var(--radius-md);
             margin-bottom: 1.25rem;
             border-left: 4px solid var(--primary);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            box-shadow: var(--shadow-sm);
         }
-
         .library h3 {
             margin-top: 0;
             color: var(--primary);
@@ -122,7 +38,6 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .library-tag {
             font-size: 0.875rem;
             background-color: var(--bg-alt);
@@ -131,33 +46,27 @@
             border-radius: 4px;
             font-weight: normal;
         }
-
         .library-details {
             display: flex;
             margin-top: 1rem;
             gap: 1.25rem;
         }
-
         .library-details .features {
             flex: 2;
         }
-
         .library-details .links {
             flex: 1;
             background-color: var(--bg-alt);
             padding: 1rem;
             border-radius: 6px;
         }
-
         .features ul {
             margin-top: 0.5rem;
             padding-left: 1.25rem;
         }
-
         .features li {
             margin-bottom: 0.5rem;
         }
-
         .library-code {
             background-color: var(--code-bg);
             padding: 1rem;
@@ -165,27 +74,23 @@
             font-family: var(--font-mono);
             overflow-x: auto;
             margin-top: 1rem;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-sm);
         }
-
         .reference-section {
             background-color: var(--bg-alt);
             padding: 1.25rem;
-            border-radius: 8px;
+            border-radius: var(--radius-md);
             margin-top: 2.5rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            box-shadow: var(--shadow-sm);
         }
-
         .reference-list {
             column-count: 2;
             column-gap: 1.875rem;
         }
-
         .reference-item {
             margin-bottom: 1rem;
             break-inside: avoid;
         }
-
         .note-box {
             background-color: var(--bg-alt);
             padding: 1rem;
@@ -193,11 +98,9 @@
             margin: 1.25rem 0;
             border-radius: 0 6px 6px 0;
         }
-
         .note-box p {
             margin: 0;
         }
-
         code {
             background-color: var(--code-bg);
             padding: 0.125rem 0.375rem;
@@ -205,21 +108,16 @@
             font-family: var(--font-mono);
             font-size: 0.9em;
         }
-
-        /* Responsive adjustments */
         @media (max-width: 768px) {
             .library-details {
                 flex-direction: column;
             }
-
             .reference-list {
                 column-count: 1;
             }
-
             .library {
                 padding: 1rem;
             }
-
             .library-code {
                 padding: 0.75rem;
                 font-size: 0.85rem;

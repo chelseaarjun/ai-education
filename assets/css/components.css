@@ -1,0 +1,117 @@
+/* Course Description */
+.course-description {
+    background: linear-gradient(135deg, #eaf2f8 0%, #f0f7ff 100%);
+    padding: 1.25rem;
+    padding-top: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(74, 111, 165, 0.1);
+}
+
+/* Section Styles */
+section {
+    margin-bottom: 2rem;
+}
+
+section > *:first-child {
+    margin-top: 0;
+}
+
+section > p:first-of-type {
+    margin-top: 0.5rem;
+}
+
+/* Examples */
+.example {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.example:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Prompt Examples */
+.prompt-example {
+    background-color: var(--bg-alt);
+    border-left: 4px solid var(--secondary);
+    padding: 1rem;
+    margin: 1rem 0;
+    white-space: pre-line;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    border-radius: 0 6px 6px 0;
+}
+
+.response-example {
+    background-color: var(--bg-success);
+    border-left: 4px solid var(--success);
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Diagrams */
+.diagram {
+    display: block;
+    margin: 25px auto;
+    max-width: 100%;
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px;
+    overflow: hidden;
+}
+
+/* Typography */
+.subtitle {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    font-weight: 400;
+    color: var(--secondary);
+    line-height: 1.5;
+}
+
+/* Lists */
+ul, ol {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+    line-height: var(--line-height-body);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .course-description {
+        padding: 1rem;
+    }
+
+    .example, .prompt-example, .response-example {
+        padding: 0.75rem;
+        margin: 0.75rem 0;
+    }
+
+    .diagram {
+        padding: 0.5rem;
+        margin: 15px auto;
+    }
+}
+
+body, html {
+    font-family: var(--font-main);
+} 
