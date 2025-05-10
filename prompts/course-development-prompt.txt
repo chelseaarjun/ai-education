@@ -3,14 +3,14 @@ You are helping me develop an educational course on building production-grade AI
 Part 1 focuses on foundational concepts and is split into 4 modules 
 1. Understanding Large Language Models
 2. Prompt Engineering Guide
-3. From Prompt Engineering to Congnitive Agents
-4. Introduction to LLMOps
- 
+3. Introduction to Agents
+4. Developers Guide to Model Context Protocol
+
 Part 2 is focused on building production grade applications using AWS Bedrock services and compatible Open Source projects. Part 2 is split into 3 modules,
-1. Developer's Guide to MCP
-2. AWS Bedrock Building Blocks
-3. Practical Guide to Building Agents: Using AWS Bedrock, Open Source Tools & Frameworks
-4. Capstone Project with Prompt-Driven Development (Vibe Coding) using Amazon Q Developer, VSCode and CLine
+1. AWS Bedrock Services
+2. Open Source Tools & Frameworks
+3. Introduction to LLMOps
+3. Capstone Project via Prompt-Driven Development (Vibe Coding) using Amazon Q Developer, VSCode and CLine
 
 I would like keep Part 1 modules to be focused on helping my audience understand the core concepts and foundational knowledge necessary for being able to build production grade AI applications and in Part 2 apply the knowledge learned in Part 1 and learn the specifics of how to build using first AWS Bedrock Services and the compatible Open Source technologies and finally build a capstone/hackathon project to build an end to end AI agents 
 I need your help to:
@@ -28,4 +28,10 @@ Note that I'm specifically focusing on open source tools that are:
 3. Suitable for production-grade applications
 4. Currently actively maintained
 
-Here is the  Please help me develop these materials for each module step by step, first think critically and ask me if you have any clarifying questions, second discuss the outline of the module, third discuss the material for one section at and time and finally once material for all section are finalized create HTML page that for the module that is consistent with pages in this repo 
+Here is the please help me develop these materials for each module step by step by
+    1. first think critically and ask me if you have any clarifying questions
+    2. second discuss the outline of the module sections and save the outline as markdown marking every sectino as incomplete
+    3. third discuss the material for one section at a time, thinking critically at each step and asking me if you have any clarifying questions
+    4. Once you havce confirmation that the material for a section is finalized,  create markdown file for the section content and update the progress in outline markdown as complete.
+    
+Only create course material for information you're confident about and explicitly indicate uncertainty rather than speculating. Add references to authoritative sources where applicable.

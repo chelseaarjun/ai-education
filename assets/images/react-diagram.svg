@@ -1,0 +1,34 @@
+<svg width="600" height="225" viewBox="0 0 800 300">
+    <!-- Background -->
+    <rect x="0" y="0" width="800" height="300" fill="#f8f9fa" rx="10" ry="10"></rect>
+    <!-- Title -->
+    <text x="400" y="40" text-anchor="middle" fill="#4a6fa5" font-size="20" font-weight="bold">ReAct: Reason + Act</text>
+    <!-- Circle with 4 segments -->
+    <circle cx="400" cy="170" r="120" fill="none" stroke="#ddd" stroke-width="2"></circle>
+    <!-- Segments -->
+    <path d="M400 50 A120 120 0 0 1 520 170" fill="#e9f0f9" stroke="#4a6fa5" stroke-width="2"></path>
+    <path d="M520 170 A120 120 0 0 1 400 290" fill="#f0e9f9" stroke="#6b4ca5" stroke-width="2"></path>
+    <path d="M400 290 A120 120 0 0 1 280 170" fill="#f9e9f0" stroke="#a54c6b" stroke-width="2"></path>
+    <path d="M280 170 A120 120 0 0 1 400 50" fill="#e9f9f0" stroke="#4ca56b" stroke-width="2"></path>
+    <!-- Text in segments -->
+    <text x="400" y="100" text-anchor="middle" fill="#4a6fa5" font-size="16" font-weight="bold">THINK</text>
+    <text x="400" y="120" text-anchor="middle" fill="#333" font-size="12">Analyze the problem</text>
+    <text x="470" y="170" text-anchor="middle" fill="#6b4ca5" font-size="16" font-weight="bold">ACT</text>
+    <text x="470" y="190" text-anchor="middle" fill="#333" font-size="12">Take a specific action</text>
+    <text x="400" y="240" text-anchor="middle" fill="#a54c6b" font-size="16" font-weight="bold">OBSERVE</text>
+    <text x="400" y="260" text-anchor="middle" fill="#333" font-size="12">Evaluate the results</text>
+    <text x="330" y="170" text-anchor="middle" fill="#4ca56b" font-size="16" font-weight="bold">DECIDE</text>
+    <text x="330" y="190" text-anchor="middle" fill="#333" font-size="12">Plan next steps</text>
+    <!-- Circle at center -->
+    <circle cx="400" cy="170" r="30" fill="white" stroke="#ff9e3d" stroke-width="2"></circle>
+    <text x="400" y="175" text-anchor="middle" fill="#ff9e3d" font-size="14" font-weight="bold">ReAct</text>
+    <!-- Curved arrows -->
+    <path d="M430 60 Q450 80 460 100" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="2,2"></path>
+    <polygon points="460,100 456,93 464,93" fill="#333"></polygon>
+    <path d="M500 200 Q480 220 460 240" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="2,2"></path>
+    <polygon points="460,240 456,233 464,233" fill="#333"></polygon>
+    <path d="M370 280 Q350 260 340 240" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="2,2"></path>
+    <polygon points="340,240 336,233 344,233" fill="#333"></polygon>
+    <path d="M300 140 Q320 120 340 100" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="2,2"></path>
+    <polygon points="340,100 336,93 344,93" fill="#333"></polygon>
+</svg> 

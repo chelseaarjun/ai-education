@@ -12,20 +12,38 @@
     z-index: 900;
     font-size: 1rem;
 }
-.module-sidebar h4 {
+
+/* Heading styles */
+.module-sidebar > h4 {
     margin-top: 0;
     color: #4a6fa5;
-    font-size: 1.05rem;
-    margin-bottom: 12px;
+    font-size: 1.1rem;
+    margin-bottom: 16px;
 }
+
+/* List styles */
 .module-sidebar ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
+
 .module-sidebar li {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
+
+/* Nested list styles */
+.module-sidebar .h4-list {
+    margin-left: 16px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+}
+
+.module-sidebar .h4-item {
+    margin-bottom: 6px;
+}
+
+/* Link styles */
 .module-sidebar a {
     color: #333;
     text-decoration: none;
@@ -34,10 +52,41 @@
     display: block;
     transition: background 0.2s, color 0.2s;
 }
+
 .module-sidebar a.active {
-    background: #4a6fa5;
-    color: #fff;
+    background: rgba(74, 111, 165, 0.15);
+    color: #4a6fa5;
     font-weight: bold;
+}
+
+/* H3 items styling */
+.module-sidebar .h3-item > a {
+    font-weight: 500;
+    color: #4a6fa5;
+}
+
+.module-sidebar .h3-item > a.active {
+    background: rgba(74, 111, 165, 0.15);
+    color: #4a6fa5;
+}
+
+/* H4 items styling */
+.module-sidebar .h4-item > a {
+    color: #4a6fa5;
+    font-size: 0.95em;
+}
+
+.module-sidebar .h4-item > a.active {
+    background: rgba(74, 111, 165, 0.15);
+    color: #4a6fa5;
+}
+
+/* No sections message */
+.module-sidebar .no-sections {
+    color: #666;
+    font-size: 0.9em;
+    padding: 8px;
+    font-style: italic;
 }
 
 /* --- Content Layout (sidebar-related) --- */
@@ -47,6 +96,7 @@
     max-width: calc(85% - 220px - 80px);
     width: 85%;
 }
+
 @media (max-width: 900px) {
     .content-inner {
         margin-left: 0;
@@ -58,6 +108,7 @@
         display: none;
     }
 }
+
 @media (max-width: 600px) {
     .content-inner {
         padding-top: 10px;

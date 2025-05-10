@@ -1,0 +1,38 @@
+# Prompt Engineering Guide
+Master the art and science of effective prompts
+
+## 1. Prompt Engineering Overview
+
+<!-- Insert: ![Prompt Engineering Overview Diagram](../../../../assets/images/prompt-overview-diagram.svg) -->
+
+### 1.1 What are Prompts?
+### 1.2 Why Prompt Engineering Matters
+### 1.3 The Prompt Engineering Mindset
+### 1.4 Anatomy of an Effective Prompt
+
+<!-- Insert: ![Anatomy of a Prompt Diagram](../../../../assets/images/prompt-anatomy-diagram.svg) -->
+
+## 2. Writing Effective Prompts
+
+### 2.1 Core Prompting Principles: The CRISP Framework
+### 2.2 Prompt Design Challenges
+
+## 3. Prompt Engineering Techniques
+
+### 3.1 Intermediate Techniques
+    - Role Assignment
+    - Self-Consistency and Verification
+    - Prompt Chaining
+    - Few-Shot Prompting
+### 3.2 Advanced Techniques Toolkit
+    - Chain-of-Thought Prompting
+    - Tree of Thoughts Prompting
+    - ReAct (Reasoning + Acting) 
+    - Retrieval-Augmented Generation (RAG) 
+### 3.3 Selecting the Right Techniques
+
+## 4. Additional Resources
+
+### 4.1 References and Further Reading
+### 4.2 Recommended Tools and Libraries
+### 4.3 Community and Practice

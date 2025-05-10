@@ -4,47 +4,135 @@
 @media (max-width: 768px) {
     /* Improve readability on mobile */
     body {
-        font-size: 16px;
-        line-height: 1.6;
+        font-size: 15px;
+        line-height: 1.5;
+        padding-top: 50px !important;
     }
     
     /* Adjust container padding */
     .container {
-        padding: 0 15px;
+        padding: 0.75rem;
+        margin: 0 auto;
+        max-width: 100%;
     }
     
     /* Make headers more compact */
     header {
-        padding: 30px 0 !important;
+        padding: 0.75rem 0 !important;
+    }
+    
+    /* Adjust section padding and margins */
+    section {
+        padding: 1rem !important;
+        padding-top: 0.75rem !important;
+        margin-bottom: 1rem !important;
+        border-radius: 6px !important;
+    }
+
+    /* Adjust course description spacing */
+    .course-description {
+        padding: 1rem !important;
+        padding-top: 0.75rem !important;
+    }
+
+    /* Adjust heading spacing */
+    h1 {
+        font-size: 1.6rem !important;
+        padding-top: 0.25rem !important;
+        margin-top: 0.5rem !important;
+    }
+    
+    h2 {
+        font-size: 1.4rem !important;
+        margin-top: 1rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    h3 {
+        font-size: 1.2rem !important;
+        margin-top: 0.75rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    /* First elements in sections */
+    section > *:first-child {
+        margin-top: 0 !important;
+    }
+
+    section > p:first-of-type {
+        margin-top: 0.5rem !important;
+    }
+    
+    /* Adjust container padding */
+    .container {
+        padding: 0.75rem;
+        margin: 0 auto;
+        max-width: 100%;
+    }
+    
+    /* Make headers more compact */
+    header {
+        padding: 1rem 0 !important;
     }
     
     h1 {
-        font-size: 2rem !important;
-        padding-top: 10px !important;
+        font-size: 1.6rem !important;
+        padding-top: 0.5rem !important;
+        margin-top: 0.75rem !important;
+    }
+    
+    h2 {
+        font-size: 1.4rem !important;
+        margin-top: 1.25rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    h3 {
+        font-size: 1.2rem !important;
+        margin-top: 1rem !important;
+        margin-bottom: 0.5rem !important;
     }
     
     .subtitle {
-        font-size: 1rem !important;
+        font-size: 0.95rem !important;
     }
     
-    /* Adjust section padding */
-    section {
-        padding: 20px 15px !important;
-        margin-bottom: 25px !important;
-    }
-    
-    /* Make code blocks scroll horizontally */
+    /* Improve code block readability */
     pre, code, .library-code {
         max-width: 100%;
         overflow-x: auto;
         white-space: pre;
         word-wrap: normal;
+        font-size: 0.85rem !important;
+        padding: 0.75rem !important;
+        border-radius: 4px !important;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Enhance touch targets */
+    button, 
+    .nav-button,
+    .demo-button,
+    .quiz-option {
+        min-height: 40px;
+        padding: 0.5rem 0.75rem !important;
+    }
+    
+    /* Improve form elements */
+    input, 
+    textarea, 
+    select {
+        font-size: 16px !important; /* Prevent iOS zoom */
+        padding: 0.5rem !important;
     }
     
     /* Adjust diagrams and visuals */
-    .diagram, .visual-container {
+    .diagram, 
+    .visual-container {
         overflow-x: auto;
         max-width: 100%;
+        margin: 1rem 0 !important;
+        padding: 0.75rem !important;
     }
     
     svg {
@@ -52,63 +140,160 @@
         height: auto;
     }
     
-    /* Fix quiz containers */
-    .quiz-container {
-        padding: 15px !important;
+    /* Enhance navigation */
+    .module-nav {
+        padding: 0.25rem !important;
     }
     
-    .quiz-option {
-        padding: 12px !important;
+    .module-nav-btn {
+        font-size: 0.85rem !important;
+        padding: 0.4rem 0.6rem !important;
+    }
+    
+    /* Improve scrolling */
+    .content-inner {
+        -webkit-overflow-scrolling: touch;
+        scroll-padding-top: 60px;
+    }
+    
+    /* Fix quiz containers */
+    .quiz-container {
+        padding: 1rem !important;
+        margin: 1rem 0 !important;
+    }
+    
+    /* Enhance examples and interactive elements */
+    .example,
+    .prompt-example,
+    .response-example,
+    .interactive-demo {
+        margin: 1rem 0 !important;
+        padding: 0.75rem !important;
     }
     
     /* Improve library details layout */
     .library-details {
         flex-direction: column;
+        gap: 0.75rem;
     }
     
     .library-details .features,
     .library-details .links {
-        flex: 1;
         width: 100%;
-    }
-    
-    .library-details .links {
-        margin-top: 15px;
     }
     
     /* Fix reference section */
     .reference-list {
         column-count: 1 !important;
+        gap: 0.75rem;
+    }
+    
+    /* Add smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Improve table responsiveness */
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 1rem 0;
+        background:
+            linear-gradient(to right, white 30%, rgba(255,255,255,0)),
+            linear-gradient(to right, rgba(255,255,255,0), white 70%) 100% 0,
+            radial-gradient(farthest-side at 0% 50%, rgba(0,0,0,.2), rgba(0,0,0,0)),
+            radial-gradient(farthest-side at 100% 50%, rgba(0,0,0,.2), rgba(0,0,0,0)) 100% 0;
+        background-repeat: no-repeat;
+        background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
+        background-position: 0 0, 100% 0, 0 0, 100% 0;
+        background-attachment: local, local, scroll, scroll;
     }
 }
 
 /* Extra small devices */
 @media (max-width: 480px) {
-    /* Further reduce padding */
-    section, .library, .course-description {
-        padding: 15px 12px !important;
+    body {
+        font-size: 14px;
     }
     
-    /* Smaller headings */
+    .container {
+        padding: 0.5rem;
+    }
+    
+    section {
+        padding: 0.75rem !important;
+    }
+    
+    h1 {
+        font-size: 1.4rem !important;
+    }
+    
     h2 {
-        font-size: 1.5rem !important;
+        font-size: 1.25rem !important;
     }
     
     h3 {
-        font-size: 1.3rem !important;
+        font-size: 1.1rem !important;
     }
     
-    /* Adjust token containers */
-    .token-container {
-        flex-wrap: wrap;
+    .module-nav-btn {
+        font-size: 0.8rem !important;
+        padding: 0.35rem !important;
     }
     
-    .token, .token-alt {
-        margin-bottom: 5px;
+    /* Adjust spacing for smaller screens */
+    .example,
+    .prompt-example,
+    .response-example,
+    .interactive-demo,
+    .quiz-container {
+        margin: 0.75rem 0 !important;
+        padding: 0.75rem !important;
     }
     
-    /* Fix embedding space */
-    .embedding-space {
-        height: 250px !important;
+    /* Improve touch targets for very small screens */
+    button,
+    .nav-button,
+    .demo-button,
+    .quiz-option {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        min-height: 36px;
+        padding: 0.4rem 0.6rem !important;
+    }
+
+    /* Introduction section mobile adjustments */
+    #introduction {
+        padding-top: 0.5rem !important;
+    }
+
+    #introduction h2 {
+        margin-bottom: 0.75rem !important;
+    }
+
+    #introduction .course-description {
+        padding: 1rem !important;
+        padding-top: 0.75rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    #introduction h3 {
+        margin-top: 0.75rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    #introduction p {
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+
+    #introduction ul {
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+
+    #introduction .section-nav-btns {
+        margin-top: 0.75rem !important;
     }
 }

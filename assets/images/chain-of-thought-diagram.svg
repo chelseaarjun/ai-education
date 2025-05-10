@@ -1,0 +1,26 @@
+<svg width="600" height="150" viewBox="0 0 800 200">
+    <!-- Background -->
+    <rect x="0" y="0" width="800" height="200" fill="#f8f9fa" rx="10" ry="10"></rect>
+    <!-- Boxes -->
+    <rect x="50" y="80" width="120" height="50" fill="#e9f0f9" stroke="#4a6fa5" stroke-width="2" rx="5" ry="5"></rect>
+    <rect x="200" y="80" width="120" height="50" fill="#f0e9f9" stroke="#6b4ca5" stroke-width="2" rx="5" ry="5"></rect>
+    <rect x="350" y="80" width="120" height="50" fill="#f9e9f0" stroke="#a54c6b" stroke-width="2" rx="5" ry="5"></rect>
+    <rect x="500" y="80" width="120" height="50" fill="#e9f9f0" stroke="#4ca56b" stroke-width="2" rx="5" ry="5"></rect>
+    <rect x="650" y="80" width="100" height="50" fill="#fff8e1" stroke="#ff9e3d" stroke-width="2" rx="5" ry="5"></rect>
+    <!-- Text -->
+    <text x="110" y="110" text-anchor="middle" fill="#333" font-size="14">Initial Problem</text>
+    <text x="260" y="110" text-anchor="middle" fill="#333" font-size="14">Step 1</text>
+    <text x="410" y="110" text-anchor="middle" fill="#333" font-size="14">Step 2</text>
+    <text x="560" y="110" text-anchor="middle" fill="#333" font-size="14">Step 3</text>
+    <text x="700" y="110" text-anchor="middle" fill="#333" font-size="14">Solution</text>
+    <!-- Arrows -->
+    <path d="M170 105 L200 105" stroke="#666" stroke-width="2"></path>
+    <polygon points="200,105 193,101 193,109" fill="#666"></polygon>
+    <path d="M320 105 L350 105" stroke="#666" stroke-width="2"></path>
+    <polygon points="350,105 343,101 343,109" fill="#666"></polygon>
+    <path d="M470 105 L500 105" stroke="#666" stroke-width="2"></path>
+    <polygon points="500,105 493,101 493,109" fill="#666"></polygon>
+    <path d="M620 105 L650 105" stroke="#666" stroke-width="2"></path>
+    <polygon points="650,105 643,101 643,109" fill="#666"></polygon>
+    <text x="400" y="40" text-anchor="middle" fill="#4a6fa5" font-size="20" font-weight="bold">Chain of Thought</text>
+</svg> 

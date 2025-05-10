@@ -26,23 +26,49 @@ function updateSidebar(sectionId) {
     const sidebar = document.querySelector('.module-sidebar');
     const section = document.getElementById(sectionId);
     if (!sidebar || !section) return;
+    
     // Find all h3/h4 in the section
     const headings = section.querySelectorAll('h3, h4');
-    let html = '';
-    if (headings.length > 0) {
-        html += '<ul>';
-        headings.forEach(h => {
-            // Ensure heading has an id for anchor
-            if (!h.id) {
-                h.id = sectionId + '-' + h.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
-            }
-            html += `<li><a href="#${h.id}">${h.textContent}</a></li>`;
-        });
-        html += '</ul>';
-    } else {
-        html = '<div style="color:#888;font-size:0.95em;">No sub-sections</div>';
+    
+    // If no headings, show "No sub-sections" message
+    if (headings.length === 0) {
+        sidebar.innerHTML = `
+            <h4>On this page</h4>
+            <div class="no-sections">No sub-sections</div>
+        `;
+        return;
     }
-    sidebar.innerHTML = `<h4>On this page</h4>${html}`;
+    
+    let html = '<h4>On this page</h4><ul>';
+    let currentH3 = null;
+    
+    headings.forEach(h => {
+        // Ensure heading has an id for anchor
+        if (!h.id) {
+            h.id = sectionId + '-' + h.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        }
+        
+        if (h.tagName === 'H3') {
+            // Close previous h4 list if exists
+            if (currentH3) {
+                html += '</ul></li>';
+            }
+            html += `<li class="h3-item"><a href="#${h.id}">${h.textContent}</a>`;
+            currentH3 = h;
+            html += '<ul class="h4-list">';
+        } else if (h.tagName === 'H4') {
+            html += `<li class="h4-item"><a href="#${h.id}">${h.textContent}</a></li>`;
+        }
+    });
+    
+    // Close any open lists
+    if (currentH3) {
+        html += '</ul></li>';
+    }
+    html += '</ul>';
+    
+    sidebar.innerHTML = html;
+
     // Add click listeners for smooth scroll
     sidebar.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', function(e) {

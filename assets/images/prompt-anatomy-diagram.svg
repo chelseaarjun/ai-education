@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="300" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect x="0" y="0" width="800" height="400" fill="#f8f9fa" rx="10" ry="10"></rect>
+    <!-- Title -->
+    <text x="400" y="40" text-anchor="middle" fill="#4a6fa5" font-size="22" font-weight="bold">Anatomy of a Prompt</text>
+    <!-- Main Container -->
+    <rect x="100" y="70" width="600" height="300" fill="white" stroke="#ddd" stroke-width="2" rx="10" ry="10"></rect>
+    <!-- Component Sections -->
+    <rect x="120" y="90" width="560" height="60" fill="#e9f0f9" stroke="#4a6fa5" stroke-width="2" rx="5" ry="5"></rect>
+    <text x="130" y="115" fill="#4a6fa5" font-size="16" font-weight="bold">INSTRUCTIONS</text>
+    <text x="130" y="135" fill="#333" font-size="14">Explicit directions on what to do</text>
+    <rect x="120" y="160" width="560" height="60" fill="#f0e9f9" stroke="#6b4ca5" stroke-width="2" rx="5" ry="5"></rect>
+    <text x="130" y="185" fill="#6b4ca5" font-size="16" font-weight="bold">CONTEXT</text>
+    <text x="130" y="205" fill="#333" font-size="14">Background information the model needs</text>
+    <rect x="120" y="230" width="560" height="60" fill="#f9e9f0" stroke="#a54c6b" stroke-width="2" rx="5" ry="5"></rect>
+    <text x="130" y="255" fill="#a54c6b" font-size="16" font-weight="bold">INPUT EXAMPLES</text>
+    <text x="130" y="275" fill="#333" font-size="14">Demonstrations of desired patterns</text>
+    <rect x="120" y="300" width="560" height="60" fill="#e9f9f0" stroke="#4ca56b" stroke-width="2" rx="5" ry="5"></rect>
+    <text x="130" y="325" fill="#4ca56b" font-size="16" font-weight="bold">OUTPUT FORMAT</text>
+    <text x="130" y="345" fill="#333" font-size="14">Specification of how responses should be structured</text>
+</svg> 
