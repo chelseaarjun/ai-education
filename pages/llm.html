@@ -14,58 +14,113 @@
     <link rel="stylesheet" href="../assets/css/introduction-fix.css">
     <link rel="stylesheet" href="../assets/css/quiz.css">
     <style>
-        /* Remove the following blocks, as they are now in course-index.css:
-        :root { ... }
-        body { ... }
-        h1 { ... }
-        h2 { ... }
-        .container { ... }
-        */
-        /* Keep only page-specific styles below: */
+        .diagram {
+            display: block;
+            margin: 25px auto;
+            max-width: 100%;
+            text-align: center;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        .course-description {
+            background: linear-gradient(135deg, #eaf2f8 0%, #f0f7ff 100%);
+            padding: 1.25rem;
+            padding-top: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            margin-top: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(74, 111, 165, 0.1);
+        }
+
         .subtitle {
             font-size: 1.2rem;
-            margin-top: 10px;
-            font-weight: 300;
+            margin-top: 0.5rem;
+            font-weight: 400;
+            color: var(--secondary);
+            line-height: 1.5;
         }
-        .concept-section {
-            margin-bottom: 50px;
-            padding: 20px;
-            border-radius: 8px;
-            background-color: #f9f9f9;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+        /* Section content spacing */
+        section > *:first-child {
+            margin-top: 0;
         }
-        .course-description {
-            background-color: #eaf2f8;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+        section > p:first-of-type {
+            margin-top: 0.5rem;
         }
-        .visual-container {
-            margin: 20px 0;
-            padding: 20px;
+
+        /* Lists */
+        ul, ol {
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            line-height: var(--line-height-body);
+        }
+
+        /* Examples and components spacing */
+        .example:first-child,
+        .prompt-example:first-child,
+        .response-example:first-child,
+        .crisp-component:first-child,
+        .interactive-demo:first-child {
+            margin-top: 0.5rem;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background-color: var(--code-bg);
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--accent);
+            white-space: pre-wrap;
+            line-height: 1.5;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Examples */
+        .example {
             background: white;
+            border: 1px solid var(--border);
             border-radius: 8px;
-            border: 1px solid #ddd;
+            padding: 1rem;
+            margin: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        .highlight {
-            font-weight: bold;
-            color: #2980b9;
+
+        .example:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
         }
-        /* Context Window */
+
+        /* LLM-specific visualizations */
         .context-window {
             width: 100%;
             height: 300px;
-            border: 3px solid #3498db;
+            border: 3px solid var(--primary);
             border-radius: 10px;
             position: relative;
             background-color: #eef7ff;
-            margin: 20px 0;
+            margin: 1.25rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
+
         .prompt-box {
             width: 40%;
             height: 100px;
-            background-color: #e74c3c;
+            background-color: var(--accent);
             border-radius: 8px;
             position: absolute;
             top: 30px;
@@ -75,12 +130,13 @@
             align-items: center;
             color: white;
             font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
+
         .response-box {
             width: 70%;
             height: 150px;
-            background-color: #2ecc71;
+            background-color: var(--success);
             border-radius: 8px;
             position: absolute;
             bottom: 30px;
@@ -90,60 +146,76 @@
             align-items: center;
             color: white;
             font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
-        /* Tokenization */
+
         .token-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
-            margin: 20px 0;
+            gap: 0.5rem;
+            margin: 1.25rem 0;
+            padding: 1rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
         }
+
+        .token, .token-alt {
+            padding: 0.5rem 0.75rem;
+            color: white;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
         .token {
-            padding: 5px 10px;
-            background-color: #3498db;
-            color: white;
-            border-radius: 5px;
-            font-family: monospace;
+            background-color: var(--primary);
         }
+
         .token-alt {
-            padding: 5px 10px;
-            background-color: #9b59b6;
-            color: white;
-            border-radius: 5px;
-            font-family: monospace;
+            background-color: var(--secondary);
         }
-        /* Token Estimation */
+
         .token-estimation {
             width: 100%;
-            border: 2px solid #3498db;
+            border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
         }
+
         .estimation-row {
             display: flex;
-            margin: 10px 0;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
+            margin: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.75rem;
         }
+
         .estimation-label {
             flex: 1;
-            font-weight: bold;
+            font-weight: 500;
+            color: var(--primary);
         }
+
         .estimation-value {
             flex: 2;
         }
-        /* Embeddings */
+
         .embedding-space {
             width: 100%;
             height: 300px;
-            border: 2px solid #3498db;
+            border: 1px solid var(--border);
             border-radius: 8px;
             position: relative;
-            background-color: #f8f9fa;
-            margin: 20px 0;
+            background-color: white;
+            margin: 1.25rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
         }
+
         .word-node {
             position: absolute;
             width: 80px;
@@ -152,147 +224,82 @@
             justify-content: center;
             align-items: center;
             border-radius: 15px;
-            background-color: #3498db;
+            background-color: var(--primary);
             color: white;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         .word-connection {
             position: absolute;
-            background-color: #bdc3c7;
+            background-color: var(--border);
             transform-origin: 0 0;
             height: 2px;
         }
-        /* Logits */
+
         .logit-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 1.25rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
         }
+
         .logit-table th, .logit-table td {
-            border: 1px solid #ddd;
-            padding: 10px;
+            border: 1px solid var(--border);
+            padding: 0.75rem;
             text-align: left;
         }
+
         .logit-table th {
-            background-color: #f2f2f2;
+            background-color: var(--bg-alt);
+            font-weight: 500;
+            color: var(--primary);
         }
+
         .logit-score {
             display: flex;
             align-items: center;
         }
+
         .score-bar {
             height: 20px;
-            background-color: #3498db;
-            margin-left: 10px;
+            background-color: var(--primary);
+            margin-left: 0.75rem;
             border-radius: 3px;
         }
-        /* Response Format */
+
         .output-comparison {
             display: flex;
-            gap: 20px;
-            margin: 20px 0;
+            gap: 1.25rem;
+            margin: 1.25rem 0;
         }
+
         .output-box {
             flex: 1;
-            border: 2px solid #3498db;
+            border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 20px;
+            padding: 1.25rem;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
         }
-        .output-header {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #2980b9;
-            text-align: center;
-        }
-        .json-box {
-            background-color: #f8f8f8;
-            font-family: monospace;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        /* Quiz Section */
-        .quiz-section {
-            margin-top: 60px;
-            padding: 30px;
-            background-color: #eef7ff;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        .quiz-title {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #2c3e50;
-        }
-        .quiz-question {
-            background-color: white;
-            padding: 20px;
-            margin-bottom: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .question-title {
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #2980b9;
-        }
-        .options {
-            margin-left: 20px;
-        }
-        .option {
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .option:hover {
-            background-color: #f5f5f5;
-        }
-        .option.selected {
-            background-color: #d6eaf8;
-            border-color: #3498db;
-        }
-        .option.correct {
-            background-color: #d4edda;
-            border-color: #28a745;
-        }
-        .option.incorrect {
-            background-color: #f8d7da;
-            border-color: #dc3545;
-        }
-        .answer-explanation {
-            margin-top: 15px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-left: 4px solid #3498db;
-            display: none;
-        }
-        .btn-check {
-            display: block;
-            margin: 20px auto 10px;
-            padding: 8px 20px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .btn-check:hover {
-            background-color: #2980b9;
-        }
-        .btn-check:disabled {
-            background-color: #95a5a6;
-            cursor: not-allowed;
-        }
-        .content-inner {
-            /* padding-top is set dynamically by JS */
-        }
-        .content-inner > :first-child,
-        .content-inner > h1 {
-            margin-top: 0;
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .output-comparison {
+                flex-direction: column;
+            }
+
+            .token-container {
+                padding: 0.75rem;
+            }
+
+            .token, .token-alt {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.6rem;
+            }
         }
     </style>
 </head>
