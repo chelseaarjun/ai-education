@@ -438,9 +438,14 @@
         };
 
         function onIntersect(entries) {
+            // Fallback: If at the very top, always highlight Welcome
+            if (window.scrollY === 0) {
+                Object.values(navMap).forEach(el => el.classList.remove('active'));
+                navMap['introduction'].classList.add('active');
+                return;
+            }
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Remove .active from all, add to current
                     Object.values(navMap).forEach(el => el.classList.remove('active'));
                     if (navMap[entry.target.id]) {
                         navMap[entry.target.id].classList.add('active');
