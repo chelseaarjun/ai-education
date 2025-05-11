@@ -78,7 +78,6 @@
     right: 0;
     top: 100%;
     margin-top: 5px;
-    
     /* Add transition for smooth appearance/disappearance */
     opacity: 0;
     visibility: hidden;
@@ -137,6 +136,12 @@
 
 /* Keep dropdown visible when hovering over the content */
 .course-nav-dropdown-content:hover {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+.course-nav-dropdown.active .course-nav-dropdown-content {
     display: block;
     opacity: 1;
     visibility: visible;
