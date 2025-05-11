@@ -201,8 +201,10 @@
         display: none;
         position: fixed;
         top: 50px;
-        left: 0;
-        width: 100%;
+        right: 0;
+        left: auto;
+        min-width: 200px;
+        width: auto;
         height: auto;
         max-height: calc(100vh - 50px);
         overflow-y: auto;
