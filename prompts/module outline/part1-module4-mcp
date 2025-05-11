@@ -1,0 +1,81 @@
+Part 1 Module 4: Developer's Guide to Model Context Protocol (MCP)
+Module Overview
+This module introduces developers to the Model Context Protocol (MCP), a standardized way for LLMs to interact with external tools and data sources. By the end of this module, students will understand the core architecture of MCP, its specifications, how LLMs and agents leverage it, and how to build and use tools with MCP.
+Sections
+1. Introduction to Model Context Protocol [Status: Incomplete]
+
+What is MCP and why it matters
+Historical context and development by Anthropic
+The problem MCP solves
+MCP vs other tool-use frameworks
+Industry adoption and standardization efforts
+
+2. MCP Architecture and Components [Status: Incomplete]
+
+Host, Client, and Server architecture
+Core components and their relationships
+Communication flow between components
+Message format and structure
+Authentication and security considerations
+
+3. Deep Dive into MCP Specification [Status: Incomplete]
+
+Protocol design principles
+Schema definitions
+API endpoints and methods
+Request and response formats
+Error handling and response codes
+Versioning approach
+
+4. LLMs and Agents Using MCP [Status: Incomplete]
+
+How LLMs interact with MCP
+Tool discovery and invocation patterns
+Agent architectures leveraging MCP
+Handling context and memory
+Multi-turn interactions with tools
+Practical examples with Claude and other models
+
+5. Discovering and Using MCP Tools [Status: Incomplete]
+
+Tool registries and discovery mechanisms
+Tool documentation standards
+Testing and validating tool behavior
+Common patterns for tool integration
+Hands-on: Using existing tools via MCP
+
+6. Building Your Own MCP Tool [Status: Incomplete]
+
+Tool design best practices
+Setting up the development environment
+Creating a simple MCP-compatible tool
+Testing and debugging tools
+Hands-on: Building a store location analyzer tool
+
+7. Integrating MCP with AWS Bedrock [Status: Incomplete]
+
+AWS Bedrock models supporting MCP
+Knowledge Bases and MCP
+Amazon Agents for Bedrock
+Security and access management
+Best practices for production deployment
+
+8. Assessment and Exercises [Status: Incomplete]
+
+Knowledge check questions
+Hands-on exercises
+Mini-project: Building a lease document analyzer with MCP
+
+Learning Outcomes
+By the end of this module, students will be able to:
+
+Explain the core architecture and components of MCP
+Understand the MCP specification and its implementation
+Describe how LLMs and agents leverage MCP for tool use
+Discover and use tools built and exposed via MCP
+Build their own MCP-compatible tools
+Integrate MCP tools with AWS Bedrock services
+
+Further Reading and Resources
+
+To be populated with authoritative sources

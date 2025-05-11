@@ -248,8 +248,8 @@
         <a class="module-nav-btn" href="#ai-evolution" id="nav-ai-evolution">AI Evolution</a>
         <a class="module-nav-btn" href="#course-structure" id="nav-course-structure">Course Structure</a>
     </nav>
-    <div class="content-inner">
-        <section id="introduction">
+    <div class="content-inner" id="content-inner">
+        <section id="introduction" class="module-section">
             <div class="course-description">
                 <h2>Welcome to AI Foundations</h2>
                 <p>This comprehensive course explores the key concepts needed to build production-grade AI applications. Through a combination of theoretical foundations and practical applications, you'll build the skills necessary to understand and create AI-powered solutions.</p>
@@ -365,13 +365,13 @@
                     
                     <div class="module">
                         <h3>Fundamentals of AI Agents</h3>
-                        <p>Explore how congintive language AI agents can autonomously perform complex tasks by combining multiple capabilities. Learn about frameworks like ReAct that enable reasoning and action in AI systems.</p>
+                        <p>Explore how cognitive language AI agents can autonomously perform complex tasks by combining multiple capabilities. Learn about frameworks like ReAct that enable reasoning and action in AI systems.</p>
                         <p><a href="pages/agents.html" class="nav-button">Start Module</a></p>
                     </div>
                     
-                    <div class="module coming-soon">
-                        <h3>Introduction to LLMOps</h3>
-                        <p>Understand the operational aspects of deploying and maintaining LLM-based applications. Learn best practices for monitoring, updating, and scaling AI systems in production environments.</p>
+                    <div class="module">
+                        <h3>Developer's Guide to Model Context Protocol (MCP)</h3>
+                        <p>Learn how to use MCP to build robust, maintainable AI applications. Understand the core principles of MCP, its integration with AWS Bedrock, and how it enables standardized communication between AI models and tools.</p>
                     </div>
                 </div>
             
@@ -392,11 +392,6 @@
                     </div>
                     
                     <div class="module coming-soon">
-                        <h3>Developer's Guide to Model Context Protocol</h3>
-                        <p>Learn how to use MCP to build robust, maintainable AI applications. Understand the core principles of MCP, its integration with AWS Bedrock, and how it enables standardized communication between AI models and tools.</p>
-                    </div>
-                    
-                    <div class="module coming-soon">
                         <h3>AWS Bedrock Service Offerings</h3>
                         <p>Explore Amazon's Bedrock platform for building and scaling generative AI applications. Learn how to leverage managed foundation models, fine-tuning capabilities, and integration with other AWS services.</p>
                     </div>
@@ -405,6 +400,11 @@
                         <h3>Open Source Tools & Frameworks</h3>
                         <p>Explore key open-source libraries that complement AWS Bedrock services. Learn how frameworks like LangChain, LangFuse, CrewAI can streamline development, and how general-purpose tools like FastAPI, Streamlit, and Pydantic help build production-ready AI applications.</p>
                         <p><a href="pages/open-source.html" class="nav-button">Start Module</a></p>
+                    </div>
+                    
+                    <div class="module coming-soon">
+                        <h3>Introduction to LLMOps</h3>
+                        <p>Understand the operational aspects of deploying and maintaining LLM-based applications. Learn best practices for monitoring, updating, and scaling AI systems in production environments.</p>
                     </div>
                     
                     <div class="module coming-soon">
@@ -418,58 +418,54 @@
     <script src="assets/js/course-nav.js"></script>
     <script src="assets/js/module-nav-bar.js"></script>
     <script>
-        // Function to toggle the navigation index
-        function toggleNav() {
-            const navContent = document.getElementById('navContent');
-            navContent.classList.toggle('hidden');
-            
-            // Update button text
-            const navToggle = document.querySelector('.nav-toggle');
-            if (navContent.classList.contains('hidden')) {
-                navToggle.textContent = '☰';
-            } else {
-                navToggle.textContent = '✕';
-            }
-        }
-        // Section nav active highlight logic
-        (function() {
-            const sections = [
-                {id: 'introduction', nav: 'nav-introduction'},
-                {id: 'genai-section', nav: 'nav-genai-section'},
-                {id: 'ai-evolution', nav: 'nav-ai-evolution'},
-                {id: 'course-structure', nav: 'nav-course-structure'},
-            ];
-            function onScroll() {
-                let scrollPos = window.scrollY || window.pageYOffset;
-                const navOffset = getNavOffset();
-                let found = false;
-                for (let i = sections.length - 1; i >= 0; i--) {
-                    const sec = document.getElementById(sections[i].id);
-                    if (sec) {
-                        const secTop = sec.getBoundingClientRect().top + window.scrollY - navOffset;
-                        if (scrollPos >= secTop - 1) { // -1 for rounding
-                            sections.forEach(s => document.getElementById(s.nav).classList.remove('active'));
-                            document.getElementById(sections[i].nav).classList.add('active');
-                            found = true;
-                            break;
-                        }
+    (function() {
+        const navLinks = [
+            {id: 'introduction', nav: 'nav-introduction'},
+            {id: 'genai-section', nav: 'nav-genai-section'},
+            {id: 'ai-evolution', nav: 'nav-ai-evolution'},
+            {id: 'course-structure', nav: 'nav-course-structure'}
+        ];
+        const navMap = {};
+        navLinks.forEach(link => {
+            navMap[link.id] = document.getElementById(link.nav);
+        });
+
+        // Set up Intersection Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '-120px 0px 0px 0px', // Adjust for nav height
+            threshold: 0.1
+        };
+
+        function onIntersect(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Remove .active from all, add to current
+                    Object.values(navMap).forEach(el => el.classList.remove('active'));
+                    if (navMap[entry.target.id]) {
+                        navMap[entry.target.id].classList.add('active');
                     }
                 }
-                if (!found) {
-                    sections.forEach(s => document.getElementById(s.nav).classList.remove('active'));
-                    document.getElementById(sections[0].nav).classList.add('active');
-                }
-            }
-            window.addEventListener('scroll', onScroll, {passive: true});
-            // Also update on click
-            document.querySelectorAll('.section-nav-button').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    setTimeout(onScroll, 350);
-                });
             });
-            // Initial highlight
-            window.addEventListener('DOMContentLoaded', onScroll);
-        })();
+        }
+
+        const observer = new window.IntersectionObserver(onIntersect, observerOptions);
+
+        navLinks.forEach(link => {
+            const section = document.getElementById(link.id);
+            if (section) observer.observe(section);
+        });
+
+        // Also update on click (for instant feedback)
+        Object.values(navMap).forEach(el => {
+            el.addEventListener('click', function() {
+                setTimeout(() => {
+                    Object.values(navMap).forEach(e => e.classList.remove('active'));
+                    el.classList.add('active');
+                }, 200);
+            });
+        });
+    })();
     </script>
     <script>
     function setIndexContentPadding() {
