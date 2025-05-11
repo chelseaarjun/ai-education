@@ -267,6 +267,7 @@
         <button class="module-nav-btn" data-section="overview">Overview</button>
         <button class="module-nav-btn" data-section="writing-effective-prompts">Writing Effective Prompts</button>
         <button class="module-nav-btn" data-section="techniques">Techniques</button>
+        <button class="module-nav-btn" data-section="building-applications">Building with LLMs</button>
         <button class="module-nav-btn" data-section="resources">Resources</button>
         <button class="module-nav-btn" data-section="quiz-section">Quiz</button>
     </nav>
@@ -731,31 +732,87 @@
                     Employee question: "Am I allowed to access work emails on my personal smartphone?"
                 </div>
             </div>
-
-            <h3>3.3 Selecting the Right Techniques</h3>
-            <p>Choose techniques based on specific needs rather than complexity for its own sake:</p>
-
-            <ol>
-                <li><strong>Start with CRISP fundamentals:</strong> A well-structured prompt following CRISP principles often yields excellent results without additional techniques.</li>
-                <li><strong>Address specific issues:</strong> Introduce techniques only to solve identified problems.</li>
-                <li><strong>Consider model capabilities:</strong> More advanced models may require fewer prompting techniques.</li>
-                <li><strong>Evaluate the tradeoffs:</strong> More complex techniques often come with increased token usage and potential for confusion.</li>
-                <li><strong>Test systematically:</strong> Document which techniques work best for specific use cases.</li>
-            </ol>
-
-            <div class="note">
-                <p>In production applications, maintain a library of effective prompts, implement version control, and establish monitoring systems to track performance.</p>
-            </div>
-
             <div class="section-nav-btns">
                 <button id="back-techniques">Back</button>
                 <button id="next-techniques">Next</button>
             </div>
         </section>
+        <section id="building-applications">
+            <h2>4. AI Application Development</h2>
+                <h3>4.1 Prompt Development Methodology</h3>
+                <p>Choose techniques based on specific needs rather than complexity for its own sake:</p>
+
+                <ol>
+                    <li><strong>Start with CRISP fundamentals:</strong> A well-structured prompt following CRISP principles often yields excellent results without additional techniques.</li>
+                    <li><strong>Address specific issues:</strong> Introduce techniques only to solve identified problems.</li>
+                    <li><strong>Consider model capabilities:</strong> More advanced models may require fewer prompting techniques.</li>
+                    <li><strong>Evaluate the tradeoffs:</strong> More complex techniques often come with increased token usage and potential for confusion.</li>
+                    <li><strong>Test systematically:</strong> Document which techniques work best for specific use cases.</li>
+                </ol>
+
+                <div class="note">
+                    <p>In production applications, maintain a library of effective prompts, implement version control, and establish monitoring systems to track performance.</p>
+                </div>
+                <h3>4.2 Approaches to Building Applications using LLMs</h3>
+                <p>There are three primary approaches to building LLM applications, with increasing levels of sophistication:</p>
+                <table style="width:100%; margin-bottom: 24px; text-align:center;">
+                  <thead>
+                    <tr>
+                      <th style="width: 16%;">Attribute</th>
+                      <th style="width: 28%;">Prompt Engineering + LLMs</th>
+                      <th style="width: 28%;">Prompt Engineering + LLMs + External Knowledge</th>
+                      <th style="width: 28%;">Prompt Engineering + Autonomous Agents</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><b>Visual</b></td>
+                      <td><img src="../assets/images/llm-basic.png" alt="Basic LLM interaction with input and output" style="max-width:90%;margin:6px 0;"/></td>
+                      <td><img src="../assets/images/llm-knowledge.png" alt="LLM with external knowledge sources" style="max-width:90%;margin:6px 0;"/></td>
+                      <td><img src="../assets/images/agent-cycle.png" alt="Agent architecture with observation-action cycle" style="max-width:90%;margin:6px 0;"/></td>
+                    </tr>
+                    <tr>
+                      <td><b>Description</b></td>
+                      <td>Directly interact with the LLM using carefully crafted prompts.</td>
+                      <td>Enhance LLMs with real-time or domain-specific information from external sources (databases, APIs, documents).</td>
+                      <td>Combine LLMs with tools, memory, and decision-making to create systems that can plan, act, and adapt autonomously.</td>
+                    </tr>
+                    <tr>
+                      <td><b>Best For</b></td>
+                      <td>Simple, self-contained tasks that rely on general knowledge.</td>
+                      <td>Information-rich tasks requiring up-to-date, specialized, or proprietary data.</td>
+                      <td>Complex, multi-step workflows that require reasoning, tool use, and adaptive planning.</td>
+                    </tr>
+                    <tr>
+                      <td><b>Use Cases</b></td>
+                      <td>Text summarization, content generation, classification, translation.</td>
+                      <td>Company data Q&amp;A, research over large document sets, market analysis.</td>
+                      <td>Personal assistants, automated research agents, workflow automation, multi-tool orchestration.</td>
+                    </tr>
+                    <tr>
+                      <td><b>Complexity</b></td>
+                      <td>Low</td>
+                      <td>Medium</td>
+                      <td>High</td>
+                    </tr>
+                    <tr>
+                      <td><b>Limitations</b></td>
+                      <td>Limited by model's context window and training data cutoff; cannot access new or proprietary information.</td>
+                      <td>Dependent on quality and freshness of external data; requires robust retrieval and integration.</td>
+                      <td>Increased system complexity; harder to debug; may have higher latency and operational overhead.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>These three approaches represent a continuum of complexity and capability that we'll explore in greater detail in subsequent modules.</p>
+                <div class="section-nav-btns">
+                    <button id="back-building-applications">Back</button>
+                    <button id="next-building-applications">Next</button>
+                </div>
+        </section>
         <!-- Section 4: Additional Resources -->
         <section id="resources">
-            <h2>4. Additional Resources</h2>
-            <h3>4.1 References and Further Reading</h3>
+            <h2>5. Additional Resources</h2>
+            <h3>5.1 References and Further Reading</h3>
             <ul>
                 <li><a href="https://docs.anthropic.com/en/prompt-library/library" target="_blank">Anthropic's Claude Prompt Library</a></li>
                 <li><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank">Anthropic's Claude Prompt Guide</a></li>
@@ -764,7 +821,7 @@
                 <li><a href="https://python.langchain.com/docs/concepts/prompt_templates/" target="_blank">LangChain Prompt Templates</a></li>
                 <li><a href="https://www.kaggle.com/code/kaggle/prompt-engineering-for-developers-course" target="_blank">Kaggle Prompt Engineering for Developers Course</a></li>
             </ul>
-            <h3>4.2 Recommended Tools and Libraries</h3>
+            <h3>5.2 Recommended Tools and Libraries</h3>
             <ul>
                 <li><a href="https://python.langchain.com/" target="_blank">LangChain</a> - Framework for developing applications powered by language models, with extensive prompt templating capabilities</li>
                 <li><a href="https://github.com/stanfordnlp/dspy" target="_blank">DSPy</a> - Programming framework for algorithmically optimizing LM prompts and weights</li>
@@ -774,7 +831,7 @@
                 <li><a href="https://aws.amazon.com/bedrock/prompt-management/" target="_blank">AWS Bedrock Prompt Management</a> - Tools for managing, versioning, and evaluating prompts in production</li>
                 <li><a href="https://aws.amazon.com/bedrock/flows/" target="_blank">AWS Prompt Flows</a> - Visual prompt chaining and orchestration service</li>
             </ul>
-            <h3>4.3 Community and Practice</h3>
+            <h3>5.3 Community and Practice</h3>
             <ul>
                 <li><a href="https://github.blog/2023-07-17-prompt-engineering-guide-generative-ai-llms/" target="_blank">GitHub's Prompt Engineering Guide</a> - Developer insights from the GitHub Copilot team</li>
                 <li><a href="https://github.com/promptslab/Awesome-Prompt-Engineering" target="_blank">Awesome-Prompt-Engineering</a> - Curated resources for prompt engineering with a focus on GPT models</li>

@@ -614,7 +614,7 @@
                 <table>
                   <thead><tr><th>Aspect</th><th>Description</th></tr></thead>
                   <tbody>
-                    <tr><td><b>Key Capabilities</b></td><td>&bull; <b>Structured problem-solving</b>: Breaking down complex tasks into clear, logical steps<br>&bull; <b>Self-consistency checking</b>: Detecting and correcting contradictions in their own reasoning<br>&bull; <b>Extended reasoning chains</b>: Following longer, more complex logical arguments<br>&bull; <b>Understanding cause and effect</b>: Recognizing how events relate and influence outcomes</td></tr>
+                    <tr><td><b>Key Capabilities</b></td><td>&bull; <b>Structured problem-solving</b>: Breaking down complex tasks into clear, logical steps<br>&bull; <b>Self-consistency checking</b>: Detecting and correcting contradictions in their own reasoning<br>&bull; <b>Extended reasoning chains</b>: Following longer, more complex logical arguments</td></tr>
                     <tr><td><b>Current Limitations</b></td><td>&bull; <b>Complex multi-step reasoning</b>: Still struggle with novel mathematical proofs and multi-constraint optimization<br>&bull; <b>Specialized domain knowledge</b>: Difficulty with advanced legal reasoning or medical diagnosis<br>&bull; <b>Spatial reasoning</b>: Inconsistent performance on complex physical systems or 3D visualization problems</td></tr>
                     <tr><td><b>Notable Examples</b></td><td>&bull; <b>ChatGPT o1</b>: OpenAI's model with improved mathematical and logical reasoning<br>&bull; <b>Claude 3.7 Sonnet</b>: Anthropic's model with structured problem-solving capabilities<br>&bull; <b>DeepSeek-R1</b>: Notable for performance on academic reasoning benchmarks</td></tr>
                     <tr><td><b>Real-World Impact</b></td><td>Higher accuracy on complex tasks, fewer hallucinations, and more reliable performance&mdash;making reasoning models the foundation for building autonomous AI agents</td></tr>
@@ -636,57 +636,6 @@
                   <li><b>Difficulty with tasks requiring specialized domain knowledge</b> (e.g., advanced legal reasoning or medical diagnosis)</li>
                   <li><b>Inconsistent performance on spatial reasoning tasks</b> (e.g., complex physical systems or 3D visualization problems)</li>
                 </ul>
-                <h4>Building Applications with LLMs</h4>
-                <p>There are three primary approaches to building LLM applications, with increasing levels of sophistication:</p>
-                <table style="width:100%; margin-bottom: 24px; text-align:center;">
-                  <thead>
-                    <tr>
-                      <th style="width: 16%;">Attribute</th>
-                      <th style="width: 28%;">LLMs + Prompt Engineering</th>
-                      <th style="width: 28%;">LLMs + Prompt Engineering + External Knowledge</th>
-                      <th style="width: 28%;">Autonomous Agents</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><b>Visual</b></td>
-                      <td><img src="../assets/images/llm-basic.png" alt="Basic LLM interaction with input and output" style="max-width:90%;margin:6px 0;"/></td>
-                      <td><img src="../assets/images/llm-knowledge.png" alt="LLM with external knowledge sources" style="max-width:90%;margin:6px 0;"/></td>
-                      <td><img src="../assets/images/agent-cycle.png" alt="Agent architecture with observation-action cycle" style="max-width:90%;margin:6px 0;"/></td>
-                    </tr>
-                    <tr>
-                      <td><b>Description</b></td>
-                      <td>Directly interact with the LLM using carefully crafted prompts.</td>
-                      <td>Enhance LLMs with real-time or domain-specific information from external sources (databases, APIs, documents).</td>
-                      <td>Combine LLMs with tools, memory, and decision-making to create systems that can plan, act, and adapt autonomously.</td>
-                    </tr>
-                    <tr>
-                      <td><b>Best For</b></td>
-                      <td>Simple, self-contained tasks that rely on general knowledge.</td>
-                      <td>Information-rich tasks requiring up-to-date, specialized, or proprietary data.</td>
-                      <td>Complex, multi-step workflows that require reasoning, tool use, and adaptive planning.</td>
-                    </tr>
-                    <tr>
-                      <td><b>Use Cases</b></td>
-                      <td>Text summarization, content generation, classification, translation.</td>
-                      <td>Company data Q&amp;A, research over large document sets, market analysis.</td>
-                      <td>Personal assistants, automated research agents, workflow automation, multi-tool orchestration.</td>
-                    </tr>
-                    <tr>
-                      <td><b>Complexity</b></td>
-                      <td>Low</td>
-                      <td>Medium</td>
-                      <td>High</td>
-                    </tr>
-                    <tr>
-                      <td><b>Limitations</b></td>
-                      <td>Limited by model's context window and training data cutoff; cannot access new or proprietary information.</td>
-                      <td>Dependent on quality and freshness of external data; requires robust retrieval and integration.</td>
-                      <td>Increased system complexity; harder to debug; may have higher latency and operational overhead.</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <p>These three approaches represent a continuum of complexity and capability that we'll explore in greater detail in subsequent modules.</p>
                 <h4>Future Research Directions</h4>
                 <p>The field is rapidly evolving beyond current LLM limitations, with several promising research directions that could transform how we build AI applications:</p>
                 <table>
