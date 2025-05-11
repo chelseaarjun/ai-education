@@ -15,6 +15,11 @@ section {
     margin-bottom: 2rem;
 }
 
+section:first-of-type {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
 section > *:first-child {
     margin-top: 0;
 }

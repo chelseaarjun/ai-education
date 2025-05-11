@@ -285,9 +285,7 @@ h1 {
     max-width: 900px;
     margin: 0 auto;
     width: 100%;
-    padding-top: 32px;
 }
-
 /* Ensure anchor targets are visible below the fixed navs */
 #genai-section, #ai-evolution, #course-structure, #module-container, #welcome {
     scroll-margin-top: 110px;
