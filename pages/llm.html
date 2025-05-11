@@ -309,11 +309,12 @@
         <button class="module-nav-btn" data-section="context-window">Context Window</button>
         <button class="module-nav-btn" data-section="tokenization">Tokenization</button>
         <button class="module-nav-btn" data-section="embeddings">Embeddings</button>
-        <button class="module-nav-btn" data-section="temperature">Logits & Temperature</button>
+        <button class="module-nav-btn" data-section="temperature">Logits</button>
         <button class="module-nav-btn" data-section="response-format">Response Format</button>
         <button class="module-nav-btn" data-section="model-selection">LLM Evolution</button>
         <button class="module-nav-btn" data-section="quiz-section">Quiz</button>
     </nav>
+    <nav class="module-sidebar"></nav>
     <div class="content-inner">
         <section id="introduction">
             <div class="course-description">
@@ -620,18 +621,6 @@
                   </tbody>
                 </table>
                 <blockquote><b>Note:</b> When a model shows its reasoning, all reasoning steps count toward the context window limit and output token costs. Parameters like <b>max_tokens</b> and <b>budget_tokens</b> can control total output length and costs.</blockquote>
-                <div class="quiz-question">
-                  <p class="question-title">Quiz: Which training approach below is specifically designed to enhance an LLM's reasoning capabilities?</p>
-                  <ul class="quiz-options">
-                    <li class="quiz-option" data-correct="false">A) Next-token prediction</li>
-                    <li class="quiz-option" data-correct="true">B) Chain-of-thought training</li>
-                    <li class="quiz-option" data-correct="false">C) Masked language modeling</li>
-                    <li class="quiz-option" data-correct="false">D) Decoder-only architecture</li>
-                  </ul>
-                  <div class="quiz-feedback">
-                    <strong>Answer:</strong> B) Chain-of-thought training. This approach teaches models to break down problems into logical steps, improving their reasoning capabilities.
-                  </div>
-                </div>
                 <h4>Current Limitations of LLMs</h4>
                 <p>Despite impressive advances, even today's most sophisticated models face significant challenges:</p>
                 <table>
@@ -647,19 +636,6 @@
                   <li><b>Difficulty with tasks requiring specialized domain knowledge</b> (e.g., advanced legal reasoning or medical diagnosis)</li>
                   <li><b>Inconsistent performance on spatial reasoning tasks</b> (e.g., complex physical systems or 3D visualization problems)</li>
                 </ul>
-                <div class="quiz-question">
-                  <p class="question-title">Assessment: Why do LLMs sometimes hallucinate information, and what approaches can developers take to mitigate this problem? (Select all that apply)</p>
-                  <ul class="quiz-options">
-                    <li class="quiz-option" data-correct="false">A) LLMs have perfect knowledge but choose to be creative</li>
-                    <li class="quiz-option" data-correct="true">B) The statistical nature of prediction sometimes generates plausible but incorrect information</li>
-                    <li class="quiz-option" data-correct="true">C) Using retrieval augmentation to ground model responses in verified sources</li>
-                    <li class="quiz-option" data-correct="false">D) Training models on larger datasets always eliminates hallucinations</li>
-                    <li class="quiz-option" data-correct="true">E) Implementing fact-checking components that verify model outputs</li>
-                  </ul>
-                  <div class="quiz-feedback">
-                    <strong>Answer:</strong> B, C, and E. Hallucinations occur due to the statistical nature of LLMs. Retrieval augmentation and fact-checking can help mitigate this issue.
-                  </div>
-                </div>
                 <h4>Building Applications with LLMs</h4>
                 <p>There are three primary approaches to building LLM applications, with increasing levels of sophistication:</p>
                 <table style="width:100%; margin-bottom: 24px; text-align:center;">
@@ -849,6 +825,35 @@
                         <div class="quiz-feedback">
                             <strong>Answer:</strong> A) Analyzing an entire legal contract at once. Claude 3.7 Sonnet's 200,000 token context window allows it to process lengthy documents entirely, maintaining understanding of references and relationships throughout the text.
                         </div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">
+                        <p class="question-title">9. Why do LLMs sometimes hallucinate information, and what approaches can developers take to mitigate this problem? (Select all that apply)</p>
+                        <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">A) LLMs have perfect knowledge but choose to be creative</li>
+                        <li class="quiz-option" data-correct="true">B) The statistical nature of prediction sometimes generates plausible but incorrect information</li>
+                        <li class="quiz-option" data-correct="true">C) Using retrieval augmentation to ground model responses in verified sources</li>
+                        <li class="quiz-option" data-correct="false">D) Training models on larger datasets always eliminates hallucinations</li>
+                        <li class="quiz-option" data-correct="true">E) Implementing fact-checking components that verify model outputs</li>
+                        </ul>
+                        <div class="quiz-feedback">
+                        <strong>Answer:</strong> B, C, and E. Hallucinations occur due to the statistical nature of LLMs. Retrieval augmentation and fact-checking can help mitigate this issue.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-question">
+                    <p class="question-title">10. Which training approach below is specifically designed to enhance an LLM's reasoning capabilities?</p>
+                    <ul class="quiz-options">
+                    <li class="quiz-option" data-correct="false">A) Next-token prediction</li>
+                    <li class="quiz-option" data-correct="true">B) Chain-of-thought training</li>
+                    <li class="quiz-option" data-correct="false">C) Masked language modeling</li>
+                    <li class="quiz-option" data-correct="false">D) Decoder-only architecture</li>
+                    </ul>
+                    <div class="quiz-feedback">
+                    <strong>Answer:</strong> B) Chain-of-thought training. This approach teaches models to break down problems into logical steps, improving their reasoning capabilities.
                     </div>
                 </div>
             </div>
