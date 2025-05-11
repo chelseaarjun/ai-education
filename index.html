@@ -10,13 +10,6 @@
     <link rel="stylesheet" href="assets/css/mobile-fixes.css">
     <link rel="stylesheet" href="assets/css/introduction-fix.css">
     <style>
-        /* Remove the following blocks, as they are now in course-index.css:
-        :root { ... }
-        body { ... }
-        h1, h2, h3, h4 { ... }
-        h1 { ... }
-        */
-        /* Keep only page-specific styles below: */
         .course-description {
             background-color: #eaf2f8;
             padding: 20px;
@@ -250,10 +243,10 @@
 <body>
     <!-- The global nav is injected by course-nav.js at the top of <body> -->
     <nav class="module-nav">
-        <a class="nav-button" href="#introduction" id="nav-genai-section" data-section="introduction">Welcome</a> 
-        <a class="nav-button" href="#genai-section" id="nav-genai-section" data-section="understanding-genai">Generative AI</a>     
-        <a class="nav-button" href="#ai-evolution" id="nav-genai-section" data-section="ai-evolution">AI Evolution</a>     
-        <a class="nav-button" href="#course-structure" id="nav-genai-section" data-section="course-structure">Course Structure</a>
+        <a class="module-nav-btn" href="#introduction" id="nav-introduction">Welcome</a>
+        <a class="module-nav-btn" href="#genai-section" id="nav-genai-section">Generative AI</a>
+        <a class="module-nav-btn" href="#ai-evolution" id="nav-ai-evolution">AI Evolution</a>
+        <a class="module-nav-btn" href="#course-structure" id="nav-course-structure">Course Structure</a>
     </nav>
     <div class="content-inner">
         <section id="introduction">
@@ -424,5 +417,190 @@
     </div>
     <script src="assets/js/course-nav.js"></script>
     <script src="assets/js/module-nav-bar.js"></script>
+    <script>
+        // Function to toggle the navigation index
+        function toggleNav() {
+            const navContent = document.getElementById('navContent');
+            navContent.classList.toggle('hidden');
+            
+            // Update button text
+            const navToggle = document.querySelector('.nav-toggle');
+            if (navContent.classList.contains('hidden')) {
+                navToggle.textContent = '☰';
+            } else {
+                navToggle.textContent = '✕';
+            }
+        }
+        // Section nav active highlight logic
+        (function() {
+            const sections = [
+                {id: 'introduction', nav: 'nav-introduction'},
+                {id: 'genai-section', nav: 'nav-genai-section'},
+                {id: 'ai-evolution', nav: 'nav-ai-evolution'},
+                {id: 'course-structure', nav: 'nav-course-structure'},
+            ];
+            function onScroll() {
+                let scrollPos = window.scrollY || window.pageYOffset;
+                const navOffset = getNavOffset();
+                let found = false;
+                for (let i = sections.length - 1; i >= 0; i--) {
+                    const sec = document.getElementById(sections[i].id);
+                    if (sec) {
+                        const secTop = sec.getBoundingClientRect().top + window.scrollY - navOffset;
+                        if (scrollPos >= secTop - 1) { // -1 for rounding
+                            sections.forEach(s => document.getElementById(s.nav).classList.remove('active'));
+                            document.getElementById(sections[i].nav).classList.add('active');
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                if (!found) {
+                    sections.forEach(s => document.getElementById(s.nav).classList.remove('active'));
+                    document.getElementById(sections[0].nav).classList.add('active');
+                }
+            }
+            window.addEventListener('scroll', onScroll, {passive: true});
+            // Also update on click
+            document.querySelectorAll('.section-nav-button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    setTimeout(onScroll, 350);
+                });
+            });
+            // Initial highlight
+            window.addEventListener('DOMContentLoaded', onScroll);
+        })();
+    </script>
+    <script>
+    function setIndexContentPadding() {
+        const courseNav = document.querySelector('.course-nav');
+        const sectionNav = document.querySelector('.module-nav');
+        const contentInner = document.querySelector('.content-inner');
+        
+        if (contentInner) {
+            let pad = 0;
+            if (courseNav) pad += courseNav.offsetHeight;
+            if (sectionNav) pad += sectionNav.offsetHeight;
+            
+            // Add extra padding for mobile
+            const extraPad = window.innerWidth <= 768 ? 24 : 16;
+            document.documentElement.style.setProperty('--nav-height', (pad + extraPad) + 'px');
+            contentInner.style.paddingTop = (pad + extraPad) + 'px';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initial setup
+        setIndexContentPadding();
+        
+        // Force initial scroll position after layout is complete
+        setTimeout(() => {
+            if (window.location.hash === '' || window.location.hash === '#introduction') {
+                window.scrollTo(0, 0);
+            }
+        }, 100);
+
+        // Handle navigation clicks
+        document.querySelectorAll('.section-nav-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('data-section');
+                
+                if (targetId === 'welcome') {
+                    setIndexContentPadding(); // Ensure padding is correct
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    return;
+                }
+
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    const offset = getNavOffset();
+                    setTimeout(() => {
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }, 50);
+                }
+            });
+        });
+
+        // Set initial scroll margins
+        setSectionScrollMargin();
+    });
+
+    // Update padding on resize
+    window.addEventListener('resize', setIndexContentPadding);
+    </script>
+    <!-- --- Improved scroll-margin and scroll spy logic for nav offset --- -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Force initial scroll to top
+        window.scrollTo(0, 0);
+
+        // Handle navigation clicks
+        document.querySelectorAll('.section-nav-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('data-section');
+                
+                if (targetId === 'welcome') {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    return;
+                }
+
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    const offset = getNavOffset();
+                    setTimeout(() => {
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }, 50);
+                }
+            });
+        });
+
+        // Set initial scroll margins
+        setSectionScrollMargin();
+    });
+
+    function getNavOffset() {
+        const courseNav = document.querySelector('.course-nav');
+        const sectionNav = document.querySelector('.module-nav');
+        let pad = 0;
+        if (courseNav) pad += courseNav.offsetHeight;
+        if (sectionNav) pad += sectionNav.offsetHeight;
+        return pad + 16; // Increased buffer for better spacing
+    }
+
+    function setSectionScrollMargin() {
+        const margin = getNavOffset();
+        const sectionEls = [
+            document.getElementById('welcome'),
+            document.getElementById('understanding-genai'),
+            document.getElementById('ai-evolution-title'),
+            document.getElementById('course-structure-title'),
+        ].filter(Boolean);
+        sectionEls.forEach(el => {
+            if (el) {
+                el.style.scrollMarginTop = margin + 'px';
+            }
+        });
+    }
+    </script>
 </body>
 </html>

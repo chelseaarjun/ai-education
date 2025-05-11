@@ -22,6 +22,7 @@
     border-radius: 6px 6px 0 0;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
+    text-decoration: none !important;
 }
 .module-nav-btn.active {
     background: #4a6fa5;
@@ -30,6 +31,11 @@
 }
 .module-nav-btn:focus-visible {
     outline: 2px solid #4a6fa5;
+}
+.module-nav-btn:active,
+.module-nav-btn:focus,
+.module-nav-btn:hover {
+    text-decoration: none !important;
 }
 
 @media (max-width: 600px) {
