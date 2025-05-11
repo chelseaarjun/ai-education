@@ -8,12 +8,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const navHTML = `
     <nav class="course-nav">
         <div class="course-nav-container">
-            <a href="${rootPath}index.html" class="course-nav-logo">AI Foundations Course</a>
+            <a href="${rootPath}index.html#introduction" class="course-nav-logo">AI Foundations Course</a>
             
             <button class="course-nav-mobile-toggle" aria-label="Toggle navigation menu">☰</button>
             
             <div class="course-nav-menu">
-                <a href="${rootPath}index.html" class="course-nav-home">Home</a>
+                <a href="${rootPath}index.html#introduction" class="course-nav-home">Home</a>
                 
                 <div class="course-nav-dropdown">
                     <button class="course-nav-dropdown-btn">Part 1: Foundational Concepts</button>
@@ -21,16 +21,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         <a href="${rootPath}pages/llm.html" class="course-nav-dropdown-item available">LLM Concepts</a>
                         <a href="${rootPath}pages/prompts.html" class="course-nav-dropdown-item available">Prompt Engineering</a>
                         <a href="${rootPath}pages/agents.html" class="course-nav-dropdown-item available">Agents</a>
-                        <a href="#" class="course-nav-dropdown-item coming-soon">LLMOps <span>Coming Soon</span></a>
+                        <a href="#" class="course-nav-dropdown-item coming-soon">Model Context Protocol (MCP)<span>Coming Soon</span></a>
                     </div>
                 </div>
                 
                 <div class="course-nav-dropdown">
                     <button class="course-nav-dropdown-btn">Part 2: Building AI Applications</button>
                     <div class="course-nav-dropdown-content">
-                        <a href="#" class="course-nav-dropdown-item coming-soon">Model Context Protocol <span>Coming Soon</span></a>
                         <a href="#" class="course-nav-dropdown-item coming-soon">AWS Bedrock <span>Coming Soon</span></a>
                         <a href="${rootPath}pages/open-source.html" class="course-nav-dropdown-item available">Open Source Tools & Frameworks</a>
+                        <a href="#" class="course-nav-dropdown-item coming-soon">LLMOps <span>Coming Soon</span></a>
                         <a href="#" class="course-nav-dropdown-item coming-soon">Prompt-Driven Dev <span>Coming Soon</span></a>
                     </div>
                 </div>
@@ -95,25 +95,45 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Make dropdowns clickable on mobile
-    const dropdowns = document.querySelectorAll('.course-nav-dropdown');
-    
-    dropdowns.forEach(function(dropdown) {
+    // Dropdown hover delay for desktop
+    document.querySelectorAll('.course-nav-dropdown').forEach(dropdown => {
+        let hoverTimeout;
         const button = dropdown.querySelector('.course-nav-dropdown-btn');
-        
+
+        // Show dropdown after delay on mouseenter (desktop only)
+        button.addEventListener('mouseenter', function() {
+            if (window.innerWidth > 768) {
+                hoverTimeout = setTimeout(() => {
+                    dropdown.classList.add('active');
+                }, 400); // 400ms delay
+            }
+        });
+
+        // Cancel show if mouse leaves before delay
+        button.addEventListener('mouseleave', function() {
+            if (window.innerWidth > 768) {
+                clearTimeout(hoverTimeout);
+            }
+        });
+
+        // Hide dropdown on mouseleave from dropdown area
+        dropdown.addEventListener('mouseleave', function() {
+            if (window.innerWidth > 768) {
+                clearTimeout(hoverTimeout);
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // Mobile: show/hide on click
         button.addEventListener('click', function(e) {
-            // Only handle click on mobile view
             if (window.innerWidth <= 768) {
                 e.preventDefault();
-                
                 // Close all other dropdowns
-                dropdowns.forEach(function(otherDropdown) {
+                document.querySelectorAll('.course-nav-dropdown').forEach(function(otherDropdown) {
                     if (otherDropdown !== dropdown) {
                         otherDropdown.classList.remove('active');
                     }
                 });
-                
-                // Toggle this dropdown
                 dropdown.classList.toggle('active');
             }
         });
