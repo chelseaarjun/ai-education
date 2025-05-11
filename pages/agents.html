@@ -160,15 +160,36 @@
 </head>
 <body>
     <nav class="module-nav">
+        <button class="module-nav-btn" data-section="introduction">Introduction</button>     
         <button class="module-nav-btn" data-section="fundamentals">Fundamentals</button>
         <button class="module-nav-btn" data-section="memory">Memory</button>
         <button class="module-nav-btn" data-section="tools">Tools</button>
         <button class="module-nav-btn" data-section="decision-cycle">Decision Cycle</button>
+        <button class="module-nav-btn" data-section="quiz-section">Quiz</button>
     </nav>
     <nav class="module-sidebar"></nav>
     <div class="content-inner">
+        <!-- Section 0: Introduction -->
+        <section id="introduction">
+            <div class="course-description">
+                <h2 class="module-title">Module 3: Cognitive Language Agents</h2>
+                <p>An AI agent is a software system that can have persistent memory, interact with its external environment, reason, and take actions to achieve specific goals — often autonomously.</p>
+                <h3 class="section-title">What You'll Learn</h3>
+                <p>In this module, you'll master the following key areas:</p>
+                <ul>
+                    <li><b>Agent Fundamentals:</b> What makes an AI agent different from an LLM</li>
+                    <li><b>Memory:</b> How agents retain and use information</li>
+                    <li><b>Tools:</b> How agents use external tools to extend their capabilities</li>
+                    <li><b>Decision Cycle:</b> How agents observe, plan, and act in iterative loops</li>
+                    <li><b>Agent Architectures:</b> Practical frameworks and libraries for building agents</li>
+                </ul>
+            </div>           
+            <div class="section-nav-btns">
+                <button id="back-introduction" disabled>Back</button>
+                <button id="next-introduction">Next</button>
+            </div>
+        </section>
         <section id="fundamentals" class="module-section">
-            <h2>Module 3: Cognitive Language Agents</h2>
             <h3>What is an AI Agent?</h3>
             <p>An AI agent is a software system that can have persistent memory, interact with its external environment, reason, and take actions to achieve specific goals — often autonomously.</p>
             <p>Agents have three essential components:</p>
@@ -276,29 +297,6 @@ print(result)
 </code></pre>
                 </div>
             </div>
-            <h3>Quiz</h3>
-            <div class="quiz-container">
-                <div class="quiz-question">What is the primary difference between an LLM and an AI agent?</div>
-                <ul class="quiz-options">
-                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">a) LLMs are less advanced than agents</li>
-                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">b) Agents actively take actions and use tools to achieve goals</li>
-                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">c) LLMs cannot understand human language</li>
-                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">d) Agents do not use language models</li>
-                </ul>
-                <div class="quiz-feedback">
-                    <strong>Explanation:</strong> b) Agents actively take actions and use tools to achieve goals.
-                </div>
-            </div>
-            <div class="quiz-container">
-                <div class="quiz-question">An agent receives a new sales report, analyzes the numbers to decide if inventory needs to be reordered, and then places an order if necessary.<br>True or False: AI agents are always fully autonomous and require no human intervention.</div>
-                <ul class="quiz-options">
-                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">a) True</li>
-                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">b) False</li>
-                </ul>
-                <div class="quiz-feedback">
-                    <strong>Explanation:</strong> b) False. Many agents operate with varying degrees of autonomy and may require human oversight or intervention at different points in their operation.
-                </div>
-            </div>
             <div class='section-nav-btns'>
                 <button id='back-fundamentals' disabled>Back</button>
                 <button id='next-fundamentals'>Next</button>
@@ -384,19 +382,6 @@ print(result)
                 <li><strong>Procedural memory:</strong> The step-by-step process the agent uses to walk the user through restarting the router.</li>
             </ul>
             <hr>
-            <h3>Quiz</h3>
-            <div class="quiz-container">
-                <div class="quiz-question">Which memory type is used for:</div>
-                <ol class="quiz-options">
-                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">Remembering the user's last support ticket?</li>
-                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">Looking up the company's return policy?</li>
-                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">Knowing how to guide a user through troubleshooting steps?</li>
-                </ol>
-                <div class="quiz-feedback">
-                    <strong>Explanation:</strong> Remembering the user's last support ticket is an example of episodic memory.
-                </div>
-            </div>
-            <hr>
             <div class='section-nav-btns'>
                 <button id='back-memory'>Back</button>
                 <button id='next-memory'>Next</button>
@@ -473,19 +458,6 @@ print(result)
                 <li>❌ Empty results that might lead to invented details</li>
                 <li>✅ "No information available about product XYZ-123"</li>
             </ul>
-            <h3>Quiz</h3>
-            <div class="quiz-container">
-                <div class="quiz-question">Which combination of tools would be most essential for this agent?</div>
-                <ul class="quiz-options">
-                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">A) Database Retrieval + External API Calls + Webhook Integrations</li>
-                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">B) Code Execution + Direct Function Calling only</li>
-                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">C) External API Calls + Code Execution only</li>
-                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">D) Database Retrieval only</li>
-                </ul>
-                <div class="quiz-feedback">
-                    <strong>Explanation:</strong> A) Database Retrieval + External API Calls + Webhook Integrations is the most essential combination for this agent.
-                </div>
-            </div>
             <div class='section-nav-btns'>
                 <button id='back-tools'>Back</button>
                 <button id='next-tools'>Next</button>
@@ -554,21 +526,6 @@ print(result)
                 <li><strong>Act:</strong> The agent retrieves the status and replies, "Your order is out for delivery and should arrive today."</li>
             </ol>
             <p>The agent then updates its memory with this interaction, ready for the next question.</p>
-            <hr>
-            <h3>Quiz</h3>
-            <div class="quiz-container">
-                <div class="quiz-question">Which of the following best describes the agent decision cycle in a digital assistant?</div>
-                <ul class="quiz-options">
-                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">A) The agent only responds to user input without using memory or tools</li>
-                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">B) The agent observes, plans, acts, and updates its memory in a repeating loop</li>
-                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">C) The agent always escalates to a human for every task</li>
-                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">D) The agent only uses pre-programmed responses</li>
-                </ul>
-                <div class="quiz-feedback">
-                    <strong>Explanation:</strong> B) The agent observes, plans, acts, and updates its memory in a repeating loop.
-                </div>
-            </div>
-            <hr>
             <h3>Module 3 Summary</h3>
             <p>In this module, you learned how modern AI agents are designed to go beyond simple text generation. You explored:</p>
             <ul>
@@ -584,8 +541,72 @@ print(result)
                 <button id='next-decision-cycle' disabled>Next</button>
             </div>
         </section>
+        <section id="quiz-section" class="module-section" style="display:none">
+            <h2 class="quiz-title">Concept Check Questions</h2>
+            <div class="quiz-container">
+                <div class="quiz-question">Which memory type is used for:</div>
+                <ol class="quiz-options">
+                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">Remembering the user's last support ticket?</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">Looking up the company's return policy?</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">Knowing how to guide a user through troubleshooting steps?</li>
+                </ol>
+                <div class="quiz-feedback">
+                    <strong>Explanation:</strong> Remembering the user's last support ticket is an example of episodic memory.
+                </div>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-question">What is the primary difference between an LLM and an AI agent?</div>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">a) LLMs are less advanced than agents</li>
+                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">b) Agents actively take actions and use tools to achieve goals</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">c) LLMs cannot understand human language</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">d) Agents do not use language models</li>
+                </ul>
+                <div class="quiz-feedback">
+                    <strong>Explanation:</strong> b) Agents actively take actions and use tools to achieve goals.
+                </div>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-question">An agent receives a new sales report, analyzes the numbers to decide if inventory needs to be reordered, and then places an order if necessary.<br>True or False: AI agents are always fully autonomous and require no human intervention.</div>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">a) True</li>
+                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">b) False</li>
+                </ul>
+                <div class="quiz-feedback">
+                    <strong>Explanation:</strong> b) False. Many agents operate with varying degrees of autonomy and may require human oversight or intervention at different points in their operation.
+                </div>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-question">Which combination of tools would be most essential for this agent?</div>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">A) Database Retrieval + External API Calls + Webhook Integrations</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">B) Code Execution + Direct Function Calling only</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">C) External API Calls + Code Execution only</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">D) Database Retrieval only</li>
+                </ul>
+                <div class="quiz-feedback">
+                    <strong>Explanation:</strong> A) Database Retrieval + External API Calls + Webhook Integrations is the most essential combination for this agent.
+                </div>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-question">Which of the following best describes the agent decision cycle in a digital assistant?</div>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">A) The agent only responds to user input without using memory or tools</li>
+                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">B) The agent observes, plans, acts, and updates its memory in a repeating loop</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">C) The agent always escalates to a human for every task</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">D) The agent only uses pre-programmed responses</li>
+                </ul>
+                <div class="quiz-feedback">
+                    <strong>Explanation:</strong> B) The agent observes, plans, acts, and updates its memory in a repeating loop.
+                </div>
+            </div>
+            <div class='section-nav-btns'>
+                <button id='back-quiz-section'>Back</button>
+                <button id='next-quiz-section' disabled>Next</button>
+            </div>
+        </section>
     </div>
-
+    
     <script src="../assets/js/course-nav.js"></script>
     <script src="../assets/js/module-sidebar.js"></script>
     <script src="../assets/js/quiz.js"></script>

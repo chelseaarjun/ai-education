@@ -305,6 +305,7 @@
 </head>
 <body>
     <nav class="module-nav">
+        <button class="module-nav-btn" data-section="introduction">Introduction</button>
         <button class="module-nav-btn" data-section="context-window">Context Window</button>
         <button class="module-nav-btn" data-section="tokenization">Tokenization</button>
         <button class="module-nav-btn" data-section="embeddings">Embeddings</button>
@@ -314,12 +315,27 @@
         <button class="module-nav-btn" data-section="quiz-section">Quiz</button>
     </nav>
     <div class="content-inner">
-        <section id="context-window" class="module-section">
-             <!-- Introduction Section -->
-            <div class="course-description" id="introduction">
-                <h2>Module 1: Understanding Large Language Models</h2>
-                <p>Large Language Models (LLMs) are sophisticated AI systems trained on vast amounts of text data that can understand, generate, and manipulate human language. These powerful tools form the foundation of modern AI applications like chatbots, content generators, and virtual assistants. The following sections explain the key concepts needed to effectively work with LLMs in production-grade applications.</p>
+        <section id="introduction">
+            <div class="course-description">
+                <h2 class="module-title">Module 1: Understanding Large Language Models</h2>
+                <p>Large Language Models (LLMs) are sophisticated AI systems trained on vast amounts of text data that can understand, generate, and manipulate human language. These powerful tools form the foundation of modern AI applications like chatbots, content generators, and virtual assistants.</p>
+                <h3 class="section-title">What You'll Learn</h3>
+                <p>In this module, you'll master the following key areas:</p>
+                <ul>
+                    <li><b>Context Window:</b> How LLMs process and limit information</li>
+                    <li><b>Tokenization:</b> How text is broken down for model processing</li>
+                    <li><b>Embeddings:</b> How LLMs represent meaning and relationships</li>
+                    <li><b>Logits & Temperature:</b> How LLMs make predictions and control creativity</li>
+                    <li><b>Response Format:</b> How to structure and interpret model outputs</li>
+                    <li><b>Model Evolution:</b> Advances in LLM architectures and capabilities</li>
+                </ul>
             </div>
+            <div class="section-nav-btns">
+                <button id="back-introduction" disabled>Back</button>
+                <button id="next-introduction">Next</button>
+            </div>
+        </section>
+        <section id="context-window" class="module-section">
             <div class="concept-section">
                 <h2>1. Context Window: The Container of Information</h2>
                 
@@ -338,7 +354,7 @@
                 <p><span class="highlight">Practical Application:</span> Your <strong>prompt size + maximum desired response length</strong> must fit within the context window. If you request a longer response than available in the context window, the model will <strong>stop generating at the limit</strong>.</p>
             </div>
             <div class="section-nav-btns">
-                <button id="back-context-window" disabled>Back</button>
+                <button id="back-context-window">Back</button>
                 <button id="next-context-window">Next</button>
             </div>
         </section>

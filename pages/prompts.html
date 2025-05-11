@@ -268,6 +268,7 @@
         <button class="module-nav-btn" data-section="writing-effective-prompts">Writing Effective Prompts</button>
         <button class="module-nav-btn" data-section="techniques">Techniques</button>
         <button class="module-nav-btn" data-section="resources">Resources</button>
+        <button class="module-nav-btn" data-section="quiz-section">Quiz</button>
     </nav>
     <nav class="module-sidebar"></nav>
     <div class="content-inner">
@@ -782,6 +783,28 @@
             <div class="section-nav-btns">
                 <button id="back-resources">Back</button>
                 <button id="next-resources" disabled>Next</button>
+            </div>
+        </section>
+        <section id="quiz-section" class="module-section" style="display:none">
+            <div class="quiz-section">
+                <h2 class="quiz-title">Concept Check Questions</h2>
+                <div class="quiz-container">
+                    <div class="quiz-question">
+                        <p class="question-title">[Placeholder] Add your quiz questions here.</p>
+                        <ul class="quiz-options">
+                            <li class="quiz-option" data-correct="false">Option A</li>
+                            <li class="quiz-option" data-correct="true">Option B</li>
+                            <li class="quiz-option" data-correct="false">Option C</li>
+                        </ul>
+                        <div class="quiz-feedback">
+                            <strong>Answer:</strong> Option B is correct.
+                        </div>
+                    </div>
+                </div>
+                <div class='section-nav-btns'>
+                    <button id='back-quiz-section'>Back</button>
+                    <button id='next-quiz-section' disabled>Next</button>
+                </div>
             </div>
         </section>
     </div>
