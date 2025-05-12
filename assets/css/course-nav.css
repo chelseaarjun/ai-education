@@ -77,7 +77,7 @@
     z-index: 1001;
     right: 0;
     top: 100%;
-    margin-top: 5px;
+    margin-top: 0;
     /* Add transition for smooth appearance/disappearance */
     opacity: 0;
     visibility: hidden;
