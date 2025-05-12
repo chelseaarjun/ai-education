@@ -576,6 +576,17 @@
                 </div>
                 
                 <p><span class="highlight">Practical Application:</span> The <strong>temperature</strong>, <strong>topP</strong>, and <strong>topK</strong> parameters control creativity vs. predictability in responses. These parameters let you balance deterministic, factual outputs with more creative, varied responses.</p>
+
+                <!-- Interactive Probability Distribution Graph -->
+                <div id="temperature-graph-container" style="margin-top: 32px; padding: 20px; background: #f8f9fa; border-radius: 8px; border: 1px solid #ddd;">
+                    <h4 style="margin-top: 0;">Interactive: See How Temperature Changes Probabilities</h4>
+                    <p style="margin-bottom: 8px;">Adjust the temperature to see how the probability distribution changes for a generic set of logits.</p>
+                    <label for="temperature-slider"><b>Temperature:</b> <span id="temperature-value">1.0</span></label>
+                    <input type="range" id="temperature-slider" min="0.1" max="2.0" step="0.01" value="1.0" style="width: 220px; vertical-align: middle; margin-left: 10px;">
+                    <canvas id="temperature-prob-chart" width="500" height="260" style="display: block; margin-top: 18px;"></canvas>
+                    <div style="font-size: 0.95em; color: #555; margin-top: 8px;">This chart uses a generic set of logits: [2.0, 1.0, 0.5, 0.0, -1.0]. Probabilities are calculated using the softmax function after scaling by temperature.</div>
+                </div>
+                <!-- End Interactive Probability Distribution Graph -->
             </div>
             <div class="section-nav-btns">
                 <button id="back-temperature">Back</button>
@@ -855,6 +866,8 @@
             </div>
         </section>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../assets/js/temperature-graph.js"></script>
     <script src="../assets/js/course-nav.js"></script>
     <script src="../assets/js/module-sidebar.js"></script>
     <script src="../assets/js/quiz.js"></script>
