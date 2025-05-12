@@ -170,6 +170,10 @@
 
 /* Mobile menu button */
 .course-nav-mobile-toggle {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    z-index: 1100;
     display: none;
     background: none;
     border: none;
