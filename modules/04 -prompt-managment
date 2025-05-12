@@ -6,4 +6,12 @@
     - Creating a Prompt Library 
     - Co-owing the prompts with Business Teams
     - Version Control 
-    - Measuring Accurary and Latency
+    - Measuring Accurary and Latency\
+
+6. Integrating MCP with AWS Bedrock [Status: Incomplete]
+
+AWS Bedrock models supporting MCP
+Knowledge Bases and MCP
+Amazon Agents for Bedrock
+Security and access management
+Best practices for production deployment

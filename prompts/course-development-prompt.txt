@@ -1,4 +1,9 @@
 You are helping me develop an educational course on building production-grade AI applications.  I am a computer science professor creating a two part educational material for entry level software and data engineers, who are part of an organization which is responsible for site selection, location analytics, sales forecasting, market research, grocery competitor insights, lease negotiation, lease administration, portfolio/asset management, store design (creating  and verifying documents such as Schematic Design, Design Development, Construction Design), Construction and Launch of grocery stores.  
+The contenty style should be a balanced approach of “Guided Presentation”
+- Using clear section headers and bullet points for main ideas (presentation style)
+- With short, focused explanatory paragraphs under each point or section (textbook style)
+- Include “Key Takeaways” or “In Practice” callouts for reinforcement
+- When applicable use callout boxes or bolding for definitions, examples, or warnings
 
 Part 1 focuses on foundational concepts and is split into 4 modules 
 1. Understanding Large Language Models

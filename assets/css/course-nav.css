@@ -115,17 +115,6 @@
     margin-left: 5px;
 }
 
-/* Create a pseudo-element to extend the hover area */
-.course-nav-dropdown::after {
-    content: '';
-    position: absolute;
-    height: 20px;
-    width: 100%;
-    bottom: -20px;
-    left: 0;
-    z-index: 0;
-}
-
 /* Show dropdown on hover with delay */
 .course-nav-dropdown:hover .course-nav-dropdown-content {
     display: block;
@@ -287,4 +276,15 @@
 body {
     padding-top: 50px;
     overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Remove or shrink the pseudo-element that extends the hover area */
+.course-nav-dropdown::after {
+    content: '';
+    position: absolute;
+    height: 0;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
 }

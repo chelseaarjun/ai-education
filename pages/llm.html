@@ -338,21 +338,47 @@
         </section>
         <section id="context-window" class="module-section">
             <div class="concept-section">
-                <h2>1. Context Window: The Container of Information</h2>
+                <h2>1. Context Window: The Model's Working Memory</h2>
                 
-                <p><span class="highlight">Concept:</span> The <strong>context window</strong> is the <strong>maximum number of tokens</strong> that can be processed in a single API call, including both the input prompt and the generated output.</p>
-                
-                <p><span class="highlight">Everyday Example:</span> Think of the context window like a container with a fixed size. Your prompt takes up part of this container, and the remaining space is available for the model's response.</p>
-                
+                <p>
+                    <span class="highlight">Concept:</span>
+                    The <strong>context window</strong> is the model's "working memory"—the total number of <strong>tokens</strong> (chunks of text) it can consider at once. This includes both your input and the model's output. 
+                    <br>
+                    Modern AI models, called <strong>transformers</strong> (invented by Google), use an <strong>attention mechanism</strong> to focus on all tokens in this window at the same time—but nothing outside it.
+                </p>
+
+                <p>
+                    <span class="highlight">Everyday Example:</span>
+                    Imagine a whiteboard with limited space. You write your question (input tokens) and leave room for the model's answer (output tokens). If your question fills the board, there's less space for the answer. If you run out of space, the model stops writing—even mid-sentence.
+                </p>
+
                 <div class="visual-container">
                     <div class="context-window">
-                        <div class="prompt-box">Your Prompt<br>(3,000 tokens)</div>
-                        <div class="response-box">Maximum Response Length<br>(5,000 tokens)</div>
+                        <div class="prompt-box">Your Prompt<br>(e.g., 3,000 tokens)</div>
+                        <div class="response-box">Model's Response<br>(up to 5,000 tokens)</div>
                     </div>
-                    <p style="text-align: center; margin-top: 10px;">Context Window: 8,000 tokens total</p>
+                    <p style="text-align: center; margin-top: 10px;">
+                        <strong>Context Window: 8,000 tokens total (input + output)</strong>
+                    </p>
                 </div>
-                
-                <p><span class="highlight">Practical Application:</span> Your <strong>prompt size + maximum desired response length</strong> must fit within the context window. If you request a longer response than available in the context window, the model will <strong>stop generating at the limit</strong>.</p>
+
+                <p>
+                    <span class="highlight">Why it matters:</span>
+                    <ul>
+                        <li><strong>Hard limit:</strong> <b>input tokens + output tokens ≤ max context window</b></li>
+                        <li>If your input is large, you have less room for the model's answer.</li>
+                        <li>If you hit the limit, the model will stop—sometimes in the middle of a sentence.</li>
+                        <li>This applies to all transformer models: OpenAI's GPT-4o/o1, Anthropic's Claude 3.7, and Amazon's Nova Premier.</li>
+                        <li><strong>Cost control:</strong> Although foundational models have a maximum context window, most APIs let you set a smaller limit (using parameters like <code>max_tokens</code>) if you want to control costs or keep responses shorter.</li>
+                    </ul>
+                </p>
+
+                <div class="callout" style="background: #f8f9fa; border-left: 4px solid #3498db; padding: 12px 18px; margin: 18px 0;">
+                    <strong>Note on Reasoning Models & Token Budgets:</strong>
+                    Newer models (like OpenAI's o1, Anthropic's Claude 3.7, and Amazon's Nova Premier) support <strong>very large context windows</strong>—sometimes up to 1 million tokens! These models can "think" for longer and do multi-step reasoning, but every step and intermediate thought also uses up tokens. Many APIs let you control this with a <strong>budget_tokens</strong> or <strong>reasoning budget</strong> parameter, so you can balance depth of reasoning with cost and performance.
+                </div>
+
+                <span style='font-size:1.2em; margin-right:0.3em;'>💡</span><strong>Tip:</strong> Keep your prompts concise and leave enough space for the model's answer—especially for complex tasks that need extended reasoning.
             </div>
             <div class="section-nav-btns">
                 <button id="back-context-window">Back</button>
@@ -389,7 +415,20 @@
                     </div>
                 </div>
                 
-                <p><span class="highlight">Practical Application:</span> Understanding tokenization helps you <strong>optimize prompts</strong> to fit within context window limits and <strong>manage costs</strong> effectively. For English text: <strong>1 token ≈ 4 characters</strong> or <strong>¾ of a word</strong> on average. Code typically uses <strong>more tokens</strong> than natural language.</p>
+                <p><span class="highlight">Practical Application:</span> 
+                <strong>Quick Token & Cost Estimation for Developers:</strong><br>
+                For English, <b>1 token ≈ 4 characters</b> (including spaces/punctuation) or <b>¾ of a word</b>.<br>
+                <span style='font-size:0.95em;color:#555;'>Reference: <a href='https://platform.openai.com/tokenizer' target='_blank' rel='noopener'>OpenAI Tokenizer</a></span><br><br>
+                <b>How to use:</b>
+                <ul>
+                  <li>Count words or characters in your input and expected output.</li>
+                  <li>Estimate tokens (words × 1.33 or characters ÷ 4).</li>
+                  <li>Add input and output tokens for total usage.</li>
+                  <li>Check your provider's pricing—most charge <b>less for input tokens</b> and <b>more for output tokens</b>.</li>
+                  <li>Multiply by the respective rates to estimate total cost.</li>
+                </ul>
+                <b>Example:</b> 375 words input ~ 500 tokens, 75 words output ~ 100 tokens ≈ 600 tokens in context window. If input is $0.01/1K tokens and output is $0.02/1K tokens, cost ≈ $0.005 (input) + $0.002 (output) = $0.007 per request.
+                </p>
             </div>
             <div class="section-nav-btns">
                 <button id="back-tokenization">Back</button>
