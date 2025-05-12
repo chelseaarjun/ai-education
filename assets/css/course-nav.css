@@ -48,7 +48,7 @@
 }
 
 .course-nav-dropdown-btn {
-    background-color: transparent;
+    background-color: #34495e;
     color: white;
     border: none;
     cursor: pointer;
@@ -187,7 +187,6 @@
     .course-nav {
         height: auto;
     }
-    
     .course-nav-container {
         padding: 0 15px;
         height: 50px;
@@ -231,6 +230,7 @@
     .course-nav-dropdown {
         width: 100%;
         margin: 0;
+        background-color: #34495e;
     }
     
     .course-nav-dropdown-btn {
@@ -296,6 +296,9 @@ body {
     }
     
     .course-nav-mobile-toggle {
+        position: fixed;
+        right: 10px;
+        top: 10px;
         padding: 8px;
     }
     
