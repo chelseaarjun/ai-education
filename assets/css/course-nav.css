@@ -288,24 +288,3 @@ body {
     padding-top: 50px;
     overflow-x: hidden; /* Prevent horizontal scrolling */
 }
-
-/* Additional mobile-specific styles */
-@media (max-width: 480px) {
-    .course-nav-logo {
-        font-size: 0.9rem;
-    }
-    
-    .course-nav-mobile-toggle {
-        position: fixed;
-        right: 10px;
-        top: 10px;
-        padding: 8px;
-    }
-    
-    /* Improve tap targets */
-    .course-nav-dropdown-item, 
-    .course-nav-home,
-    .course-nav-dropdown-btn {
-        padding: 14px 15px;
-    }
-}
