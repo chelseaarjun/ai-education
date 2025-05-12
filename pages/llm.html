@@ -480,7 +480,7 @@
             <div class="concept-section">
                 <h2>4. Logits: Making Predictions</h2>
                 
-                <p><span class="highlight">Concept:</span> <strong>Logits</strong> are raw numerical scores the model assigns to each possible next token before making its final selection. The text generation process has two phases: First, the model processes your prompt to calculate these logits, which are then converted to probabilities for each potential next word. This calculation phase is deterministic - identical inputs always produce the same probability distribution. Second, the model selects tokens from this distribution, either predictably (by always choosing the highest-probability token) or with controlled randomness to balance accuracy with creativity.</p>
+                <p><span class="highlight">Concept:</span> <strong>Logits</strong> are raw numerical scores the model assigns to each possible next token before making its final selection. The text generation process has two phases: First, the model processes your prompt to calculate these logits, which are then converted to probabilities for each potential next word using the <strong>softmax function</strong> (<a href="https://en.wikipedia.org/wiki/Softmax_function" target="_blank" rel="noopener">Wikipedia</a>). This calculation phase is deterministic—identical inputs always produce the same probability distribution. Second, the model selects tokens from this distribution, either predictably (by always choosing the highest-probability token) or with controlled randomness to balance accuracy with creativity.</p>
                 
                 <p><span class="highlight">Everyday Example:</span> When completing "The capital of France is ____," a model assigns high scores to relevant answers like "Paris" and low scores to irrelevant options like "banana."</p>
                 
@@ -538,7 +538,7 @@
                         <div style="margin-top: 30px; display: flex; gap: 20px;">
                             <div style="flex: 1; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background-color: #f1f9fe;">
                                 <h4 style="margin-top: 0;">Temperature</h4>
-                                <p><strong>Modifies the probability distribution itself. Lower temperatures make the model more deterministic, leading to predictable outputs, while higher temperatures introduce more randomness and creativity</strong></p>
+                                <p><strong>Modifies the probability distribution itself. Lower temperatures make the model more deterministic, leading to predictable outputs, while higher temperatures introduce more randomness and creativity. The allowed range depends on the provider and model—check your API documentation.</strong></p>
                                 <ul>
                                     <li><strong>Low (0.2):</strong> Makes likely tokens even more likely</li>
                                     <li><strong>High (1.0):</strong> Makes distribution more uniform</li>
@@ -547,8 +547,8 @@
                             </div>
                             
                             <div style="flex: 1; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background-color: #f1f9fe;">
-                                <h4 style="margin-top: 0;">topP (Nucleus Sampling)</h4>
-                                <p><strong>Considers only top tokens that sum to P probability</strong></p>
+                                <h4 style="margin-top: 0;">topP (also called Nucleus Sampling)</h4>
+                                <p><strong>Uses a cumulative probability distribution. Sorts all possible next tokens by their probability (from highest to lowest). Then selects the smallest set of tokens whose cumulative probability adds up to the value of topP (e.g., 0.9 means the top tokens that together make up 90% of the probability)</strong></p>
                                 <ul>
                                     <li><strong>topP = 0.9:</strong> Only "Paris", "Lyon", "Nice" considered (95% cumulative)</li>
                                     <li><strong>topP = 0.8:</strong> Only "Paris" considered (80% cumulative)</li>
@@ -566,6 +566,10 @@
                                 <div style="font-size: 0.9em; font-style: italic;">Fixed number regardless of probabilities</div>
                             </div>
                         </div>
+                    </div>
+                    
+                    <div style="margin-top: 15px; background: #fffbe6; border-left: 4px solid #f1c40f; padding: 10px 16px; border-radius: 6px; font-size: 1em;">
+                        <span style='font-size:1.2em; margin-right:0.3em;'>💡</span><strong>Tip:</strong> For most use cases, set <b>either</b> <code>temperature</code> <b>or</b> <code>topP</code>—not both. Controlling both can lead to unpredictable or unstable results, as both parameters affect randomness in different ways.
                     </div>
                     
                     <p><strong>Combined Effect:</strong> These parameters work together to control selection. Temperature modifies the distribution, then topP and topK filter which tokens can be selected from the modified distribution.</p>
