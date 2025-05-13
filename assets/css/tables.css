@@ -52,3 +52,30 @@ tr:last-child td {
         -webkit-overflow-scrolling: touch;
     }
 } 
+
+/* Enhanced Table Styles (from agents.html) */
+table.enhanced-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+table.enhanced-table th, table.enhanced-table td {
+    padding: 1em 0.75em;
+    border: 1px solid #e0e6ef;
+    text-align: left;
+}
+table.enhanced-table th {
+    background: #f5f8fa;
+    color: #2a4a6b;
+    font-weight: 600;
+}
+table.enhanced-table tr:nth-child(even) {
+    background: #f8f9fa;
+}
+table.enhanced-table tr:hover {
+    background: #eaf2f8;
+} 

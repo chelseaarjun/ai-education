@@ -132,4 +132,76 @@ body, html {
     color: var(--primary);
     margin-top: 1.5em;
     font-weight: 600;
+}
+
+/* Callout Boxes */
+.callout-info {
+    background: #eaf6fb;
+    border-left: 4px solid #3498db;
+    padding: 1em;
+    margin: 1.25em 0;
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-start;
+}
+.callout-tip {
+    background: #f9fbe7;
+    border-left: 4px solid #cddc39;
+    padding: 1em;
+    margin: 1.25em 0;
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-start;
+}
+.callout-warning {
+    background: #fff3e0;
+    border-left: 4px solid #ff9800;
+    padding: 1em;
+    margin: 1.25em 0;
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-start;
+}
+.callout-icon {
+    font-size: 1.5em;
+    margin-right: 0.75em;
+    flex-shrink: 0;
+    line-height: 1.2;
+}
+
+/* Enhanced Lists */
+ul.enhanced-list {
+    list-style: none;
+    padding-left: 0;
+}
+ul.enhanced-list li {
+    position: relative;
+    padding-left: 2em;
+    margin-bottom: 0.7em;
+}
+ul.enhanced-list li::before {
+    content: '✔️';
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    font-size: 1.1em;
+}
+ul.tip-list li::before {
+    content: '💡';
+}
+
+/* Code Blocks (moved from agents.html) */
+.code-block {
+    background-color: #f0f6ff;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    margin: 1.25rem 0;
+    border-left: 6px solid #3498db;
+    border-top: 2px solid #3498db;
+    white-space: pre-wrap;
+    line-height: 1.6;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.07);
 } 

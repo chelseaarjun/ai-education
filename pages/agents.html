@@ -74,21 +74,6 @@
             margin-top: 0.5rem;
         }
 
-        /* Code Blocks */
-        .code-block {
-            background-color: var(--code-bg);
-            padding: 1rem;
-            border-radius: 6px;
-            overflow-x: auto;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            margin: 1rem 0;
-            border-left: 4px solid var(--accent);
-            white-space: pre-wrap;
-            line-height: 1.5;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
-        
         /* Examples */
         .example {
             background: white;
@@ -182,13 +167,13 @@
                 <p>This module builds on your understanding of LLMs and prompt engineering, showing you how to design and build agents that can remember, reason, use tools, and act autonomously—unlocking a new level of capability for your AI applications.</p>
                 <h3 class="section-title">What You'll Learn</h3>
                 <p>In this module, you'll master the following key areas:</p>
-                <ul>
+                <ul class="enhanced-list">
                     <li><b>Agent Fundamentals:</b> What makes an AI agent different from an LLM</li>
                     <li><b>Memory:</b> How agents retain and use information</li>
                     <li><b>Tools:</b> How agents use external tools to extend their capabilities</li>
                     <li><b>Decision Cycle:</b> How agents observe, plan, and act in iterative loops</li>
                 </ul>
-                <span style='font-size:1.2em; margin-right:0.3em;'>💡</span><strong>Tip:</strong> No matter if you’re building a simple LLM-powered app or a sophisticated agent system, every successful AI solution depends on clear, well-crafted prompts - even the most advanced agents rely on clear, well-structured prompts to guide the LLM’s reasoning and actions.
+                <span style='font-size:1.2em; margin-right:0.3em;'>💡</span><strong>Tip:</strong> No matter if you're building a simple LLM-powered app or a sophisticated agent system, every successful AI solution depends on clear, well-crafted prompts - even the most advanced agents rely on clear, well-structured prompts to guide the LLM's reasoning and actions.
             </div>           
             <div class="section-nav-btns">
                 <button id="back-introduction" disabled>Back</button>
@@ -197,10 +182,12 @@
         </section>
         <section id="fundamentals" class="module-section">
             <h2>From LLMs to Agents: Why Go Further?</h2>
-            <p>While LLMs are incredibly versatile, many real-world applications require more than just language understanding.</p>
-            <p>The agent is a software system that wraps around the LLM, orchestrating when to call the LLM, what to ask, how to use the response, and how to interact with the environment (including databases, APIs, or human-in-the-loop steps).</p>
+            <p>While <strong>LLMs</strong> are incredibly versatile, many real-world applications require more than just language understanding.</p>
+            <div class="callout-info"><span class="callout-icon">🤖</span>
+            <p> <strong>The agent</strong> is a software system that wraps around the LLM, orchestrating when to call the LLM, what to ask, how to use the response, and how to interact with the environment (including databases, APIs, or human-in-the-loop steps).</p>
+            </div>
             <p>Agents extend the capabilities of LLMs by adding:</p>
-            <ul>
+            <ul class="enhanced-list">
                 <li><strong>Tool Use:</strong> Agents can use external tools (APIs, search engines etc.) to interact with the external environment.</li>
                 <li><strong>Memory Recall:</strong> Agents remember past actions, user preferences, or important facts (short-term and long-term).</li>
                 <li><strong>Autonomous Decision-making:</strong> Agents use an LLM as their brain and repeat the <b>decision cycle</b> (Observe → Plan → Act) as needed until an end state is reached.</li>
@@ -208,7 +195,7 @@
             <h3>When Should You Use Agents?</h3>
             <p>Not every application needs the complexity of an agent. Many tasks—like summarization, classification, or Q&A—can be solved with just prompt engineering and an LLM.</p>
             <p>However, as your use case grows to require memory, tool use, or multi-step reasoning, agents become essential.</p>
-            <table>
+            <table class="enhanced-table">
                 <thead>
                     <tr>
                         <th></th>
@@ -513,9 +500,9 @@ print(result)
             <p>After acting, the agent updates its memory and starts the cycle again for the next input or task. The agent's "brain" (the LLM and its code) brings together memory and tools to decide the best next step in each cycle.</p>
             <hr>
             <h3>Separation of Responsibilities in the Decision Cycle</h3>
-            <p>As you’ve learned, agents and LLMs play distinct roles within an AI system. The agent manages the overall workflow—deciding when to use memory, which tools to call, and how to handle each step—while the LLM provides language understanding and reasoning at key moments in the cycle.
+            <p>As you've learned, agents and LLMs play distinct roles within an AI system. The agent manages the overall workflow—deciding when to use memory, which tools to call, and how to handle each step—while the LLM provides language understanding and reasoning at key moments in the cycle.
             </p>
-            <p><strong>Why This Matters:</strong><br>This separation of responsibilities means the agent can use the LLM’s strengths as needed within each decision cycle, while also managing memory, tool use, and business logic. This design leads to more robust, flexible, and safe AI systems—allowing the agent to coordinate complex tasks, enforce rules, and integrate with external systems, all while leveraging the LLM’s capabilities.</p>
+            <p><strong>Why This Matters:</strong><br>This separation of responsibilities means the agent can use the LLM's strengths as needed within each decision cycle, while also managing memory, tool use, and business logic. This design leads to more robust, flexible, and safe AI systems—allowing the agent to coordinate complex tasks, enforce rules, and integrate with external systems, all while leveraging the LLM's capabilities.</p>
             <hr>
             <h3>Building Agents: Do You Need a Library?</h3>
             <p>You don't strictly need a library to build an agent—at its core, an agent is a software system that manages memory, tool use, and decision logic around an LLM. However, building a robust agent from scratch can be complex and time-consuming.</p>
