@@ -37,7 +37,7 @@
 
 .course-nav-menu {
     display: flex;
-    gap: 10px;
+    gap: 0 !important;
     align-items: center;
     height: 50px;
 }
