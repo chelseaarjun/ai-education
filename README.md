@@ -108,6 +108,14 @@ This project is licensed under the terms of the included LICENSE file.
 - Anthropic for developing the Claude models referenced in the materials
 - The LangChain team for their excellent framework
 
+## Run All Companion Notebooks on Binder
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/chelseaarjun/ai-education/HEAD?filepath=notebooks)
+
+- Click the badge above to launch an interactive Jupyter environment in your browser (replace USERNAME/REPO with your GitHub repo).
+- In the Jupyter interface, navigate to the `notebooks/` directory and open any companion notebook for the module you want to explore (e.g., `llm_companion.ipynb`).
+- All required Python dependencies are pre-installed via `requirements.txt`.
+- You will need to provide your own AWS credentials in the first cell of any notebook that uses Bedrock/Claude features.
 ---
 
 Created with ❤️ for AI education and advancement.
