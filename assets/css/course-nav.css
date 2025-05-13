@@ -160,8 +160,6 @@
 /* Mobile menu button */
 .course-nav-mobile-toggle {
     position: fixed;
-    right: 10px;
-    top: 10px;
     z-index: 1100;
     display: none;
     background: none;
@@ -183,7 +181,7 @@
     
     .course-nav-logo {
         font-size: 1rem;
-        max-width: 70%;
+        width: auto !important;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -211,9 +209,11 @@
     }
     
     .course-nav-mobile-toggle {
-        display: block;
-        padding: 10px;
-        font-size: 1.3rem;
+        position: fixed;
+        width: auto !important;
+        right: 0 !important;
+        display: inline-block;
+        z-index: 3000;
     }
     
     .course-nav-dropdown {
@@ -251,6 +251,10 @@
         border-bottom: 1px solid #2c3e50;
         padding: 12px 20px;
         font-size: 14px;
+    }
+    .course-nav-dropdown-item.available {
+        color: white;
+        font-weight: bold;
     }
     
     .course-nav-home {

@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const navHTML = `
     <nav class="course-nav">
         <div class="course-nav-container">
-            <a href="${rootPath}index.html#introduction" class="course-nav-logo">AI Foundations Course</a>
-            
+            <div class="course-nav-logo-container">
+                <a href="${rootPath}index.html#introduction" class="course-nav-logo">AI Foundations Course</a>
+            </div>
             <button class="course-nav-mobile-toggle" aria-label="Toggle navigation menu">☰</button>
-            
             <div class="course-nav-menu">
                 <a href="${rootPath}index.html#introduction" class="course-nav-home">Home</a>
                 
