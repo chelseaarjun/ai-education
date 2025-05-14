@@ -9,33 +9,28 @@ Introduction: What is MCP?
 Why MCP Matters: The Problem It Solves
 What Does the MCP Protocol Cover?
 
-2. Architecture (big picture: host, client, server)
-3. Features (what the protocol enables: resources, tools, prompts, sampling)
-4. Communication Model (how the pieces talk: lifecycle, message types, format)
-    Connection lifecycle (init, message exchange, termination)
+2. Architecture (big picture: host, client, server) [Status: COMPELTE]
+3. Features (what the protocol enables: resources, tools, prompts, sampling) [Status: INCOMPELTE]
+4. Communication Model (how the pieces talk: lifecycle, message types, format) [Status: INCOMPELTE]
+    Connection lifecycle (init, capability negotiation, message exchange, termination)
     Message types (request, response, notification, error)
     Message format (JSON-RPC 2.0, schemas, validation)
-5. Error Handling & Versioning
+5. Error Handling & Versioning [Status: INCOMPELTE]
     Error codes, propagation, handling
     Versioning approach
-6. Security, Privacy, and Best Practices
+6. Security, Privacy, and Best Practices [Status: INCOMPELTE]
     Security boundaries (host/client/server)
     Consent, privacy, access control
     Implementation guidelines
-7. Building Your Own MCP Tool
+7. Building Your Own MCP Tool [Status: INCOMPELTE]
 
 Tool design best practices
 Setting up the development environment
 Creating a simple MCP-compatible tool
 Testing and debugging tools
-Hands-on: Building a store location analyzer tool
 
-8. Assessment and Further Reading
+8. Quiz [Status: INCOMPELTE]
 
-Quiz Knowledge check questions
-Hands-on exercises
-Mini-project:
+9. Further Reading and Resources [Status: INCOMPELTE]
 
-9. Further Reading and Resources
-
-To be populated with authoritative sources
+To be populated with authoritative sources  

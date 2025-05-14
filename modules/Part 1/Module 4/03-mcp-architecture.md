@@ -1,4 +1,4 @@
-## MCP Architecture and Protocol Specification
+## MCP Architecture
 
 ---
 
@@ -34,29 +34,27 @@ MCP is built on a modular, client-server architecture with three main roles:
 #### How It Works (At a Glance): Practical Example
 
 **Scenario:**  
-A developer is using an **AI-powered IDE (the host)** that integrates both a **code search tool** and a **documentation lookup tool**.
+A user is interacting with an **AI-powered productivity assistant (the host)** that integrates both a **calendar tool** and a **weather tool**.
 
 **Flow (as shown in the diagram):**
 
 ```
 [User] → [Host Application]
                 ↓
-         [Client Connector] ←→ [Server 1: Code Search]
+         [Client Connector] ←→ [Server 1: Calendar Tool]
                 ↓
-         [Client Connector] ←→ [Server 2: Documentation]
+         [Client Connector] ←→ [Server 2: Weather Tool]
 ```
 
-1. **User** asks the AI assistant in the IDE: "Find where the function `processOrder` is defined and show me the related documentation."
-2. **Host Application** receives the request and determines it needs to use two different capabilities: **code search** and **documentation lookup**.
-3. The host uses:
-   - **Client 1** to connect to **Server 1 (Code Search)**, which returns the location of `processOrder`.
-   - **Client 2** to connect to **Server 2 (Documentation)**, which returns the relevant documentation.
-4. Each client only communicates with its assigned server, ensuring that **code search data** and **documentation data** remain **isolated and secure**.
-5. The host **aggregates the results** and presents them to the user, maintaining control over what data is shared and how tools are used.
-
-**Key Points:**
-- The **host** manages user consent, security, and orchestration.
-- **Clients** act as secure bridges, each handling a specific capability and maintaining strict boundaries.
-- **Servers** provide focused, composable capabilities and never have access to the full user context or each other's data.
-
----
+1. **User** asks the AI assistant: "Do I have any meetings this afternoon, and what’s the weather forecast for that time?"
+2. The **Host Application** determines it needs to:
+    - Check the user’s calendar for meetings this afternoon (**calendar tool**)
+    - Get the weather forecast for the meeting time (**weather tool**)
+3. The host:
+    - Uses **Client 1** to connect to **Server 1 (Calendar Tool)**, which returns:  
+      “You have a meeting at 3:00 PM.”
+    - Uses **Client 2** to connect to **Server 2 (Weather Tool)**, which returns:  
+      “The forecast at 3:00 PM is sunny, 75°F.”
+4. Each client only communicates with its assigned server. The calendar server never sees weather data, and vice versa.
+5. The **Host aggregates the results** the results and presents:
+    - “You have a meeting at 3:00 PM. The weather at that time is expected to be sunny, 75°F.”--
