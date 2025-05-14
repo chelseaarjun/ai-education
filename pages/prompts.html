@@ -259,6 +259,21 @@
         #introduction .section-nav-btns {
             margin-top: 1rem;
         }
+
+        /* CRISP Framework Components - reduced spacing for writing-effective-prompts section */
+        #writing-effective-prompts .crisp-component {
+            margin: 0.5rem 0;
+            padding: 0.75rem;
+        }
+        /* Examples - reduced spacing for writing-effective-prompts section */
+        #writing-effective-prompts .example {
+            margin: 0.5rem 0;
+        }
+
+        #writing-effective-prompts .prompt-example p,ul {
+            margin-top: 0em;
+            margin-bottom: 0em;
+        }
     </style>
 </head>
 <body>
@@ -424,8 +439,8 @@
                 <p><strong>Example: Applying the CRISP Framework</strong></p>
                 <div class="prompt-example">
                     <p>✗ <strong>Poor Example:</strong><br>
-                    "Create a meal plan for a vegetarian."</p>
-
+                    "Create a meal plan for a vegetarian."
+                   </p>
                     <p>✓ <strong>Good Example (Applying CRISP principles):</strong></p>
                     <ul>
                         <li><strong>C (Context):</strong> "I'm a nutrition coach working with a 35-year-old female vegetarian athlete who trains 5 days per week."</li>
@@ -433,9 +448,9 @@
                         <li><strong>I (Input/Output):</strong> "Please format the plan as a daily schedule with meal names, ingredients, approximate calories, and protein content for each meal."</li>
                         <li><strong>S (Specific Language):</strong> Note the specific terms used throughout: "3-day meal plan," "2500 calories," "120g protein," "no soy products," "meal names," "ingredients," "calories," and "protein content" instead of vague terms.</li>
                     </ul>
-
                     <p>✓ <strong>Progressively Refined Example (Adding P):</strong><br>
-                    "You are an expert sports nutritionist specializing in plant-based diets for athletes. I'm a nutrition coach working with a 35-year-old female vegetarian athlete who trains 5 days per week for marathon running. She needs a 3-day meal plan meeting these requirements: 2500 calories daily, 120g protein, primarily whole foods, and no soy products due to allergies. For optimal performance, time her highest carbohydrate meals 2-3 hours before training sessions (typically at 6am). Please format the plan as a daily schedule with meal names, ingredients, approximate calories, and protein content for each meal, and include a brief explanation of how this plan supports her athletic performance."</p>
+                    "You are an expert sports nutritionist specializing in plant-based diets for athletes. I'm a nutrition coach working with a 35-year-old female vegetarian athlete who trains 5 days per week for marathon running. She needs a 3-day meal plan meeting these requirements: 2500 calories daily, 120g protein, primarily whole foods, and no soy products due to allergies. For optimal performance, time her highest carbohydrate meals 2-3 hours before training sessions (typically at 6am). Please format the plan as a daily schedule with meal names, ingredients, approximate calories, and protein content for each meal, and include a brief explanation of how this plan supports her athletic performance."
+                    </p>
                 </div>
             </div>
 
@@ -445,9 +460,9 @@
             <h4>2.2.1 Leading Questions and Confirmation Bias</h4>
             <p>Models tend to agree with premises in your questions, leading to potentially biased responses.</p>
             <div class="example">
-                <p>❌<strong>Leading Question:</strong><br>
+                <p>❌ <strong>Leading Question:</strong><br>
                 "Don't you think the proposed architecture is overly complex and will lead to maintenance issues?"</p>
-                <p>✅<strong>Neutral Question:</strong><br>
+                <p>✅ <strong>Neutral Question:</strong><br>
                 "Evaluate the proposed architecture in terms of complexity and long-term maintainability."</p>
             </div>
             <p><strong>Reference:</strong> <a href="https://dl.acm.org/doi/10.1145/3571730" target="_blank">Ji et al. (2023). "Survey of Hallucination in Natural Language Generation." ACM Computing Surveys.</a></p>
@@ -846,7 +861,7 @@
             </ul>
             <div class="section-nav-btns">
                 <button id="back-resources">Back</button>
-                <button id="next-resources" disabled>Next</button>
+                <button id="next-resources">Next</button>
             </div>
         </section>
         <section id="quiz-section" class="module-section" style="display:none">
@@ -964,7 +979,7 @@
                 </div>
                 <div class='section-nav-btns'>
                     <button id='back-quiz-section'>Back</button>
-                    <button id='next-quiz-section' disabled>Next</button>
+                    <button id='next-quiz-section'>Next</button>
                 </div>
             </div>
         </section>
