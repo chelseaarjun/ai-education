@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../assets/css/introduction-fix.css">
     <link rel="stylesheet" href="../assets/css/quiz.css">
     <style>
+        /* Removed .course-description styles, now in shared CSS */
         .diagram {
             display: block;
             margin: 25px auto;
@@ -23,17 +24,6 @@
             border-radius: 4px;
             padding: 10px;
             overflow: hidden;
-        }
-
-        .course-description {
-            background: linear-gradient(135deg, #eaf2f8 0%, #f0f7ff 100%);
-            padding: 1.25rem;
-            padding-top: 1rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            margin-top: 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(74, 111, 165, 0.1);
         }
 
         .subtitle {
@@ -92,10 +82,6 @@
 
         /* Add responsive adjustments */
         @media (max-width: 768px) {
-            .course-description {
-                padding: 1.25rem;
-            }
-
             .example, .crisp-component, .interactive-demo {
                 padding: 1rem;
                 margin: 0.75rem 0;
@@ -114,13 +100,6 @@
         #fundamentals h2 {
             margin-top: 0;
             margin-bottom: 1rem;
-        }
-
-        #fundamentals .course-description {
-            padding: 1.25rem;
-            padding-top: 1rem;
-            margin-top: 0;
-            margin-bottom: 1.25rem;
         }
 
         #fundamentals h3 {
@@ -521,6 +500,7 @@ print(result)
                 <li><strong>Act:</strong> The agent retrieves the status and replies, "Your order is out for delivery and should arrive today."</li>
             </ol>
             <p>The agent then updates its memory with this interaction, ready for the next question.</p>
+            <hr/>
             <h3>Module 3 Summary</h3>
             <p>In this module, you learned how modern AI agents are designed to go beyond simple text generation. You explored:</p>
             <ul>
