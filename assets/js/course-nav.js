@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <a href="${rootPath}pages/llm.html" class="course-nav-dropdown-item available">LLM Concepts</a>
                         <a href="${rootPath}pages/prompts.html" class="course-nav-dropdown-item available">Prompt Engineering</a>
                         <a href="${rootPath}pages/agents.html" class="course-nav-dropdown-item available">Agents</a>
-                        <a href="#" class="course-nav-dropdown-item coming-soon">Model Context Protocol (MCP)<span>Coming Soon</span></a>
+                        <a href="${rootPath}pages/mcp.html" class="course-nav-dropdown-item available">Model Context Protocol (MCP)</a>
                     </div>
                 </div>
                 

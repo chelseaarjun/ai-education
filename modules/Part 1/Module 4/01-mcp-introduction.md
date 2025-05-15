@@ -1,3 +1,18 @@
+## Module 4: Developer's Guide to Model Context Protocol (MCP)
+
+This module introduces developers to the Model Context Protocol (MCP), a standardized way for LLMs to interact with external tools and data sources. 
+
+### What You'll Learn
+
+By the end of this module, you will be able to:
+
+- Explain what MCP is and why it was developed
+- Understand the core architecture and components of MCP
+- Compare MCP with other tool-use frameworks
+- Recognize how MCP is being adopted and standardized in the industry
+- Apply MCP concepts to build and integrate tools with LLMs
+
+### Overview 
 **MCP (Model Context Protocol)** is a standardized protocol that enables Large Language Models (LLMs) to interact with external tools, APIs, and data sources in a structured and secure way.
 
 - **Definition:** MCP specifies how LLMs can send and receive structured messages to perform actions beyond simple text generation.
@@ -23,11 +38,11 @@
 
 The **Model Context Protocol (MCP)** defines how AI-powered applications and tools interact, covering:
 
-- **Architecture:** The roles and responsibilities of the host, client, and server in an MCP system.
-- **Base Protocol** Core JSON-RPC message types.  The structure and types of messages exchanged, including requests, responses, notifications, and errors.
-- **Connection Lifecycle:** How sessions are initialized, maintained, and ended between clients and servers
-- **Client Features** The core functions MCP enables, such as resources, tools, prompts, and sampling.
-- **Server Features** The core functions MCP enables, such as resources, tools, prompts, and sampling.
-- **Security, Error Handling & Versioning:** secure communication, error management, and protocol evolution
+- **Architecture** The roles and responsibilities of the host, client, and server in an MCP system, ensuring modularity, security, and clear separation of concerns.
+- **Core Message Types** Standardized JSON-RPC message types—requests, responses, notifications, and errors—that enable structured, reliable communication between MCP components.
+- **Connection Lifecycle** How MCP sessions are initialized, maintained, and terminated, including capability negotiation and supported transport protocols for robust, stateful connections.
+- **Transport Protocols** Supported communication protocols (stdio, HTTP), session management, and authorization.
+- **Features** Outlines the core capabilities MCP enables—such as resources, tools, prompts, and sampling—allowing clients and servers to declare, negotiate, and use powerful, composable functions.
+- **Security Principles** Best practices and requirements for user consent, access control, and safe tool use, ensuring secure and trustworthy MCP integrations.
 
 Together, these elements make MCP a robust, extensible, and secure foundation for advanced AI integrations.

@@ -1,0 +1,30 @@
+You are an expert educational content creator and Python developer.
+Your task is to create a hands-on IPython (Jupyter) notebook for entry-level software and data engineers learning the Model Context Protocol (MCP) as part of a course on building production-grade AI applications.
+Context:
+The lab should teach students the roles of Host, Client, and Server in MCP.
+Students will build a local MCP server that exposes both a resource (list of store locations) and a tool (find nearest store).
+Students will also run a second, open-source MCP server (the MCP Time Server) to get the local time for a given location.
+The host logic must use the Claude Sonnet model from AWS Bedrock as the LLM to interpret user queries and route them to the correct MCP client/server.
+The lab should include examples of error handling (e.g., invalid method or parameters).
+Requirements:
+The notebook should be beginner-friendly, with clear explanations, diagrams, and step-by-step instructions.
+Include code cells for:
+Setting up the environment and dependencies.
+Implementing the student’s MCP server (resource + tool).
+Running the MCP Time Server locally.
+Implementing the host logic (with LLM integration using Claude Sonnet via AWS Bedrock).
+Writing MCP clients to interact with both servers.
+Demonstrating error handling and displaying error responses.
+Use precise, unambiguous language for all MCP concepts (resource, tool, method, JSON-RPC, etc.).
+Include at least one exercise where students must trigger and handle an error response from their server.
+Provide sample input/output and expected results for each step.
+Add reflection questions at the end to reinforce learning.
+Input/Output Structure:
+Input: User queries in natural language (e.g., “What time is it at the nearest store to 90210?”).
+Output: The notebook should show how the host (LLM) interprets the query, which MCP server/method is called, and the resulting response (including error handling).
+Progressive Refinement:
+If any step is ambiguous or missing information, ask clarifying questions before proceeding.
+Ensure the notebook is modular and easy to extend for future labs.
+Deliverable:
+A complete, ready-to-run IPython notebook that guides students through building, running, and interacting with MCP clients and servers, with a focus on practical understanding and hands-on experience.
+The LLM integration must use the Claude Sonnet model from AWS Bedrock.

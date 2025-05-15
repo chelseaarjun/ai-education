@@ -7,5 +7,6 @@
 - [Model Context Protocol: Concepts – Resources, Tools, Prompts, Sampling](https://modelcontextprotocol.io/docs/concepts/resources) — Deep dives into each feature, with examples and best practices.
 - [Model Context Protocol (MCP) — A Technical Deep Dive (Medium)](https://medium.com/@singhrajni2210/model-context-protocol-mcp-a-technical-deep-dive-810273a34304) — Third-party technical deep dive into MCP's motivation, architecture, and use cases.
 - [MCP GitHub Documentation](https://github.com/modelcontextprotocol/docs) — The open-source repository for MCP documentation, including examples and community discussions.
-- [MCP Detailed Specification] (https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/schema) - Detailed MCP specification in typescript 
+- [MCP Detailed Specification](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/schema) - Detailed MCP specification in typescript 
 - [Model Context Protocol: Tutorials and Quickstarts](https://modelcontextprotocol.io/quickstart) — Step-by-step guides for building servers and clients.
+- [JSON-RPC 2.0 Specification](https://www.jsonrpc.org/specification)

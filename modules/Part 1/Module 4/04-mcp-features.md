@@ -1,57 +1,48 @@
 ### Features
 
-MCP enables applications to leverage a variety of powerful features by connecting to different types of servers. These features allow AI-powered assistants to perform useful actions, retrieve information, and interact with external systems in a standardized way.
+MCP enables applications to leverage a variety of powerful features by connecting to different types of servers and clients. These features allow AI-powered assistants to perform useful actions, retrieve information, and interact with external systems in a standardized way.
 
 ---
 
-#### What is a Feature in MCP?
-
-A **feature** in MCP is a specific capability that a server can provide and a client can use. Features are declared and negotiated during the connection setup, so both sides know what is available for the session.
-
----
-
-#### Common MCP Features
+#### Server Features
 
 - **Resources:**  
   Structured data or contextual information that a server can provide to the client.  
+  - **Local or Remote:** Resources can come from local files, databases, or remote/cloud services—any data source the server can access.
+  - **How it works:** The server exposes data (e.g., files, database tables, API results) as resources, which the client/LLM can browse, reference, or subscribe to for updates.
   *Examples:*  
-  - A list of files in a project  
-  - User profile data  
-  - Search results from a database
+  - Exposing a list of files in a local project folder  
+  - Presenting customer records from a remote database as a resource
 
 - **Tools:**  
   Functions or actions that the AI assistant can invoke via the MCP protocol.  
+  - **How it works:** Tools are interactive operations—such as running a query, formatting code, or sending a notification—that the LLM can call with specific parameters.
   *Examples:*  
-  - Running a code formatter  
-  - Executing a database query  
-  - Sending a notification
+  - A "searchDatabase" tool lets the LLM request "find all customers in California" and get results on demand.
+
+> **Tip:**  
+> Use a resource for static or subscribable data; use a tool for dynamic, parameterized queries or actions.
 
 - **Prompts:**  
-  Templated messages or workflows that guide the LLM’s behavior or user interactions.  
+  Templated messages or workflows provided by the server to guide the LLM's behavior or user interactions.  
+  - **How it works:** Prompts standardize and streamline common tasks, ensuring consistency and best practices in how the LLM interacts with users or data.
   *Examples:*  
   - A prompt template for summarizing a document  
   - A workflow for onboarding a new user
 
+---
+
+#### Client Features
+
 - **Sampling:**  
-  The process where the server can request the LLM to generate or “sample” a response, often as part of a multi-step workflow.  
+  The ability for the server to request the client to generate a completion or response from the LLM (i.e., to "sample" text or data).  
+  - **How it works:** Sampling enables advanced workflows where the server can leverage the client's LLM access for tasks like summarization, drafting, or decision-making—without needing its own LLM API keys.
   *Examples:*  
-  - Generating a summary for a report  
-  - Creating a draft email
+  - A server asks the client to use its LLM to summarize a document or generate a draft email as part of a larger workflow.
 
+- **Roots:**  
+  A way for the client to define and expose the boundaries of accessible directories and files to the server.  
+  - **How it works:** Roots provide fine-grained control over what parts of the filesystem a server can access, enhancing security and privacy.
+  *Examples:*  
+  - A client exposes only the "/projects/my-app" directory to a code analysis server, preventing access to other files.
 ---
-
-#### How Features Work
-
-- **Declaration & Negotiation:**  
-  During the initialization phase, both clients and servers declare which features they support. Only features supported by both sides are enabled for the session.
-- **Server Support:**  
-  A single MCP server can support multiple features. For example, a server might provide both a resource (list of files) and a tool (file search function).
-- **Client Support:**  
-  A client “supports” a feature if it can handle the protocol flows and message types required for that feature—not just calling a server, but also processing responses, notifications, or requests as needed.
-
----
-
-**Key Points:**
-- Features are the core capabilities that MCP enables between clients and servers.
-- Not all features are supported by both sides; some are server-only, some client-only, and some require both.
-- Features are modular and composable, allowing for flexible and extensible integrations.
