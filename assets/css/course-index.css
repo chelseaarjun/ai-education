@@ -341,3 +341,46 @@ h1 {
     margin-top: 0 !important;
     padding-top: 0 !important;
 }
+
+.course-description {
+    background: linear-gradient(135deg, #eaf2f8 0%, #f0f7ff 100%);
+    padding: 1.25rem;
+    padding-top: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(74, 111, 165, 0.1);
+}
+
+@media (max-width: 768px) {
+    .course-description {
+        padding: 1.25rem;
+    }
+}
+
+/* Improved blockquote styling for course modules */
+blockquote {
+    background: linear-gradient(90deg, #f0f7ff 80%, #eaf2f8 100%);
+    border-left: 4px solid var(--primary, #4a6fa5);
+    margin: 1.5em 0;
+    padding: 1.1em 1.5em 1.1em 1.3em;
+    border-radius: 8px;
+    color: var(--light-text, #555);
+    font-size: 1.05em;
+    box-shadow: 0 2px 8px rgba(74, 111, 165, 0.04);
+    position: relative;
+}
+blockquote strong {
+    color: var(--primary, #4a6fa5);
+}
+blockquote::before {
+    content: '\201C';
+    color: var(--accent, #ff9e3d);
+    font-size: 2.2em;
+    position: absolute;
+    left: 12px;
+    top: 8px;
+    opacity: 0.18;
+    pointer-events: none;
+}

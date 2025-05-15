@@ -30,10 +30,11 @@
     <nav class="module-nav">
         <button class="module-nav-btn" data-section="introduction">Introduction</button>
         <button class="module-nav-btn" data-section="architecture">Architecture</button>
-        <button class="module-nav-btn" data-section="core-message-types">Core Message Types</button>
+        <button class="module-nav-btn" data-section="core-message-types">Message Types</button>
         <button class="module-nav-btn" data-section="features">Features</button>
-        <button class="module-nav-btn" data-section="connections-lifecycle">Connection Lifecycle</button>
-        <button class="module-nav-btn" data-section="transports-security">Transport Protocols</button>
+        <button class="module-nav-btn" data-section="connections-lifecycle">Connection</button>
+        <button class="module-nav-btn" data-section="transports-security">Protocols</button>
+        <button class="module-nav-btn" data-section="security-trust">Security</button>
         <button class="module-nav-btn" data-section="quiz">Quiz</button>
         <button class="module-nav-btn" data-section="references">References</button>
     </nav>
@@ -41,36 +42,541 @@
     <div class="content-inner">
         <!-- Section: Introduction -->
         <section id="introduction">
-            <!-- Content from 01-mcp-introduction.md -->
-            <!-- Will be filled in next step -->
+            <div class="course-description">
+                <h2>Module 4: Developer's Guide to Model Context Protocol (MCP)</h2>
+                <p>This module introduces developers to the Model Context Protocol (MCP), a standardized protocol that enables Large Language Models (LLMs) to interact with external tools, APIs, and data sources in a structured and secure way.</p>
+                <ul>
+                    <li><strong>Definition:</strong> MCP specifies how LLMs can send and receive structured messages to perform actions beyond simple text generation.</li>
+                    <li><strong>Purpose:</strong> It allows LLMs to access real-time information, perform complex operations, and integrate seamlessly with business processes and external systems.</li>
+                </ul>
+                <h3>What You'll Learn</h3>
+                <ul>
+                    <li>Explain what MCP is and why it was developed</li>
+                    <li>Understand the core architecture and components of MCP</li>
+                    <li>Apply MCP concepts to build and integrate tools with LLMs</li>
+                </ul>
+            </div>
+            <hr/>
+            <h3>Why Was MCP Created, and Why Does It Matter?</h3>
+            <blockquote>
+                <strong>The Challenge:</strong><br/>
+                As LLMs became more powerful, developers wanted to connect them to external tools and data. Early attempts relied on custom, one-off solutions, which were difficult to maintain, inconsistent, and often insecure.
+            </blockquote>
+            <ul>
+                <li><strong>Historical Context:</strong> MCP was developed by Anthropic in response to these challenges. The goal was to create a universal, standardized way for LLMs to safely and reliably interact with the outside world.</li>
+                <li><strong>Why It Matters:</strong>
+                    <ul>
+                        <li><strong>Standardization:</strong> MCP provides a common language for tool integration, reducing fragmentation and making it easier for developers to connect LLMs with a wide range of tools.</li>
+                        <li><strong>Security and Control:</strong> By defining clear protocols and permissions, MCP helps ensure that LLMs interact with external systems in a safe, auditable, and controlled manner.</li>
+                        <li><strong>Unlocks New Capabilities:</strong> With MCP, LLMs can go beyond static knowledge, enabling dynamic, real-world applications such as data analysis, workflow automation, and more.</li>
+                    </ul>
+                </li>
+            </ul>
+            <hr/>
+            <h3>What Does the MCP Protocol Cover?</h3>
+            <ul>
+                <li><strong>Architecture:</strong> The roles and responsibilities of the host, client, and server in an MCP system, ensuring modularity, security, and clear separation of concerns.</li>
+                <li><strong>Core Message Types:</strong> Standardized JSON-RPC message types—requests, responses, notifications, and errors—that enable structured, reliable, and extensible communication between MCP components.</li>
+                <li><strong>Connection Lifecycle:</strong> How MCP sessions are initialized, maintained, and terminated, including capability negotiation and supported transport protocols for robust, stateful connections.</li>
+                <li><strong>Transport Protocols:</strong> Supported communication protocols (stdio, HTTP), session management, and authorization.</li>
+                <li><strong>Features:</strong> Outlines the core capabilities MCP enables—such as resources, tools, prompts, and sampling—allowing clients and servers to declare, negotiate, and use powerful, composable functions.</li>
+                <li><strong>Security Principles:</strong> Best practices and requirements for user consent, access control, and safe tool use, ensuring secure and trustworthy MCP integrations.</li>
+            </ul>
+            <p>Together, these elements make MCP a robust, extensible, and secure foundation for advanced AI integrations.</p>
+            <div class="section-nav-btns">
+                <button id="back-introduction" disabled>Back</button>
+                <button id="next-introduction">Next</button>
+            </div>
         </section>
         <!-- Section: Architecture -->
         <section id="architecture">
-            <!-- Content from 02-mcp-architecture.md -->
+            <h2>Architecture</h2>
+            <h3>1. MCP System Overview</h3>
+            <h4>High-Level Architecture: Host, Client, and Server</h4>
+            <p>MCP is built on a modular, client-server architecture with three main roles:</p>
+            <ul>
+                <li><strong>Host:</strong> The <strong>central application</strong> that manages all connections, enforces security, and coordinates LLM interactions.
+                    <ul>
+                        <li>Typically, the host is an application that interacts with an <strong>LLM</strong> (e.g., an AI-powered IDE, chat platform, or assistant interface).</li>
+                        <li>The host <strong>creates and manages multiple clients</strong>—each client connects to a different server for a specific capability (such as code search or documentation lookup).</li>
+                        <li>The host is responsible for <strong>user consent, security enforcement, and orchestration</strong> of all interactions.</li>
+                        <li><strong>Example:</strong> An AI-powered IDE that lets users ask questions about their code and documentation. The IDE (<strong>host</strong>) uses the LLM to interpret user's request and decide which tools (<strong>servers</strong>) are used to answer the user's query.</li>
+                    </ul>
+                </li>
+                <li><strong>Client:</strong> A <strong>connector</strong> within the host that establishes and manages a session with a specific server.
+                    <ul>
+                        <li>Each client maintains a <strong>1:1 relationship</strong> with a server and handles <strong>protocol and capability negotiation, message routing, and capability exchange</strong>.</li>
+                        <li>Clients act as <strong>secure bridges</strong>, maintaining strict boundaries—each client only communicates with its assigned server and only has access to the data and capabilities the host allows.</li>
+                        <li><strong>Example:</strong> In the IDE, one client connects to the code search server, another to the documentation server. The code search client cannot access documentation data, and vice versa.</li>
+                    </ul>
+                </li>
+                <li><strong>Server:</strong> A <strong>service</strong> that provides specialized context, tools, or prompts to the client.
+                    <ul>
+                        <li>Servers can be <strong>local or remote</strong>, and are focused on specific capabilities.</li>
+                        <li>Servers operate <strong>independently</strong>, exposing resources, tools, or prompts via the MCP protocol, and must respect security constraints set by the host.</li>
+                        <li><strong>Examples:</strong>
+                            <ul>
+                                <li>A <strong>code search server</strong> that indexes and searches code repositories.</li>
+                                <li>A <strong>documentation server</strong> that retrieves API documentation.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <hr/>
+            <h3>MCP Design Principles</h3>
+            <ul>
+                <li><strong>Servers should be extremely easy to build:</strong>
+                    <ul>
+                        <li>Host applications handle complex orchestration responsibilities, allowing servers to focus on specific, well-defined capabilities with simple interfaces and maintainable code.</li>
+                    </ul>
+                </li>
+                <li><strong>Servers should be highly composable:</strong>
+                    <ul>
+                        <li>Each server provides focused functionality in isolation, but multiple servers can be combined seamlessly. The shared protocol enables interoperability and modular, extensible design.</li>
+                    </ul>
+                </li>
+                <li><strong>Servers should not be able to read the whole conversation, nor "see into" other servers:</strong>
+                    <ul>
+                        <li>Servers receive only the necessary contextual information, with full conversation history staying with the host. Each server connection is isolated, and cross-server interactions are controlled by the host to enforce security boundaries.</li>
+                    </ul>
+                </li>
+                <li><strong>Features can be added to servers and clients progressively:</strong>
+                    <ul>
+                        <li>The core protocol provides minimal required functionality, but additional capabilities can be negotiated and added as needed. Servers and clients can evolve independently, with the protocol designed for future extensibility and backwards compatibility.</li>
+                    </ul>
+                </li>
+            </ul>
+            <hr/>
+            <h4>How It Works (At a Glance): Practical Example</h4>
+            <p><strong>Scenario:</strong> A user is interacting with an <strong>AI-powered productivity assistant (the host)</strong> that integrates both a <strong>calendar tool</strong> and a <strong>weather tool</strong>.</p>
+            <pre class="diagram">
+[User] → [Host Application]
+            ↓
+     [Client Connector] ←→ [Server 1: Calendar Tool]
+            ↓
+     [Client Connector] ←→ [Server 2: Weather Tool]
+            </pre>
+            <ol>
+                <li><strong>User</strong> asks the AI assistant: "Do I have any meetings this afternoon, and what's the weather forecast for that time?"</li>
+                <li>The <strong>Host Application</strong> uses the LLM to interpret the user's request and determines it needs to:
+                    <ul>
+                        <li>Check the user's calendar for meetings this afternoon (<strong>calendar tool</strong>)</li>
+                        <li>Get the weather forecast for the meeting time (<strong>weather tool</strong>)</li>
+                    </ul>
+                </li>
+                <li>The host:
+                    <ul>
+                        <li>Uses <strong>Client 1</strong> to connect to <strong>Server 1 (Calendar Tool)</strong>, which returns: "You have a meeting at 3:00 PM."</li>
+                        <li>Uses <strong>Client 2</strong> to connect to <strong>Server 2 (Weather Tool)</strong>, which returns: "The forecast at 3:00 PM is sunny, 75°F."</li>
+                    </ul>
+                </li>
+                <li>Each client only communicates with its assigned server. The calendar server never sees weather data, and vice versa.</li>
+                <li>The <strong>Host aggregates the results</strong> and presents: "You have a meeting at 3:00 PM. The weather at that time is expected to be sunny, 75°F."</li>
+            </ol>
         </section>
         <!-- Section: Core Message Types -->
         <section id="core-message-types">
-            <!-- Content from 03-mcp-core-message-types.md -->
+            <h2>Core Message Types</h2>
+            <h3>Overview</h3>
+            <p>JSON-RPC 2.0 is a lightweight, stateless remote procedure call (RPC) protocol that uses JSON for encoding messages and is widely used for structured communication between distributed systems.</p>
+            <p>The Model Context Protocol (MCP) uses a set of standardized message types, based on the JSON-RPC 2.0 protocol, to enable structured, reliable, and extensible communication between hosts, clients, and servers. Understanding these message types is essential for building and integrating MCP-compliant tools and applications.</p>
+            <h3>Main Message Types</h3>
+            <ul>
+                <li><strong>Request</strong></li>
+                <li><strong>Response</strong></li>
+                <li><strong>Error</strong></li>
+                <li><strong>Notification</strong></li>
+            </ul>
+            <p>Each type serves a specific purpose in the protocol and follows a well-defined structure.</p>
+            <hr/>
+            <h4>Request</h4>
+            <ul>
+                <li>Used to ask another component to perform an action or provide information.</li>
+                <li><strong>Required fields:</strong>
+                    <ul>
+                        <li><code>id</code>: MUST be a unique identifier for the request (number or string).</li>
+                        <li><code>method</code>: MUST be a string specifying the operation to invoke.</li>
+                        <li><code>params</code>: MAY be included (object or array), depending on the method.</li>
+                    </ul>
+                </li>
+                <li>Always expects a corresponding response.</li>
+            </ul>
+            <pre class="code-block">{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "resources/read",
+  "params": { "id": "abc123" }
+}</pre>
+            <h4>Response</h4>
+            <ul>
+                <li>Sent in reply to a request, containing the result of the requested action.</li>
+                <li><strong>Required fields:</strong>
+                    <ul>
+                        <li><code>id</code>: MUST match the <code>id</code> of the original request.</li>
+                        <li><code>result</code>: MUST be included if the request was successful (result MAY follow JSON structure).</li>
+                        <li><code>error</code>: MUST NOT be included if <code>result</code> is present.</li>
+                    </ul>
+                </li>
+            </ul>
+            <pre class="code-block">{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": { "id": "abc123", "name": "Resource Name", "data": "..." }
+}</pre>
+            <h4>Error</h4>
+            <ul>
+                <li>Sent if a request cannot be fulfilled due to an error (e.g., invalid parameters, method not found).</li>
+                <li><strong>Required fields:</strong>
+                    <ul>
+                        <li><code>id</code>: MUST match the <code>id</code> of the original request.</li>
+                        <li><code>error</code>: MUST be an object with at least <code>code</code> (number) and <code>message</code> (string).</li>
+                        <li><code>result</code>: MUST NOT be included if <code>error</code> is present.</li>
+                    </ul>
+                </li>
+                <li>Includes an error code and message for debugging and handling.</li>
+                <li><strong>Common error codes:</strong>
+                    <ul>
+                        <li><code>-32700</code> ParseError: Invalid JSON was received by the server.</li>
+                        <li><code>-32600</code> InvalidRequest: The JSON sent is not a valid Request object.</li>
+                        <li><code>-32601</code> MethodNotFound: The method does not exist or is not available.</li>
+                        <li><code>-32602</code> InvalidParams: Invalid method parameter(s).</li>
+                        <li><code>-32603</code> InternalError: Internal JSON-RPC error.</li>
+                        <li>(MCP and applications may define additional codes above <code>-32000</code> for custom errors.)</li>
+                    </ul>
+                </li>
+            </ul>
+            <pre class="code-block">{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "error": { "code": -32601, "message": "Method not found" }
+}</pre>
+            <h4>Notification</h4>
+            <ul>
+                <li>One-way message that does not expect a response.</li>
+                <li><strong>Required fields:</strong>
+                    <ul>
+                        <li><code>jsonrpc</code>: MUST be the string "2.0".</li>
+                        <li><code>method</code>: MUST be a string specifying the event or action.</li>
+                        <li><code>params</code>: MAY be included (object or array), depending on the method.</li>
+                        <li><code>id</code>: MUST NOT be included.</li>
+                    </ul>
+                </li>
+                <li>Used for events or updates (e.g., resource changed, progress update).</li>
+            </ul>
+            <pre class="code-block">{
+  "jsonrpc": "2.0",
+  "method": "notifications/resources/updated",
+  "params": { "resourceId": "abc123" }
+}</pre>
+            <hr/>
+            <h3>Additional Notes</h3>
+            <ul>
+                <li><strong>Batching:</strong> MCP (via JSON-RPC 2.0) supports sending multiple requests or notifications in a single batch for efficiency.</li>
+                <li><strong>Cancellation:</strong> MCP supports cancelling in-progress requests using a special notification (e.g., <code>"notifications/cancelled"</code>), allowing clients or servers to request that a long-running operation be stopped if it is no longer needed. <a href="https://modelcontextprotocol.io/specification/2025-03-26/basic/utilities/cancellation" target="_blank">Learn more</a></li>
+                <li><strong>Extensibility:</strong> Custom methods and parameters can be defined as long as they adhere to the protocol's structure.</li>
+            </ul>
+            <h4>References</h4>
+            <ul>
+                <li><a href="https://modelcontextprotocol.io/specification/2025-03-26" target="_blank">MCP Specification: Core Message Types</a></li>
+                <li><a href="https://github.com/modelcontextprotocol/modelcontextprotocol/tree/main/schema" target="_blank">MCP Protocol Schema on GitHub</a></li>
+                <li><a href="https://www.jsonrpc.org/specification" target="_blank">JSON-RPC 2.0 Specification</a></li>
+            </ul>
         </section>
         <!-- Section: Features -->
         <section id="features">
-            <!-- Content from 04-mcp-features.md -->
+            <h2>Features</h2>
+            <p>MCP enables applications to leverage a variety of powerful features by connecting to different types of servers and clients. These features allow AI-powered assistants to perform useful actions, retrieve information, and interact with external systems in a standardized way.</p>
+            <hr/>
+            <h3>Server Features</h3>
+            <ul>
+                <li><strong>Resources:</strong> Structured data or contextual information that a server can provide to the client.
+                    <ul>
+                        <li><strong>Local or Remote:</strong> Resources can come from local files, databases, or remote/cloud services—any data source the server can access.</li>
+                        <li><strong>How it works:</strong> The server exposes data (e.g., files, database tables, API results) as resources, which the client/LLM can browse, reference, or subscribe to for updates.</li>
+                        <li><em>Examples:</em> Exposing a list of files in a local project folder; presenting customer records from a remote database as a resource.</li>
+                    </ul>
+                </li>
+                <li><strong>Tools:</strong> Functions or actions that the AI assistant can invoke via the MCP protocol.
+                    <ul>
+                        <li><strong>How it works:</strong> Tools are interactive operations—such as running a query, formatting code, or sending a notification—that the LLM can call with specific parameters.</li>
+                        <li><em>Examples:</em> A "searchDatabase" tool lets the LLM request "find all customers in California" and get results on demand.</li>
+                    </ul>
+                </li>
+                <li><strong>Prompts:</strong> Templated messages or workflows provided by the server to guide the LLM's behavior or user interactions.
+                    <ul>
+                        <li><strong>How it works:</strong> Prompts standardize and streamline common tasks, ensuring consistency and best practices in how the LLM interacts with users or data.</li>
+                        <li><em>Examples:</em> A prompt template for summarizing a document; a workflow for onboarding a new user.</li>
+                    </ul>
+                </li>
+            </ul>
+            <blockquote><strong>Tip:</strong> Use a resource for static or subscribable data; use a tool for dynamic, parameterized queries or actions.</blockquote>
+            <h3>Client Features</h3>
+            <ul>
+                <li><strong>Sampling:</strong> The ability for the server to request the client to generate a completion or response from the LLM (i.e., to "sample" text or data).
+                    <ul>
+                        <li><strong>How it works:</strong> Sampling enables advanced workflows where the server can leverage the client's LLM access for tasks like summarization, drafting, or decision-making—without needing its own LLM API keys.</li>
+                        <li><em>Examples:</em> A server asks the client to use its LLM to summarize a document or generate a draft email as part of a larger workflow.</li>
+                    </ul>
+                </li>
+                <li><strong>Roots:</strong> A way for the client to define and expose the boundaries of accessible directories and files to the server.
+                    <ul>
+                        <li><strong>How it works:</strong> Roots provide fine-grained control over what parts of the filesystem a server can access, enhancing security and privacy.</li>
+                        <li><em>Examples:</em> A client exposes only the "/projects/my-app" directory to a code analysis server, preventing access to other files.</li>
+                    </ul>
+                </li>
+            </ul>
         </section>
         <!-- Section: Connection Lifecycle -->
         <section id="connections-lifecycle">
-            <!-- Content from 05-mcp-connections-lifecycle.md -->
+            <h2>MCP Connection Lifecycle</h2>
+            <h3>Overview</h3>
+            <p>The connection lifecycle in the Model Context Protocol (MCP) defines how a session is established, maintained, and terminated between a client and a server, with the host orchestrating the process. This lifecycle ensures robust, secure, and feature-negotiated communication for all MCP-compliant integrations.</p>
+            <h3>Lifecycle Diagram</h3>
+            <div class="diagram">
+                <img src="../assets/images/mcp-lifecycle.png" alt="MCP Connection Lifecycle" style="max-width:600px;width:100%;height:auto;display:block;margin:0 auto;" />
+            </div>
+            <p><em>The diagram above illustrates the key phases and message flows in a typical MCP session, including initialization, active session management, requests, notifications, and termination.</em></p>
+            <h3>Lifecycle Phases</h3>
+            <h4>1. Initialization</h4>
+            <ul>
+                <li><strong>Host initializes the client</strong> and starts the session.</li>
+                <li><strong>Client sends an initialization request</strong> to the server, declaring its supported capabilities (features, protocol version, etc.).</li>
+                <li><strong>Server responds</strong> with its own supported capabilities.</li>
+                <li><strong>Negotiation:</strong> Only the features supported by both client and server are enabled for the session.</li>
+            </ul>
+            <h4>2. Active Session with Negotiated Features</h4>
+            <ul>
+                <li>Once initialized, the session enters an active state where both sides know which features are available.</li>
+                <li><strong>Client Requests:</strong>
+                    <ul>
+                        <li>User- or model-initiated actions trigger requests from the client to the server (e.g., requesting tools or resources).</li>
+                        <li>The server processes the request and sends a response.</li>
+                        <li>The client updates the UI or responds to the model as needed.</li>
+                    </ul>
+                </li>
+                <li><strong>Server Requests:</strong>
+                    <ul>
+                        <li>The server can initiate requests to the client (e.g., sampling requests for LLM completions).</li>
+                        <li>The client forwards these to the AI and returns the response to the server.</li>
+                    </ul>
+                </li>
+                <li><strong>Notifications:</strong>
+                    <ul>
+                        <li>Either side can send notifications for events like resource updates or status changes.</li>
+                        <li>Notifications do not expect a response and are used for real-time updates.</li>
+                    </ul>
+                </li>
+            </ul>
+            <h4>3. Termination</h4>
+            <ul>
+                <li>Either the host or client can terminate the session when work is complete or an error occurs.</li>
+                <li>The session ends cleanly, and all resources are released.</li>
+            </ul>
+            <h3>Key Points</h3>
+            <ul>
+                <li><strong>Capability negotiation</strong> during initialization ensures only mutually supported features are active.</li>
+                <li><strong>Requests</strong> and <strong>notifications</strong> flow in both directions, enabling rich, interactive workflows.</li>
+                <li><strong>Termination</strong> is explicit, ensuring clean shutdown and resource management.</li>
+            </ul>
         </section>
         <!-- Section: Transports & Security -->
         <section id="transports-security">
-            <!-- Content from 06-mcp-transports.md -->
+            <h2>Transport Protocols</h2>
+            <h3>Transport Protocols in MCP</h3>
+            <p>MCP supports two main transport protocols for communication between clients and servers:</p>
+            <ul>
+                <li><strong>stdio:</strong> The client launches the MCP server as a subprocess and exchanges messages using standard input and output streams. This is fast, local, and ideal for tools running on the same machine.</li>
+                <li><strong>Streamable HTTP:</strong> The client and server communicate over HTTP using POST and GET requests, with specific headers to manage content and sessions:
+                    <ul>
+                        <li><strong>POST:</strong>
+                            <ul>
+                                <li>The client sends one or more JSON-RPC messages in a POST request with <code>Content-Type: application/json</code>.</li>
+                                <li>The <code>Accept</code> header should include both <code>application/json</code> and <code>text/event-stream</code> to indicate the client can handle either a single response or a streaming response.</li>
+                                <li>The server responds with <code>Content-Type: application/json</code> for a single response, or <code>Content-Type: text/event-stream</code> for streaming multiple messages.</li>
+                                <li>If a session is established, both client and server include the <code>Mcp-Session-Id</code> header in their requests and responses.</li>
+                            </ul>
+                        </li>
+                        <li><strong>GET:</strong>
+                            <ul>
+                                <li>The client can open a persistent connection by sending a GET request with <code>Accept: text/event-stream</code>, allowing the server to push messages as events occur.</li>
+                                <li>The server responds with <code>Content-Type: text/event-stream</code> to confirm a streaming connection.</li>
+                                <li>The <code>Mcp-Session-Id</code> header is also used if a session is active.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <p>This approach enables both single-response and real-time, streaming communication, making MCP suitable for a wide range of use cases.</p>
+            <blockquote>For more details, see the <a href="https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http" target="_blank">MCP Transports documentation</a>.</blockquote>
+            <hr/>
+            <h3>Authorization in MCP (2025-03-26 Spec)</h3>
+            <ul>
+                <li><strong>Authorization is optional in MCP, but for HTTP-based transports, it is strongly recommended (SHOULD) for security, especially in production environments.</strong></li>
+                <li>OAuth 2.1 is the recommended method for secure authorization and access control.</li>
+                <li>For local (stdio) transports, credentials are typically managed via the environment.</li>
+                <li><strong>Further reading:</strong> See the <a href="https://modelcontextprotocol.io/specification/2025-03-26/basic/authorization" target="_blank">MCP Authorization documentation</a> for full details and best practices.</li>
+            </ul>
+            <hr/>
+            <h3>Session Management in MCP</h3>
+            <ul>
+                <li>MCP supports session management to maintain stateful interactions between clients and servers.</li>
+                <li>When using Streamable HTTP, the server may assign a unique session ID during initialization (via the <code>Mcp-Session-Id</code> header).</li>
+                <li>The client must include this session ID in all subsequent requests for the session's duration.</li>
+                <li>Sessions can be explicitly terminated by the client or server, ensuring clean resource management and robust error handling.</li>
+            </ul>
+            <blockquote>For more, see <a href="https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#session-management" target="_blank">Session Management in the MCP spec</a>.</blockquote>
+        </section>
+        <!-- Section: Security and Trust & Safety -->
+        <section id="security-trust">
+            <h2>Security and Trust &amp; Safety</h2>
+            <div class="note" style="background: #fffbe6; border-left: 4px solid #ff9e3d; padding: 12px 18px; border-radius: 6px; margin-bottom: 1.2em;">
+                <strong>Reference:</strong> <a href="https://modelcontextprotocol.io/specification/2025-03-26#security-and-trust-%26-safety" target="_blank" rel="noopener">MCP Specification: Security and Trust &amp; Safety</a><br>
+                <em>This section is a direct, word-for-word reference from the official MCP specification for accuracy and authority.</em>
+            </div>
+            <p>The Model Context Protocol (MCP) enables powerful integrations between LLMs and external tools or data sources. With this power comes significant responsibility: implementors must ensure robust security, user trust, and safety at every stage of development and deployment.</p>
+            <h3>Key Principles</h3>
+            <ol>
+                <li><strong>User Consent and Control</strong><br>
+                    Users must explicitly consent to all data access and operations. Users should always understand and control what data is shared and what actions are taken on their behalf. Applications should provide clear UIs for reviewing and authorizing activities.
+                </li>
+                <li><strong>Data Privacy</strong><br>
+                    Hosts must obtain explicit user consent before exposing user data to servers. Resource data must not be transmitted elsewhere without user consent, and all user data should be protected with appropriate access controls.
+                </li>
+                <li><strong>Tool Safety</strong><br>
+                    Tools represent arbitrary code execution and must be treated with caution. Descriptions of tool behavior should be considered untrusted unless obtained from a trusted server. Hosts must obtain explicit user consent before invoking any tool, and users should understand what each tool does before authorizing its use.
+                </li>
+                <li><strong>LLM Sampling Controls</strong><br>
+                    Users must explicitly approve any LLM sampling requests. Users should control whether sampling occurs, the actual prompt sent, and what results the server can see. The protocol intentionally limits server visibility into prompts.
+                </li>
+            </ol>
+            <h3>Implementation Guidelines</h3>
+            <ul>
+                <li>Build robust consent and authorization flows into your applications.</li>
+                <li>Provide clear documentation of security implications for users and developers.</li>
+                <li>Implement appropriate access controls and data protections.</li>
+                <li>Follow security best practices in all integrations.</li>
+                <li>Consider privacy implications in all feature designs.</li>
+            </ul>
+            <blockquote><strong>While MCP itself cannot enforce these principles at the protocol level, it is the responsibility of every implementor to uphold them in practice.</strong></blockquote>
         </section>
         <!-- Section: Quiz -->
         <section id="quiz">
-            <!-- Content from 08-mcp-quiz.md -->
+            <h2>MCP Module Quiz</h2>
+            <div class="quiz-section">
+                <div class="quiz-container">
+                    <div class="quiz-question">
+                        <p class="question-title">1. Which of the following are the three main roles in the MCP architecture?</p>
+                        <ul class="quiz-options">
+                            <li class="quiz-option" data-correct="true">A) Host, Client, Server</li>
+                            <li class="quiz-option" data-correct="false">B) User, Model, Database</li>
+                            <li class="quiz-option" data-correct="false">C) Agent, Tool, Resource</li>
+                            <li class="quiz-option" data-correct="false">D) Application, API, Service</li>
+                        </ul>
+                        <div class="quiz-feedback">
+                            <strong>Answer:</strong> A) Host, Client, Server
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">
+                        <p class="question-title">2. True or False: In MCP, only the client can send requests to the server.</p>
+                        <ul class="quiz-options">
+                            <li class="quiz-option" data-correct="false">True</li>
+                            <li class="quiz-option" data-correct="true">False</li>
+                        </ul>
+                        <div class="quiz-feedback">
+                            <strong>Answer:</strong> False. Both the client and server can send requests and notifications.
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">
+                        <p class="question-title">3. Which protocol is used by MCP for encoding messages?</p>
+                        <ul class="quiz-options">
+                            <li class="quiz-option" data-correct="false">A) XML-RPC</li>
+                            <li class="quiz-option" data-correct="true">B) JSON-RPC 2.0</li>
+                            <li class="quiz-option" data-correct="false">C) SOAP</li>
+                            <li class="quiz-option" data-correct="false">D) REST</li>
+                        </ul>
+                        <div class="quiz-feedback">
+                            <strong>Answer:</strong> B) JSON-RPC 2.0
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">
+                        <p class="question-title">4. What is the difference between a resource and a tool in MCP?</p>
+                        <ul class="quiz-options">
+                            <li class="quiz-option" data-correct="false">A) Resources are actions, tools are data</li>
+                            <li class="quiz-option" data-correct="true">B) Resources are data or information, tools are actions or functions</li>
+                            <li class="quiz-option" data-correct="false">C) Both are the same</li>
+                            <li class="quiz-option" data-correct="false">D) Tools are only for security</li>
+                        </ul>
+                        <div class="quiz-feedback">
+                            <strong>Answer:</strong> B) Resources are data or information, tools are actions or functions
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">
+                        <p class="question-title">5. True or False: MCP supports both stdio and HTTP as transport protocols.</p>
+                        <ul class="quiz-options">
+                            <li class="quiz-option" data-correct="true">True</li>
+                            <li class="quiz-option" data-correct="false">False</li>
+                        </ul>
+                        <div class="quiz-feedback">
+                            <strong>Answer:</strong> True
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">
+                        <p class="question-title">6. Which of the following is the recommended method for authorization in MCP when using HTTP-based transports?</p>
+                        <ul class="quiz-options">
+                            <li class="quiz-option" data-correct="false">A) Basic Auth</li>
+                            <li class="quiz-option" data-correct="true">B) OAuth 2.1</li>
+                            <li class="quiz-option" data-correct="false">C) API Key in URL</li>
+                            <li class="quiz-option" data-correct="false">D) No authorization is needed</li>
+                        </ul>
+                        <div class="quiz-feedback">
+                            <strong>Answer:</strong> B) OAuth 2.1
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">
+                        <p class="question-title">7. True or False: Notifications in MCP are one-way messages that do not expect a response.</p>
+                        <ul class="quiz-options">
+                            <li class="quiz-option" data-correct="true">True</li>
+                            <li class="quiz-option" data-correct="false">False</li>
+                        </ul>
+                        <div class="quiz-feedback">
+                            <strong>Answer:</strong> True
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-nav-btns">
+                <button id="back-quiz">Back</button>
+                <button id="next-quiz">Next</button>
+            </div>
         </section>
         <!-- Section: References -->
         <section id="references">
-            <!-- Content from 07-mcp-references.md -->
+            <h2>References</h2>
+            <ul>
+                <li><a href="https://modelcontextprotocol.io/introduction" target="_blank">Model Context Protocol: Introduction (Official)</a> — Overview, motivation, and analogy for MCP.</li>
+                <li><a href="https://modelcontextprotocol.io/specification/2025-03-26" target="_blank">Model Context Protocol: Full Specification (Official)</a> — The canonical, up-to-date protocol specification.</li>
+                <li><a href="https://modelcontextprotocol.io/specification/2025-03-26/architecture" target="_blank">MCP Specification: Architecture (Official)</a> — Authoritative source on host, client, and server roles, security boundaries, and design principles.</li>
+                <li><a href="https://modelcontextprotocol.io/docs/concepts/architecture" target="_blank">Model Context Protocol: Core Architecture (Concepts)</a> — Explains the architecture, connection flows, and isolation principles in detail.</li>
+                <li><a href="https://modelcontextprotocol.io/docs/concepts/resources" target="_blank">Model Context Protocol: Concepts – Resources, Tools, Prompts, Sampling</a> — Deep dives into each feature, with examples and best practices.</li>
+                <li><a href="https://medium.com/@singhrajni2210/model-context-protocol-mcp-a-technical-deep-dive-810273a34304" target="_blank">Model Context Protocol (MCP) — A Technical Deep Dive (Medium)</a> — Third-party technical deep dive into MCP's motivation, architecture, and use cases.</li>
+                <li><a href="https://github.com/modelcontextprotocol/docs" target="_blank">MCP GitHub Documentation</a> — The open-source repository for MCP documentation, including examples and community discussions.</li>
+                <li><a href="https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/schema" target="_blank">MCP Detailed Specification</a> - Detailed MCP specification in typescript</li>
+                <li><a href="https://modelcontextprotocol.io/quickstart" target="_blank">Model Context Protocol: Tutorials and Quickstarts</a> — Step-by-step guides for building servers and clients.</li>
+                <li><a href="https://www.jsonrpc.org/specification" target="_blank">JSON-RPC 2.0 Specification</a></li>
+            </ul>
         </section>
     </div>
     <script src="../assets/js/course-nav.js"></script>
