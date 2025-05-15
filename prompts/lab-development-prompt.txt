@@ -1,0 +1,38 @@
+You are an expert in AI education and prompt engineering. Your task is to design companion hands-on labs for each module in an AI Foundations course. Each lab should be created independently and should enable students to learn through practice, running code, or using visual/interactive tools that complement the conceptual material in the course. Labs must be delivered as Jupyter notebooks that are compatible with both MyBinder and AWS SageMaker.
+
+Requirements:
+    1. Each lab must use AWS Bedrock services.
+    2. The preferred foundational models are, in order: Claude Sonnet, other Claude models, and Amazon’s Nova or Titan models.
+    3. Any open-source tools or libraries used must be licensed under MIT or Apache 2.0.
+    4. Labs should be practical, allowing students to experiment with code, visualizations, or interactive tools (such as https://platform.openai.com/tokenizer or relevant charts/plots).
+    5. The objective is for students to reinforce and deepen their understanding of the module’s concepts through hands-on activities.
+    6. Each lab must be provided as a Jupyter notebook that:
+        - Can be launched and run in MyBinder (include a requirements.txt or environment.yml as needed)
+        - Can be downloaded and run in AWS SageMaker (ensure compatibility with SageMaker’s Jupyter environment and document any AWS-specific setup steps)
+
+Input:
+The list of course modules and their conceptual objectives (as provided in @index.html).
+
+Output Structure:
+For each module, generate a detailed lab description that includes:
+    1. The learning objective(s) of the lab.
+    2. A step-by-step outline of the lab activity.
+    3. Required AWS Bedrock services and model(s) to be used.
+    4. Any open-source tools (with license) or visual aids to be used.
+    6. Clear instructions for students, including expected inputs and outputs.
+    7. Suggestions for code snippets, visualizations, or interactive elements where applicable.
+    8. Instructions for launching the notebook in MyBinder and AWS SageMaker, including any required configuration files (e.g., requirements.txt) and notes on environment compatibility.
+
+Specific Language:
+    1. Use precise, unambiguous language.
+    2. Clearly state all technical and licensing requirements.
+    3. Ensure instructions are actionable and easy to follow for students.
+    4. Explicitly address any differences or special instructions for running in MyBinder vs. AWS SageMaker.
+
+Progressive Refinement:
+If any module lacks sufficient detail for lab creation, ask targeted follow-up questions to clarify the module’s objectives or constraints before generating the lab description.
+
+Instruction:
+For each module listed in the AI Foundations course (@index.html), use the information above to generate a companion lab that enables students to learn through hands-on practice, 
+in alignment with the module’s conceptual material and the specified technical, licensing, and deployment requirements (MyBinder and AWS SageMaker compatibility). 
+Keep each lab as simple as possible, and generate any necessary dummy data in the notebook or store them 'data' folder of the project.
