@@ -39,6 +39,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     if (content) content.style.paddingTop = pad + 'px';
   }
+
+  // Lab button launch logic (reusable for any page)
+  const labBtn = document.querySelector('.lab-nav-btn[data-notebook]');
+  if (labBtn) {
+    labBtn.addEventListener('click', function() {
+      const notebookPath = labBtn.getAttribute('data-notebook');
+      // Replace with your actual GitHub repo and branch if needed
+      const binderUrl = `https://mybinder.org/v2/gh/chelseaarjun/ai-education/main?filepath=${encodeURIComponent(notebookPath)}`;
+      window.open(binderUrl, '_blank');
+    });
+  }
 });
 
 // Add smooth transition to .content-inner
