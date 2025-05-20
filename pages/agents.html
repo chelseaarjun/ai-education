@@ -172,8 +172,8 @@
         <section id="fundamentals" class="module-section">
             <h2>From LLMs to Agents: Why Go Further?</h2>
             <p>While <strong>LLMs</strong> are incredibly versatile, many real-world applications require more than just language understanding.</p>
-            <div class="callout-info"><span class="callout-icon">🤖</span>
-            <p> <strong>The agent</strong> is a software system that wraps around the LLM, orchestrating when to call the LLM, what to ask, how to use the response, and how to interact with the environment (including databases, APIs, or human-in-the-loop steps).</p>
+            <div class="callout-info" style="background:#f8fafd;border-left:4px solid #4a6fa5;margin:1.2em 0 0.5em 0;padding:1em 1.2em;"><span class="callout-icon">🤖</span>
+            <strong>The agent</strong> is a software system that wraps around the LLM, orchestrating when to call the LLM, what to ask, how to use the response, and how to interact with the environment (including databases, APIs, or human-in-the-loop steps).
             </div>
             <p>Agents extend the capabilities of LLMs by adding:</p>
             <ul class="enhanced-list">
@@ -181,6 +181,11 @@
                 <li><strong>Memory Recall:</strong> Agents remember past actions, user preferences, or important facts (short-term and long-term).</li>
                 <li><strong>Autonomous Decision-making:</strong> Agents use an LLM as their brain and repeat the <b>decision cycle</b> (Observe → Plan → Act) as needed until an end state is reached.</li>
             </ul>
+            <!-- Bare Minimum Agent Note -->
+            <div class="callout-info" style="background:#fffbe6;border-left:4px solid #ffd700;margin:1em 0 1.2em 0;padding:1em 1.2em;">
+              <span style="font-size:1.2em;margin-right:0.3em;">⚡</span>
+              <b>LLM Access</b> and a <b>decision loop</b> (observe, plan, act) are the true minimum for autonomy. <b>Memory</b> and <b>tool use</b> are optional for the simplest agents, but required for multi-step, context-aware, or world-interacting agents.
+            </div>
             <h3>When Should You Use Agents?</h3>
             <p>Not every application needs the complexity of an agent. Many tasks—like summarization, classification, or Q&A—can be solved with just prompt engineering and an LLM.</p>
             <p>However, as your use case grows to require memory, tool use, or multi-step reasoning, agents become essential.</p>
