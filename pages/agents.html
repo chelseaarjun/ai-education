@@ -139,6 +139,7 @@
         <button class="module-nav-btn" data-section="memory">Memory</button>
         <button class="module-nav-btn" data-section="tools">Tools</button>
         <button class="module-nav-btn" data-section="decision-cycle">Decision Cycle</button>
+        <button class="module-nav-btn" data-section="types-of-agents">Types of Agents</button>
         <button class="module-nav-btn" data-section="quiz-section">Quiz</button>
     </nav>
     <nav class="module-sidebar"></nav>
@@ -146,21 +147,22 @@
         <!-- Section 0: Introduction -->
         <section id="introduction">
             <div class="course-description">
-                <h2 class="module-title">Module 3: Cognitive Language Agents</h2>
+                <h2 class="module-title">Module 3: Autonomous Cognitive Language Agents</h2>
                 <p>In the previous modules, you learned the foundational building blocks of modern AI applications:</p>
                 <ul>
                     <li><strong>Module 1</strong> introduced you to Large Language Models (LLMs)—powerful AI systems capable of understanding and generating human language. LLMs excel at reasoning, summarizing, answering questions, and more, but they operate within certain boundaries: they have no persistent memory, cannot access external tools or data, and do not act autonomously.</li>
                     <li><strong>Module 2</strong> explored the art and science of prompt engineering—the practice of crafting clear, effective instructions to get the best results from LLMs. With strong prompt engineering, you can build surprisingly capable applications using just an LLM, without any additional complexity.</li>
                 </ul>
                 <p>While LLMs are incredibly versatile, many real-world applications require more than just language understanding. This is where AI agents come in.</p>
-                <p>This module builds on your understanding of LLMs and prompt engineering, showing you how to design and build agents that can remember, reason, use tools, and act autonomously—unlocking a new level of capability for your AI applications.</p>
+                <p>This module builds on your understanding of LLMs and prompt engineering, showing you how to design and build autonomous agents that can remember, reason, use tools, and act autonomously—unlocking a new level of capability for your AI applications.</p>
                 <h3 class="section-title">What You'll Learn</h3>
                 <p>In this module, you'll master the following key areas:</p>
                 <ul class="enhanced-list">
-                    <li><b>Agent Fundamentals:</b> What makes an AI agent different from an LLM</li>
-                    <li><b>Memory:</b> How agents retain and use information</li>
+                    <li><b>Agent Fundamentals:</b> What makes an autonomous AI agent different from an LLM</li>
+                    <li><b>Memory:</b> Types of memory and how agents use them</li>
                     <li><b>Tools:</b> How agents use external tools to extend their capabilities</li>
                     <li><b>Decision Cycle:</b> How agents observe, plan, and act in iterative loops</li>
+                    <li><b>Types of Agents:</b> Different types of agents and their characteristics</li>
                 </ul>
                 <span style='font-size:1.2em; margin-right:0.3em;'>💡</span><strong>Tip:</strong> No matter if you're building a simple LLM-powered app or a sophisticated agent system, every successful AI solution depends on clear, well-crafted prompts - even the most advanced agents rely on clear, well-structured prompts to guide the LLM's reasoning and actions.
             </div>           
@@ -194,21 +196,21 @@
                     <tr>
                         <th></th>
                         <th>Traditional Workflow</th>
-                        <th>Prompt-Enhanced LLM Application</th>
-                        <th>Agentic Application</th>
+                        <th>Single-Step LLM Applications</th>
+                        <th>Multi-Step Autonomous Agents</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr><td><b>Flexibility</b></td><td>Rigid, fixed steps</td><td>Flexible output, but fixed process</td><td>Dynamic, adapts steps and tools</td></tr>
-                    <tr><td><b>Use of Tools</b></td><td>Manual or pre-coded</td><td>Limited (via prompt)</td><td>Can autonomously select and use tools</td></tr>
-                    <tr><td><b>Memory</b></td><td>Minimal, often stateless</td><td>Short-term (context window)</td><td>Short-term and long-term, episodic, etc.</td></tr>
-                    <tr><td><b>Decision Cycle</b></td><td>Predefined logic</td><td>LLM-based, but single-shot</td><td>Multi-step, iterative, goal-driven</td></tr>
+                    <tr><td><b>Use of Tools</b></td><td> Pre-coded</td><td>Limited (via custom integration or RAG)</td><td>Can autonomously select and use tools</td></tr>
+                    <tr><td><b>Memory</b></td><td>Minimal, often stateless</td><td>Limited to context window (stateless across calls)</td><td>Stateful (remembers across steps using long-term memory)</td></tr>
+                    <tr><td><b>Decision Cycle</b></td><td>Predefined logic</td><td>LLM-based, but single-step</td><td>Multi-step, iterative, goal-driven</td></tr>
                 </tbody>
             </table>
             <h3>Example: Document Extraction</h3>
             <ul>
                 <li><strong>Traditional Workflow:</strong> Extracts fixed fields from one type of document that always follows the same structure (e.g., always pulls "Name" and "Date" from a standard lease form).</li>
-                <li><strong>Prompt-Enhanced LLM Application:</strong> Can flexibly extract different fields based on the prompt, but still processes one document at a time and does not adapt its process or use external tools.</li>
+                <li><strong>Single-Step LLM Applications:</strong> Can flexibly extract different fields based on the prompt, but still processes one document at a time and does not adapt its process or use external tools.</li>
                 <li><strong>Agentic Application:</strong> Can interact with tools to translate documents, convert between different document types, and extract relevant fields—even adapting its approach based on the document's structure or missing information.</li>
             </ul>
             <div class="code-examples-row">
@@ -331,11 +333,6 @@ spanish_doc = "Este contrato de arrendamiento es entre John Doe y ACME Corp. Com
 print(agent_decision_loop(spanish_doc))
 </code></pre>
                 </div>
-            </div>
-            <!-- Frameworks Note -->
-            <div class="callout-info" style="background:#f8fafd;border-left:4px solid #4a6fa5;margin:1.2em 0 0.5em 0;padding:1em 1.2em;">
-                <span style="font-size:1.1em;margin-right:0.3em;">🛠️</span>
-                <b>Note:</b> Frameworks like <b>LangChain</b> can greatly simplify the development of LLM-powered applications by providing abstractions for agents, tools, memory, and orchestration. However, the decision to incorporate such frameworks should be carefully evaluated based on your specific use case, complexity, and production requirements.
             </div>
             <div class='section-nav-btns'>
                 <button id='back-fundamentals' disabled>Back</button>
@@ -555,7 +552,11 @@ print(agent_decision_loop(spanish_doc))
                 <li><strong>CrewAI</strong>: Focuses on multi-agent collaboration and workflow orchestration.</li>
                 <li><strong>Autogen</strong> (Microsoft): For building multi-agent and tool-using systems.</li>
             </ul>
-            <p>These libraries provide reusable components, integrations, and best practices, making it much easier and safer to build production-grade agents.</p>
+             <!-- Frameworks Note -->
+             <div class="callout-info" style="background:#f8fafd;border-left:4px solid #4a6fa5;margin:1.2em 0 0.5em 0;padding:1em 1.2em;">
+                <span style="font-size:1.1em;margin-right:0.3em;">🛠️</span>
+                <b>Note:</b> These frameworks provide reusable components, integrations, and best practices that can greatly simplify the development effort needed to build safe production-grade agents. However, the decision to incorporate such frameworks should be carefully evaluated based on your specific use case, complexity, and production requirements.
+            </div>
             <hr>
             <h3>Example (Customer Support Chatbot)</h3>
             <ol>
@@ -578,6 +579,39 @@ print(agent_decision_loop(spanish_doc))
             <div class='section-nav-btns'>
                 <button id='back-decision-cycle'>Back</button>
                 <button id='next-decision-cycle'>Next</button>
+            </div>
+        </section>
+        <section id="types-of-agents" class="module-section" style="display:none">
+            <h2>Types of Agents</h2>
+            <ol style="margin-left:1.2em;">
+                <li><b>Stateful (Conversational Multi-Turn) Agents</b><br>
+                    <b>Description:</b> These agents maintain context or memory across multiple turns, allowing for more natural conversations or multi-step tasks.<br>
+                    <b>Example:</b> A customer support bot that remembers your previous questions in a session.
+                </li>
+                <li><b>Tool-Using Agents</b><br>
+                    <b>Description:</b> These agents can call external tools, APIs, or functions in addition to using the LLM. They can fetch data, perform calculations, or interact with databases.<br>
+                    <b>Example:</b> An agent that can look up real-time weather, do math, or retrieve information from a company database.
+                </li>
+                <li><b>Autonomous (Iterative/Decision-Loop) Agents</b><br>
+                    <b>Description:</b> These agents operate in a loop: they observe, plan, and act—possibly using memory and tools—until a goal is reached. They can break down complex tasks into sub-steps and decide what to do next at each step.<br>
+                    <b>Example:</b> An agent that plans a trip by searching for flights, booking hotels, and creating an itinerary, making decisions at each step.
+                </li>
+                <li><b>Multi-Agent Systems</b><br>
+                    <b>Description:</b> These systems involve multiple agents, each with specialized roles, collaborating or communicating to solve complex problems.<br>
+                    <b>Example:</b> A team of agents where one researches, another writes, and a third reviews the output.
+                </li>
+                <li><b>Human-in-the-Loop Agents</b><br>
+                    <b>Description:</b> These agents can escalate to or collaborate with humans when they reach the limits of their capabilities or need approval.<br>
+                    <b>Example:</b> An agent that drafts an email but asks a human to review before sending.
+                </li>
+                <li><b>Specialized Agents</b><br>
+                    <b>Description:</b> <!-- please add description -->
+                    <br><b>Example:</b> <!-- please add example -->
+                </li>
+            </ol>
+            <div class='section-nav-btns'>
+                <button id='back-types-of-agents'>Back</button>
+                <button id='next-types-of-agents'>Next</button>
             </div>
         </section>
         <section id="quiz-section" class="module-section" style="display:none">
