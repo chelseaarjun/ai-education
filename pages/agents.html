@@ -212,30 +212,34 @@
                     <div class="code-summary">
                         This code sends a prompt to a language model to extract specific fields from a lease document in a single step. It highlights how prompt engineering alone enables flexible information extraction without any additional logic or memory.
                     </div>
-                    <pre><code class="language-python">from langchain.llms import Bedrock
-<span class="code-highlight">from langchain.prompts import PromptTemplate</span>
-from langchain.chains import LLMChain
+                    <pre><code class="language-python">import boto3
+import json
 
-# Initialize Bedrock LLM (replace with your model and credentials)
-llm = Bedrock(
-    model_id="anthropic.claude-v2",  # or "amazon.titan-text-lite-v1"
-    region_name="us-west-2"
-)
-
-# Define a prompt template for extracting fields
-<span class="code-highlight">prompt = PromptTemplate(
-    input_variables=["document"],
-    template="Extract the following fields from this lease document: Tenant Name, Lease Start Date, Rent Amount.\n\nDocument:\n{document}\n\nFields:"
-)</span>
-
-# Create a simple LLM chain
-<span class="code-highlight">chain = LLMChain(llm=llm, prompt=prompt)</span>
-
+# Set up Bedrock client
+bedrock = boto3.client("bedrock-runtime", region_name="us-east-1")
+<span class="code-highlight">
+def extract_fields(document):
+    prompt = (
+        "Extract the following fields from this lease document: Tenant Name, Lease Start Date, Rent Amount.\n\n"
+        f"Document:\n{document}\n\nFields:"
+    )
+    body = json.dumps({
+        "prompt": prompt,
+        "max_tokens_to_sample": 200,
+        "temperature": 0
+    })
+    response = bedrock.invoke_model(
+        modelId="anthropic.claude-3-sonnet-20240229-v1",
+        body=body
+    )
+    result = json.loads(response["body"].read())
+    return result["completion"].strip()
+</span>
 # Example document
 doc = "This lease is made between John Doe and ACME Corp. Lease starts on 2024-07-01. Monthly rent is $2,500."
 
-# Run the chain
-result = chain.run(document=doc)
+# Run the extraction
+result = extract_fields(doc)
 print(result)
 </code></pre>
                 </div>
@@ -244,50 +248,89 @@ print(result)
                     <div class="code-summary">
                         This code first checks if a lease document is in English or Spanish, then uses a single prompt to instruct the language model to translate to English if needed and extract key fields. It illustrates how an agent can handle multilingual input and autonomously solve a multi-step task by leveraging LLM reasoning and prompt design.
                     </div>
-                    <pre><code class="language-python">from langchain.llms import Bedrock
-<span class="code-highlight">from langchain.agents import initialize_agent, Tool</span>
-from langchain.tools import BaseTool
+                    <pre><code class="language-python">import boto3
+import json
 
-# Example tool: Document field extractor
-<span class="code-highlight">class FieldExtractorTool(BaseTool):
-    name = "Field Extractor"
-    description = "Extracts fields from a lease document."
-    def _run(self, document: str):
-        # (In practice, use an LLM or regex; here, just a placeholder)
-        return "Tenant: John Doe, Start Date: 2024-07-01, Rent: $2,500"</span>
+# Define your tools
+def translate_to_english(text):
+# Dummy translation for demo; in real use, call an API or LLM
+if "Este contrato" in text:
+    return "This lease is made between John Doe and ACME Corp. Lease starts on 2024-07-01. Monthly rent is $2,500."
+return text
 
-# Example tool: Translator
-class TranslatorTool(BaseTool):
-    name = "Translator"
-    description = "Translates a document to English."
-    def _run(self, document: str):
-        # Placeholder for translation logic
-        return "Translated document: " + document
+def extract_fields(text):
+# Dummy extraction for demo; in real use, call an LLM
+if "John Doe" in text:
+    return "Tenant: John Doe, Start Date: 2024-07-01, Rent: $2,500"
+return "Fields not found"
 
-# Initialize Bedrock LLM
-llm = Bedrock(
-    model_id="anthropic.claude-v2",
-    region_name="us-west-2"
+<span class="code-highlight"># Build prompt for Claude
+# Tool registry
+TOOLS = {
+"translate_to_english": translate_to_english,
+"extract_fields": extract_fields,
+}</span>
+
+# Bedrock client
+bedrock = boto3.client("bedrock-runtime", region_name="us-east-1")
+
+def call_claude(prompt):
+body = json.dumps({
+    "prompt": prompt,
+    "max_tokens_to_sample": 200,
+    "temperature": 0
+})
+response = bedrock.invoke_model(
+    modelId="anthropic.claude-3-sonnet-20240229-v1",
+    body=body
 )
+result = json.loads(response["body"].read())
+return result['content'][0]['text'].strip()
 
-# Register tools
-<span class="code-highlight">tools = [FieldExtractorTool(), TranslatorTool()]</span>
+<span class="code-highlight">
+def agent_decision_loop(document):
+    history = []
+    while True:
+        #Build prompt for Claude
+        prompt = (
+            "Your goal: Extract the tenant name, lease start date, and rent amount from the provided lease document. "
+            "If the document is not in English, translate it to English first.\n\n"
+            "You are an agent that can use the following tools:\n"
+            "- translate_to_english(text): Translates text to English if needed.\n"
+            "- extract_fields(text): Extracts tenant name, lease start date, and rent amount from an English lease document.\n\n"
+            f"Document: {document}\n"
+            f"History: {history}\n"
+            "What should you do next? Reply with:\n"
+            "Action: '<'tool_name'>'\n"
+            "Action Input: '<'input'>'\n"
+            "or\n"
+            "Final Answer: <your answer>\n"
+        )
+        output = call_claude(prompt)
+        print("Claude Output:", output)
+        if output.startswith("Final Answer:"):
+            return output[len("Final Answer:"):].strip()
+        elif output.startswith("Action:"):
+            lines = output.splitlines()
+            action = lines[0].split(":", 1)[1].strip()
+            action_input = lines[1].split(":", 1)[1].strip()
+            result = TOOLS[action](action_input)
+            history.append({"action": action, "input": action_input, "result": result})
+            document = result  # For this simple example, update document for next step
+        else:
+            return "Agent did not understand what to do."
+</span>
 
-# Initialize agent
-<span class="code-highlight">agent = initialize_agent(
-    tools=tools,
-    llm=llm,
-    agent_type="zero-shot-react-description"
-)</span>
-
-# Example: Document in another language
-doc = "Este contrato de arrendamiento es entre John Doe y ACME Corp. Comienza el 1 de julio de 2024. La renta mensual es de $2,500."
-
-# Run the agent
-result = agent.run(f"Extract the tenant, start date, and rent from this lease document: {doc}")
-print(result)
+# Example usage
+spanish_doc = "Este contrato de arrendamiento es entre John Doe y ACME Corp. Comienza el 1 de julio de 2024. La renta mensual es de $2,500."
+print(agent_decision_loop(spanish_doc))
 </code></pre>
                 </div>
+            </div>
+            <!-- Frameworks Note -->
+            <div class="callout-info" style="background:#f8fafd;border-left:4px solid #4a6fa5;margin:1.2em 0 0.5em 0;padding:1em 1.2em;">
+                <span style="font-size:1.1em;margin-right:0.3em;">🛠️</span>
+                <b>Note:</b> Frameworks like <b>LangChain</b> can greatly simplify the development of LLM-powered applications by providing abstractions for agents, tools, memory, and orchestration. However, the decision to incorporate such frameworks should be carefully evaluated based on your specific use case, complexity, and production requirements.
             </div>
             <div class='section-nav-btns'>
                 <button id='back-fundamentals' disabled>Back</button>
