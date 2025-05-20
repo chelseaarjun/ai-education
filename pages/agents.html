@@ -120,6 +120,16 @@
         #fundamentals .section-nav-btns {
             margin-top: 1rem;
         }
+        .code-summary {
+            background: #f8fafc;
+            border-left: 4px solid #4a6fa5;
+            border-radius: 6px;
+            padding: 0.75em 1em;
+            margin-bottom: 0.7em;
+            font-size: 1em;
+            color: #2d3a4a;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -199,6 +209,9 @@
             <div class="code-examples-row">
                 <div class="code-example-col">
                     <div class="code-example-header">Prompt-Enhanced LLM Application</div>
+                    <div class="code-summary">
+                        This code sends a prompt to a language model to extract specific fields from a lease document in a single step. It highlights how prompt engineering alone enables flexible information extraction without any additional logic or memory.
+                    </div>
                     <pre><code class="language-python">from langchain.llms import Bedrock
 <span class="code-highlight">from langchain.prompts import PromptTemplate</span>
 from langchain.chains import LLMChain
@@ -228,6 +241,9 @@ print(result)
                 </div>
                 <div class="code-example-col">
                     <div class="code-example-header">Agentic Application</div>
+                    <div class="code-summary">
+                        This code first checks if a lease document is in English or Spanish, then uses a single prompt to instruct the language model to translate to English if needed and extract key fields. It illustrates how an agent can handle multilingual input and autonomously solve a multi-step task by leveraging LLM reasoning and prompt design.
+                    </div>
                     <pre><code class="language-python">from langchain.llms import Bedrock
 <span class="code-highlight">from langchain.agents import initialize_agent, Tool</span>
 from langchain.tools import BaseTool
