@@ -3,3 +3,6 @@ matplotlib
 scikit-learn
 numpy
 tiktoken
+pandas
+faiss-cpu
+sentence-transformers

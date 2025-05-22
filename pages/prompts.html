@@ -280,9 +280,9 @@
     <nav class="module-nav">
         <button class="module-nav-btn" data-section="introduction">Introduction</button>
         <button class="module-nav-btn" data-section="overview">Overview</button>
-        <button class="module-nav-btn" data-section="writing-effective-prompts">Writing Effective Prompts</button>
+        <button class="module-nav-btn" data-section="writing-effective-prompts">Writing CRISP Prompts</button>
         <button class="module-nav-btn" data-section="techniques">Techniques</button>
-        <button class="module-nav-btn" data-section="building-applications">Building with LLMs</button>
+        <button class="module-nav-btn" data-section="building-applications">Building Prompt Based Apps</button>
         <button class="module-nav-btn" data-section="resources">Resources</button>
         <button class="module-nav-btn" data-section="quiz-section">Quiz</button>
         <button class="module-nav-btn lab-nav-btn" id="lab-launch-btn" data-notebook="notebooks/prompt_foundations_lab.ipynb">
@@ -413,7 +413,7 @@
         </section>
         <!-- Section 2: Writing Effective Prompts -->
         <section id="writing-effective-prompts">
-            <h2>2. Writing Effective Prompts</h2>
+            <h2>2. Writing CRISP Prompts</h2>
             <p>Crafting effective prompts is both an art and a science, requiring understanding of how LLMs interpret and respond to different inputs. In this section, we'll explore the CRISP framework that provides a systematic approach to prompt design, along with key challenges that even experienced prompt engineers must navigate to achieve reliable, high-quality results.</p>
             
             <h3>2.1 Core Prompting Principles: The CRISP Framework</h3>
@@ -422,21 +422,48 @@
             <div class="crisp-component">
                 <p><strong>C - Comprehensive Context</strong></p>
                 <p>Provide relevant background information that frames your request properly while avoiding unnecessary details.</p>
+                    <p>❌ <b>Poor Context (Missing key background):</b></p>
+                    "Analyze this customer feedback and suggest improvements."
+                    <p>❌ <b>Poor Context (Too much irrelevant detail):</b></p>
+                    "I'm a store manager who's been working in retail for 15 years, graduated from State University with a business degree, and I drive a Honda Civic. Our store opened in 1987 and was renovated in 2019. The building has 45,000 square feet and we sell groceries. We have 87 employees and our store hours are 6am to 11pm. Analyze this customer feedback and suggest improvements."
+                    <p>✅ <b>Good Context (Just right):</b></p>
+                    "I'm a grocery store manager analyzing customer feedback from our mobile app users. Our store focuses on fresh produce and organic products, serving a health-conscious suburban demographic. Analyze this customer feedback and suggest improvements."
             </div>
 
             <div class="crisp-component">
                 <p><strong>R - Requirements Specification</strong></p>
                 <p>Clearly define task requirements, constraints, and parameters that guide the model to know when the assigned task is complete.</p>
+                <p>❌ <b>Vague Requirements:</b></p>
+                "I'm a grocery store manager. Look at this customer feedback about our produce section and tell me what to do."
+                <p>✅ <b>Good Requirements:</b></p>
+                "I'm a grocery store manager. Analyze this customer feedback about our produce section and provide exactly 3 actionable improvement recommendations. Each recommendation must be implementable within 30 days and cost less than $5,000."
             </div>
 
             <div class="crisp-component">
                 <p><strong>I - Input/Output Structure</strong></p>
                 <p>Define the format of information you're providing and the specific format you expect in return.</p>
+                <p>❌ <b>No Structure:</b></p>
+                "I'm a grocery store manager. Here's customer feedback about our produce section: [feedback text]. Give me 3 actionable improvements under $5,000 each."
+                <p>✅ <b>Good Requirements:</b></p>
+                <p><b>INPUT FORMAT:</b> Customer feedback enclosed in triple backticks</p>
+                <code>```
+                [feedback text]
+               ```</code>
+                
+                <p><b>OUTPUT FORMAT:</b> Provide exactly 3 recommendations using this structure:</p>
+                <p>**Recommendation #:** [Title]</p>
+                <p>**Cost Estimate:** [Amount]</p>
+                <p>**Implementation Timeline:** [Days]</p>
+                <p>**Expected Impact:** [Specific outcome]</p>
             </div>
 
             <div class="crisp-component">
                 <p><strong>S - Specific Language</strong></p>
                 <p>Use precise, unambiguous terminology that eliminates confusion in your request.</p>
+                <p>❌ <b>Vague Language:</b></p>
+                "I'm a grocery store manager. Look at this customer feedback about our produce and give me some quick fixes that won't cost too much and will make customers happier soon."
+                <p>✅ <b>Specific Language:</b></p>
+                "I'm a grocery store manager. Analyze this customer feedback about our produce section and provide 3 operational improvements that can be implemented within 30 days, cost under $5,000 each, and directly address the quality issues mentioned in the feedback."
             </div>
 
             <div class="crisp-component">
@@ -552,10 +579,9 @@
 
             <div class="example">
                 <div class="prompt-example">
-                    You are an experienced security engineer with expertise in OWASP Top 10 vulnerabilities. Review the following API endpoint code and identify potential security risks, categorizing them according to the OWASP framework:
+                    You are an experienced grocery store operations manager with 15 years of experience in inventory management and customer service. Analyze the following customer complaint about produce quality and provide both immediate resolution steps and preventive measures:
 
-                    [code snippet]
-                </div>
+                    Customer complaint: "I bought avocados yesterday that looked perfect but were completely brown inside when I cut them today. This is the third time this month."                </div>
             </div>
 
             <h4>3.1.2 Self-Consistency and Verification</h4>
@@ -614,19 +640,26 @@
 
             <div class="example">
                 <div class="prompt-example">
-                    Classify the following customer inquiries by department (Technical Support, Billing, Sales, or General Information):
+                    Classify the following location factors as PRIMARY, SECONDARY, or TERTIARY for grocery store site selection:
 
                     Example 1:
-                    Customer: "I can't log into my account after the recent update."
-                    Department: Technical Support
+                    Factor: "Population density within 3-mile radius"
+                    Classification: PRIMARY
+                    Reasoning: Direct correlation with customer base size
 
-                    Example 2:
-                    Customer: "I'd like to upgrade to the enterprise plan."
-                    Department: Sales
+                    Example 2:  
+                    Factor: "Presence of complementary businesses (pharmacy, bank)"
+                    Classification: SECONDARY
+                    Reasoning: Drives foot traffic but not essential
 
-                    Now classify this inquiry:
-                    Customer: "I was charged twice for my monthly subscription."
-                    Department:
+                    Example 3:
+                    Factor: "Architectural style of surrounding buildings"
+                    Classification: TERTIARY
+                    Reasoning: Aesthetic consideration with minimal business impact
+
+                    Now classify:
+                    Factor: "Average household income within 5-mile radius"
+                    Classification:
                 </div>
             </div>
 
@@ -636,7 +669,7 @@
             <p><strong>What it is:</strong> Instructing the model to work through a problem step-by-step, showing its reasoning process.</p>
 
             <div class="diagram">
-                <img src="../assets/images/chain-of-thought-diagram.svg" alt="Chain of Thought Diagram" width="600" />
+                <img src="../assets/images/cot.png" alt="Chain of Thought Diagram" width="600" />
             </div>
 
             <p><strong>When to use it:</strong></p>
@@ -659,9 +692,16 @@
 
             <div class="example">
                 <div class="prompt-example">
-                    Question: A retail store is running a promotion where customers get 30% off their purchase, and loyalty members get an additional 15% off the discounted price. If a loyalty member buys items totaling $250, how much will they pay?
+                    A grocery chain is considering opening a new location. Analyze this decision step-by-step:
+                    Market data:
+                    - Population: 45,000 within 3 miles
+                    - Median household income: $65,000
+                    - Existing competition: 1 major chain store, 2 independent grocers
+                    - Traffic count: 25,000 vehicles/day on main road
+                    - Available space: 35,000 sq ft
+                    - Lease cost: $18/sq ft annually
 
-                    Please solve this step-by-step:
+                    Think through this analysis step-by-step, considering market penetration, competitive positioning, and financial feasibility.
                 </div>
             </div>
 
@@ -696,10 +736,10 @@
             </div>
 
             <h4>3.2.3 ReAct (Reasoning + Acting)</h4>
-            <p><strong>What it is:</strong> A prompting technique that combines reasoning with action in an iterative cycle, alternating between thinking about a problem and taking concrete steps to solve it.</p>
+            <p><strong>What it is:</strong> A systematic framework that combines reasoning and action in iterative cycles, where AI systems alternate between thinking about problems and taking concrete steps to solve them. ReAct can be implemented both at the prompt level (teaching models to reason-act within responses) and at the system level (orchestrating multiple model calls).</p>
 
             <div class="diagram">
-                <img src="../assets/images/react-diagram.svg" alt="ReAct Diagram" width="600" />
+                <img src="../assets/images/react.png" alt="ReAct Diagram" width="600" />
             </div>
 
             <p><strong>When to use it:</strong></p>
@@ -710,26 +750,24 @@
                 <li>When implementing agent-based architectures</li>
             </ul>
 
-            <div class="note">
-                <p><strong>Important note:</strong> While modern reasoning models perform many reasoning steps implicitly, the ReAct pattern remains valuable for structuring tool use in agent systems. Libraries like LangChain abstract much of the implementation complexity through functions like <code>create_react_agent</code> (see <a href="https://python.langchain.com/api_reference/langchain/agents/langchain.agents.react.agent.create_react_agent.html" target="_blank">LangChain ReAct documentation</a>) that handle the reasoning-action-observation loop behind the scenes, allowing developers to focus on defining tools and goals rather than the mechanics of implementing the pattern.</p>
-            </div>
-
             <p><strong>Reference:</strong> <a href="https://arxiv.org/abs/2210.03629" target="_blank">Yao et al. (2022). "ReAct: Synergizing Reasoning and Acting in Language Models." Google Research.</a></p>
 
             <div class="example">
                 <div class="prompt-example">
-                    You are a customer support analyst solving a technical issue. For this problem:
-                    1. THINK: Analyze what might be causing the issue based on the symptoms
-                    2. ACT: Suggest a specific diagnostic step to gather more information
-                    3. OBSERVE: Consider what the results of this step would tell you
-                    4. DECIDE: Based on this reasoning, determine the next action to take
+                    You are a commercial real estate specialist helping negotiate a grocery store lease. For each step in the negotiation process:
 
-                    Customer issue: "When I try to upload photos to your website, it gets stuck at 90% every time. I've tried different browsers but have the same problem."
+                    1. THINK: Analyze the current situation and what information you need
+                    2. ACT: Propose a specific negotiation strategy or request information  
+                    3. OBSERVE: Consider the likely response from the landlord
+                    4. DECIDE: Determine your next move based on the anticipated outcome
+
+                    Initial situation: Landlord is asking $24/sq ft for a 40,000 sq ft space. Market rate research shows comparable spaces at $18-22/sq ft. The location has high traffic but needs $200,000 in buildout modifications.
                 </div>
             </div>
+            <h3>3.3 Retrieval-Augmented Generation (RAG)</h3>
+            <p>RAG isn't a technique focused on crafting individual prompts, but rather an architectural pattern to combine prompting with external data sources. This pattern has evolved to include broader tool integrations with databases, APIs, and other external systems.</p>
 
-            <h4>3.2.4 Retrieval-Augmented Generation (RAG)</h4>
-            <p><strong>What it is:</strong> Enhancing prompts with relevant external information retrieved from documents or knowledge bases.</p>
+            <p><strong>What it is:</strong> RAG is primarily an architectural pattern that enhances prompt's context with relevant external information by retrieving relevant external information from documents or knowledge bases.</p>
 
             <div class="diagram">
                 <img src="../assets/images/RAG.png" alt="RAG System Architecture" width="600" />
@@ -742,10 +780,6 @@
                 <li>When up-to-date or proprietary information is essential</li>
                 <li>To reduce hallucinations by grounding responses in verified data</li>
             </ul>
-
-            <div class="note">
-                <p><strong>Important note:</strong> RAG is primarily an architectural pattern that works by retrieving relevant information and incorporating it into the prompt's context.</p>
-            </div>
 
             <div class="example">
                 <div class="prompt-example">
@@ -762,83 +796,100 @@
             </div>
         </section>
         <section id="building-applications">
-            <h2>4. Building with LLMs</h2>
-            <p>Well-crafted prompts are the foundation of effective AI applications. They serve as the critical interface between human goals and AI capabilities, directly impacting your application's accuracy, response quality, latency, and reliability..</p>
-                <h3>4.1 Prompt Development Methodology</h3>
-                <p>Start simple, test, evaluate and iterate incrementally using intermediate and advanced techniques based on specific needs rather than adding complexity for its own sake:</p>
+            <h2>4. Building Prompt Based LLM Applications</h2>
+            <p>Well-crafted prompts are the foundation of effective AI applications. They serve as the critical interface between human goals and AI capabilities, directly impacting your application's accuracy, response quality, latency, and reliability.</p>
+            <h3>4.1 Prompt Development Methodology</h3>
+            <p>Start simple, test, evaluate and iterate incrementally using intermediate and advanced techniques based on specific needs rather than adding complexity for its own sake:</p>
 
-                <ol>
-                    <li><strong>Start with CRISP fundamentals:</strong> A well-structured prompt following CRISP principles often yields excellent results without additional techniques.</li>
-                    <li><strong>Address specific issues:</strong> Introduce techniques only to solve identified problems.</li>
-                    <li><strong>Consider model capabilities:</strong> More advanced models may require fewer prompting techniques.</li>
-                    <li><strong>Evaluate the tradeoffs:</strong> More complex techniques often come with increased token usage and potential for confusion.</li>
-                    <li><strong>Test systematically:</strong> Document which techniques work best for specific use cases.</li>
-                </ol>
+            <ol>
+                <li><strong>Start with CRISP fundamentals:</strong> A well-structured prompt following CRISP principles often yields excellent results without additional techniques.</li>
+                <li><strong>Address specific issues:</strong> Introduce techniques only to solve identified problems.</li>
+                <li><strong>Consider model capabilities:</strong> More advanced models may require fewer prompting techniques.</li>
+                <li><strong>Evaluate the tradeoffs:</strong> More complex techniques often come with increased token usage, latencty and potential other overheads.</li>
+                <li><strong>Test systematically:</strong> Document which techniques work best for specific use cases.</li>
+            </ol>
 
-                <div class="note">
-                    <p>In production applications, maintain a library of effective prompts, implement version control, and establish monitoring systems to track performance.</p>
-                </div>
-                <h3>4.2 Application Development Approaches</h3>
-                <p>There are three primary approaches to building LLM applications, with increasing levels of sophistication:</p>
-                <ol>
-                    <li><strong>Prompt Engineering + LLMs:</strong> The simplest approach, focusing on direct interactions with language models through well-crafted prompts.</li>
-                    <li><strong>Prompt Engineering + LLMs + External Knowledge:</strong> Building on the first approach by enhancing LLMs with external data sources to improve context relevance and result accuracy through real-time or domain-specific information.</li>
-                    <li><strong>Prompt Engineering + Autonomous Agents:</strong> The most advanced approach, combining LLMs with tools, memory, and decision-making frameworks to create systems that can execute complex tasks with minimal human intervention.</li>
-                </ol>
-                <p>Each approach offers distinct advantages and is suited to different types of applications, as shown in the comparison below:</p>
-                <table style="width:100%; margin-bottom: 24px; text-align:center;">
-                  <thead>
+            <div class="note">
+                <p>In production applications, maintain a library of effective prompts, implement version control, and establish monitoring systems to track performance.</p>
+            </div>
+            <h3>4.2 LLM Application Development Approaches</h3>
+            <p></p>LLM application development offers multiple approaches, from direct prompt engineering to integrating external knowledge—which we'll discuss below—and building autonomous agents, which we'll cover in the next module.</p>
+            <h4>Direct Prompt Engineering</h4>
+            <p>The most straightforward development approach involves directly interacting with LLMs using carefully crafted prompts. This method leverages the model's trained knowledge and works well for simple, self-contained tasks.
+            </p>
+            <div class="diagram">
+                <img src="../assets/images/llm-basic.png" alt="Basic LLM interaction with input and output"/>
+            </div>
+            <table style="width:100%; margin-bottom: 24px; text-align:left;">
+                <thead>
                     <tr>
-                      <th style="width: 16%;">Attribute</th>
-                      <th style="width: 28%;">Prompt Engineering + LLMs</th>
-                      <th style="width: 28%;">Prompt Engineering + LLMs + External Knowledge</th>
-                      <th style="width: 28%;">Prompt Engineering + Autonomous Agents</th>
+                        <th style="width: 50%;">Key Characteristics</th>
+                        <th style="width: 40%;">Best For</th>
                     </tr>
-                  </thead>
-                  <tbody>
+                </thead>
+                <tbody>
                     <tr>
-                      <td><b>Visual</b></td>
-                      <td><img src="../assets/images/llm-basic.png" alt="Basic LLM interaction with input and output" style="max-width:90%;margin:6px 0;"/></td>
-                      <td><img src="../assets/images/llm-knowledge.png" alt="LLM with external knowledge sources" style="max-width:90%;margin:6px 0;"/></td>
-                      <td><img src="../assets/images/agent-cycle.png" alt="Agent architecture with observation-action cycle" style="max-width:90%;margin:6px 0;"/></td>
+                        <td>
+                        <ol>
+                            <li>Can be single-turn interactions or multi-turn conversations</li>
+                            <li>Limited to the model's context window</li>
+                            <li>Low complexity implementation</li>
+                            <li>Relies on LLM model's general knowledge</li>
+                        </ol>
+                        </td>
+                        <td>
+                        <ol>
+                            <li>Text summarization and content generation</li>
+                            <li>Classification and translation tasks</li>
+                            <li>Applications that don't require external data</li>
+                        </ol>
+                        </td>
                     </tr>
+                </tbody>
+            </table>
+           
+            <h4>Enhanced with External Knowledge</h4>
+            <p>When applications require current or specialized information, developers can enhance LLMs with tools to interact with external sources like databases, APIs, and document stores.</p>
+            <div class="diagram">
+                <img src="../assets/images/llm-external-knowledge.png" alt="LLM with external knowledge sources" width="600" />
+            </div>
+            <table style="width:100%; margin-bottom: 24px; text-align:left;">
+                <thead>
                     <tr>
-                      <td><b>Description</b></td>
-                      <td>Directly interact with the LLM using carefully crafted prompts.</td>
-                      <td>Enhance LLMs with real-time or domain-specific information from external sources (databases, APIs, documents).</td>
-                      <td>Combine LLMs with tools, memory, and decision-making to create systems that can plan, act, and adapt autonomously.</td>
+                        <th style="width: 50%;">Key Characteristics</th>
+                        <th style="width: 40%;">Best For</th>
                     </tr>
+                </thead>
+                <tbody>
                     <tr>
-                      <td><b>Best For</b></td>
-                      <td>Simple, self-contained tasks that rely on general knowledge.</td>
-                      <td>Information-rich tasks requiring up-to-date, specialized, or proprietary data.</td>
-                      <td>Complex, multi-step workflows that require reasoning, tool use, and adaptive planning.</td>
+                        <td>
+                        <ol>
+                            <li>Builds upon direct prompting approach</li>
+                            <li>Incorporates domain-specific information</li>
+                            <li>Medium complexity implementation</li>
+                            <li>Improves context relevance and accuracy</li>
+                        </ol>
+                        </td>
+                        <td>
+                        <ol>
+                            <li>Company data Q&A systems</li>
+                            <li>Classification and translation tasks</li>
+                            <li>Simple applications requiring LLM capabilities augmented with proprietary data</li>
+                        </ol>
+                        </td>
                     </tr>
-                    <tr>
-                      <td><b>Use Cases</b></td>
-                      <td>Text summarization, content generation, classification, translation.</td>
-                      <td>Company data Q&amp;A, research over large document sets, market analysis.</td>
-                      <td>Personal assistants, automated research agents, workflow automation, multi-tool orchestration.</td>
-                    </tr>
-                    <tr>
-                      <td><b>Complexity</b></td>
-                      <td>Low</td>
-                      <td>Medium</td>
-                      <td>High</td>
-                    </tr>
-                    <tr>
-                      <td><b>Limitations</b></td>
-                      <td>Limited by model's context window and training data cutoff; cannot access new or proprietary information.</td>
-                      <td>Dependent on quality and freshness of external data; requires robust retrieval and integration.</td>
-                      <td>Increased system complexity; harder to debug; may have higher latency and operational overhead.</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <p>These three approaches represent a continuum of complexity and capability that we'll explore in greater detail in subsequent modules.</p>
-                <div class="section-nav-btns">
-                    <button id="back-building-applications">Back</button>
-                    <button id="next-building-applications">Next</button>
-                </div>
+                </tbody>
+            </table>
+
+            <p>The choice between these approaches depends on your application requirements: data freshness needs, complexity tolerance, and specific use cases. Regardless of which approach you select, the foundation remains the same—effective prompt engineering drives success across all LLM application development patterns.
+            </p>
+            <div class="callout" style="background: #f8f9fa; border-left: 4px solid #3498db; padding: 12px 18px; margin: 18px 0;">
+                <strong>Remember:</strong> Regardless of which approach you select, effective prompt engineering drives success across all LLM application development patterns.
+              </div>
+            <div class="section-nav-btns">
+                <button id="back-building-applications">Back</button>
+                <button id="next-building-applications">Next</button>
+            </div>
         </section>
         <!-- Section 4: Additional Resources -->
         <section id="resources">
