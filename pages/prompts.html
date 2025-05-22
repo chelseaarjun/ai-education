@@ -813,9 +813,9 @@
                 <p>In production applications, maintain a library of effective prompts, implement version control, and establish monitoring systems to track performance.</p>
             </div>
             <h3>4.2 LLM Application Development Approaches</h3>
-            <p></p>LLM application development offers multiple approaches, from direct prompt engineering to integrating external knowledge—which we'll discuss below—and building autonomous agents, which we'll cover in the next module.</p>
+            <p></p>LLM application development offers multiple approaches, from direct prompt engineering to building applications with custom external knowledge integration—which we'll discuss below—and building autonomous agents, which we'll cover in the next module.</p>
             <h4>Direct Prompt Engineering</h4>
-            <p>The most straightforward development approach involves directly interacting with LLMs using carefully crafted prompts. This method leverages the model's trained knowledge and works well for simple, self-contained tasks.
+            <p>The most straightforward development approach involves directly interacting with LLMs using carefully crafted prompts. This method leverages the model's trained knowledge, internal reasoning and works well for simple, self-contained tasks.
             </p>
             <div class="diagram">
                 <img src="../assets/images/llm-basic.png" alt="Basic LLM interaction with input and output"/>
@@ -834,7 +834,7 @@
                             <li>Can be single-turn interactions or multi-turn conversations</li>
                             <li>Limited to the model's context window</li>
                             <li>Low complexity implementation</li>
-                            <li>Relies on LLM model's general knowledge</li>
+                            <li>Relies on LLM model's general knowledge and single step internal reasoning</li>
                         </ol>
                         </td>
                         <td>
@@ -848,7 +848,7 @@
                 </tbody>
             </table>
            
-            <h4>Enhanced with External Knowledge</h4>
+            <h4>LLM ApplicationsEnhanced with External Knowledge</h4>
             <p>When applications require current or specialized information, developers can enhance LLMs with tools to interact with external sources like databases, APIs, and document stores.</p>
             <div class="diagram">
                 <img src="../assets/images/llm-external-knowledge.png" alt="LLM with external knowledge sources" width="600" />
@@ -872,7 +872,7 @@
                         </td>
                         <td>
                         <ol>
-                            <li>Company data Q&A systems</li>
+                            <li>Simple Q&A Chatbots</li>
                             <li>Classification and translation tasks</li>
                             <li>Simple applications requiring LLM capabilities augmented with proprietary data</li>
                         </ol>

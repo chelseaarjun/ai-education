@@ -140,6 +140,7 @@
         <button class="module-nav-btn" data-section="introduction">Introduction</button>   
         <button class="module-nav-btn" data-section="agent-intro">What's An Agent?</button>       
         <button class="module-nav-btn" data-section="fundamentals">Fundamentals</button>
+        <button class="module-nav-btn" data-section="when-to-use-agents">When to use?</button>
         <button class="module-nav-btn" data-section="memory">Memory</button>
         <button class="module-nav-btn" data-section="tools">Tools</button>
         <button class="module-nav-btn" data-section="decision-cycle">Decision Cycle</button>
@@ -163,11 +164,12 @@
                 <p>In this course, we focus specifically on LLM-powered agents - systems that leverage Large Language Models as their core reasoning engine. These represent a distinctly modern approach to agent design with unique capabilities and limitations.
                 </p>
                 <ul class="enhanced-list">
-                    <li><b>Agent Fundamentals:</b> What makes an autonomous AI agent different from an LLM</li>
+                    <li><b>Agent Fundamentals:</b> The key characteristics that define LLM-powered agents</li>
+                    <li><b>When to use Agents:</b> What makes an autonomous LLM powered agents different from an Prompt-Based LLM Applications.</li>
                     <li><b>Memory:</b> Types of memory and how agents use them</li>
                     <li><b>Tools:</b> How agents use external tools to extend their capabilities</li>
                     <li><b>Decision Cycle:</b> How agents observe, plan, and act in iterative loops</li>
-                    <li><b>Types of Agents:</b> Different types of agents and their characteristics</li>
+                    <li><b>Agent Patterns:</b> Different agents patterns and production consideration </li>
                 </ul>
             </div>  
             <span style='font-size:1.2em; margin-right:0.3em;'>💡</span><strong>Tip:</strong> No matter if you're building a simple LLM-powered app or a sophisticated agent system, every successful AI solution depends on clear, well-crafted prompts - even the most advanced agents rely on clear, well-structured prompts to guide the LLM's reasoning and actions.         
@@ -189,7 +191,7 @@
                     <li><b>Autonomy</b>: The ability to operate without direct human intervention</li>
                     <li><b>Reactivity</b>: The ability to perceive and respond to changes in the environment</li>
                     <li><b>Pro-activeness</b>: The ability to take initiative and pursue goals</li>
-                    <li><b>Social ability</b>: The ability to interact with other agents or humans</li>
+                    <li><b>Social Ability</b>: The ability to interact with other agents or humans</li>
                 </ul>
                 However, it's crucial to understand that these characteristics exist on a spectrum rather than as binary attributes.
             </p>
@@ -220,8 +222,7 @@
             These three capabilities transform LLMs from reactive language models into semi-autonomous systems that can reason, remember, and act to accomplish complex real-world tasks.            
             <div class="callout-info" style="background:#fffbe6;border-left:4px solid #ffd700;margin:1em 0 1.2em 0;padding:1em 1.2em;">
               <span style="font-size:1.2em;margin-right:0.3em;">⚡</span>
-              For the remainder of this module, <b>"agents"</b> refers to <b>LLM-powered agents</b> with at least one of the three capabilities described above. 
-              Systems built with <b>just LLMs and prompts</b>, without any of these capabilities, will be referred to as <b>"prompt-based LLM applications"</b>.           
+              For the remainder of this module, <b>"agents"</b> refers to <b>LLM-powered agents</b>. The key differentiator from <b>Prompt-Based LLM Applications</b> is the orchestrated decision cycle and persistent memory, which requires careful engineering and enables agents to handle complex tasks semi-autonomously at the cost of increased implementation complexity. As LLMs improve at handling complex tasks internally, the implementation and maintenance costs of agents will likely decrease.
             </div>
             <h3>The Engineering Challenge: From Prompts to Orchestration</h3>
             <p>While prompt engineering remains important, building LLM-powered agents shifts the primary engineering focus to orchestration design:</p>
@@ -232,6 +233,12 @@
                 <li><b>Loop Termination:</b> How does the agent determine when a task is complete versus when to continue the Reason → Plan → Act cycle? What prevents infinite loops?</li>
             </ul>  
             <p>This orchestration logic varies dramatically by use case - a research agent needs different decision patterns than a customer service agent or a data analysis agent. The engineering complexity lies in designing these control flows rather than just crafting prompts.</p>
+            <div class='section-nav-btns'>
+                <button id='back-fundamentals' disabled>Back</button>
+                <button id='next-fundamentals'>Next</button>
+            </div>
+        </section>
+    <section id="when-to-use-agents" class="module-section">
             <h3>When Should You Use Agents?</h3>
             <p>Not every application needs the complexity of an agent. Many tasks—like summarization, classification, or Q&A—can be solved with just prompt engineering and an LLM.</p>
             <p>However, as your use case grows to require memory, tool use, or multi-step reasoning, agents become essential.</p>
@@ -263,56 +270,62 @@
                     <tr>
                         <td class="dimension">Description</td>
                         <td>Software systems with predefined logic and workflows</td>
-                        <td>Direct interactions with LLMs through carefully engineered prompts, optionally enhanced with external knowledge (e.g., RAG, API/database retrieval).</td>
+                        <td>Direct interactions with LLMs through carefully engineered prompts, enhanced with external knowledge and reasoning techniques</td>
                         <td>Systems that combine LLMs with tools, memory, and orchestration logic</td>
                     </tr>
                     <tr>
                         <td class="dimension">Implementation Complexity</td>
                         <td>Medium-High (requires specific logic for each task)</td>
-                        <td>Low-Medium (prompt engineering alone is low; adding retrieval or external data increases complexity).</td>
+                        <td>Low-Medium (prompt engineering plus predefined integrations)</td>
                         <td>High (requires orchestration, tool integration, memory systems)</td>
                     </tr>
                     <tr>
-                        <td class="dimension">Best For</td>
-                        <td>Well-defined, stable processes with clear rules</td>
-                        <td>Tasks leveraging the model's pre-existing knowledge or requiring up-to-date/domain-specific information that can be injected into the prompt.</td>
-                        <td>Complex tasks requiring multiple steps, external data, or persistent context</td>
+                        <td class="dimension">Applications & Examples</td>
+                        <td>Well-defined processes: order processing, data validation, reporting</td>
+                        <td>Tasks leveraging the model's pre-existing knowledge or requiring up-to-date/domain-specific information that can be injected into the prompt.s: content creation, Simple Chatbots, text-to-SQL applications</td>
+                        <td>Complex tasks requiring multiple steps reasoning, external data, or persistent context. Customer service agents, research assistants, automated analysts</td>
                     </tr>
                     <tr>
-                        <td class="dimension">Use Cases</td>
-                        <td>Order processing, data validation, reporting</td>
-                        <td>Content creation, summarization, classification, Q&A over company data, document search, translation</td>
-                        <td>Customer service agents, research assistants, automated analysts</td>
+                        <td class="dimension">Autonomy</td>
+                        <td>Limited within predefined rules and predetermined logic</td>
+                        <td>Limited within LLM reasoning and predefined tool usage patterns</td>
+                        <td>Semi-autonomous with LLM orchestrating tool selection and execution based on goals and context</td>
                     </tr>
                     <tr>
-                        <td class="dimension">Adaptability</td>
-                        <td>Low (requires code changes for new tasks and handles only anticipated scenarios)</td>
-                        <td>Medium (can adapt through prompt revisions and by updating external knowledge sources)</td>
-                        <td>High (can adapt to new tasks through instructions and reason through novel, unexpected situations)</td>
+                        <td class="dimension">Reactivity</td>
+                        <td>Responds to specific triggers and data changes</td>
+                        <td>Responds to user prompts with enhanced context</td>
+                        <td>Responds to environmental changes and adapts strategy accordingly</td>
+                    </tr>
+                    <tr>
+                        <td class="dimension">Pro-activeness</td>
+                        <td>Follows predetermined paths without initiative</td>
+                        <td>Reactive within single interactions, no cross-session initiative</td>
+                        <td>Takes initiative to pursue goals across multiple steps and sessions</td>
+                    </tr>
+                    <tr>
+                        <td class="dimension">Social Ability</td>
+                        <td>Structured interactions with predefined interfaces</td>
+                        <td>Natural language conversation with enhanced responses</td>
+                        <td>Multi-turn dialogue with context awareness and goal persistence</td>
                     </tr>
                     <tr>
                         <td class="dimension">Tool Integration</td>
                         <td>Pre-programmed connections to specific systems</td>
-                        <td>Limited (can retrieve and inject external data, but does not autonomously select or use tools)</td>
-                        <td>Dynamic integration with multiple tools and services as needed</td>
+                        <td>Predefined tool usage (RAG integrations, LLM output as tool input)/td>
+                        <td>LLM decides which tools to use; orchestrated tool selection with feedback loops</td>
                     </tr>
                     <tr>
                         <td class="dimension">Memory Management</td>
                         <td>Database-driven with explicit schema design</td>
-                        <td>Limited to context window</td>
+                        <td>Context window concatenation (limited to context window size)</td>
                         <td>Persistent across sessions with both short and long-term storage</td>
                     </tr>
                     <tr>
                         <td class="dimension">Reasoning Process</td>
                         <td>Linear, rule-based or algorithmic</td>
-                        <td>Single-pass language processing</td>
-                        <td>Multi-step reasoning with planning and feedback loops</td>
-                    </tr>
-                    <tr>
-                        <td class="dimension">Human Oversight</td>
-                        <td>Structured (predefined approval workflows)</td>
-                        <td>High (output typically requires human review)</td>
-                        <td>Configurable (can perform sequences autonomously with defined guardrails)</td>
+                        <td>Single-step reasoning per interaction (may use CoT, ToT, ReAct within prompts)</td>
+                        <td>Multi-step reasoning across interactions with planning and feedback loops</td>
                     </tr>
                 </tbody>
             </table>
@@ -444,8 +457,8 @@ print(agent_decision_loop(spanish_doc))
                 </div>
             </div>
             <div class='section-nav-btns'>
-                <button id='back-fundamentals' disabled>Back</button>
-                <button id='next-fundamentals'>Next</button>
+                <button id='back-when-to-use-agents' disabled>Back</button>
+                <button id='next-when-to-use-agents'>Next</button>
             </div>
         </section>
         <section id="memory" class="module-section" style="display:none">
@@ -697,16 +710,16 @@ print(agent_decision_loop(spanish_doc))
                 </thead>
                 <tbody>
                     <tr>
-                        <td><b>Single Conversational Agents</b></td>
+                        <td><b>Conversational Agents</b></td>
                         <td>One agent handles multi-turn conversations with users</td>
                         <td>Customer service, personal assistants, Q&A systems</td>
-                        <td>ChatGPT-style interfaces, support chatbots</td>
+                        <td>ChatGPT-style interfaces, support chatbots, coding assistants etc.</td>
                     </tr>
                     <tr>
                         <td><b>Task-Oriented Agents</b></td>
-                        <td>Designed to complete specific workflows or objectives</td>
-                        <td>Automated analysis, report generation, data processing</td>
-                        <td>Market research agent, inventory analysis agent</td>
+                        <td>Designed to complete specific workflows or objectives, including those requiring interaction with browsers, desktop applications, or system interfaces </td>
+                        <td>Automated analysis, report generation, document handling, web automation, and more</td>
+                        <td>Market research agent,  inventory analysis agent, web scraping agent, automated testing agent</td>
                     </tr>
                     <tr>
                         <td><b>Multi-Agent Systems</b></td>
