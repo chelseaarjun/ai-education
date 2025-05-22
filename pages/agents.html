@@ -143,8 +143,9 @@
         <button class="module-nav-btn" data-section="memory">Memory</button>
         <button class="module-nav-btn" data-section="tools">Tools</button>
         <button class="module-nav-btn" data-section="decision-cycle">Decision Cycle</button>
-        <button class="module-nav-btn" data-section="agent-architecture-types">Agent Architectures</button>
+        <button class="module-nav-btn" data-section="agent-patterns">Agent Patterns</button>
         <button class="module-nav-btn" data-section="quiz-section">Quiz</button>
+        <button class="module-nav-btn" data-section="resources">Resources</button>
     </nav>
     <nav class="module-sidebar"></nav>
     <div class="content-inner">
@@ -159,7 +160,7 @@
                 </ul>
                 <p>This module builds on your understanding of LLMs and prompt engineering, showing you how to design and build autonomous agents that can remember, reason, use tools, and act autonomously—unlocking a new level of capability for your AI applications.</p>
                 <h3 class="section-title">What You'll Learn</h3>
-                <p>In this course, we focus specifically on LLM-based agents - systems that leverage Large Language Models as their core reasoning engine. These represent a distinctly modern approach to agent design with unique capabilities and limitations.
+                <p>In this course, we focus specifically on LLM-powered agents - systems that leverage Large Language Models as their core reasoning engine. These represent a distinctly modern approach to agent design with unique capabilities and limitations.
                 </p>
                 <ul class="enhanced-list">
                     <li><b>Agent Fundamentals:</b> What makes an autonomous AI agent different from an LLM</li>
@@ -177,12 +178,12 @@
         </section>
         <section id="agent-intro" class="module-section">
             <h3>What is an AI Agent?</h3>
-            <p>An AI agent is a system that perceives its environment through sensors, processes this information, and acts upon the environment through actuators to achieve specific goals. This definition has evolved significantly since the early days of AI research.
+            <p>An AI agent is a system that perceives its environment through sensors, processes this information, and acts upon the environment through actuators to achieve specific goals. Today, this same principle applies to LLM-powered agents, but with digital sensors and actuators
             </p>
             <h3>Historical Context</h3>
             <p>The concept of agents in AI dates back to the 1950s with early work in cybernetics (the study of control systems and information processing in both machines and living organisms) and the development of the first AI programs. The Turing Test, proposed by Alan Turing, established a framework for evaluating if machines could exhibit human-like intelligence - though not specifically defining "agents" as we understand them today.
             In the 1980s and 1990s, the agent paradigm became more formalized in AI research, with researchers developing various types of agents from simple reactive systems to more complex deliberative architectures.</p>
-            <h3>Key Characteristics of Agents</h3>
+            
             <p>Traditional AI literature identifies several key characteristics of agents:
                 <ul>
                     <li><b>Autonomy</b>: The ability to operate without direct human intervention</li>
@@ -192,16 +193,7 @@
                 </ul>
                 However, it's crucial to understand that these characteristics exist on a spectrum rather than as binary attributes.
             </p>
-            <h3>The Spectrum of Agency</h3>
-            <p>The Spectrum of Agency
-                Rather than thinking of agency as binary (either something is an agent or it's not), it's more helpful to consider a spectrum of agency with varying degrees of:
-                <ul>
-                    <li><b>Independence</b>: How much the system can function without human guidance</li>
-                    <li><b>Goal-directedness</b>: How explicitly the system pursues objectives</li>
-                    <li><b>Environmental awareness</b>: How well the system perceives and models its environment</li>
-                    <li><b>Adaptability</b>: How effectively the system learns from the past and adjusts to new circumstances</li>
-                </ul>
-            </p>
+            <div class="callout-info" style="background:#f8fafd;border-left:4px solid #4a6fa5;margin:1.2em 0 0.5em 0;padding:1em 1.2em;">Rather than thinking of agency as binary (either something is an agent or it's not), it's more helpful to consider a spectrum of agency, varying from highly supervised to fully autonomous.</div>
             <div class="section-nav-btns">
                 <button id="back-agent-intro" disabled>Back</button>
                 <button id="next-agent-intro">Next</button>
@@ -209,23 +201,37 @@
         </section>
         <section id="fundamentals" class="module-section">
             <h2>From LLMs to Agents: Why Go Further?</h2>
-            <p>While LLMs are incredibly versatile, many real-world applications require more than just language understanding. This is where AI agents come in.</p>
-            </p>
+            <p>While LLMs are incredibly versatile, many real-world applications require more than just language understanding. This is where LLM-powered agents come in.</p>
             <div class="callout-info" style="background:#f8fafd;border-left:4px solid #4a6fa5;margin:1.2em 0 0.5em 0;padding:1em 1.2em;"><span class="callout-icon">🤖</span>
             <strong>LLM-Powered agent</strong> is a software system that wraps around the LLM, orchestrating when to call the LLM, what to ask, how to use the response, and how to interact with the environment (including databases, APIs, or human-in-the-loop steps).
             </div>
+            <p>For LLM-powered agents, the traditional agent definition still applies, but with modern digital implementations:</p>
+            <ul>
+                <li><b>Sensors</b> → Text inputs, API responses, database queries, and file contents</li>
+                <li><b>Processing</b> → LLM reasoning combined with memory and planning systems</li>
+                <li><b>Actuators</b> → Tool calls, API requests, text generation, and system commands</li>
+            </ul>
             <p>LLM-powered agents build upon the foundation of Large Language Models by extending them with critical capabilities:            </p>
             <ul class="enhanced-list">
-                <li><strong>Tool Use:</strong> While base LLMs can only process and generate text, LLM-based agents can interact with the world by using external tools, APIs, and services to retrieve information or perform actions.</li>
+                <li><strong>Tool Use:</strong> While base LLMs can only process and generate text, LLM-powered agents can interact with the world by using external tools, APIs, and services to retrieve information or perform actions.</li>
                 <li><strong>Persistent Memory:</strong> Unlike base LLMs limited to their context window, agents remember past actions, user preferences, or important facts (short-term and long-term). They can also use it improve future actions.</li>
                 <li><strong>Decision Cycle:</strong> Agents use an LLM as their brain and repeat the <b>Decision Cycle</b> (Reason → Plan → Act) as needed, often using tools and memory, until an end state is reached.</li>
             </ul>
-            Combining the language capabilities of LLMs with these capabilities creates a powerful new paradigm for building AI systems that can act semi-autonomously to accomplish complex tasks.
-            
+            These three capabilities transform LLMs from reactive language models into semi-autonomous systems that can reason, remember, and act to accomplish complex real-world tasks.            
             <div class="callout-info" style="background:#fffbe6;border-left:4px solid #ffd700;margin:1em 0 1.2em 0;padding:1em 1.2em;">
               <span style="font-size:1.2em;margin-right:0.3em;">⚡</span>
               For the remainder of this module, <b>"agents"</b> refers to <b>LLM-powered agents</b> with at least one of the three capabilities described above. 
-              Systems built with <b>just LLMs and prompts</b>, without any of these capabilities, will be referred to as <b>"prompt-based LLM applications"</b>.            </div>
+              Systems built with <b>just LLMs and prompts</b>, without any of these capabilities, will be referred to as <b>"prompt-based LLM applications"</b>.           
+            </div>
+            <h3>The Engineering Challenge: From Prompts to Orchestration</h3>
+            <p>While prompt engineering remains important, building LLM-powered agents shifts the primary engineering focus to orchestration design:</p>
+            <ul>
+                <li><b>Decision Logic:</b> When should the agent call external tools versus generate responses using the LLM's training knowledge? How does it choose between multiple available tools for the same task?</li>
+                <li><b>Error Handling:</b> What happens when a tool call fails, returns incomplete data, or produces unexpected results? How should the agent recover and continue?</li>
+                <li><b>Memory Operations:</b> What information should be stored after each interaction? When should past information be retrieved and used? How should conflicting information be handled?</li>
+                <li><b>Loop Termination:</b> How does the agent determine when a task is complete versus when to continue the Reason → Plan → Act cycle? What prevents infinite loops?</li>
+            </ul>  
+            <p>This orchestration logic varies dramatically by use case - a research agent needs different decision patterns than a customer service agent or a data analysis agent. The engineering complexity lies in designing these control flows rather than just crafting prompts.</p>
             <h3>When Should You Use Agents?</h3>
             <p>Not every application needs the complexity of an agent. Many tasks—like summarization, classification, or Q&A—can be solved with just prompt engineering and an LLM.</p>
             <p>However, as your use case grows to require memory, tool use, or multi-step reasoning, agents become essential.</p>
@@ -235,7 +241,7 @@
                         <th>Dimension</th>
                         <th>Traditional Workflows</th>
                         <th>Prompt-Based LLM Applications</th>
-                        <th>LLM-Based Agents</th>
+                        <th>LLM-powered Agents</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -671,6 +677,83 @@ print(agent_decision_loop(spanish_doc))
                 <li><strong>Act:</strong> The agent retrieves the status and replies, "Your order is out for delivery and should arrive today."</li>
             </ol>
             <p>The agent then updates its memory with this interaction, ready for the next question.</p>
+           <div class='section-nav-btns'>
+                <button id='back-decision-cycle'>Back</button>
+                <button id='next-decision-cycle'>Next</button>
+            </div>    
+        </section>
+        
+        <section id="agent-patterns" class="module-section">
+            <h2>Agent Patterns</h2>
+            <p>LLM-powered agents can be implemented in various ways depending on the application needs. Here are some of the patterns you'll encounter:</p>
+            <table class="enhanced-table" style="margin-bottom:2em;">
+                <thead>
+                    <tr>
+                        <th>Pattern</th>
+                        <th>Description</th>
+                        <th>Best For</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>Single Conversational Agents</b></td>
+                        <td>One agent handles multi-turn conversations with users</td>
+                        <td>Customer service, personal assistants, Q&A systems</td>
+                        <td>ChatGPT-style interfaces, support chatbots</td>
+                    </tr>
+                    <tr>
+                        <td><b>Task-Oriented Agents</b></td>
+                        <td>Designed to complete specific workflows or objectives</td>
+                        <td>Automated analysis, report generation, data processing</td>
+                        <td>Market research agent, inventory analysis agent</td>
+                    </tr>
+                    <tr>
+                        <td><b>Multi-Agent Systems</b></td>
+                        <td>Multiple specialized agents collaborate on complex tasks</td>
+                        <td>Complex workflows requiring different expertise areas</td>
+                        <td>Research team (data gathering, analysis, reporting)</td>
+                    </tr>
+                    <tr>
+                        <td><b>Human-in-the-Loop Systems</b></td>
+                        <td>Require human approval for key decisions or actions</td>
+                        <td>High-stakes decisions, regulated environments, building trust</td>
+                        <td>Investment recommendations needing manager approval</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Production Considerations</h3>
+            <p>Building LLM-powered agents for production environments requires careful attention to several critical areas:</p>
+            <table class="enhanced-table">
+                <thead>
+                    <tr>
+                        <th>Area</th>
+                        <th>Key Practices/Considerations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>Reliability & Error Handling</b></td>
+                        <td>Retry logic, graceful degradation, clear error messaging, fallback mechanisms</td>
+                    </tr>
+                    <tr>
+                        <td><b>Output Consistency</b></td>
+                        <td>Structured output (JSON/templates), temperature=0, human review, pin model versions, comprehensive testing</td>
+                    </tr>
+                    <tr>
+                        <td><b>Cost & Performance</b></td>
+                        <td>Monitor token usage, cost guardrails, optimize loops, caching, balance thoroughness and latency</td>
+                    </tr>
+                    <tr>
+                        <td><b>Security & Access Control</b></td>
+                        <td>Access controls, authentication, audit logging, guardrails, input validation/sanitization</td>
+                    </tr>
+                    <tr>
+                        <td><b>Monitoring & Observability</b></td>
+                        <td>Track decision paths, tool usage, failure rates, monitor for anomalies, maintain logs, collect metrics, alerts</td>
+                    </tr>
+                </tbody>
+            </table>
             <hr/>
             <h3>Module 3 Summary</h3>
             <p>In this module, you learned how modern AI agents are designed to go beyond simple text generation. You explored:</p>
@@ -682,101 +765,23 @@ print(agent_decision_loop(spanish_doc))
                 <li>The importance of separating the agent's orchestration logic from the LLM's language and reasoning capabilities, and how frameworks like LangChain, CrewAI, and others can help you build robust, production-ready agents</li>
             </ul>
             <p>By understanding these concepts, you're now equipped to design and build AI agents that can autonomously assist, augment, or automate knowledge work in digital applications.</p>
+        
             <div class='section-nav-btns'>
-                <button id='back-decision-cycle'>Back</button>
-                <button id='next-decision-cycle'>Next</button>
-            </div>
-        </section>
-        <section id="agent-architecture-types" class="module-section" style="display:none">
-            <h2>Agent Architecture Types</h2>
-            <div class="callout-info" style="background:#f8fafd;border-left:4px solid #4a6fa5;margin:1.2em 0 1.2em 0;padding:1em 1.2em;">
-                <span style="font-size:1.1em;margin-right:0.3em;">🧩</span>
-                <b>Note:</b> Agent architectures describe <b>how</b> an agent is built and operates internally—how it manages memory, tool use, decision-making, and collaboration. Many real-world agents combine multiple patterns to meet their use case.
-            </div>
-            <ol style="margin-left:1.2em;">
-                <li><b>Stateless (Single-Turn) Architecture</b><br>
-                    <b>Description:</b> Processes each input independently, with no memory of previous interactions.<br>
-                    <b>Example:</b> A Q&A bot that answers each question without context from prior turns.
-                </li>
-                <li><b>Conversational (Stateful) Architecture</b><br>
-                    <b>Description:</b> Maintains context or memory across multiple turns, enabling more natural conversations and multi-step tasks.<br>
-                    <b>Example:</b> A customer support chatbot that remembers your previous questions in a session.
-                </li>
-                <li><b>Tool-Enhanced Architecture</b><br>
-                    <b>Description:</b> Designed to call external tools, APIs, or functions as part of its reasoning and action process.<br>
-                    <b>Example:</b> An agent that can look up real-time weather, perform calculations, or retrieve information from a database.
-                </li>
-                <li><b>Decision Loop / Autonomous Architecture</b><br>
-                    <b>Description:</b> Operates in a loop: observes, plans, and acts—possibly using memory and tools—until a goal is reached. Enables multi-step reasoning and adaptive behavior.<br>
-                    <b>Example:</b> An agent that plans a trip by searching for flights, booking hotels, and creating an itinerary, making decisions at each step.
-                </li>
-                <li><b>Retrieval-Augmented Generation (RAG) Architecture</b><br>
-                    <b>Description:</b> Retrieves relevant information from external knowledge bases or vector databases and incorporates it into the prompt for the LLM.<br>
-                    <b>Example:</b> A research assistant that answers questions using up-to-date company documents.
-                </li>
-                <li><b>ReAct (Reasoning + Acting) Architecture</b><br>
-                    <b>Description:</b> Alternates between reasoning (thinking) and acting (using tools or APIs), often in a loop, to solve complex tasks.<br>
-                    <b>Example:</b> An agent that thinks step-by-step, uses a calculator tool, and then continues reasoning based on the result.
-                </li>
-                <li><b>Multi-Agent System Architecture</b><br>
-                    <b>Description:</b> Multiple agents, each with specialized roles, collaborate or communicate to solve complex problems. Often involves orchestration and communication protocols.<br>
-                    <b>Example:</b> A team of agents where one researches, another writes, and a third reviews the output.
-                </li>
-                <li><b>Human-in-the-Loop Architecture</b><br>
-                    <b>Description:</b> Designed to escalate to or collaborate with humans when it reaches the limits of its capabilities or needs approval.<br>
-                    <b>Example:</b> An agent that drafts an email but asks a human to review before sending.
-                </li>
-                <li><b>Specialized/Custom Architectures</b><br>
-                    <b>Description:</b> Tailored for highly specific domains or tasks, often combining multiple patterns or introducing custom workflows, tools, or memory systems.<br>
-                    <b>Example:</b> A legal contract review agent with custom compliance-checking modules and domain-specific retrieval.
-                </li>
-            </ol>
-            <div class="architecture-table-wrapper" style="overflow-x:auto;margin-top:1.5em;">
-                <table class="enhanced-table" style="min-width:700px;text-align:center;">
-                    <thead>
-                        <tr style="background:#f0f7ff;">
-                            <th>Architecture Type</th>
-                            <th>Memory</th>
-                            <th>Tool Use</th>
-                            <th>Decision Loop</th>
-                            <th>Multi-Agent</th>
-                            <th>Human-in-the-Loop</th>
-                            <th>Example Use Case</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Stateless</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>FAQ bot</td></tr>
-                        <tr><td>Conversational</td><td>✅</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>Customer support chat</td></tr>
-                        <tr><td>Tool-Enhanced</td><td>Maybe</td><td>✅</td><td>❌</td><td>❌</td><td>❌</td><td>Weather lookup agent</td></tr>
-                        <tr><td>Decision Loop/Autonomous</td><td>✅</td><td>✅</td><td>✅</td><td>❌</td><td>Maybe</td><td>Workflow automation</td></tr>
-                        <tr><td>RAG</td><td>Maybe</td><td>✅</td><td>Maybe</td><td>❌</td><td>❌</td><td>Research assistant</td></tr>
-                        <tr><td>ReAct</td><td>Maybe</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td><td>Math-solving agent</td></tr>
-                        <tr><td>Multi-Agent</td><td>Maybe</td><td>Maybe</td><td>Maybe</td><td>✅</td><td>Maybe</td><td>Collaborative research team</td></tr>
-                        <tr><td>Human-in-the-Loop</td><td>Maybe</td><td>Maybe</td><td>Maybe</td><td>Maybe</td><td>✅</td><td>Email drafting with approval</td></tr>
-                        <tr><td>Specialized/Custom</td><td>Varies</td><td>Varies</td><td>Varies</td><td>Varies</td><td>Varies</td><td>Legal/medical expert agent</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="callout-info" style="background:#fffbe6;border-left:4px solid #ffd700;margin:1.2em 0 0.5em 0;padding:1em 1.2em;">
-                <span style="font-size:1.1em;margin-right:0.3em;">💡</span>
-                <b>Tip:</b> Most production agents combine several of these architectures. For example, a customer support agent may use a conversational core, RAG for knowledge retrieval, and escalate to a human when needed.
-            </div>
-            <div class='section-nav-btns'>
-                <button id='back-agent-architecture-types'>Back</button>
-                <button id='next-agent-architecture-types'>Next</button>
+                <button id='back-agent-patterns'>Back</button>
+                <button id='next-agent-patterns'>Next</button>
             </div>
         </section>
         <section id="quiz-section" class="module-section" style="display:none">
             <h2 class="quiz-title">Concept Check Questions</h2>
             <div class="quiz-container">
-                <div class="quiz-question">Which memory type is used for:</div>
-                <ol class="quiz-options">
-                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">Remembering the user's last support ticket?</li>
-                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">Looking up the company's return policy?</li>
-                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">Knowing how to guide a user through troubleshooting steps?</li>
-                </ol>
+                <div class="quiz-question">Which memory type is responsible for remembering the user's last support ticket?</div>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">A) Episodic memory</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">B) Semantic memory</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">C) Procedural memory</li>
+                </ul>
                 <div class="quiz-feedback">
-                    <strong>Explanation:</strong> Remembering the user's last support ticket is an example of episodic memory.
+                    <strong>Explanation:</strong> Episodic memory stores specific experiences and events, such as previous support tickets.
                 </div>
             </div>
             <div class="quiz-container">
@@ -792,7 +797,7 @@ print(agent_decision_loop(spanish_doc))
                 </div>
             </div>
             <div class="quiz-container">
-                <div class="quiz-question">An agent receives a new sales report, analyzes the numbers to decide if inventory needs to be reordered, and then places an order if necessary.<br>True or False: AI agents are always fully autonomous and require no human intervention.</div>
+                <div class="quiz-question">True or False: AI agents are always fully autonomous and require no human intervention.</div>
                 <ul class="quiz-options">
                     <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">a) True</li>
                     <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">b) False</li>
@@ -802,19 +807,19 @@ print(agent_decision_loop(spanish_doc))
                 </div>
             </div>
             <div class="quiz-container">
-                <div class="quiz-question">Which combination of tools would be most essential for this agent?</div>
+                <div class="quiz-question">Which of the following is NOT a core capability that distinguishes LLM-powered agents from basic LLM applications?</div>
                 <ul class="quiz-options">
-                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">A) Database Retrieval + External API Calls + Webhook Integrations</li>
-                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">B) Code Execution + Direct Function Calling only</li>
-                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">C) External API Calls + Code Execution only</li>
-                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">D) Database Retrieval only</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">A) Ability to use external tools</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">B) Persistent memory across interactions</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">C) Multi-step decision cycles</li>
+                    <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">D) Generating images from text prompts</li>
                 </ul>
                 <div class="quiz-feedback">
-                    <strong>Explanation:</strong> A) Database Retrieval + External API Calls + Webhook Integrations is the most essential combination for this agent.
+                    <strong>Explanation:</strong> Generating images is not a core agent capability; tool use, memory, and decision cycles are what set agents apart.
                 </div>
             </div>
             <div class="quiz-container">
-                <div class="quiz-question">Which of the following best describes the agent decision cycle in a digital assistant?</div>
+                <div class="quiz-question">Which of the following best describes the agent decision cycle in a digital personal assistant?</div>
                 <ul class="quiz-options">
                     <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">A) The agent only responds to user input without using memory or tools</li>
                     <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">B) The agent observes, plans, acts, and updates its memory in a repeating loop</li>
@@ -828,6 +833,31 @@ print(agent_decision_loop(spanish_doc))
             <div class='section-nav-btns'>
                 <button id='back-quiz-section'>Back</button>
                 <button id='next-quiz-section'>Next</button>
+            </div>
+        </section>
+        <!-- Resources Section -->
+        <section id="resources" class="module-section">
+            <h2>Resources</h2>
+            <ul>
+                <li><b>CoALA: Cognitive Architectures for Language Agents</b><br>
+                    <a href="https://arxiv.org/pdf/2309.02427" target="_blank">arXiv PDF</a> – A comprehensive survey of cognitive architectures for language agents, including memory, planning, and tool use.
+                </li>
+                <li><b>Amazon Bedrock Agents Documentation</b><br>
+                    <a href="https://aws.amazon.com/bedrock/agents/" target="_blank">AWS Bedrock Agents</a> – Official AWS documentation for building, orchestrating, and deploying LLM-powered agents with memory, tool use, and multi-agent collaboration.
+                </li>
+                <li><b>LangChain Documentation</b><br>
+                    <a href="https://python.langchain.com/docs/" target="_blank">LangChain Docs</a> – The most popular open-source framework for building LLM-powered agents with memory, tools, and workflows.
+                </li>
+                <li><b>CrewAI</b><br>
+                    <a href="https://github.com/joaomdmoura/crewAI" target="_blank">CrewAI GitHub</a> – Open-source framework for multi-agent collaboration and workflow orchestration.
+                </li>
+                <li><b>Microsoft AutoGen</b><br>
+                    <a href="https://github.com/microsoft/autogen" target="_blank">AutoGen GitHub</a> – Framework for building multi-agent and tool-using systems.
+                </li>
+            </ul>
+            <div class='section-nav-btns'>
+                <button id='back-resources'>Back</button>
+                <button id='next-resources'>Next</button>
             </div>
         </section>
     </div>
