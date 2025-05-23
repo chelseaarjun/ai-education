@@ -138,13 +138,13 @@
 <body>
     <nav class="module-nav">
         <button class="module-nav-btn" data-section="introduction">Introduction</button>   
-        <button class="module-nav-btn" data-section="agent-intro">What's An Agent?</button>       
+        <button class="module-nav-btn" data-section="agent-intro">History</button>       
         <button class="module-nav-btn" data-section="fundamentals">Fundamentals</button>
         <button class="module-nav-btn" data-section="when-to-use-agents">When to use?</button>
         <button class="module-nav-btn" data-section="memory">Memory</button>
         <button class="module-nav-btn" data-section="tools">Tools</button>
         <button class="module-nav-btn" data-section="decision-cycle">Decision Cycle</button>
-        <button class="module-nav-btn" data-section="agent-patterns">Agent Patterns</button>
+        <button class="module-nav-btn" data-section="agent-patterns">Patterns</button>
         <button class="module-nav-btn" data-section="quiz-section">Quiz</button>
         <button class="module-nav-btn" data-section="resources">Resources</button>
     </nav>
@@ -219,6 +219,10 @@
                 <li><strong>Persistent Memory:</strong> Unlike base LLMs limited to their context window, agents remember past actions, user preferences, or important facts (short-term and long-term). They can also use it improve future actions.</li>
                 <li><strong>Decision Cycle:</strong> Agents use an LLM as their brain and repeat the <b>Decision Cycle</b> (Reason → Plan → Act) as needed, often using tools and memory, until an end state is reached.</li>
             </ul>
+            <div class="diagram">
+                <img src="../assets/images/agent_component.png" alt="Diagram showing an agent at the center, connected to tools, memory, and a decision cycle, all triggered by a user request or task." style="max-width: 420px; width: 100%; height: auto; display: block; margin: 0 auto;" />
+                <div style="font-size:0.98em; color:#444; margin-top:0.5em;">Figure: Core components of an LLM-powered agent. The agent orchestrates tool use, memory, and a decision cycle in response to user requests or tasks.</div>
+            </div>
             These three capabilities transform LLMs from reactive language models into semi-autonomous systems that can reason, remember, and act to accomplish complex real-world tasks.            
             <div class="callout-info" style="background:#fffbe6;border-left:4px solid #ffd700;margin:1em 0 1.2em 0;padding:1em 1.2em;">
               <span style="font-size:1.2em;margin-right:0.3em;">⚡</span>
