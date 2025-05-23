@@ -145,8 +145,8 @@
         <button class="module-nav-btn" data-section="tools">Tools</button>
         <button class="module-nav-btn" data-section="decision-cycle">Decision Cycle</button>
         <button class="module-nav-btn" data-section="agent-patterns">Patterns</button>
-        <button class="module-nav-btn" data-section="quiz-section">Quiz</button>
         <button class="module-nav-btn" data-section="resources">Resources</button>
+        <button class="module-nav-btn" data-section="quiz-section">Quiz</button>
     </nav>
     <nav class="module-sidebar"></nav>
     <div class="content-inner">
@@ -788,6 +788,31 @@ print(agent_decision_loop(spanish_doc))
                 <button id='next-agent-patterns'>Next</button>
             </div>
         </section>
+        <!-- Resources Section -->
+        <section id="resources" class="module-section">
+        <h2>Resources</h2>
+        <ul>
+            <li><b>CoALA: Cognitive Architectures for Language Agents</b><br>
+                <a href="https://arxiv.org/pdf/2309.02427" target="_blank">arXiv PDF</a> – A comprehensive survey of cognitive architectures for language agents, including memory, planning, and tool use.
+            </li>
+            <li><b>Amazon Bedrock Agents Documentation</b><br>
+                <a href="https://aws.amazon.com/bedrock/agents/" target="_blank">AWS Bedrock Agents</a> – Official AWS documentation for building, orchestrating, and deploying LLM-powered agents with memory, tool use, and multi-agent collaboration.
+            </li>
+            <li><b>LangChain Documentation</b><br>
+                <a href="https://python.langchain.com/docs/" target="_blank">LangChain Docs</a> – The most popular open-source framework for building LLM-powered agents with memory, tools, and workflows.
+            </li>
+            <li><b>CrewAI</b><br>
+                <a href="https://github.com/joaomdmoura/crewAI" target="_blank">CrewAI GitHub</a> – Open-source framework for multi-agent collaboration and workflow orchestration.
+            </li>
+            <li><b>Microsoft AutoGen</b><br>
+                <a href="https://github.com/microsoft/autogen" target="_blank">AutoGen GitHub</a> – Framework for building multi-agent and tool-using systems.
+            </li>
+        </ul>
+        <div class='section-nav-btns'>
+            <button id='back-resources'>Back</button>
+            <button id='next-resources'>Next</button>
+        </div>
+        </section>
         <section id="quiz-section" class="module-section" style="display:none">
             <h2 class="quiz-title">Concept Check Questions</h2>
             <div class="quiz-container">
@@ -850,31 +875,6 @@ print(agent_decision_loop(spanish_doc))
             <div class='section-nav-btns'>
                 <button id='back-quiz-section'>Back</button>
                 <button id='next-quiz-section'>Next</button>
-            </div>
-        </section>
-        <!-- Resources Section -->
-        <section id="resources" class="module-section">
-            <h2>Resources</h2>
-            <ul>
-                <li><b>CoALA: Cognitive Architectures for Language Agents</b><br>
-                    <a href="https://arxiv.org/pdf/2309.02427" target="_blank">arXiv PDF</a> – A comprehensive survey of cognitive architectures for language agents, including memory, planning, and tool use.
-                </li>
-                <li><b>Amazon Bedrock Agents Documentation</b><br>
-                    <a href="https://aws.amazon.com/bedrock/agents/" target="_blank">AWS Bedrock Agents</a> – Official AWS documentation for building, orchestrating, and deploying LLM-powered agents with memory, tool use, and multi-agent collaboration.
-                </li>
-                <li><b>LangChain Documentation</b><br>
-                    <a href="https://python.langchain.com/docs/" target="_blank">LangChain Docs</a> – The most popular open-source framework for building LLM-powered agents with memory, tools, and workflows.
-                </li>
-                <li><b>CrewAI</b><br>
-                    <a href="https://github.com/joaomdmoura/crewAI" target="_blank">CrewAI GitHub</a> – Open-source framework for multi-agent collaboration and workflow orchestration.
-                </li>
-                <li><b>Microsoft AutoGen</b><br>
-                    <a href="https://github.com/microsoft/autogen" target="_blank">AutoGen GitHub</a> – Framework for building multi-agent and tool-using systems.
-                </li>
-            </ul>
-            <div class='section-nav-btns'>
-                <button id='back-resources'>Back</button>
-                <button id='next-resources'>Next</button>
             </div>
         </section>
     </div>

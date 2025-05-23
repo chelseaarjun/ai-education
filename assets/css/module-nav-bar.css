@@ -146,4 +146,31 @@
     width: 1.1em;
     display: inline-block;
     vertical-align: middle;
+}
+
+.section-toc {
+  text-align: left;
+  font-size: 1em;
+  margin-bottom: 1.5em;
+}
+.section-toc a {
+  color: #4a6fa5;
+  text-decoration: none;
+  margin-right: 0.7em;
+}
+.section-toc a:hover {
+  text-decoration: underline;
+}
+section {
+  margin-bottom: 2.5em;
+}
+ul, ol {
+  margin-bottom: 1.2em;
+}
+li {
+  margin-bottom: 0.5em;
+}
+h2, h3, h4 {
+  margin-top: 1.5em;
+  margin-bottom: 0.7em;
 } 
