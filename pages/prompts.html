@@ -296,7 +296,7 @@
         <section id="introduction">
             <div class="course-description" id="introduction">
                 <h2>Module 2: Master the art and science of effective prompts</h2>
-                <p>Welcome to this guide on prompt engineering! Today, you'll explore how to effectively communicate with artificial intelligence models like Claude and Amazon Bedrock to get the best possible results for your applications.</p>
+                <p>Welcome to this guide on prompt engineering! Today, you'll explore how to effectively communicate with LLM models to get the best possible results for your applications.</p>
                 <p>Prompt engineering is a crucial skill in the AI era. By the end of this lesson, you'll understand how to craft effective prompts that can help you build sophisticated AI applications, even without extensive programming knowledge.</p>
                 <div class="callout" style="background: #f8f9fa; border-left: 4px solid #3498db; padding: 12px 18px; margin: 18px 0;">
                   <strong>Hands-On Lab:</strong> <br>
@@ -383,22 +383,22 @@
                     <text x="130" y="185" fill="#6b4ca5" font-size="16" font-weight="bold">CONTEXT</text>
                     <text x="130" y="205" fill="#333" font-size="14">Background information the model needs</text>
                     <rect x="120" y="230" width="560" height="60" fill="#f9e9f0" stroke="#a54c6b" stroke-width="2" rx="5" ry="5"></rect>
-                    <text x="130" y="255" fill="#a54c6b" font-size="16" font-weight="bold">INPUT EXAMPLES</text>
-                    <text x="130" y="275" fill="#333" font-size="14">Demonstrations of desired patterns</text>
+                    <text x="130" y="255" fill="#a54c6b" font-size="16" font-weight="bold">INPUT</text>
+                    <text x="130" y="275" fill="#333" font-size="14">Actual data to be processed</text>
                     <rect x="120" y="300" width="560" height="60" fill="#e9f9f0" stroke="#4ca56b" stroke-width="2" rx="5" ry="5"></rect>
                     <text x="130" y="325" fill="#4ca56b" font-size="16" font-weight="bold">OUTPUT FORMAT</text>
                     <text x="130" y="345" fill="#333" font-size="14">Specification of how responses should be structured</text>
                 </svg>
             </div>
-            <p>An effective prompt consists of three essential components that work together to guide the model toward producing desired outputs:</p>
+            <p>An effective prompt consists of input data to be processed and three essential components that work together to guide the model toward producing desired outputs:</p>
             <ol>
-                <li><strong>Task Requirements</strong>: Clear instructions defining the specific action the model should perform.</li>
+                <li><strong>Instructions</strong>: Clear instructions defining the specific action the model should perform.</li>
                 <li><strong>Background Context</strong>: Relevant information that helps the model understand the task's setting.</li>
                 <li><strong>Input/Output Structure</strong>: The format of information provided and the expected response format.</li>
             </ol>
             <p>The positioning of these components matters significantly. Due to the "primacy-recency effect," models tend to pay more attention to information at the beginning and end of prompts, with content in the middle receiving less focus.</p>
             <div class="code-block">
-[TASK REQUIREMENTS]: Create a summary of the following customer feedback that highlights key issues and one positive aspect.
+[INSTRUCTIONS]: Create a summary of the following customer feedback that highlights key issues and one positive aspect.
 
 [BACKGROUND CONTEXT]: This feedback is from a user of our mobile banking app who has been a customer for 3 years and primarily uses the deposit and transfer features.
 
