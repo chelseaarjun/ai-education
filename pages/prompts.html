@@ -408,6 +408,19 @@
 
 [OUTPUT STRUCTURE]: Provide a 2-sentence summary followed by bullet points for key issues and one positive aspect.
             </div>
+
+            <h3>1.5 System Prompts</h3>
+            <p>
+              <b>System prompts</b> (also called <b>system messages</b> or <b>system instructions</b>) are special instructions provided to the LLM before any user input. They set the model's overall behavior, persona, and constraints for the session. System prompts are not visible to the end user, but they shape every response the model generates.
+            </p>
+            <ul>
+              <li><b>Purpose:</b> Set the assistant's tone, role, and boundaries (e.g., "You are a helpful, concise assistant.")</li>
+              <li><b>Best Practice:</b> Use system prompts to enforce safety, style, or domain-specific behavior.</li>
+              <li><b>Example:</b> <code>You are an expert legal advisor. Always cite relevant laws. Respond only in JSON format.</code></li>
+            </ul>
+            <p>
+              <b>Tip:</b> Combine system prompts with clear user instructions for best results. Most modern LLM APIs (OpenAI, Anthropic, Google Gemini) support system prompts as a core feature.
+            </p>
             <div class="section-nav-btns">
                 <button id="back-overview" disabled>Back</button>
                 <button id="next-overview">Next</button>
@@ -571,6 +584,9 @@
 
             <h4>3.1.1 Role Assignment</h4>
             <p><strong>What it is:</strong> Assigning the model a specific role, expertise, or perspective to frame its responses.</p>
+            <div class="callout" style="background: #f8fafd; border-left: 4px solid #4a6fa5; margin: 1em 0; padding: 0.8em 1em;">
+              <b>Best Practice:</b> The most robust way to assign a role is by using a <b>system prompt</b>. This sets the model's persona and global behavior for the session.<br>
+            </div>
 
             <p><strong>When to use it:</strong></p>
             <ul>
