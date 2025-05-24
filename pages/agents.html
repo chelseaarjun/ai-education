@@ -161,17 +161,17 @@
                     <li><strong>Module 1</strong> introduced you to Large Language Models (LLMs)—powerful AI systems capable of understanding and generating human language. LLMs excel at reasoning, summarizing, answering questions, and more, but they operate within certain boundaries: they have no persistent memory, cannot access external tools or data, and do not act autonomously.</li>
                     <li><strong>Module 2</strong> explored the art and science of prompt engineering—the practice of crafting clear, effective instructions to get the best results from LLMs. With strong prompt engineering, you can build surprisingly capable applications using just an LLM, without any additional complexity.</li>
                 </ul>
-                <p>This module builds on your understanding of LLMs and prompt engineering, showing you how to design and build autonomous agents that can remember, reason, use tools, and act autonomously—unlocking a new level of capability for your AI applications.</p>
+                <p>This module builds on your understanding of LLMs and prompt engineering, showing you how to design and build agents that can remember, reason, use tools, and act autonomously—unlocking a new level of capability for your AI applications.</p>
                 <h3 class="section-title">What You'll Learn</h3>
-                <p>In this course, we focus specifically on LLM-powered agents - systems that leverage Large Language Models as their core reasoning engine. These represent a distinctly modern approach to agent design with unique capabilities and limitations.
+                <p>In this course, we focus specifically on LLM-powered agents—systems that leverage Large Language Models as their core reasoning engine. This represents a modern approach to agent design, with unique capabilities and limitations.
                 </p>
                 <ul class="enhanced-list">
                     <li><b>Agent Fundamentals:</b> The key characteristics that define LLM-powered agents</li>
-                    <li><b>When to use Agents:</b> What makes an autonomous LLM powered agents different from an Prompt-Based LLM Applications.</li>
+                    <li><b>When to use Agents:</b> What makes autonomous LLM-powered agents different from prompt-based LLM applications.</li>
                     <li><b>Memory:</b> Types of memory and how agents use them</li>
                     <li><b>Tools:</b> How agents use external tools to extend their capabilities</li>
                     <li><b>Decision Cycle:</b> How agents observe, plan, and act in iterative loops</li>
-                    <li><b>Agent Patterns:</b> Different agents patterns and production consideration </li>
+                    <li><b>Agent Patterns:</b> Different agent patterns and production considerations</li>
                 </ul>
             </div>  
             <span style='font-size:1.2em; margin-right:0.3em;'>💡</span><strong>Tip:</strong> No matter if you're building a simple LLM-powered app or a sophisticated agent system, every successful AI solution depends on clear, well-crafted prompts - even the most advanced agents rely on clear, well-structured prompts to guide the LLM's reasoning and actions.         
@@ -185,7 +185,7 @@
             <p>An AI agent is a system that perceives its environment through sensors, processes this information, and acts upon the environment through actuators to achieve specific goals. Today, this same principle applies to LLM-powered agents, but with digital sensors and actuators
             </p>
             <h3>Historical Context</h3>
-            <p>The concept of agents in AI dates back to the 1950s with early work in cybernetics (the study of control systems and information processing in both machines and living organisms) and the development of the first AI programs. The Turing Test, proposed by Alan Turing, established a framework for evaluating if machines could exhibit human-like intelligence - though not specifically defining "agents" as we understand them today.
+            <p>The concept of agents in AI dates back to the 1950s with early work in cybernetics (the study of control systems and information processing in both machines and living organisms) and the development of the first AI programs. The Turing Test, proposed by Alan Turing, established a framework for evaluating if machines could exhibit human-like intelligence—though not specifically defining "agents" as we understand them today.
             In the 1980s and 1990s, the agent paradigm became more formalized in AI research, with researchers developing various types of agents from simple reactive systems to more complex deliberative architectures.</p>
             
             <p>Traditional AI literature identifies several key characteristics of agents:
@@ -218,7 +218,7 @@
             <p>LLM-powered agents build upon the foundation of Large Language Models by extending them with critical capabilities:            </p>
             <ul class="enhanced-list">
                 <li><strong>Tool Use:</strong> While base LLMs can only process and generate text, LLM-powered agents can interact with the world by using external tools, APIs, and services to retrieve information or perform actions.</li>
-                <li><strong>Persistent Memory:</strong> Unlike base LLMs limited to their context window, agents remember past actions, user preferences, or important facts (short-term and long-term). They can also use it improve future actions.</li>
+                <li><strong>Persistent Memory:</strong> Unlike base LLMs limited to their context window, agents remember past actions, user preferences, or important facts (short-term and long-term). They can also use it to improve future actions.</li>
                 <li><strong>Decision Cycle:</strong> Agents use an LLM as their brain and repeat the <b>Decision Cycle</b> (Reason → Plan → Act) as needed, often using tools and memory, until an end state is reached.</li>
             </ul>
             <div class="diagram">
@@ -228,7 +228,7 @@
             These three capabilities transform LLMs from reactive language models into semi-autonomous systems that can reason, remember, and act to accomplish complex real-world tasks.            
             <div class="callout-info" style="background:#fffbe6;border-left:4px solid #ffd700;margin:1em 0 1.2em 0;padding:1em 1.2em;">
               <span style="font-size:1.2em;margin-right:0.3em;">⚡</span>
-              For the remainder of this module, <b>"agents"</b> refers to <b>LLM-powered agents</b>. The key differentiator from <b>Prompt-Based LLM Applications</b> is the orchestrated decision cycle and persistent memory, which requires careful engineering and enables agents to handle complex tasks semi-autonomously at the cost of increased implementation complexity. As LLMs improve at handling complex tasks internally, the implementation and maintenance costs of agents will likely decrease.
+              For the remainder of this module, <b>"agents"</b> refers to <b>LLM-powered agents</b>. The key differentiator from <b>Prompt-Based LLM Applications</b> is the orchestrated decision cycle and persistent memory, which require careful engineering and enable agents to handle complex tasks semi-autonomously at the cost of increased implementation complexity. As LLMs improve at handling complex tasks internally, the implementation and maintenance costs of agents will likely decrease.
             </div>
             <h3>The Engineering Challenge: From Prompts to Orchestration</h3>
             <p>While prompt engineering remains important, building LLM-powered agents shifts the primary engineering focus to orchestration design:</p>
@@ -288,7 +288,7 @@
                     <tr>
                         <td class="dimension">Applications & Examples</td>
                         <td>Well-defined processes: order processing, data validation, reporting</td>
-                        <td>Tasks leveraging the model's pre-existing knowledge or requiring up-to-date/domain-specific information that can be injected into the prompt.s: content creation, Simple Chatbots, text-to-SQL applications</td>
+                        <td>Tasks leveraging the model's pre-existing knowledge or requiring up-to-date/domain-specific information that can be injected into the prompt: content creation, simple chatbots, text-to-SQL applications</td>
                         <td>Complex tasks requiring multiple steps reasoning, external data, or persistent context. Customer service agents, research assistants, automated analysts</td>
                     </tr>
                     <tr>
@@ -318,7 +318,7 @@
                     <tr>
                         <td class="dimension">Tool Integration</td>
                         <td>Pre-programmed connections to specific systems</td>
-                        <td>Predefined tool usage (RAG integrations, LLM output as tool input)/td>
+                        <td>Predefined tool usage (RAG integrations, LLM output as tool input)</td>
                         <td>LLM decides which tools to use; orchestrated tool selection with feedback loops</td>
                     </tr>
                     <tr>
@@ -489,7 +489,7 @@ print(agent_decision_loop(spanish_doc))
             </ul>
             <p><strong>Analogy:</strong><br>Like having all the notes and materials you need on your desk while working on a homework assignment—everything you need right now is in front of you and easy to use.</p>
             <hr>
-            <h4>2. Long-Term Memory: What the agent has experienced before and know as facts</h4>
+            <h4>2. Long-Term Memory: What the agent has experienced before and knows as facts</h4>
             <p>Long-term memory is where the agent stores information it may need in the future, even after the current conversation or task is over. It has two main types:</p>
             <table>
                 <thead>
@@ -513,7 +513,7 @@ print(agent_decision_loop(spanish_doc))
             <h4>3. Procedural Memory: How the agent knows what to do and how to do it</h4>
             <p>Procedural memory is how the agent knows what to do and how to do it.</p>
             <ul>
-                <li><strong>Implicit procedural memory:</strong> The skills and reasoning built into the LLM itself encoded in the model's weights.</li>
+                <li><strong>Implicit procedural memory:</strong> The skills and reasoning built into the LLM itself, encoded in the model's weights.</li>
                 <li><strong>Explicit procedural memory:</strong> The agent's code, prompt templates, and programmed workflows (e.g., how to escalate a support ticket, how to call an API).</li>
             </ul>
             <p><strong>Key Points:</strong></p>

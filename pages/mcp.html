@@ -66,7 +66,7 @@
                     <li><strong>Transport Protocols:</strong> Supported communication protocols (stdio, HTTP), session management, and authorization.</li>
                     <li><strong>Security Principles:</strong> Best practices and requirements for user consent, access control, and safe tool use, ensuring secure and trustworthy MCP integrations.</li>
                 </ul>
-                <p>You will learn how together, these elements make MCP a robust, extensible, and secure foundation for advanced AI integrations.</p>
+                <p>You will learn how these elements together make MCP a robust, extensible, and secure foundation for advanced AI integrations.</p>
             </div>
 
             <div class="section-nav-btns">
@@ -122,7 +122,7 @@
             <h3>MCP Design Principles</h3>
             <div style="margin-bottom:1.2em;"><span>🛠️ <strong>Servers should be extremely easy to build:</strong> Host applications handle orchestration, so servers focus on simple, well-defined capabilities.</span></div>
             <div style="margin-bottom:1.2em;"><span>🧩 <strong>Servers should be highly composable:</strong> Each server works in isolation but can be seamlessly combined with others via the shared protocol.</span></div>
-            <div style="margin-bottom:1.2em;"><span>🔒 <strong>Servers should not be able to read the whole conversation, nor "see into" other servers:</strong> Servers only receive necessary context; each connection is isolated and controlled by the host.</span></div>
+            <div style="margin-bottom:1.2em;"><span>🔒 <strong>Servers should not be able to read the whole conversation or "see into" other servers:</strong> Servers only receive necessary context; each connection is isolated and controlled by the host.</span></div>
             <div style="margin-bottom:1.2em;"><span>⬆️ <strong>Features can be added to servers and clients progressively:</strong> The protocol allows new capabilities to be negotiated and added as needed, supporting independent evolution.</span></div>
             
             <h3>How It Works (At a Glance): Practical Example</h3>
@@ -141,6 +141,10 @@
             <li><b>Host:</b> Aggregates the results and presents: "You have a meeting at 3:00 PM. The weather at that time is expected to be sunny, 75°F."</li>
             </ol>
             <p style="margin-top:1em; color:#4a6fa5;"><b>Key Point:</b> This example shows how MCP enables secure, modular, and orchestrated multi-tool workflows.</p>
+            <div class="callout-info" style="margin-top:1em;"><b>Note:</b> MCP provides official SDKs for multiple languages, 
+                including <a href='https://github.com/modelcontextprotocol/python-sdk' target='_blank'>Python</a> 
+                and <a href='https://github.com/modelcontextprotocol/typescript-sdk' target='_blank'>TypeScript</a>, 
+                to simplify development and integration. See official <a href='https://modelcontextprotocol.io/sdk/java/mcp-overview' target='_blank'>documentation</a> for more details.</div>
             <div class="section-nav-btns">
                 <button id="back-architecture">Back</button>
                 <button id="next-architecture">Next</button>
@@ -246,7 +250,7 @@
         <!-- Section: Features -->
         <section id="features">
             <h2>Features</h2>
-            <p>MCP defines a set of features—such as resources, tools, prompts, sampling, and roots—that enable applications to interact with external data, perform actions, and extend AI capabilities in a standardized secure manner.</p>
+            <p>MCP defines a set of features—such as resources, tools, prompts, sampling, and roots—that enable applications to interact with external data, perform actions, and extend AI capabilities in a standardized, secure manner.</p>
             <h3>Server Features</h3>
             <p>
             <span>📦 <b>Resources:</b> Structured data or context a server provides.<br>
@@ -267,7 +271,7 @@
             <h3>Client Features</h3>
             <p>
             <span>🎲 <b>Sampling:</b> Lets the server request the client to generate a completion or response from the LLM.<br>
-            <b>How it works:</b> Server asks client to use its LLM for tasks like summarization or drafting.<br>
+            <b>How it works:</b> Server asks the client to use its LLM for tasks like summarization or drafting.<br>
             <b>Example:</b> Server requests a summary of a document.</span>
             </p>
             <p>
@@ -324,7 +328,7 @@
             <ul>
             <li><b>Who:</b> Server, client, or host can initiate termination (e.g., on completion, user request, or error).</li>
             <li><b>How:</b> Termination is communicated explicitly via protocol messages or notifications.</li>
-            <li><b>Host:</b> Mediates/co-ordinates termination, notifies all parties, and updates the UI or application state.</li>
+            <li><b>Host:</b> Mediates/coordinates termination, notifies all parties, and updates the UI or application state.</li>
             <li><b>Cleanup:</b> All resources (connections, memory, temp files) are released.</li>
             <li><b>Result:</b> Session ends cleanly, and the system is ready for new sessions or safe shutdown.</li>
             </ul>
@@ -392,7 +396,7 @@
                 <strong>Reference:</strong> <a href="https://modelcontextprotocol.io/specification/2025-03-26#security-and-trust-%26-safety" target="_blank" rel="noopener">MCP Specification: Security and Trust &amp; Safety</a><br>
                 <em>This section is a direct, word-for-word reference from the official MCP specification for accuracy and authority.</em>
             </div>
-            <p>The Model Context Protocol (MCP) enables powerful integrations between LLMs and external tools or data sources. With this power comes significant responsibility: implementors must ensure robust security, user trust, and safety at every stage of development and deployment.</p>
+            <p>The Model Context Protocol (MCP) enables powerful integrations between LLMs and external tools or data sources. With this power comes significant responsibility: implementers must ensure robust security, user trust, and safety at every stage of development and deployment.</p>
             <h3>Key Principles</h3>
             <ol>
                 <li><strong>User Consent and Control</strong><br>
@@ -416,7 +420,7 @@
                 <li>Follow security best practices in all integrations.</li>
                 <li>Consider privacy implications in all feature designs.</li>
             </ul>
-            <blockquote><strong>While MCP itself cannot enforce these principles at the protocol level, it is the responsibility of every implementor to uphold them in practice.</strong></blockquote>
+            <blockquote><strong>While MCP itself cannot enforce these principles at the protocol level, it is the responsibility of every implementer to uphold them in practice.</strong></blockquote>
             <div class="section-nav-btns">
                 <button id="back-security-trust">Back</button>
                 <button id="next-security-trust">Next</button>
@@ -433,9 +437,10 @@
                 <li><a href="https://modelcontextprotocol.io/docs/concepts/resources" target="_blank">Model Context Protocol: Concepts – Resources, Tools, Prompts, Sampling</a> — Deep dives into each feature, with examples and best practices.</li>
                 <li><a href="https://medium.com/@singhrajni2210/model-context-protocol-mcp-a-technical-deep-dive-810273a34304" target="_blank">Model Context Protocol (MCP) — A Technical Deep Dive (Medium)</a> — Third-party technical deep dive into MCP's motivation, architecture, and use cases.</li>
                 <li><a href="https://github.com/modelcontextprotocol/docs" target="_blank">MCP GitHub Documentation</a> — The open-source repository for MCP documentation, including examples and community discussions.</li>
-                <li><a href="https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/schema" target="_blank">MCP Detailed Specification</a> - Detailed MCP specification in typescript</li>
+                <li><a href="https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/schema" target="_blank">MCP Detailed Specification</a> - Detailed MCP specification in TypeScript</li>
                 <li><a href="https://modelcontextprotocol.io/quickstart" target="_blank">Model Context Protocol: Tutorials and Quickstarts</a> — Step-by-step guides for building servers and clients.</li>
                 <li><a href="https://www.jsonrpc.org/specification" target="_blank">JSON-RPC 2.0 Specification</a></li>
+                <li><a href="https://modelcontextprotocol.io/sdk/java/mcp-overview" target="_blank">Model Context Protocol Java SDK Overview</a> — Official documentation for the Java SDK, including features like tool discovery, resource management, and transport options.</li>
             </ul>
             <div class="section-nav-btns">
                 <button id="back-references">Back</button>

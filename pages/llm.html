@@ -314,7 +314,7 @@
         <section id="introduction">
             <div class="course-description">
                 <h2 class="module-title">Module 1: Understanding Large Language Models</h2>
-                <p>Large Language Models (LLMs) are sophisticated AI systems trained on vast amounts of text data that can understand, generate, and manipulate human language. These powerful tools form the foundation of modern AI applications like chatbots, content generators, and virtual assistants.</p>
+                <p>Large Language Models (LLMs) are sophisticated AI systems, trained on vast amounts of text data, that can understand, generate, and manipulate human language. These powerful tools form the foundation of modern AI applications like chatbots, content generators, and virtual assistants.</p>
                 <div class="callout" style="background: #f8f9fa; border-left: 4px solid #3498db; padding: 12px 18px; margin: 18px 0;">
                     <strong>Hands-On Lab:</strong> <br>
                     Try the <b>LLM Foundations Lab</b> in Jupyter! <br>
@@ -344,7 +344,7 @@
                     <span class="highlight">Concept:</span>
                     The <strong>context window</strong> is the model's "working memory"—the total number of <strong>tokens</strong> (chunks of text) it can consider at once. This includes both your input and the model's output. 
                     <br>
-                    Modern AI models, called <strong>transformers</strong> (invented by Google), use an <strong>attention mechanism</strong> to focus on all tokens in this window at the same time—but nothing outside it.
+                    Modern AI models, known as <strong>transformers</strong> (introduced by Google), use an <strong>attention mechanism</strong> to focus on all tokens in this window simultaneously—but nothing outside it.
                 </p>
 
                 <p>
@@ -417,7 +417,7 @@
                 
                 <p><span class="highlight">Practical Application:</span> 
                 <strong>Quick Token & Cost Estimation for Developers:</strong><br>
-                For English, <b>1 token ≈ 4 characters</b> (including spaces/punctuation) or <b>¾ of a word</b>.<br>
+                For English, on average, <b>1 token ≈ 4 characters</b> (including spaces and punctuation) or <b>¾ of a word</b>.<br>
                 <span style='font-size:0.95em;color:#555;'>Reference: <a href='https://platform.openai.com/tokenizer' target='_blank' rel='noopener'>OpenAI Tokenizer</a></span><br><br>
                 <b>How to use:</b>
                 <ul>
@@ -481,7 +481,7 @@
                 <h2>4. Logits: Making Predictions</h2>
                 
                 <p><span class="highlight">Concept:</span> <strong>Logits</strong> are raw numerical scores the model assigns to each possible next token before making its final selection.</p>
-                <p><strong>First phase:</strong> The model splits the prompt into <strong>tokens</strong>, converts the tokens to <strong>embeddings</strong>, and processes the sequence of embeddings through its layers (e.g., <strong>transformer blocks</strong>), which use attention mechanisms to understand relationships and context. The model then produces <strong>logits</strong>—raw scores for every possible next token. These logits are converted to probabilities using the <strong>softmax function</strong> (<a href="https://en.wikipedia.org/wiki/Softmax_function" target="_blank" rel="noopener">Wikipedia</a>). This calculation phase is <strong>deterministic</strong>—identical inputs always produce the same probability distribution.</p>
+                <p><strong>First phase:</strong> The model splits the prompt into <strong>tokens</strong>, converts the tokens to <strong>embeddings</strong>, and processes the sequence of embeddings through its layers (e.g., <strong>transformer blocks</strong>), which use attention mechanisms to understand relationships and context. The model then produces <strong>logits</strong>—raw scores for every possible next token. These logits are converted to probabilities using the <strong>softmax function</strong> (see <a href="https://en.wikipedia.org/wiki/Softmax_function" target="_blank" rel="noopener">Wikipedia</a>). This calculation phase is <strong>deterministic</strong>—identical inputs always produce the same probability distribution.</p>
                 <p><strong>Second phase:</strong> The model selects tokens from this distribution, either <strong>deterministically</strong> (by always choosing the highest-probability token, if configured to do so) or with <strong>controlled randomness</strong> (to balance accuracy with creativity, depending on the <strong>sampling parameters</strong>).</p>
                 
                 <p><span class="highlight">Everyday Example:</span> When completing "The capital of France is ____," a model assigns high scores to relevant answers like "Paris" and low scores to irrelevant options like "banana."</p>
@@ -655,7 +655,7 @@
                   <li><b>Parallel processing</b>: Enabling simultaneous rather than sequential computation</li>
                   <li><b>Flexible architecture</b>: Supporting various NLP tasks through encoder-decoder components</li>
                 </ul>
-                <p>Following this breakthrough, researchers discovered the "scaling law" phenomenon: model capabilities improve predictably when increasing parameters, training data, and computing power. This insight led to a rapid expansion in model size:</p>
+                <p>Following this breakthrough, researchers discovered the "scaling law" phenomenon: model capabilities improve predictably as parameters, training data, and computing power increase. This insight led to a rapid expansion in model size:</p>
                 <table>
                   <thead><tr><th>Year</th><th>Model</th><th>Parameters</th><th>Key Advancement</th></tr></thead>
                   <tbody>
