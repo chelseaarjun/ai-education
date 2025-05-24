@@ -141,8 +141,8 @@
     <nav class="module-nav">
         <button class="module-nav-btn" data-section="introduction">Introduction</button>   
         <button class="module-nav-btn" data-section="agent-intro">History</button>       
-        <button class="module-nav-btn" data-section="fundamentals">Fundamentals</button>
-        <button class="module-nav-btn" data-section="when-to-use-agents">When to use?</button>
+        <button class="module-nav-btn" data-section="fundamentals">Agent</button>
+        <button class="module-nav-btn" data-section="when-to-use-agents">When?</button>
         <button class="module-nav-btn" data-section="memory">Memory</button>
         <button class="module-nav-btn" data-section="tools">Tools</button>
         <button class="module-nav-btn" data-section="decision-cycle">Decision Cycle</button>
@@ -155,7 +155,7 @@
         <!-- Section 0: Introduction -->
         <section id="introduction">
             <div class="course-description">
-                <h2 class="module-title">Module 3: Building Applications with LLM-Powered Agents</h2>
+                <h2 class="module-title">Module 3: Building Agentic LLM Applications</h2>
                 <p>In the previous modules, you learned the foundational building blocks of modern AI applications:</p>
                 <ul>
                     <li><strong>Module 1</strong> introduced you to Large Language Models (LLMs)—powerful AI systems capable of understanding and generating human language. LLMs excel at reasoning, summarizing, answering questions, and more, but they operate within certain boundaries: they have no persistent memory, cannot access external tools or data, and do not act autonomously.</li>
@@ -163,11 +163,11 @@
                 </ul>
                 <p>This module builds on your understanding of LLMs and prompt engineering, showing you how to design and build agents that can remember, reason, use tools, and act autonomously—unlocking a new level of capability for your AI applications.</p>
                 <h3 class="section-title">What You'll Learn</h3>
-                <p>In this course, we focus specifically on LLM-powered agents—systems that leverage Large Language Models as their core reasoning engine. This represents a modern approach to agent design, with unique capabilities and limitations.
+                <p>In this course, we focus specifically on agentic LLM applications that leverage Large Language Models as their core reasoning engine. This represents a modern approach to agent design, with unique capabilities and limitations.
                 </p>
                 <ul class="enhanced-list">
-                    <li><b>Agent Fundamentals:</b> The key characteristics that define LLM-powered agents</li>
-                    <li><b>When to use Agents:</b> What makes autonomous LLM-powered agents different from prompt-based LLM applications.</li>
+                    <li><b>Agent Fundamentals:</b> The key characteristics that define agents</li>
+                    <li><b>When to use Agents:</b> What makes agents different from Single-Step or Workflow-Based LLM applications.</li>
                     <li><b>Memory:</b> Types of memory and how agents use them</li>
                     <li><b>Tools:</b> How agents use external tools to extend their capabilities</li>
                     <li><b>Decision Cycle:</b> How agents observe, plan, and act in iterative loops</li>
@@ -207,7 +207,7 @@
             <h2>From LLMs to Agents: Why Go Further?</h2>
             <p>While LLMs are incredibly versatile, many real-world applications require more than just language understanding. This is where LLM-powered agents come in.</p>
             <div class="callout-info" style="background:#f8fafd;border-left:4px solid #4a6fa5;margin:1.2em 0 0.5em 0;padding:1em 1.2em;"><span class="callout-icon">🤖</span>
-            <strong>LLM-Powered agent</strong> is a software system that wraps around the LLM, orchestrating when to call the LLM, what to ask, how to use the response, and how to interact with the environment (including databases, APIs, or human-in-the-loop steps).
+                <strong>Agentic LLM application</strong> is a software system that wraps around the LLM, operating in a loop—observing its environment, using the LLM's reasoning to decide what to do next, and taking actions to achieve its goals.
             </div>
             <p>For LLM-powered agents, the traditional agent definition still applies, but with modern digital implementations:</p>
             <ul>
@@ -219,7 +219,7 @@
             <ul class="enhanced-list">
                 <li><strong>Tool Use:</strong> While base LLMs can only process and generate text, LLM-powered agents can interact with the world by using external tools, APIs, and services to retrieve information or perform actions.</li>
                 <li><strong>Persistent Memory:</strong> Unlike base LLMs limited to their context window, agents remember past actions, user preferences, or important facts (short-term and long-term). They can also use it to improve future actions.</li>
-                <li><strong>Decision Cycle:</strong> Agents use an LLM as their brain and repeat the <b>Decision Cycle</b> (Reason → Plan → Act) as needed, often using tools and memory, until an end state is reached.</li>
+                <li><strong>Orchestration Logic:</strong> Coordinates when and how to use the LLM, tools, and memory within each decision cycle, enabling adaptive, multi-step workflows.</li>
             </ul>
             <div class="diagram">
                 <img src="../assets/images/agent_component.png" alt="Diagram showing an agent at the center, connected to tools, memory, and a decision cycle, all triggered by a user request or task." style="max-width: 420px; width: 100%; height: auto; display: block; margin: 0 auto;" />
@@ -228,7 +228,10 @@
             These three capabilities transform LLMs from reactive language models into semi-autonomous systems that can reason, remember, and act to accomplish complex real-world tasks.            
             <div class="callout-info" style="background:#fffbe6;border-left:4px solid #ffd700;margin:1em 0 1.2em 0;padding:1em 1.2em;">
               <span style="font-size:1.2em;margin-right:0.3em;">⚡</span>
-              For the remainder of this module, <b>"agents"</b> refers to <b>LLM-powered agents</b>. The key differentiator from <b>Prompt-Based LLM Applications</b> is the orchestrated decision cycle and persistent memory, which require careful engineering and enable agents to handle complex tasks semi-autonomously at the cost of increased implementation complexity. As LLMs improve at handling complex tasks internally, the implementation and maintenance costs of agents will likely decrease.
+              For the remainder of this module, <b>"agents"</b> refers to <b>Agentic LLM applications</b>.
+              The key differentiator from <b>Single-Step or Workflow Based LLM Applications</b> is the use of LLM for orchestration and 
+              persistent memory for feedback loop and learning. These require careful engineering and enable agents to adapt to handle complex tasks flexibly
+              at the cost of increased implementation complexity.
             </div>
             <h3>The Engineering Challenge: From Prompts to Orchestration</h3>
             <p>While prompt engineering remains important, building LLM-powered agents shifts the primary engineering focus to orchestration design:</p>
@@ -236,7 +239,7 @@
                 <li><b>Decision Logic:</b> When should the agent call external tools versus generate responses using the LLM's training knowledge? How does it choose between multiple available tools for the same task?</li>
                 <li><b>Error Handling:</b> What happens when a tool call fails, returns incomplete data, or produces unexpected results? How should the agent recover and continue?</li>
                 <li><b>Memory Operations:</b> What information should be stored after each interaction? When should past information be retrieved and used? How should conflicting information be handled?</li>
-                <li><b>Loop Termination:</b> How does the agent determine when a task is complete versus when to continue the Reason → Plan → Act cycle? What prevents infinite loops?</li>
+                <li><b>Loop Termination:</b> How does the agent determine when a task is complete versus when to continue the decision cycle? What prevents infinite loops?</li>
             </ul>  
             <p>This orchestration logic varies dramatically by use case - a research agent needs different decision patterns than a customer service agent or a data analysis agent. The engineering complexity lies in designing these control flows rather than just crafting prompts.</p>
             <div class='section-nav-btns'>
@@ -253,8 +256,8 @@
                     <tr>
                         <th>Dimension</th>
                         <th>Traditional Workflows</th>
-                        <th>Prompt-Based LLM Applications</th>
-                        <th>LLM-powered Agents</th>
+                        <th>Single-Step or Workflow Based LLM Applications</th>
+                        <th>Agentic LLM Applications</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -276,8 +279,8 @@
                     <tr>
                         <td class="dimension">Description</td>
                         <td>Software systems with predefined logic and workflows</td>
-                        <td>Direct interactions with LLMs through carefully engineered prompts, enhanced with external knowledge and reasoning techniques</td>
-                        <td>Systems that combine LLMs with tools, memory, and orchestration logic</td>
+                        <td>Applications that use LLMs in one or more fixed, code-defined steps—each step may involve an LLM call or tool, but the workflow is predetermined and not dynamically chosen by the LLM.</td>
+                        <td>Systems operating in a loop—observing its environment, using the LLM's reasoning to decide what to do next, and taking actions to achieve its goals</td>
                     </tr>
                     <tr>
                         <td class="dimension">Implementation Complexity</td>
@@ -288,7 +291,7 @@
                     <tr>
                         <td class="dimension">Applications & Examples</td>
                         <td>Well-defined processes: order processing, data validation, reporting</td>
-                        <td>Tasks leveraging the model's pre-existing knowledge or requiring up-to-date/domain-specific information that can be injected into the prompt: content creation, simple chatbots, text-to-SQL applications</td>
+                        <td>Tasks solved by running the LLM in one or more fixed, code-defined steps—such as content creation, simple chatbots, text-to-SQL, or multi-step data processing—where the workflow and tool use are predetermined and not dynamically chosen by the LLM.</td>
                         <td>Complex tasks requiring multiple steps reasoning, external data, or persistent context. Customer service agents, research assistants, automated analysts</td>
                     </tr>
                     <tr>
@@ -330,7 +333,7 @@
                     <tr>
                         <td class="dimension">Reasoning Process</td>
                         <td>Linear, rule-based or algorithmic</td>
-                        <td>Single-step reasoning per interaction (may use CoT, ToT, ReAct within prompts)</td>
+                        <td>Single-step or multi-step reasoning per interaction (may use CoT, ToT, ReAct within prompts)</td>
                         <td>Multi-step reasoning across interactions with planning and feedback loops</td>
                     </tr>
                 </tbody>
@@ -338,12 +341,12 @@
             <h3>Example: Document Extraction</h3>
             <ul>
                 <li><strong>Traditional Workflow:</strong> Extracts fixed fields from one type of document that always follows the same structure (e.g., always pulls "Name" and "Date" from a standard lease form).</li>
-                <li><strong>Single-Step LLM Applications:</strong> Can flexibly extract different fields based on the prompt, but still processes one document at a time and does not adapt its process or use external tools.</li>
+                <li><strong>Single-Step or Workflow-Based LLM Applications:</strong> Can flexibly extract different fields based on the prompt, but still processes one document at a time and does not adapt its process or use external tools.</li>
                 <li><strong>Agentic Application:</strong> Can interact with tools to translate documents, convert between different document types, and extract relevant fields—even adapting its approach based on the document's structure or missing information.</li>
             </ul>
             <div class="code-examples-row">
                 <div class="code-example-col">
-                    <div class="code-example-header">Prompt-Enhanced LLM Application</div>
+                    <div class="code-example-header">Single-Step LLM Application</div>
                     <div class="code-summary">
                         This code sends a prompt to a language model to extract specific fields from a lease document in a single step. It highlights how prompt engineering alone enables flexible information extraction without any additional logic or memory.
                     </div>
@@ -670,16 +673,18 @@ print(agent_decision_loop(spanish_doc))
             </ol>
             <p>After acting, the agent updates its memory and starts the cycle again for the next input or task. The agent's "brain" (the LLM and its code) brings together memory and tools to decide the best next step in each cycle.</p>
             <hr>
-            <h3>Separation of Responsibilities in the Decision Cycle</h3>
-            <p>As you've learned, agents and LLMs play distinct roles within an AI system. The agent manages the overall workflow—deciding when to use memory, which tools to call, and how to handle each step—while the LLM provides language understanding and reasoning at key moments in the cycle.
+            <h3>Orchestration in the Agent Decision Cycle</h3>
+            <p>
+              In agentic LLM applications, orchestration is key: the agent coordinates memory, tool use, and LLM reasoning within each decision cycle. 
+              The agent actively manages when to retrieve context, when to call tools, and when to leverage the LLM for reasoning or generation. 
+              This orchestration enables adaptive, multi-step workflows and robust integration with external systems.
             </p>
-            <p><strong>Why This Matters:</strong><br>This separation of responsibilities means the agent can use the LLM's strengths as needed within each decision cycle, while also managing memory, tool use, and business logic. This design leads to more robust, flexible, and safe AI systems—allowing the agent to coordinate complex tasks, enforce rules, and integrate with external systems, all while leveraging the LLM's capabilities.</p>
             <hr>
             <h3>Building Agents: Do You Need a Library?</h3>
             <p>You don't strictly need a library to build an agent—at its core, an agent is a software system that manages memory, tool use, and decision logic around an LLM. However, building a robust agent from scratch can be complex and time-consuming.</p>
             <p><strong>Popular open-source agent frameworks include:</strong></p>
             <ul>
-                <li><strong>LangChain</strong> (Python, JS): Modular framework for building LLM-powered agents with memory, tools, and workflows.</li>
+                <li><strong>LangChain</strong> (Python, JS): Modular framework for building agentic LLM applications with memory, tools, and workflows.</li>
                 <li><strong>CrewAI</strong>: Focuses on multi-agent collaboration and workflow orchestration.</li>
                 <li><strong>Autogen</strong> (Microsoft): For building multi-agent and tool-using systems.</li>
             </ul>
@@ -704,7 +709,7 @@ print(agent_decision_loop(spanish_doc))
         
         <section id="agent-patterns" class="module-section">
             <h2>Agent Patterns</h2>
-            <p>LLM-powered agents can be implemented in various ways depending on the application needs. Here are some of the patterns you'll encounter:</p>
+            <p>Agentic LLM applications can be implemented in various ways depending on the application needs. Here are some of the patterns you'll encounter:</p>
             <table class="enhanced-table" style="margin-bottom:2em;">
                 <thead>
                     <tr>
@@ -742,7 +747,7 @@ print(agent_decision_loop(spanish_doc))
                 </tbody>
             </table>
             <h3>Production Considerations</h3>
-            <p>Building LLM-powered agents for production environments requires careful attention to several critical areas:</p>
+            <p>Building agents for production environments requires careful attention to several critical areas:</p>
             <table class="enhanced-table">
                 <thead>
                     <tr>
@@ -798,16 +803,25 @@ print(agent_decision_loop(spanish_doc))
                 <a href="https://arxiv.org/pdf/2309.02427" target="_blank">arXiv PDF</a> – A comprehensive survey of cognitive architectures for language agents, including memory, planning, and tool use.
             </li>
             <li><b>Amazon Bedrock Agents Documentation</b><br>
-                <a href="https://aws.amazon.com/bedrock/agents/" target="_blank">AWS Bedrock Agents</a> – Official AWS documentation for building, orchestrating, and deploying LLM-powered agents with memory, tool use, and multi-agent collaboration.
+                <a href="https://aws.amazon.com/bedrock/agents/" target="_blank">AWS Bedrock Agents</a> – Official AWS documentation for building, orchestrating, and deploying agents with memory, tool use, and multi-agent collaboration.
             </li>
             <li><b>LangChain Documentation</b><br>
-                <a href="https://python.langchain.com/docs/" target="_blank">LangChain Docs</a> – The most popular open-source framework for building LLM-powered agents with memory, tools, and workflows.
+                <a href="https://python.langchain.com/docs/" target="_blank">LangChain Docs</a> – The most popular open-source framework for building agents with memory, tools, and workflows.
             </li>
             <li><b>CrewAI</b><br>
                 <a href="https://github.com/joaomdmoura/crewAI" target="_blank">CrewAI GitHub</a> – Open-source framework for multi-agent collaboration and workflow orchestration.
             </li>
             <li><b>Microsoft AutoGen</b><br>
                 <a href="https://github.com/microsoft/autogen" target="_blank">AutoGen GitHub</a> – Framework for building multi-agent and tool-using systems.
+            </li>
+            <li><b>LLM Orchestration: Strategies, Frameworks, and Best Practices</b><br>
+                <a href="https://labelyourdata.com/articles/llm-orchestration" target="_blank">Label Your Data</a> – Overview of orchestration concepts, frameworks, and best practices for agentic systems.
+            </li>
+            <li><b>LLM Orchestration in the Real World: Best Practices</b><br>
+                <a href="https://www.crossml.com/llm-orchestration-in-the-real-world/" target="_blank">CrossML Blog</a> – Practical strategies and production insights for orchestrating agents.
+            </li>
+            <li><b>IBM: LLM Agent Orchestration Guide</b><br>
+                <a href="https://www.ibm.com/think/tutorials/llm-agent-orchestration-with-langchain-and-granite" target="_blank">IBM Think Tutorial</a> – Step-by-step guide to agent orchestration with modern frameworks.
             </li>
         </ul>
         <div class='section-nav-btns'>
@@ -851,15 +865,15 @@ print(agent_decision_loop(spanish_doc))
                 </div>
             </div>
             <div class="quiz-container">
-                <div class="quiz-question">Which of the following is NOT a core capability that distinguishes LLM-powered agents from basic LLM applications?</div>
+                <div class="quiz-question">Which of the following is the core capability that distinguishes agentic LLM applications from single-step or workflow-based LLM applications?</div>
                 <ul class="quiz-options">
                     <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">A) Ability to use external tools</li>
                     <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">B) Persistent memory across interactions</li>
-                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">C) Multi-step decision cycles</li>
+                    <li class="quiz-option" data-correct="false" onclick="selectQuizOption(this)">C) Multi-step adaptable orchestration logic</li>
                     <li class="quiz-option" data-correct="true" onclick="selectQuizOption(this)">D) Generating images from text prompts</li>
                 </ul>
                 <div class="quiz-feedback">
-                    <strong>Explanation:</strong> Generating images is not a core agent capability; tool use, memory, and decision cycles are what set agents apart.
+                    <strong>Explanation:</strong> C) Multi-step adaptable orchestration logic is the core capability that distinguishes agentic LLM applications from single-step or workflow-based LLM applications.
                 </div>
             </div>
             <div class="quiz-container">

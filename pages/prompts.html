@@ -282,9 +282,9 @@
     <nav class="module-nav">
         <button class="module-nav-btn" data-section="introduction">Introduction</button>
         <button class="module-nav-btn" data-section="overview">Overview</button>
-        <button class="module-nav-btn" data-section="writing-effective-prompts">Writing CRISP Prompts</button>
+        <button class="module-nav-btn" data-section="writing-effective-prompts">CRISP Prompts</button>
         <button class="module-nav-btn" data-section="techniques">Techniques</button>
-        <button class="module-nav-btn" data-section="building-applications">Building Prompt Based Apps</button>
+        <button class="module-nav-btn" data-section="building-applications">LLM Applications</button>
         <button class="module-nav-btn" data-section="resources">Resources</button>
         <button class="module-nav-btn" data-section="quiz-section">Quiz</button>
         <button class="module-nav-btn lab-nav-btn" id="lab-launch-btn" data-notebook="notebooks/prompt_foundations_lab.ipynb">
@@ -798,7 +798,7 @@
             </div>
         </section>
         <section id="building-applications">
-            <h2>4. Building Prompt Based LLM Applications</h2>
+            <h2>4. Building Single-Step and Workflow-Based LLM Applications</h2>
             <p>Well-crafted prompts are the foundation of effective AI applications. They serve as the critical interface between human goals and AI capabilities, directly impacting your application's accuracy, response quality, latency, and reliability.</p>
             <h3>4.1 Prompt Development Methodology</h3>
             <p>Start simple, test, evaluate, and iterate incrementally using intermediate and advanced techniques based on specific needs rather than adding complexity for its own sake:</p>
@@ -815,10 +815,17 @@
                 <p>In production applications, maintain a library of effective prompts, implement version control, and establish monitoring systems to track performance.</p>
             </div>
             <h3>4.2 LLM Application Development Approaches</h3>
-            <p>LLM application development offers multiple approaches, from direct prompt engineering to building applications with custom external knowledge integration—which we'll discuss below—and building autonomous agents, which we'll cover in the next module.</p>
-            <h4>Direct Prompt Engineering</h4>
-            <p>The most straightforward development approach involves directly interacting with LLMs using carefully crafted prompts. This method leverages the model's trained knowledge, internal reasoning and works well for simple, self-contained tasks.
-            </p>
+            <p>LLM applications can be broadly categorized as <b>Single-Step</b> or <b>Workflow-Based</b>:</p>
+            <ul>
+              <li><b>Single-Step LLM Applications:</b> The LLM is used in a single, atomic step to complete a task (e.g., summarization, classification, Q&A). The application logic is simple, and the LLM is called once per user request. The control flow is fixed and defined by the developer.</li>
+              <li><b>Workflow-Based LLM Applications:</b> The application consists of multiple, code-defined steps, each of which may involve an LLM call or tool use. The sequence of steps is predetermined and controlled by the developer, not the LLM. Examples include retrieval-augmented generation (RAG), multi-stage data processing, or document extraction pipelines.</li>
+            </ul>
+            <p>In both cases, the LLM does not autonomously decide the next step; the control flow is fixed in code.</p>
+            <div class="callout" style="background: #f8f9fa; border-left: 4px solid #3498db; padding: 12px 18px; margin: 18px 0;">
+                <strong>Note:</strong> <em>Agentic LLM applications, covered in the next module, differ by allowing the LLM to participate in the control flow, making decisions in a loop to achieve goals.</em>
+            </div>
+            <h4>Single-Step LLM Applications</h4>
+            <p>This approach involves directly interacting with LLMs using carefully crafted prompts. It leverages the model's trained knowledge and internal reasoning and works well for simple, self-contained tasks.</p>
             <div class="diagram">
                 <img src="../assets/images/llm-basic.png" alt="Basic LLM interaction with input and output"/>
             </div>
@@ -833,10 +840,9 @@
                     <tr>
                         <td>
                         <ol>
-                            <li>Can be single-turn interactions or multi-turn conversations</li>
                             <li>Limited to the model's context window</li>
                             <li>Low complexity implementation</li>
-                            <li>Relies on LLM model's general knowledge and single step internal reasoning</li>
+                            <li>Relies on LLM model's general knowledge and single-step internal reasoning</li>
                         </ol>
                         </td>
                         <td>
@@ -850,10 +856,10 @@
                 </tbody>
             </table>
            
-            <h4>LLM Applications Enhanced with External Knowledge</h4>
-            <p>When applications require current or specialized information, developers can enhance LLMs with tools to interact with external sources like databases, APIs, and document stores.</p>
+            <h4>Workflow-Based LLM Applications</h4>
+            <p>These applications consist of multiple, code-defined steps, each potentially involving an LLM call or tool use, but the workflow is predetermined by the developerand not dynamically chosen by the LLM.</p>
             <div class="diagram">
-                <img src="../assets/images/llm-external-knowledge.png" alt="LLM with external knowledge sources" width="600" />
+                <img src="../assets/images/llm-knowledge.png" alt="LLM with external knowledge sources" width="600" />
             </div>
             <table style="width:100%; margin-bottom: 24px; text-align:left;">
                 <thead>
@@ -866,28 +872,26 @@
                     <tr>
                         <td>
                         <ol>
-                            <li>Builds upon direct prompting approach</li>
-                            <li>Incorporates domain-specific information</li>
-                            <li>Medium complexity implementation</li>
-                            <li>Improves context relevance and accuracy</li>
+                            <li>Multiple, code-defined steps—each step may involve an LLM call or tool use</li>
+                            <li>Workflow and tool usage are predetermined and controlled by the developer (not the LLM)</li>
+                            <li>Medium implementation complexity</li>
                         </ol>
                         </td>
                         <td>
                         <ol>
-                            <li>Simple Q&A Chatbots</li>
-                            <li>Classification and translation tasks</li>
-                            <li>Simple applications requiring LLM capabilities augmented with proprietary data</li>
+                            <li>Simple Q&A chatbots with retrieval</li>
+                            <li>Multi-step data processing pipelines</li>
+                            <li>Applications requiring LLM capabilities augmented with proprietary or external data</li>
                         </ol>
                         </td>
                     </tr>
                 </tbody>
             </table>
 
-            <p>The choice between these approaches depends on your application requirements: data freshness needs, complexity tolerance, and specific use cases.
-            </p>
+            <p>The choice between these approaches depends on your application requirements: data freshness needs, complexity tolerance, and specific use cases.</p>
             <div class="callout" style="background: #f8f9fa; border-left: 4px solid #3498db; padding: 12px 18px; margin: 18px 0;">
                 <strong>Remember:</strong> Regardless of which approach you select, effective prompt engineering drives success across all LLM application development patterns.
-              </div>
+            </div>
             <div class="section-nav-btns">
                 <button id="back-building-applications">Back</button>
                 <button id="next-building-applications">Next</button>
