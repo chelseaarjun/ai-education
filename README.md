@@ -22,7 +22,7 @@ ai-education/
 
 ## Contents
 
-### 1. LLM Concepts Lesson
+### 1. LLM Concepts
 An in-depth exploration of how Large Language Models work, covering:
 
 - **Context Windows**: Understanding token limitations and management
@@ -32,7 +32,7 @@ An in-depth exploration of how Large Language Models work, covering:
 - **Response Formatting**: Structured vs. unstructured outputs
 - **Model Selection**: Choosing the right model for your application
 
-### 2. Prompt Engineering Lesson
+### 2. Prompt Engineering
 A practical guide to crafting effective prompts, including:
 
 - **Prompt Fundamentals**: Basic concepts and input-output relationships
@@ -47,12 +47,29 @@ A practical guide to crafting effective prompts, including:
   - ReAct (Reasoning and Acting)
   - RAG (Retrieval Augmented Generation)
 
-### 3. Open Source Tools (Coming Soon)
-An overview of key open-source libraries and frameworks for building AI applications:
+### 3. Agents
+A hands-on module on building LLM-powered agents, covering:
 
-- **Core LLM Frameworks**: LangChain, LlamaIndex, Langfuse
+- **Agent Fundamentals**: What makes an agent, and how LLMs are extended with memory, tools, and decision cycles
+- **When to Use Agents**: When prompt engineering is not enough
+- **Memory, Tools, and Orchestration**: How agents reason, remember, and act
+- **Agent Patterns**: Production considerations, error handling, and best practices
+
+### 4. Model Context Protocol (MCP)
+A developer-focused module on standardized AI integration:
+
+- **MCP Architecture**: Host, client, and server roles
+- **Message Types & Features**: JSON-RPC, tools, resources, prompts, and sampling
+- **Connection Lifecycle & Security**: Session management, transport, and trust
+- **SDKs & Extensibility**: Official SDKs for Python, TypeScript, and more
+
+### 5. Open Source Tools
+A comprehensive module on key open-source libraries and frameworks for building AI applications:
+
+- **Core LLM Frameworks**: LangChain, LangGraph, LlamaIndex, CrewAI, FAISS, Unstructured, ModelContextProtocol, Langfuse
 - **General Purpose Libraries**: FastAPI, Streamlit, Pydantic, Jinja2
-- **Integration with AWS Bedrock**
+- **Additional Libraries**: Ragas, DSPy, OpenLLMetry, Giskard, Guidance, Instructor, Supabase, Hugging Face Transformers, Ollama
+- **Integration with AWS Bedrock**: Practical examples and best practices
 
 ## Features
 
@@ -60,6 +77,9 @@ An overview of key open-source libraries and frameworks for building AI applicat
 - **Visual Explanations**: Diagrams and visual aids to explain complex concepts
 - **Code Examples**: Practical implementation examples using Python and AWS Bedrock
 - **Hands-on Practice**: Opportunities to craft and test different prompting strategies
+- **Agent Orchestration**: Learn production agent patterns, error handling, and orchestration best practices
+- **Security & Protocols**: Understand security, trust, and standardized integration with MCP
+- **Companion Notebooks**: Jupyter notebooks for LLMs, prompt engineering, and agents
 
 ## Getting Started
 
@@ -107,6 +127,8 @@ This project is licensed under the terms of the included LICENSE file.
 - AWS for providing the Bedrock platform and Claude model access
 - Anthropic for developing the Claude models referenced in the materials
 - The LangChain team for their excellent framework
+- Model Context Protocol team for [protocol documentation and SDKs](https://modelcontextprotocol.io/)
+- Open Source Tools module for curated library references and examples
 
 ## Run All Companion Notebooks on Binder
 
