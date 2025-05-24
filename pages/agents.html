@@ -142,7 +142,7 @@
         <button class="module-nav-btn" data-section="introduction">Introduction</button>   
         <button class="module-nav-btn" data-section="agent-intro">History</button>       
         <button class="module-nav-btn" data-section="fundamentals">Agent</button>
-        <button class="module-nav-btn" data-section="when-to-use-agents">When?</button>
+        <button class="module-nav-btn" data-section="when-to-use-agents">Choice</button>
         <button class="module-nav-btn" data-section="memory">Memory</button>
         <button class="module-nav-btn" data-section="tools">Tools</button>
         <button class="module-nav-btn" data-section="decision-cycle">Decision Cycle</button>
@@ -181,10 +181,7 @@
             </div>
         </section>
         <section id="agent-intro" class="module-section">
-            <h3>What is an AI Agent?</h3>
-            <p>An AI agent is a system that perceives its environment through sensors, processes this information, and acts upon the environment through actuators to achieve specific goals. Today, this same principle applies to LLM-powered agents, but with digital sensors and actuators
-            </p>
-            <h3>Historical Context</h3>
+            <h2>Historical Context</h2>
             <p>The concept of agents in AI dates back to the 1950s with early work in cybernetics (the study of control systems and information processing in both machines and living organisms) and the development of the first AI programs. The Turing Test, proposed by Alan Turing, established a framework for evaluating if machines could exhibit human-like intelligence—though not specifically defining "agents" as we understand them today.
             In the 1980s and 1990s, the agent paradigm became more formalized in AI research, with researchers developing various types of agents from simple reactive systems to more complex deliberative architectures.</p>
             
@@ -198,6 +195,14 @@
                 However, it's crucial to understand that these characteristics exist on a spectrum rather than as binary attributes.
             </p>
             <div class="callout-info" style="background:#f8fafd;border-left:4px solid #4a6fa5;margin:1.2em 0 0.5em 0;padding:1em 1.2em;">Rather than thinking of agency as binary (either something is an agent or it's not), it's more helpful to consider a spectrum of agency, varying from highly supervised to fully autonomous.</div>
+            <h3>What is an Agent?</h3>
+            <p>An <strong>agent is a system that perceives its environment through sensors, processes this information, and acts upon the environment through actuators to achieve specific goals</strong>. Today, this same principle applies to LLM-powered agents, but with digital sensors and actuators:
+            </p>
+            <ul>
+                <li><b>Sensors</b> → Text inputs, API responses, database queries, and file contents</li>
+                <li><b>Processing</b> → LLM reasoning combined with memory and planning systems</li>
+                <li><b>Actuators</b> → Tool calls, API requests, text generation, and system commands</li>
+            </ul>
             <div class="section-nav-btns">
                 <button id="back-agent-intro" disabled>Back</button>
                 <button id="next-agent-intro">Next</button>
@@ -209,12 +214,6 @@
             <div class="callout-info" style="background:#f8fafd;border-left:4px solid #4a6fa5;margin:1.2em 0 0.5em 0;padding:1em 1.2em;"><span class="callout-icon">🤖</span>
                 <strong>Agentic LLM application</strong> is a software system that wraps around the LLM, operating in a loop—observing its environment, using the LLM's reasoning to decide what to do next, and taking actions to achieve its goals.
             </div>
-            <p>For LLM-powered agents, the traditional agent definition still applies, but with modern digital implementations:</p>
-            <ul>
-                <li><b>Sensors</b> → Text inputs, API responses, database queries, and file contents</li>
-                <li><b>Processing</b> → LLM reasoning combined with memory and planning systems</li>
-                <li><b>Actuators</b> → Tool calls, API requests, text generation, and system commands</li>
-            </ul>
             <p>LLM-powered agents build upon the foundation of Large Language Models by extending them with critical capabilities:            </p>
             <ul class="enhanced-list">
                 <li><strong>Tool Use:</strong> While base LLMs can only process and generate text, LLM-powered agents can interact with the world by using external tools, APIs, and services to retrieve information or perform actions.</li>
@@ -248,9 +247,17 @@
             </div>
         </section>
     <section id="when-to-use-agents" class="module-section">
-            <h3>When Should You Use Agents?</h3>
+            <h2>Agentic LLM Applications: When Are They Needed?</h2>
             <p>Not every application needs the complexity of an agent. Many tasks—like summarization, classification, or Q&A—can be solved with just prompt engineering and an LLM.</p>
-            <p>However, as your use case grows to require memory, tool use, or multi-step reasoning, agents become essential.</p>
+            <p>However, agents become essential when achieving your goals requires handling multi-step complex tasks and the workflow cannot be fully specified in advance—demanding adaptive, dynamic decision-making.</p>
+            <div class="callout" style="background: #fffbe6; border-left: 4px solid #ffd700; margin: 1em 0 1.2em 0; padding: 0.5em 1em;">
+              <strong>Guiding Principles for Using Agents:</strong>
+              <ul style="margin-top: 0.5em;">
+                <li><b>Don't Build Agents for Everything:</b> Use agents only for complex, ambiguous, high-value tasks; prefer workflows for simple cases.</li>
+                <li><b>Keep It Simple:</b> Start with a minimal architecture (environment, tools, prompt); iterate before adding complexity.</li>
+              </ul>
+            </div>
+            <p>The following table compares traditional workflows, single-step or workflow-based LLM applications, and agentic LLM applications to help clarify when each approach is most appropriate.</p>
             <table class="enhanced-table">
                 <thead>
                     <tr>
@@ -822,6 +829,9 @@ print(agent_decision_loop(spanish_doc))
             </li>
             <li><b>IBM: LLM Agent Orchestration Guide</b><br>
                 <a href="https://www.ibm.com/think/tutorials/llm-agent-orchestration-with-langchain-and-granite" target="_blank">IBM Think Tutorial</a> – Step-by-step guide to agent orchestration with modern frameworks.
+            </li>
+            <li><b>How We Build Effective Agents: Barry Zhang, Anthropic</b><br>
+                <a href="https://www.youtube.com/watch?v=D7_ipDqhtwk&ab_channel=AIEngineer" target="_blank">YouTube Video</a> – Practical insights and strategies for building effective agentic LLM applications from an Anthropic engineer.
             </li>
         </ul>
         <div class='section-nav-btns'>
