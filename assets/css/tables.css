@@ -63,6 +63,14 @@ table.enhanced-table {
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0,0,0,0.04);
 }
+@media (max-width: 900px) {
+    table.enhanced-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        max-width: 100vw;
+    }
+}
 table.enhanced-table th, table.enhanced-table td {
     padding: 1em 0.75em;
     border: 1px solid #e0e6ef;

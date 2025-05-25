@@ -279,7 +279,7 @@
 /* Add padding to body to account for fixed navbar */
 body {
     padding-top: 50px;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    /* overflow-x: hidden;  Removed to allow horizontal scrolling for tables */
 }
 
 /* Remove or shrink the pseudo-element that extends the hover area */

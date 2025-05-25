@@ -250,12 +250,13 @@
             <div class="callout" style="background: #fffbe6; border-left: 4px solid #ffd700; margin: 1em 0 1.2em 0; padding: 0.5em 1em;">
               <strong>Guiding Principles for Using Agents:</strong>
               <ul style="margin-top: 0.5em;">
-                <li><b>Don't Build Agents for Everything:</b> Use agents only for complex, ambiguous, high-value tasks; prefer Single-Step or Workflow-Based LLM Applications for simple cases.</li>
+                <li><b>Don't Build Agents for Everything:</b> Use agents only for complex, ambiguous, high-value tasks; prefer Single-Step or orkflows for simple cases.</li>
                 <li><b>Keep It Simple:</b> Start with a minimal architecture (environment, tools, prompt); iterate before adding complexity.</li>
               </ul>
             </div>
             <p>The following table compares traditional workflows, single-step or workflow-based LLM applications, and agentic LLM applications to help clarify when each approach is most appropriate.</p>
-            <table class="enhanced-table">
+            <div class="table-responsive">
+            <table>
                 <thead>
                     <tr>
                         <th>Dimension</th>
@@ -342,6 +343,7 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
             <h3>Example: Document Extraction</h3>
             <ul>
                 <li><strong>Traditional Workflow:</strong> Extracts fixed fields from one type of document that always follows the same structure (e.g., always pulls "Name" and "Date" from a standard lease form).</li>
@@ -714,7 +716,7 @@ print(agent_decision_loop(spanish_doc))
         <section id="agent-patterns" class="module-section">
             <h2>Agent Patterns</h2>
             <p>Agentic LLM applications can be implemented in various ways depending on the application needs. Here are some of the patterns you'll encounter:</p>
-            <table class="enhanced-table" style="margin-bottom:2em;">
+            <table>
                 <thead>
                     <tr>
                         <th>Pattern</th>
@@ -752,7 +754,7 @@ print(agent_decision_loop(spanish_doc))
             </table>
             <h3>Production Considerations</h3>
             <p>Building agents for production environments requires careful attention to several critical areas:</p>
-            <table class="enhanced-table">
+            <table>
                 <thead>
                     <tr>
                         <th>Area</th>
@@ -829,6 +831,9 @@ print(agent_decision_loop(spanish_doc))
             </li>
             <li><b>How We Build Effective Agents: Barry Zhang, Anthropic</b><br>
                 <a href="https://www.youtube.com/watch?v=D7_ipDqhtwk&ab_channel=AIEngineer" target="_blank">YouTube Video</a> – Practical insights and strategies for building effective agentic LLM applications from an Anthropic engineer.
+            </li>
+            <li><b>Building Effective Agents (Anthropic Engineering Blog)</b><br>
+                <a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank">Anthropic Engineering Blog</a> – Practical advice, best practices, and design patterns for building agentic LLM applications, including when to use workflows vs. agents.
             </li>
         </ul>
         <div class='section-nav-btns'>
