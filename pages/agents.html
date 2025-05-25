@@ -300,10 +300,10 @@
                         <td>Complex tasks requiring multiple steps reasoning, external data, or persistent context. Customer service agents, research assistants, automated analysts</td>
                     </tr>
                     <tr>
-                        <td class="dimension">Autonomy</td>
-                        <td>Limited within predefined rules and predetermined logic</td>
-                        <td>Limited within LLM reasoning and predefined tool usage patterns</td>
-                        <td>Semi-autonomous with LLM orchestrating tool selection and execution based on goals and context</td>
+                        <td class="dimension">Autonomy: Developer vs LLM</td>
+                        <td>The developer is fully responsible for all logic, control flow, and decision-making. The system follows code paths exactly as written.</td>
+                        <td>The developer still defines the overall workflow and control flow, but the LLM may be used for reasoning or generation within those steps. The LLM does not decide what step comes next.</td>
+                        <td>The LLM (within the agent) participates in or even drives the control flow, making decisions about which tools to use, when to use them, and how to proceed, based on the current context and goal. The developer provides the environment, tools, and guardrails, but the LLM has autonomy within those constraints.</td>
                     </tr>
                     <tr>
                         <td class="dimension">Reactivity</td>
