@@ -1,0 +1,9 @@
+store_id,name,city,state,total_sqft,produce_sqft,dairy_sqft,meat_sqft,packaged_sqft,lease_expiry
+1,Fresh Valley Market,Denver,CO,28500,5130,3420,4275,7125,2025-03-15
+2,Downtown Grocers,Seattle,WA,18200,3276,1820,2730,4914,2024-08-30
+3,Sunset Plaza Foods,Austin,TX,35000,7000,4200,5600,10500,2026-11-20
+4,Garden Grove Market,Portland,OR,22800,4104,2508,3648,6840,2025-07-10
+5,Metro Fresh Supermarket,Phoenix,AZ,41000,8200,4920,6560,12300,2027-01-25
+6,Riverside Grocery Co,Nashville,TN,15500,2635,1705,2325,3875,2024-12-05
+7,Harbor Point Market,San Diego,CA,32000,5760,3520,4800,8000,2026-05-18
+8,Northside Food Center,Chicago,IL,26000,4420,2860,3900,6500,2025-09-12

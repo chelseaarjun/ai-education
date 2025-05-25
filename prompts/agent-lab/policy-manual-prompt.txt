@@ -1,0 +1,66 @@
+PROMPT: CREATE STORE POLICY MANUAL FOR STORE INTELLIGENCE ASSISTANT LAB
+
+Create a comprehensive Store Policy Manual document (8 pages) for a fictional grocery store chain. This document will be used in an AI agent lab where students build a document search tool.
+
+================================================================================
+DOCUMENT SPECIFICATIONS
+================================================================================
+
+Title: "FreshMart Grocery Chain - Store Operations Policy Manual"
+Length: 8 pages of content
+Format: Structured document suitable for conversion to PDF
+
+================================================================================
+REQUIRED CONTENT SECTIONS
+================================================================================
+
+PAGE 1: Table of Contents & Introduction
+- Document overview and purpose
+- How to use this manual
+- Emergency contact information
+
+PAGE 2-3: Customer Service Policies
+- Customer complaint procedures
+- Refund and return policies
+- Customer satisfaction guidelines
+- Service recovery procedures
+
+PAGE 4-5: Staff Operations Procedures  
+- Opening and closing procedures
+- Cash handling policies
+- Inventory management basics
+- Safety and security protocols
+
+PAGE 6-7: Product Management Policies
+- Damaged goods procedures
+- Expiration date management
+- Vendor return processes
+- Product recall procedures
+
+PAGE 8: Emergency Procedures & Contacts
+- Emergency evacuation procedures
+- Power outage protocols
+- Equipment failure procedures
+- Key personnel contact list
+
+================================================================================
+WRITING REQUIREMENTS
+================================================================================
+
+Style: Professional but accessible policy language
+Detail Level: Specific enough to answer agent queries like:
+- "What's our policy for handling expired dairy products?"
+- "How do we process customer returns?"
+- "What are the emergency contact procedures?"
+- "What's the procedure for damaged goods?"
+
+Content Characteristics:
+- Include specific dollar amounts for refund limits
+- Include specific timeframes (e.g., "within 24 hours")
+- Include step-by-step procedures
+- Include contact information and departments
+- Make policies searchable with clear keywords
+
+Format: Use headers, bullet points, and numbered lists for easy parsing by document search tools.
+
+Expected Output: Complete 8-page policy manual that can be converted to PDF and used for document search functionality in an AI agent laboratory exercise.

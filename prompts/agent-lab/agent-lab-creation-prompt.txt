@@ -1,0 +1,160 @@
+PROMPT: CREATE STORE INTELLIGENCE ASSISTANT LAB (JUPYTER NOTEBOOK)
+
+Create a comprehensive Jupyter notebook lab that teaches students to build an LLM-powered agent from scratch using raw Python implementation.
+
+================================================================================
+LAB OVERVIEW
+================================================================================
+
+Title: Store Intelligence Assistant - Raw Python Implementation
+Duration: 30-60 minutes
+Audience: Students with Python, API, and basic LLM knowledge
+Learning Objectives: 
+- Implement persistent memory using in-memory vector DB
+- Build decision cycle with tool orchestration
+- Create tool integration for data queries and document search
+- Understand agent reasoning process visibility
+
+================================================================================
+USE CASE & SCENARIO
+================================================================================
+
+Agent: Store Intelligence Assistant
+User: Regional manager overseeing 8 grocery stores
+Agent Type: Multi-turn conversational assistant
+
+Core Capabilities:
+- Store performance analysis ("How did Store 3 perform last week?")
+- Policy lookups ("What's our damaged goods policy?")
+- Lease information ("When does the downtown lease expire?")
+
+================================================================================
+TECHNICAL REQUIREMENTS
+================================================================================
+
+LLM: AWS Bedrock (provide setup instructions)
+Implementation: Raw Python (no frameworks like LangChain)
+Memory: In-memory vector database for both:
+- Document embeddings (for search)
+- Conversation memory (for context)
+
+Tools (2 total):
+1. Data Query Tool: Query CSV files with aggregations and calculations
+2. Document Search Tool: Semantic search through PDF content
+
+================================================================================
+PROVIDED DATASETS
+================================================================================
+
+You will have access to:
+- stores.csv: 8 stores (id, name, location, size_sqft, manager, lease_expiry)
+- sales_data.csv: 60 days × 8 stores × 4 categories (~2,000 rows)
+- store_policy_manual.pdf: 8 pages of operational policies
+- 8 lease documents: lease_[store_name].pdf (6 pages each)
+
+================================================================================
+NOTEBOOK STRUCTURE (INCREMENTAL BUILD)
+================================================================================
+
+SECTION 1: Setup & Dependencies
+- Import required libraries
+- AWS Bedrock configuration
+- Load and explore datasets
+- Explain the agent architecture
+
+SECTION 2: Build Tools
+- Data Query Tool implementation
+  * CSV reading and pandas operations
+  * Support queries like sales aggregations, growth calculations
+  * Include error handling
+- Document Search Tool implementation
+  * PDF text extraction
+  * In-memory vector database setup
+  * Semantic search functionality
+
+SECTION 3: Implement Memory System
+- In-memory vector database for conversation history
+- Context retrieval mechanisms
+- Memory persistence patterns
+- Show how memory influences responses
+
+SECTION 4: Decision Cycle Engine
+- Tool selection logic
+- Reasoning chain implementation
+- Multi-step decision making
+- Cycle termination conditions
+
+SECTION 5: Agent Integration
+- Combine all components
+- Main conversation loop
+- Agent class implementation
+- Error handling and fallbacks
+
+SECTION 6: Interactive Testing
+- Sample conversation scenarios
+- Show decision cycle visibility:
+  * Tool selection rationale
+  * Number of cycles used
+  * Intermediate results
+  * Final response construction
+
+Example visible output:
+```
+=== Decision Cycle 1 ===
+🧠 REASONING: User asked about Store 3 performance. Need sales data.
+🔧 TOOL SELECTED: query_sales_data  
+📊 QUERY: SELECT SUM(sales) FROM sales_data WHERE store_id=3 AND date >= '2024-01-15'
+📋 RESULT: $45,000
+
+=== Decision Cycle 2 ===  
+🧠 REASONING: Should compare to previous period for context.
+🔧 TOOL SELECTED: query_sales_data
+📊 QUERY: [previous period query]
+📋 RESULT: $39,000
+
+=== FINAL RESPONSE ===
+Store 3 had $45,000 in sales last week, up 15% from the previous week.
+```
+
+================================================================================
+CODE REQUIREMENTS
+================================================================================
+
+Style: Complete, working code with detailed explanations
+Comments: Extensive comments explaining each component
+Error Handling: Include robust error handling patterns
+Modularity: Clean, reusable functions and classes
+Testing: Include example queries and expected outputs
+
+Key Implementation Details:
+- Show how tools are selected based on query type
+- Demonstrate memory retrieval and context injection
+- Explain when and why decision cycles iterate
+- Include conversation state management
+
+================================================================================
+LEARNING OUTCOMES
+================================================================================
+
+By completion, students should understand:
+1. How to implement persistent memory in AI agents
+2. Tool integration and orchestration patterns
+3. Decision cycle logic and termination
+4. The difference between simple LLM calls and agent behavior
+5. Production considerations for agent architectures
+
+Future Connection: This lab prepares students for later labs using MCP, AWS Bedrock services, and open-source frameworks (LangChain, CrewAI).
+
+================================================================================
+DELIVERABLE
+================================================================================
+
+Complete Jupyter notebook (.ipynb) with:
+- All working code sections
+- Detailed explanations between code cells
+- Sample datasets integration
+- Interactive examples students can run
+- Clear learning progression from basic tools to complete agent
+- Ready-to-execute lab that demonstrates all core agent concepts
+
+The notebook should be self-contained and educational, allowing students to learn by doing while building a fully functional LLM-powered agent from scratch.

@@ -1,0 +1,55 @@
+PROMPT: CREATE STRUCTURED DATA FOR STORE INTELLIGENCE ASSISTANT LAB
+
+Create two CSV files with realistic but fictional data for a grocery store chain lab exercise:
+
+================================================================================
+FILE 1: stores.csv
+================================================================================
+
+Requirements:
+- 8 grocery stores total
+- Include these exact columns: store_id, name, city, state, total_sqft, produce_sqft, dairy_sqft, meat_sqft, packaged_sqft, lease_expiry
+
+Specifications:
+- store_id: Use simple integers 1-8
+- name: Creative grocery store names (e.g., "Fresh Valley Market", "Downtown Grocers")
+- city,state: Mix of urban/suburban locations with real US city and corresponding state names
+- total_sqft: Range from 12,000 to 45,000 square feet (realistic grocery store sizes)
+- Department square footage breakdown:
+  * produce_sqft: 15-25% of total store sqft
+  * dairy_sqft: 10-18% of total store sqft
+  * meat_sqft: 12-20% of total store sqft  
+  * packaged_sqft: 35-45% of total store sqft
+  * IMPORTANT: Sum of all department sqft should be 65-75% of total_sqft (remainder for aisles, checkout, storage, offices)
+- lease_expiry: Dates ranging from 2024 to 2027, spread across different months
+
+Format: Standard CSV with headers, comma-separated
+
+================================================================================
+FILE 2: sales_data.csv  
+================================================================================
+
+Requirements:
+- 60 days of daily sales data
+- 8 stores (matching store_ids from stores.csv)
+- 4 product categories: Produce, Dairy, Meat, Packaged
+
+Specifications:
+- Columns: date, store_id, category, sales_amount
+- date: 60 consecutive days starting from 2024-01-01
+- store_id: 1-8 (matching stores.csv)
+- category: Exactly these 4 categories
+- sales_amount: Realistic daily sales per category
+  * Produce: $800-2,500 per day per store
+  * Dairy: $600-1,800 per day per store  
+  * Meat: $1,000-3,200 per day per store
+  * Packaged: $1,500-4,000 per day per store
+
+Additional Requirements:
+- Include some realistic patterns: slightly higher weekend sales, some seasonal variation
+- Some stores should consistently perform better than others
+- Total rows: 60 days × 8 stores × 4 categories = 1,920 rows
+- Format: Standard CSV with headers
+
+Expected Output:
+Two complete CSV files ready for use in a Python data analysis lab. The data should support queries like "What's the sales per square foot for the produce department in Store 3?" and "Which department has the best sales per sqft across all stores?" and "What's the average daily sales for Store 5's dairy department?"

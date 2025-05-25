@@ -1,0 +1,88 @@
+PROMPT: CREATE LEASE DOCUMENTS FOR STORE INTELLIGENCE ASSISTANT LAB
+
+Create 8 separate commercial lease documents for a fictional grocery store chain. Each document should be 6 pages and correspond to the 8 stores from the structured data (stores.csv).
+
+================================================================================
+DOCUMENT SPECIFICATIONS
+================================================================================
+
+Number of Documents: 8 (one per store)
+Length: 6 pages each
+Format: Structured legal documents suitable for conversion to PDF
+Naming Convention: lease_[store_name].pdf
+
+================================================================================
+STORE MAPPING (Reference the stores.csv data you'll create)
+================================================================================
+
+Create lease documents for each of these 8 stores:
+- Use the store names and locations from stores.csv
+- Lease expiry dates should match the lease_expiry column
+- Store sizes should match size_sqft column
+
+================================================================================
+DOCUMENT STRUCTURE (All 6 pages for each lease)
+================================================================================
+
+PAGE 1: Lease Summary & Parties
+- Tenant: FreshMart Grocery Chain
+- Landlord: [Unique property management company per store]
+- Property address: [Match store location]
+- Lease term start/end dates
+- Monthly rent amount
+
+PAGE 2: Property Details
+- Square footage (match stores.csv)
+- Property description
+- Permitted use restrictions
+- Parking specifications
+
+PAGE 3: Financial Terms
+- Base rent amount
+- Security deposit details
+- CAM (Common Area Maintenance) charges
+- Rent escalation clauses
+
+PAGE 4: Tenant Responsibilities
+- Maintenance obligations
+- Insurance requirements
+- Utility responsibilities
+- Operating hour restrictions
+
+PAGE 5: Landlord Responsibilities & Property Management
+- Property maintenance obligations
+- Contact information for property management
+- Emergency maintenance procedures
+- Building management policies
+
+PAGE 6: Renewal Terms & Contact Information
+- Lease renewal options and procedures
+- Early termination clauses
+- Key contact information:
+  * Property manager name and phone
+  * Emergency maintenance contact
+  * Landlord representative details
+
+================================================================================
+CONTENT REQUIREMENTS
+================================================================================
+
+Variety: Each lease should have different:
+- Landlord/property management companies
+- Rental rates (appropriate for store size/location)
+- Property manager contacts
+- Specific terms and conditions
+
+Realism: Include realistic commercial lease elements:
+- Monthly rent: $15-35 per square foot annually
+- Security deposits: 1-3 months rent
+- CAM charges: $3-8 per square foot
+- Lease terms: 5-10 year terms
+
+Searchability: Ensure content supports agent queries like:
+- "When does the downtown store lease expire?"
+- "Who is the property manager for Store 5?"
+- "What's the monthly rent for the mall location?"
+- "What are the emergency contact details for Store 3's lease?"
+
+Expected Output: 8 complete lease documents, each 6 pages long, with unique but realistic commercial lease terms that can be searched by an AI document search tool.
