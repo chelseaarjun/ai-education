@@ -39,13 +39,17 @@
     <nav class="module-nav">
         <button class="module-nav-btn" data-section="introduction">Introduction</button>
         <button class="module-nav-btn" data-section="architecture">Architecture</button>
-        <button class="module-nav-btn" data-section="core-message-types">Message Types</button>
+        <button class="module-nav-btn" data-section="core-message-types">Messages</button>
         <button class="module-nav-btn" data-section="features">Features</button>
         <button class="module-nav-btn" data-section="connections-lifecycle">Connection</button>
         <button class="module-nav-btn" data-section="transports-security">Protocols</button>
         <button class="module-nav-btn" data-section="security-trust">Security</button>
         <button class="module-nav-btn" data-section="references">References</button>
         <button class="module-nav-btn" data-section="quiz">Quiz</button>
+        <button class="module-nav-btn lab-nav-btn" id="lab-launch-btn" data-notebook="notebooks/mcp_foundations_lab.ipynb">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="20" height="20" style="vertical-align:middle;margin-right:0.5em;"><circle cx="32" cy="32" r="6" fill="#222"/><ellipse cx="32" cy="32" rx="24" ry="10" fill="none" stroke="#222" stroke-width="3"/><ellipse cx="32" cy="32" rx="10" ry="24" fill="none" stroke="#222" stroke-width="3" transform="rotate(60 32 32)"/><ellipse cx="32" cy="32" rx="10" ry="24" fill="none" stroke="#222" stroke-width="3" transform="rotate(-60 32 32)"/><circle cx="54" cy="32" r="3" fill="#222"/><circle cx="10" cy="32" r="3" fill="#222"/><circle cx="44.78" cy="48.25" r="3" fill="#222"/><circle cx="19.22" cy="15.75" r="3" fill="#222"/><circle cx="44.78" cy="15.75" r="3" fill="#222"/><circle cx="19.22" cy="48.25" r="3" fill="#222"/></svg>
+          Lab
+        </button>
     </nav>
     <nav class="module-sidebar"></nav>
     <div class="content-inner">
@@ -57,6 +61,12 @@
                 </p>
                 <p>This module introduces developers to the Model Context Protocol (MCP), a standardized protocol developed by Anthropic that enables Large Language Models (LLMs) to interact with external tools, APIs, and data sources in a structured and secure way.</p>
                 
+                <div class="callout" style="background: #f8f9fa; border-left: 4px solid #3498db; padding: 12px 18px; margin: 18px 0;">
+                    <strong>Hands-On Lab:</strong> <br>
+                    <a href="https://mybinder.org/v2/gh/chelseaarjun/ai-education/HEAD?filepath=notebooks/mcp_foundations_lab.ipynb" target="_blank" style="color: #1a73e8; text-decoration: underline; font-weight: 500;">Launch the companion lab notebook</a>
+                    to practice building and testing MCP client-server integrations. In the lab, you'll transform direct tool calls into protocol-based interactions, experience the three-layer MCP architecture, and see how modular, secure AI integrations work in practice.<br>
+                </div>
+
                 <h3>What You'll Learn</h3>    
                 <ul>
                     <li><strong>Architecture:</strong> The roles and responsibilities of the host, client, and server in an MCP system, ensuring modularity, security, and clear separation of concerns.</li>
@@ -68,7 +78,6 @@
                 </ul>
                 <p>You will learn how these elements together make MCP a robust, extensible, and secure foundation for advanced AI integrations.</p>
             </div>
-
             <div class="section-nav-btns">
                 <button id="back-introduction" disabled>Back</button>
                 <button id="next-introduction">Next</button>
