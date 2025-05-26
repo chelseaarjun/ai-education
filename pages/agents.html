@@ -495,11 +495,40 @@ print(agent_decision_loop(spanish_doc))
             <h3>Memory Types in Language Agents</h3>
             <h4>1. Working Memory:  What the agent is thinking about right now</h4>
             <p><strong>Definition:</strong><br>Working memory is the agent's "active desk"—it holds all the information the agent needs right now to make decisions and respond. This includes:</p>
-            <ul>
-                <li>The current user message and recent conversation history</li>
-                <li>Any goals or tasks the agent is working on</li>
-                <li>Facts or context retrieved from long-term memory for the current turn</li>
-            </ul>
+            <div class="diagram">
+                <!-- Agent Working Memory Anatomy Diagram Inline SVG (Vertical) -->
+                <svg width="480" height="520" viewBox="0 0 480 520" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="0" y="0" width="480" height="520" fill="#f8f9fa" rx="10" ry="10"></rect>
+                  <text x="240" y="40" text-anchor="middle" fill="#4a6fa5" font-size="22" font-weight="bold">Anatomy of Agent Working Memory</text>
+                  <rect x="40" y="70" width="400" height="60" fill="#e9f0f9" stroke="#4a6fa5" stroke-width="2" rx="10" ry="10"></rect>
+                  <text x="60" y="100" fill="#4a6fa5" font-size="16" font-weight="bold">USER INPUT</text>
+                  <text x="60" y="120" fill="#333" font-size="14">Latest message or command from the user</text>
+              
+                  <rect x="40" y="140" width="400" height="60" fill="#f0e9f9" stroke="#6b4ca5" stroke-width="2" rx="10" ry="10"></rect>
+                  <text x="60" y="170" fill="#6b4ca5" font-size="16" font-weight="bold">RECENT HISTORY</text>
+                  <text x="60" y="190" fill="#333" font-size="14">Last few conversation turns</text>
+              
+                  <rect x="40" y="210" width="400" height="60" fill="#f9e9f0" stroke="#a54c6b" stroke-width="2" rx="10" ry="10"></rect>
+                  <text x="60" y="240" fill="#a54c6b" font-size="16" font-weight="bold">TASK/GOAL</text>
+                  <text x="60" y="260" fill="#333" font-size="14">Current objective or sub-task</text>
+              
+                  <rect x="40" y="280" width="400" height="60" fill="#e9f9f0" stroke="#4ca56b" stroke-width="2" rx="10" ry="10"></rect>
+                  <text x="60" y="310" fill="#4ca56b" font-size="16" font-weight="bold">RETRIEVED MEMORY</text>
+                  <text x="60" y="330" fill="#333" font-size="14">Facts, past interactions, or preferences</text>
+              
+                  <rect x="40" y="350" width="400" height="60" fill="#f8fafc" stroke="#4a6fa5" stroke-width="2" rx="10" ry="10"></rect>
+                  <text x="60" y="380" fill="#4a6fa5" font-size="16" font-weight="bold">ENVIRONMENT STATE</text>
+                  <text x="60" y="400" fill="#333" font-size="14">Results of recent actions or real-time data</text>
+              
+                  <rect x="40" y="420" width="400" height="60" fill="#fffbe6" stroke="#ffd700" stroke-width="2" rx="10" ry="10"></rect>
+                  <text x="60" y="450" fill="#bfa100" font-size="16" font-weight="bold">TOOLS</text>
+                  <text x="60" y="470" fill="#333" font-size="14">Tools available for the agent to act upon</text>
+                </svg>
+                <p style="margin-top:0.5em; color:#444; font-size:0.98em;">
+                    <em>Note: Working memory may include all or just some of these components, depending on the agent and the task.</em>
+                </p>
+            </div>
+            
             <p><strong>Key Points:</strong></p>
             <ul>
                 <li>Working memory is refreshed every decision cycle (e.g., each time the agent responds)</li>
@@ -568,7 +597,6 @@ print(agent_decision_loop(spanish_doc))
                 <li><strong>Semantic memory:</strong> "Restarting the router is a common fix for connectivity issues."</li>
                 <li><strong>Procedural memory:</strong> The step-by-step process the agent uses to walk the user through restarting the router.</li>
             </ul>
-            <hr>
             <div class='section-nav-btns'>
                 <button id='back-memory'>Back</button>
                 <button id='next-memory'>Next</button>
@@ -652,7 +680,11 @@ print(agent_decision_loop(spanish_doc))
         </section>
         <section id="decision-cycle" class="module-section" style="display:none">
             <h2>Decision Cycle: Observe, Plan, and Act</h2>
-            <p>In the context of AI agents for digital applications (like chatbots, virtual assistants, or workflow automation), the <strong>decision cycle</strong> is the repeating process an agent uses to understand, reason, and act—much like how a human knowledge worker would handle a task.</p>
+            <p>
+            In agentic LLM applications, orchestration of the <strong>decision cycle</strong> is key: the agent coordinates memory, tool use, and LLM reasoning within each decision cycle. 
+            The agent actively manages when to retrieve context, when to call tools, and when to leverage the LLM for reasoning or generation. 
+            This orchestration enables adaptive, multi-step workflows and robust integration with external systems.
+            </p>
             <h3>What is the Decision Cycle?</h3>
             <div style="display: flex; justify-content: center;">
             <svg width="500" height="320" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
@@ -680,22 +712,48 @@ print(agent_decision_loop(spanish_doc))
               <text x="40" y="120" fill="#666" font-size="13" text-anchor="start">Assess Results</text>
             </svg>
             </div>
-            <p><em>This diagram illustrates how the agent's memory, tools, and decision logic interact in a continuous decision cycle, enabling the agent to observe, plan, and act in digital environments.</em></p>
-            <p>The decision cycle is a loop where the agent:</p>
-            <ol>
-                <li><strong>Observes</strong> the current situation (e.g., receives a user message or new data).</li>
-                <li><strong>Plans</strong> what to do next by combining what it knows (memory), what it can do (tools), and the current goal.</li>
-                <li><strong>Acts</strong> by generating a response, calling a tool, retrieving information, or escalating to a human if needed.</li>
-            </ol>
-            <p>After acting, the agent updates its memory and starts the cycle again for the next input or task. The agent's "brain" (the LLM and its code) brings together memory and tools to decide the best next step in each cycle.</p>
+            <p><em>This diagram illustrates how, at each cycle, the agent observes all available context, decides the best next step, and takes action—repeating until the goal is achieved.</em></p>
+
+            <!-- Expanded agentic decision cycle explanation -->
+            <div class="callout-info" style="background:#f8fafd;border-left:4px solid #4a6fa5;margin:1.2em 0 0.5em 0;padding:1em 1.2em;">
+              <strong>The Agentic Decision Cycle: What Happens at Each Step?</strong><br>
+              <b>1. Observes</b> working memory which may include user input (latest message or command), recent conversation history, relevant memory (episodic, semantic, preferences), current environment state (results from API calls, databases queries etc.), and available tools/actions.<br>
+              <b>2. Plans</b> next step to take based on what was observed, available tools and the current goal. Some Examples: Which tool(s) or action(s) to use next, what information to retrieve or store, how to structure the next prompt or response, whether to ask for clarification, proceed, or escalate, and how to handle errors or ambiguity.<br>
+              <b>3. Act on the plan</b> by generating a response, calling a tool/API/external system, store or retrieve information from memory, ask clarifying questions, escalate to a human or another agent, or update internal state/goals.
+            </div>
+
+            <table style="width:100%; margin: 1em 0; text-align:left;">
+              <thead>
+                <tr>
+                  <th>Step</th>
+                  <th>What the Agent Does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Observe</b></td>
+                  <td>Observes working memory user input, context, memory, environment, and available tools</td>
+                </tr>
+                <tr>
+                  <td><b>Plan</b></td>
+                  <td>plans next step to take based on what was observed, available tools and the current goal</td>
+                </tr>
+                <tr>
+                  <td><b>Act</b></td>
+                  <td>Responds, calls tools/APIs, updates memory, asks questions, escalates, updates state</td>
+                </tr>
+              </tbody>
+            </table>
             <hr>
-            <h3>Orchestration in the Agent Decision Cycle</h3>
-            <p>
-              In agentic LLM applications, orchestration is key: the agent coordinates memory, tool use, and LLM reasoning within each decision cycle. 
-              The agent actively manages when to retrieve context, when to call tools, and when to leverage the LLM for reasoning or generation. 
-              This orchestration enables adaptive, multi-step workflows and robust integration with external systems.
-            </p>
-            <hr>
+            <div class="callout-info" style="background:#f8fafd;border-left:4px solid #4a6fa5;margin:1.2em 0 0.5em 0;padding:1em 1.2em;">
+              <strong>Update: Claude 4.0 and Autonomous Tool Use</strong><br>
+              <p>
+                <b>Claude 4.0</b> (released May 22, 2025) introduced a major advance: the ability for the LLM to autonomously select and use tools (APIs, web search, code execution, etc.) as part of its reasoning process. This means that, at each decision point, the agent can now independently decide not only <em>what</em> to do, but also <em>whether</em> and <em>how</em> to use external tools—without explicit step-by-step instructions from the developer. This shift enables more adaptive, dynamic, and capable agentic applications, where the LLM itself orchestrates tool use to achieve complex goals.
+              </p>
+              <p style="margin-top:0.5em;font-size:0.97em;color:#555;">
+                <em>Learn more: <a href="https://www.anthropic.com/news/claude-4" target="_blank">Anthropic: Introducing Claude 4</a></em>
+              </p>
+            </div>
             <h3>Building Agents: Do You Need a Library?</h3>
             <p>You don't strictly need a library to build an agent—at its core, an agent is a software system that manages memory, tool use, and decision logic around an LLM. However, building a robust agent from scratch can be complex and time-consuming.</p>
             <p><strong>Popular open-source agent frameworks include:</strong></p>
