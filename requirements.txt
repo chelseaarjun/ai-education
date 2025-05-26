@@ -8,3 +8,4 @@ faiss-cpu
 sentence-transformers
 html2text
 beautifulsoup4
+mcp

@@ -13,7 +13,7 @@ from pathlib import Path
 
 # Configuration
 COURSE_DIR = "/Users/arjunasoknair/workspace/ai-education"  # Update this path to your course directory
-OUTPUT_FILE = "course_embeddings.json"
+OUTPUT_FILE = "../embeddings/course_embeddings.json"
 AWS_REGION = "us-west-2"  # Update if using different region
 EMBEDDING_MODEL = "amazon.titan-embed-text-v2:0"
 
