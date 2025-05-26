@@ -274,6 +274,10 @@
     .course-nav-dropdown.active:hover .course-nav-dropdown-content {
         display: block;
     }
+    
+    .course-nav-linkedin {
+        margin-right: 48px !important;
+    }
 }
 
 /* Add padding to body to account for fixed navbar */
