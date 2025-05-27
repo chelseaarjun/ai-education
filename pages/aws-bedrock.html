@@ -699,25 +699,423 @@ response = bedrock_runtime.invoke_model_with_response_stream(
               For teams using SageMaker for ML workflows, SageMaker Managed MLFlow provides the best of both worlds - MLFlow flexibility with AWS operational simplicity.<br><br>
               For multi-cloud teams or those requiring extensive customization, self-hosted LangFuse offers maximum flexibility and control.</i>
             </div>
+            <h4>References</h4>
+            <ul>
+                <li><a href="https://aws.amazon.com/blogs/machine-learning/amazon-bedrock-prompt-management-is-now-available-in-ga/" target="_blank">Amazon Bedrock Prompt Management is now available in GA</a></li>
+                <li><a href="https://aws.amazon.com/bedrock/prompt-management/" target="_blank">Prompt Management for Amazon Bedrock</a></li>
+                <li><a href="https://aws.amazon.com/blogs/machine-learning/streamline-generative-ai-development-in-amazon-bedrock-with-prompt-management-and-prompt-flows-preview/" target="_blank">Streamline generative AI development in Amazon Bedrock with Prompt Management and Prompt Flows</a></li>
+                <li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow.html" target="_blank">Machine learning experiments using Amazon SageMaker AI with MLflow</a></li>
+                <li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-launch-ui.html" target="_blank">Launch the MLflow UI using a presigned URL</a></li>
+                <li><a href="https://community.aws/content/2kPiIOekxM5O0kTGr9U3rgw183H" target="_blank">Integrate Amazon Bedrock Prompt Management in LangChain applications</a></li>
+            </ul>
             <div class="section-nav-btns">
                 <button id="back-prompt-management">Back</button>
                 <button id="next-prompt-management">Next</button>
             </div>
         </section>
-         <!-- Section 5: Evaluations -->
+         <!-- Section 6: Evaluations -->
          <section id="evaluations" class="module-section" style="display:none">
             <h2>Evaluations</h2>
-            <p><em>Coming soon...</em></p>
+            <h3>6.1 What it is 🎯</h3>
+            <p><b>AWS Bedrock Evaluations</b> is a comprehensive model performance testing and benchmarking service that enables teams to systematically assess foundation models and RAG applications before production deployment. Amazon Bedrock provides evaluation tools for you to accelerate adoption of generative AI applications. Evaluate, compare, and select the foundation model for your use case with Model Evaluation.</p>
+            <ul>
+                <li><b>Compare multiple foundation models</b> side-by-side using standardized metrics</li>
+                <li><b>Evaluate RAG systems</b> built with Knowledge Bases or custom implementations</li>
+                <li><b>Test model outputs</b> against accuracy, robustness, and safety criteria</li>
+                <li><b>Generate detailed reports</b> with actionable insights for model selection</li>
+            </ul>
+            <div class="callout" style="background:#f8f9fa;border-left:4px solid #3498db;padding:12px 18px;margin:18px 0;">
+                <b>💡 Production Context:</b> Think of Bedrock Evaluations as your "model testing lab" – test your AI models before deploying them to customer-facing applications.
+            </div>
+            <hr>
+            <h3>6.2 Key Features 🛠️</h3>
+            <h4>Automatic Evaluations</h4>
+            <p>Automatic (Programmatic) model evaluation uses curated and custom datasets and provides predefined metrics including accuracy, robustness, and toxicity.</p>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+                <thead>
+                    <tr><th>Built-in Metric</th><th>Purpose</th><th>How It Works</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><b>Accuracy</b></td><td>Factual correctness</td><td>Uses BERT Score, F1 Score, or Real World Knowledge scores</td></tr>
+                    <tr><td><b>Robustness</b></td><td>Response consistency</td><td>Tests model stability under prompt variations</td></tr>
+                    <tr><td><b>Toxicity</b></td><td>Content safety</td><td>Detects harmful or inappropriate outputs using detoxify algorithm</td></tr>
+                </tbody>
+            </table>
+            </div>
+            <h4>Human Evaluations</h4>
+            <p>Human evaluation workflows can use your own employees as reviewers or you can engage a team managed by AWS to perform the human evaluation.</p>
+            <ul>
+                <li>🏢 <b>Your Own Team</b>: Use internal subject matter experts</li>
+                <li>🔧 <b>AWS Managed Team</b>: Professional evaluators managed by AWS</li>
+            </ul>
+            <h4>LLM-as-a-Judge</h4>
+            <p>You can also use an LLM-as-a-Judge to provide high quality evaluations on your dataset with metrics such as correctness, completeness, faithfulness (hallucination), as well as responsible AI metrics such as answer refusal and harmfulness.</p>
+            <h4>RAG Evaluation Capabilities</h4>
+            <p><b>Two evaluation types:</b></p>
+            <ol>
+                <li><b>Retrieval Only</b>: Tests how well your Knowledge Base finds relevant information</li>
+                <li><b>Retrieve and Generate</b>: Evaluates end-to-end RAG performance including response generation</li>
+            </ol>
+            <hr>
+            <h3>6.3 Benefits 📈</h3>
+            <h4>Integrated Evaluation Pipeline</h4>
+            <pre style="background:#f8fafd;border-radius:8px;padding:1em 1.2em;overflow-x:auto;">
+Prompt Management → Model Testing → Knowledge Base Evaluation → Agent Performance
+      ↓                ↓                    ↓                       ↓
+   Test prompts    Compare models    Validate retrieval    End-to-end testing
+</pre>
+            <h4>Standardized Metrics Across Teams</h4>
+            <ul>
+                <li><b>Consistent benchmarking</b> ensures all team members use the same quality standards</li>
+                <li><b>Automated scoring</b> eliminates subjective bias in model comparisons</li>
+                <li><b>Built-in datasets</b> provide industry-standard baselines for common tasks</li>
+            </ul>
+            <h4>Enterprise-Grade Features</h4>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+                <thead>
+                    <tr><th>Feature</th><th>Business Value</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><b>Compliance Tracking</b></td><td>Maintain audit trails for model selection decisions</td></tr>
+                    <tr><td><b>Custom Metrics</b></td><td>Define evaluation criteria specific to your grocery/retail use cases</td></tr>
+                    <tr><td><b>Source Attribution</b></td><td>Track which data sources influenced model responses</td></tr>
+                    <tr><td><b>Integration APIs</b></td><td>Embed evaluation into CI/CD pipelines</td></tr>
+                </tbody>
+            </table>
+            </div>
+            <h4>Cost-Effective Evaluation</h4>
+            <p>You pay for the inferences that are performed during the course of the model evaluation, with no additional charge for algorithmically generated scores.</p>
+            <hr>
+            <h3>6.4 Limitations & Considerations ⚠️</h3>
+            <h4>Evaluation Scope Constraints</h4>
+            <p><b>Supported Models</b></p>
+            <ul>
+                <li>Limited to foundation models available in Amazon Bedrock</li>
+                <li>Model evaluation jobs support using foundation models in Amazon Bedrock.</li>
+                <li>External models require "bring your own inference" approach</li>
+            </ul>
+            <h4>Custom Metric Limitations</h4>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+                <thead>
+                    <tr><th>Limitation</th><th>Impact</th><th>Workaround</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><b>JSON formatting requirements</b></td><td>Complex metric definitions need careful structuring</td><td>Use provided templates and examples</td></tr>
+                    <tr><td><b>Variable constraints</b></td><td>Limited placeholder variables for custom prompts</td><td>Plan evaluation templates carefully</td></tr>
+                    <tr><td><b>LLM judge dependencies</b></td><td>Custom metrics rely on judge model capabilities</td><td>Test judge model selection thoroughly</td></tr>
+                </tbody>
+            </table>
+            </div>
+            <h4>Integration Requirements</h4>
+            <ul>
+                <li><b>Data Preparation Overhead</b>
+                    <ul>
+                        <li>Custom prompt datasets that you want to specify in the model evaluation job must have the required CORS permissions added to the Amazon S3 bucket.</li>
+                        <li>Ground truth datasets required for RAG evaluations</li>
+                        <li>JSONL format requirements for all evaluation datasets</li>
+                    </ul>
+                </li>
+                <li><b>Performance Considerations</b>
+                    <ul>
+                        <li>Evaluation jobs can take significant time for large datasets</li>
+                        <li>Human evaluations require coordination and scheduling</li>
+                        <li>Human-based evaluation with your own team, you pay for the inferences and $0.21 for each completed task.</li>
+                    </ul>
+                </li>
+            </ul>
+            <h4>Production Planning Considerations</h4>
+            <div class="callout" style="background:#f8f9fa;border-left:4px solid #e67e22;padding:10px 16px;margin:12px 0 18px 0;font-size:95%">
+                ⚙️ <b>Implementation Reality Check:</b> Plan evaluation cycles into your development timeline – factor this into sprint planning.
+            </div>
+            <p><b>Key Questions to Consider/Ask</b></p>
+            <ol>
+                <li>Which evaluation metrics matter most for your specific use case?</li>
+                <li>Do you have sufficient domain expertise for human evaluations?</li>
+                <li>How will evaluation results influence your model selection process?</li>
+                <li>What's your tolerance for evaluation costs vs. quality assurance needs?</li>
+                <li>Do need ground truth dataset for evaluation?</li>
+            </ol>
+            <hr>
+            <h4>References</h4>
+            <ul>
+                <li><a href="https://aws.amazon.com/bedrock/evaluations/" target="_blank">AWS Bedrock Evaluations Service Page</a></li>
+                <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html" target="_blank">Amazon Bedrock Documentation - Model Evaluation</a></li>
+                <li><a href="https://aws.amazon.com/blogs/aws/amazon-bedrock-model-evaluation-is-now-generally-available/" target="_blank">AWS Blog: Amazon Bedrock Model Evaluation Generally Available</a></li>
+                <li><a href="https://aws.amazon.com/blogs/machine-learning/use-custom-metrics-to-evaluate-your-generative-ai-application-with-amazon-bedrock/" target="_blank">AWS Machine Learning Blog: Custom Metrics in Bedrock Evaluations</a></li>
+                <li><a href="https://aws.amazon.com/blogs/machine-learning/evaluating-rag-applications-with-amazon-bedrock-knowledge-base-evaluation/" target="_blank">AWS Machine Learning Blog: Knowledge Base Evaluations</a></li>
+            </ul>
+            <div class="section-nav-btns">
+                <button id="back-evaluations">Back</button>
+                <button id="next-evaluations">Next</button>
+            </div>
         </section>
         <!-- Section 7: Guardrails -->
         <section id="guardrails" class="module-section" style="display:none">
             <h2>Guardrails</h2>
-            <p><em>Coming soon...</em></p>
+            <h3>7.1 What it is 🛡️</h3>
+            <p><b>AWS Bedrock Guardrails</b> is a comprehensive safety and governance service that provides configurable safeguards for your generative AI applications based on your use cases and responsible AI policies. You can create multiple guardrails tailored to different use cases and apply them across multiple foundation models (FM), providing a consistent user experience and standardizing safety and privacy controls across generative AI applications.</p>
+            <p>Think of Guardrails as your AI application's "content moderation system" that automatically evaluates both user inputs and model responses to ensure they meet your organization's standards for safety, privacy, and appropriateness.</p>
+            <b>Core Functions:</b>
+            <ul>
+                <li>🚫 <b>Content Filtering</b>: Block harmful content like hate speech, violence, or inappropriate material</li>
+                <li>🏷️ <b>Topic Management</b>: Prevent discussions of specific topics (e.g., investment advice for a banking chatbot)</li>
+                <li>🔒 <b>Privacy Protection</b>: Detect and mask personally identifiable information (PII)</li>
+                <li>✅ <b>Factual Accuracy</b>: Check responses against source material to reduce hallucinations</li>
+            </ul>
+            <hr>
+            <h3>7.2 Key Features 🔧</h3>
+            <h4>Content Filters</h4>
+            <p>Amazon Bedrock Guardrails supports content filters to help detect and filter harmful user inputs and model-generated outputs in natural language.</p>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+                <thead>
+                    <tr><th>Content Category</th><th>What It Blocks</th><th>Adjustable Strength</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><b>Hate</b></td><td>Discriminatory language based on identity</td><td>Low, Medium, High</td></tr>
+                    <tr><td><b>Insults</b></td><td>Demeaning, humiliating, or bullying language</td><td>Low, Medium, High</td></tr>
+                    <tr><td><b>Sexual</b></td><td>Sexual content or inappropriate references</td><td>Low, Medium, High</td></tr>
+                    <tr><td><b>Violence</b></td><td>Threats or glorification of physical harm</td><td>Low, Medium, High</td></tr>
+                    <tr><td><b>Misconduct</b></td><td>Criminal activities or illegal content</td><td>Low, Medium, High</td></tr>
+                    <tr><td><b>Prompt Attack</b></td><td>Jailbreak attempts and prompt injection</td><td>Low, Medium, High</td></tr>
+                </tbody>
+            </table>
+            </div>
+            <h4>Sensitive Information Filters</h4>
+            <p>Amazon Bedrock Guardrails helps detect sensitive information, such as personally identifiable information (PIIs), in standard format in input prompts or model responses.</p>
+            <b>Built-in PII Detection:</b>
+            <ul>
+                <li>🏠 Address, Age, Name, Phone numbers</li>
+                <li>💳 Credit card numbers, Bank account details, SSN</li>
+                <li>🆔 Driver's license, Passport numbers</li>
+                <li>📧 Email addresses, IP addresses</li>
+            </ul>
+            <b>Two Protection Modes:</b>
+            <ul>
+                <li><b>Block</b>: Reject entire requests containing sensitive information</li>
+                <li><b>Mask</b>: Replace PII with placeholders like {NAME} or {CREDIT_CARD}</li>
+            </ul>
+            <h4>Advanced Safety Features</h4>
+            <b>Contextual Grounding Checks</b>
+            <p>Guardrails supports contextual grounding checks to help detect and filter hallucinations if the responses are not grounded (for example, factually inaccurate or new information) in the source information and irrelevant to a user's query or instruction.</p>
+            <h4>Multi-Modal Protection</h4>
+            <p>AWS Bedrock Guardrails includes image content filters that enable moderation of both image and text content in generative AI applications. The service can block up to 88% of harmful multimodal content.</p>
+            <hr>
+            <h3>7.3 Benefits 📊</h3>
+            <h4>Industry-Leading Safety Protection</h4>
+            <p>Guardrails provides comprehensive safety protections including text and image content safeguards that can block up to 88% of harmful multimodal content, and filters over 75% of hallucinated responses from models for Retrieval Augmented Generation (RAG) and summarization use cases.</p>
+            <h4>Integration with Other Bedrock Services</h4>
+            <p>Guardrails automatically works with other AWS Bedrock services you've learned about in previous sections:</p>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+                <thead>
+                    <tr><th>Service Integration</th><th>How Guardrails Helps</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><b>Model Inference</b></td><td>Evaluates inputs and outputs during API calls to foundation models</td></tr>
+                    <tr><td><b>Agents</b></td><td>Applies safety policies to multi-step agent workflows and tool calls</td></tr>
+                    <tr><td><b>Knowledge Bases</b></td><td>Validates RAG responses against source material for accuracy</td></tr>
+                    <tr><td><b>Prompt Management</b></td><td>Tests managed prompts against safety policies before deployment</td></tr>
+                </tbody>
+            </table>
+            </div>
+            <h4>Consistent Governance Across Models</h4>
+            <p>A guardrail can be used with any text or image foundation model (FM) by referencing the guardrail during the model inference. You can use guardrails with Amazon Bedrock Agents and Amazon Bedrock Knowledge Bases.</p>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+                <thead>
+                    <tr><th>Benefit</th><th>Impact</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><b>Model Agnostic</b></td><td>Same safety policies across different foundation models</td></tr>
+                    <tr><td><b>Version Control</b></td><td>Create versioned guardrail configurations for different environments</td></tr>
+                    <tr><td><b>Centralized Management</b></td><td>Single location to manage all AI safety policies</td></tr>
+                    <tr><td><b>Cross-Region Support</b></td><td>Automatic routing for optimal performance and availability</td></tr>
+                </tbody>
+            </table>
+            </div>
+            <h4>Cost-Effective Safety</h4>
+            <p>AWS Bedrock Guardrails has significantly reduced pricing, with content filters now costing $0.15 per 1,000 text units and denied topics also at $0.15 per 1,000 text units. These recent price reductions make comprehensive AI safety more affordable for production deployments.</p>
+            <hr>
+            <h3>7.4 Limitations & Considerations ⚠️</h3>
+            <h4>Language Support Constraints</h4>
+            <p>Amazon Bedrock Guardrails supports English, French, and Spanish in natural language. Guardrails will be ineffective with any other language.</p>
+            <b>Impact</b>: Multi-lingual applications need alternative safety measures for unsupported languages.
+            <h4>Regional Availability</h4>
+            <p>Amazon Bedrock Guardrails is primarily supported in US East (N. Virginia) and US West (Oregon) regions. However, cross-region inference capability now allows automatic routing of guardrail requests to optimal AWS regions within your geography (US, EU, APAC, GovCloud) for better performance and availability.</p>
+            <h4>Reasoning Model Limitations</h4>
+            <p>Amazon Bedrock Guardrails doesn't support model reasoning with Anthropic Claude 3.7 Sonnet or DeepSeek-R1 when these models are operating in their "reasoning mode."</p>
+            <b>What this means:</b>
+            <ul>
+                <li><b>Reasoning models</b> like Claude 3.7 Sonnet and DeepSeek-R1 can operate in two modes: standard output and step-by-step reasoning mode</li>
+                <li><b>Standard mode</b>: Guardrails work normally, evaluating both inputs and outputs</li>
+                <li><b>Reasoning mode</b>: Guardrails cannot inspect or filter the model's thinking process, only the final answer</li>
+            </ul>
+            <b>Impact</b>: Teams using reasoning models for complex problem-solving lose safety coverage during the intermediate reasoning steps, where models might generate inappropriate content that won't be detected by Guardrails.
+            <h4>Performance and Cost Considerations</h4>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+                <thead>
+                    <tr><th>Consideration</th><th>Impact</th><th>Mitigation Strategy</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><b>Latency Addition</b></td><td>Each guardrail evaluation adds processing time</td><td>Use selective evaluation and optimize policy combinations</td></tr>
+                    <tr><td><b>Per-Policy Pricing</b></td><td>Costs accumulate with multiple active policies</td><td>Prioritize essential policies for production workloads</td></tr>
+                    <tr><td><b>False Positives</b></td><td>Legitimate content may be blocked</td><td>Thoroughly test guardrail configurations with real data</td></tr>
+                </tbody>
+            </table>
+            </div>
+            <h4>Service Quotas and Scaling</h4>
+            <p>AWS Bedrock Guardrails supports up to 50 calls per second using the ApplyGuardrail API (doubled from previous limits). Content filters, sensitive information filters, and word filters can process up to 200 text units per second (8x increase from previous limits).</p>
+            <h4>Production Planning Considerations</h4>
+            <b>Key Implementation Questions:</b>
+            <ol>
+                <li>Which policies are essential vs. nice-to-have for your specific use case?</li>
+                <li>How will guardrail failures impact user experience - graceful degradation vs. hard blocks?</li>
+                <li>What's your strategy for handling false positives in production?</li>
+                <li>How will you test guardrail effectiveness across diverse user inputs?</li>
+            </ol>
+            <div class="callout" style="background:#f8f9fa;border-left:4px solid #e67e22;padding:10px 16px;margin:12px 0 18px 0;font-size:95%">
+                ⚙️ <b>Implementation Reality Check</b>: Start with basic content filters and PII protection, then gradually add more sophisticated policies.
+            </div>
+            <b>Testing Strategy:</b>
+            <ul>
+                <li>Use the built-in test window to validate configurations</li>
+                <li>Create comprehensive test datasets representing real user interactions</li>
+                <li>Monitor guardrail intervention rates in production</li>
+                <li>Plan for periodic policy adjustments based on real-world usage</li>
+            </ul>
+            <h4>Integration Dependencies</h4>
+            <ul>
+                <li><b>IAM Permissions</b>: Requires specific permissions for different guardrail policies</li>
+                <li><b>API Integration</b>: Applications need updates to handle guardrail responses</li>
+                <li><b>Monitoring Setup</b>: Tracking guardrail interventions requires additional observability</li>
+            </ul>
+            <hr>
+            <h4>References</h4>
+            <ul>
+                <li><a href="https://aws.amazon.com/bedrock/guardrails/" target="_blank">AWS Bedrock Guardrails Service Page</a></li>
+                <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html" target="_blank">Amazon Bedrock Documentation - Guardrails</a></li>
+                <li><a href="https://aws.amazon.com/blogs/aws/guardrails-for-amazon-bedrock-now-available-with-new-safety-filters-and-privacy-controls/" target="_blank">AWS Blog: Guardrails for Amazon Bedrock Generally Available</a></li>
+                <li><a href="https://aws.amazon.com/blogs/machine-learning/amazon-bedrock-guardrails-image-content-filters-provide-industry-leading-safeguards-helping-customer-block-up-to-88-of-harmful-multimodal-content-generally-available-today/" target="_blank">AWS Machine Learning Blog: Image Content Filters</a></li>
+                <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-sensitive-filters.html" target="_blank">AWS Documentation: Sensitive Information Filters</a></li>
+                <li><a href="https://aws.amazon.com/bedrock/pricing/" target="_blank">AWS Pricing: Bedrock Guardrails Pricing</a></li>
+            </ul>
+            <div class="section-nav-btns">
+                <button id="back-guardrails">Back</button>
+                <button id="next-guardrails">Next</button>
+            </div>
         </section>
         <!-- Section 8: Quiz -->
         <section id="quiz-section" class="module-section" style="display:none">
-            <h2>Quiz</h2>
-            <p><em>Coming soon...</em></p>
+            <div class="quiz-section">
+                <h2 class="quiz-title">Concept Check: AWS Bedrock Services</h2>
+                <div class="quiz-container">
+                    <div class="quiz-question" id="q1">
+                        <p class="question-title">1. What is the main advantage of using AWS Bedrock for enterprise AI development compared to building your own LLM infrastructure from scratch?</p>
+                        <ul class="quiz-options">
+                            <li class="quiz-option" data-correct="false">A) It requires you to set up and maintain GPU clusters</li>
+                            <li class="quiz-option" data-correct="true">B) No infrastructure management—Bedrock provides managed, scalable, and secure access to multiple foundation models</li>
+                            <li class="quiz-option" data-correct="false">C) Bedrock is only for image generation</li>
+                            <li class="quiz-option" data-correct="false">D) You can only use one model at a time</li>
+                        </ul>
+                        <div class="quiz-feedback">
+                            <strong>Answer:</strong> B) Bedrock eliminates infrastructure management and provides secure, scalable access to a variety of models.
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question" id="q2">
+                        <p class="question-title">2. Name two types of foundation models you can access through AWS Bedrock and describe one benefit of using the unified API gateway.</p>
+                        <ul class="quiz-options">
+                            <li class="quiz-option" data-correct="false">A) Only text generation models; you must use a different API for each</li>
+                            <li class="quiz-option" data-correct="false">B) Only embedding models; API is not standardized</li>
+                            <li class="quiz-option" data-correct="true">C) Text generation and image generation models; unified API makes switching models easy</li>
+                            <li class="quiz-option" data-correct="false">D) Only image generation models; no API gateway is provided</li>
+                        </ul>
+                        <div class="quiz-feedback">
+                            <strong>Answer:</strong> C) Bedrock provides access to text, image, and embedding models, all through a unified API for easy model switching.
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question" id="q3">
+                        <p class="question-title">3. Which of the following is a unique feature of Bedrock Agents that helps automate multi-step business workflows?</p>
+                        <ul class="quiz-options">
+                            <li class="quiz-option" data-correct="false">A) Only supports single-turn Q&A</li>
+                            <li class="quiz-option" data-correct="true">B) Action Groups and function calling for orchestrating API calls and tool use</li>
+                            <li class="quiz-option" data-correct="false">C) Requires manual orchestration for every step</li>
+                            <li class="quiz-option" data-correct="false">D) Only works with image data</li>
+                        </ul>
+                        <div class="quiz-feedback">
+                            <strong>Answer:</strong> B) Bedrock Agents use Action Groups and function calling to automate and orchestrate complex, multi-step workflows.
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question" id="q4">
+                        <p class="question-title">4. How does Bedrock Knowledge Bases enable Retrieval-Augmented Generation (RAG), and what is one advantage of using managed knowledge bases?</p>
+                        <ul class="quiz-options">
+                            <li class="quiz-option" data-correct="false">A) It only stores images</li>
+                            <li class="quiz-option" data-correct="false">B) It requires you to build your own vector database from scratch</li>
+                            <li class="quiz-option" data-correct="true">C) It manages document ingestion, chunking, and retrieval, saving time and reducing infrastructure overhead</li>
+                            <li class="quiz-option" data-correct="false">D) It does not support RAG</li>
+                        </ul>
+                        <div class="quiz-feedback">
+                            <strong>Answer:</strong> C) Bedrock Knowledge Bases automate RAG pipelines, reducing setup and maintenance effort.
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question" id="q5">
+                        <p class="question-title">5. Why is prompt versioning important, and how does Bedrock's "configuration as code" approach help?</p>
+                        <ul class="quiz-options">
+                            <li class="quiz-option" data-correct="false">A) It disables collaboration</li>
+                            <li class="quiz-option" data-correct="true">B) It ensures reproducibility and easy rollback by versioning prompts, models, and parameters together</li>
+                            <li class="quiz-option" data-correct="false">C) It only tracks model weights</li>
+                            <li class="quiz-option" data-correct="false">D) It prevents prompt reuse</li>
+                        </ul>
+                        <div class="quiz-feedback">
+                            <strong>Answer:</strong> B) Versioning and configuration as code ensure you know exactly what generated each output and can roll back if needed.
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question" id="q6">
+                        <p class="question-title">6. What are two types of evaluation supported by AWS Bedrock Evaluations, and why is benchmarking important?</p>
+                        <ul class="quiz-options">
+                            <li class="quiz-option" data-correct="false">A) Only human evaluation; benchmarking is optional</li>
+                            <li class="quiz-option" data-correct="true">B) Automatic and human evaluations; benchmarking ensures model quality before production</li>
+                            <li class="quiz-option" data-correct="false">C) Only automatic evaluation; benchmarking is not needed</li>
+                            <li class="quiz-option" data-correct="false">D) No evaluation is supported</li>
+                        </ul>
+                        <div class="quiz-feedback">
+                            <strong>Answer:</strong> B) Bedrock supports both automatic and human evaluations to ensure models meet quality standards before deployment.
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question" id="q7">
+                        <p class="question-title">7. List two core functions of AWS Bedrock Guardrails and explain how they contribute to responsible AI.</p>
+                        <ul class="quiz-options">
+                            <li class="quiz-option" data-correct="false">A) Model training and GPU scaling</li>
+                            <li class="quiz-option" data-correct="false">B) Only image moderation</li>
+                            <li class="quiz-option" data-correct="true">C) Content filtering and PII protection—these prevent harmful or private information from being generated or exposed</li>
+                            <li class="quiz-option" data-correct="false">D) Prompt versioning</li>
+                        </ul>
+                        <div class="quiz-feedback">
+                            <strong>Answer:</strong> C) Guardrails enforce safety and privacy, which are essential for responsible AI in production.
+                        </div>
+                    </div>
+                </div>
+                <div class="section-nav-btns">
+                    <button id="back-quiz-section">Back</button>
+                    <button id="next-quiz-section" disabled>Next</button>
+                </div>
+            </div>
         </section>
     </div>
     <script src="../assets/js/course-nav.js"></script>

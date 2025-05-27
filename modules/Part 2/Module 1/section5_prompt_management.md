@@ -138,3 +138,12 @@ AWS Bedrock offers **native prompt management** integrated directly into the pla
 > **For multi-cloud teams or those requiring extensive customization, self-hosted LangFuse** offers maximum flexibility and control.
 
 ---
+
+## References
+
+- [Amazon Bedrock Prompt Management is now available in GA](https://aws.amazon.com/blogs/machine-learning/amazon-bedrock-prompt-management-is-now-available-in-ga/)
+- [Prompt Management for Amazon Bedrock](https://aws.amazon.com/bedrock/prompt-management/)
+- [Streamline generative AI development in Amazon Bedrock with Prompt Management and Prompt Flows](https://aws.amazon.com/blogs/machine-learning/streamline-generative-ai-development-in-amazon-bedrock-with-prompt-management-and-prompt-flows-preview/)
+- [Machine learning experiments using Amazon SageMaker AI with MLflow](https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow.html)
+- [Launch the MLflow UI using a presigned URL](https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-launch-ui.html)
+- [Integrate Amazon Bedrock Prompt Management in LangChain applications](https://community.aws/content/2kPiIOekxM5O0kTGr9U3rgw183H)
