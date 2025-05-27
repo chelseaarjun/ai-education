@@ -20,11 +20,11 @@ You can run the labs in any of these environments. Follow the instructions for y
    - **Option A: If `git` is available**
      - Open a terminal in SageMaker Studio and run:
        ```bash
-       git clone https://github.com/yourusername/ai-education.git
+       git clone https://github.com/chelseaarjun/ai-education.git
        cd ai-education
        ```
    - **Option B: If `git` is not available**
-     - Download the repository as a ZIP from GitHub ([Download ZIP](https://github.com/yourusername/ai-education/archive/refs/heads/main.zip)).
+     - Download the repository as a ZIP from GitHub ([Download ZIP](https://github.com/chelseaarjun/ai-education/archive/refs/heads/main.zip)).
      - Upload the ZIP file in the SageMaker file browser.
      - Extract it in a terminal:
        ```bash
