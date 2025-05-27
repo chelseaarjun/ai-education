@@ -303,6 +303,7 @@
         <button class="module-nav-btn" data-section="temperature">Logits</button>
         <button class="module-nav-btn" data-section="response-format">Response Format</button>
         <button class="module-nav-btn" data-section="model-selection">LLM Evolution</button>
+        <button class="module-nav-btn" data-section="resources">Resources</button>
         <button class="module-nav-btn" data-section="quiz-section">Quiz</button>
         <button class="module-nav-btn lab-nav-btn" id="lab-launch-btn" data-notebook="notebooks/llm_foundations_lab.ipynb">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="20" height="20" style="vertical-align:middle;margin-right:0.5em;"><circle cx="32" cy="32" r="6" fill="#222"/><ellipse cx="32" cy="32" rx="24" ry="10" fill="none" stroke="#222" stroke-width="3"/><ellipse cx="32" cy="32" rx="10" ry="24" fill="none" stroke="#222" stroke-width="3" transform="rotate(60 32 32)"/><ellipse cx="32" cy="32" rx="10" ry="24" fill="none" stroke="#222" stroke-width="3" transform="rotate(-60 32 32)"/><circle cx="54" cy="32" r="3" fill="#222"/><circle cx="10" cy="32" r="3" fill="#222"/><circle cx="44.78" cy="48.25" r="3" fill="#222"/><circle cx="19.22" cy="15.75" r="3" fill="#222"/><circle cx="44.78" cy="15.75" r="3" fill="#222"/><circle cx="19.22" cy="48.25" r="3" fill="#222"/></svg>
@@ -865,6 +866,25 @@
             <div class="section-nav-btns">
                 <button id="back-quiz-section">Back</button>
                 <button id="next-quiz-section" disabled>Next</button>
+            </div>
+        </section>
+        <!-- Resources Section -->
+        <section id="resources" class="module-section">
+            <h2>Resources</h2>
+            <ul>
+                <li><a href="https://github.com/anthropics/courses/blob/master/anthropic_api_fundamentals/04_parameters.ipynb" target="_blank">Anthropic API Fundamentals: Model Parameters Notebook</a> – Hands-on guide to LLM parameters and API usage.</li>
+                <li><a href="https://arxiv.org/abs/1706.03762" target="_blank">Vaswani et al. (2017). "Attention Is All You Need"</a> – The original Transformer paper that started the LLM revolution.</li>
+                <li><a href="https://platform.openai.com/tokenizer" target="_blank">OpenAI Tokenizer Tool</a> – Visualize and estimate token counts for prompts and responses.</li>
+                <li><a href="https://www.promptingguide.ai/" target="_blank">Prompt Engineering Guide by DAIR.AI</a> – Comprehensive resource on prompt engineering and LLM best practices.</li>
+                <li><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank">Anthropic Claude Prompt Engineering Guide</a> – Official documentation on prompt design for Claude models.</li>
+                <li><a href="https://www.kaggle.com/code/kaggle/prompt-engineering-for-developers-course" target="_blank">Kaggle Prompt Engineering for Developers Course</a> – Interactive course on prompt engineering and LLMs.</li>
+                <li><a href="https://arxiv.org/abs/2109.07958" target="_blank">Lin et al. (2022). "TruthfulQA: Measuring How Models Mimic Human Falsehoods"</a> – Benchmark and analysis of LLM hallucinations.</li>
+                <li><a href="https://arxiv.org/abs/2206.07682" target="_blank">Wei et al. (2022). "Emergent Abilities of Large Language Models"</a> – Research on scaling and emergent properties in LLMs.</li>
+                <li><a href="https://arxiv.org/abs/2403.00504" target="_blank">LeCun et al. (2024). "Learning and Leveraging World Models in Visual Representation Learning"</a> – Overview of world models and future LLM directions.</li>
+            </ul>
+            <div class='section-nav-btns'>
+                <button id='back-resources'>Back</button>
+                <button id='next-resources'>Next</button>
             </div>
         </section>
     </div>
