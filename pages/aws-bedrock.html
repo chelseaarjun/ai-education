@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Bedrock Services</title>
+    <script data-goatcounter="https://ai-foundation-course.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <link rel="stylesheet" href="../assets/css/course-nav.css">
+    <link rel="stylesheet" href="../assets/css/module-nav-bar.css">
+    <link rel="stylesheet" href="../assets/css/module-sidebar.css">
+    <link rel="stylesheet" href="../assets/css/code-examples.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/course-index.css">
+    <link rel="stylesheet" href="../assets/css/mobile-fixes.css">
+    <link rel="stylesheet" href="../assets/css/introduction-fix.css">
+    <link rel="stylesheet" href="../assets/css/quiz.css">
+</head>
+<body>
+    <nav class="module-nav">
+        <button class="module-nav-btn" data-section="introduction">Introduction</button>
+        <button class="module-nav-btn" data-section="model-access">Model Access</button>
+        <button class="module-nav-btn" data-section="bedrock-agents">Bedrock Agents</button>
+        <button class="module-nav-btn" data-section="knowledge-bases">Knowledge Bases</button>
+        <button class="module-nav-btn" data-section="prompt-management">Prompt Management</button>
+        <button class="module-nav-btn" data-section="evaluations">Evaluations</button>
+        <button class="module-nav-btn" data-section="guardrails">Guardrails</button>
+        <button class="module-nav-btn" data-section="quiz-section">Quiz</button>
+        <!-- <button class="module-nav-btn lab-nav-btn" id="lab-launch-btn" data-notebook="notebooks/aws_bedrock_lab.ipynb">Lab</button> -->
+    </nav>
+    <nav class="module-sidebar"></nav>
+    <div class="content-inner">
+        <!-- Section 1: Introduction -->
+        <section id="introduction" class="module-section">
+            <div class="course-description">
+                <h2 class="module-title">Module: AWS Bedrock Services</h2>
+                <p>Building directly on the foundational concepts from Part 1. You'll see how AWS implements the prompt engineering, agent patterns, and AI workflows you've learned about in a managed service environment.</p>
+                <p>This module covers core AWS Bedrock service's capabilities, benefits, and limitations to help you understand what AWS offers for enterprise AI development.</p>
+                <h3>AWS Bedrock Service Ecosystem</h3>
+                <pre style="background:#f8fafd;border-radius:8px;padding:1em 1.2em;overflow-x:auto;">
+┌──────────────┐  ┌──────────────┐  ┌─────────--──────┐
+│ Model        │  │ Bedrock      │  │ Knowledge       │
+│ Access       │  │ Agents       │  │ Bases           │
+│              │  │              │  │                 │
+│ • Claude     │  │ • Action     │  │ • Unstructured: │
+│ • Nova       │  │   Groups     │  │   S3            │
+│ • Llama      │  │ • Functions  │  │ • Structured:   │
+│              │  │ • Planning   │  │   Redshift,     │
+│              │  │              │  │   Glue          │
+│              │  │              │  │ • Vector:       │
+│              │  │              │  │   OpenSearch,   │
+│              │  │              │  │   Aurora        │
+│              │  │              │  │ • Hybrid:       │
+│              │  │              │  │   Kendra        │
+└──────┬───────┘  └──────┬───────┘  └──────┬───────---┘
+       │                 │                 │
+       └─────────────────┼─────────────────┘
+                         │
+          ┌──────────────┼──────────────┐
+          │              │              │
+          ▼              ▼              ▼
+  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐
+  │ Guardrails   │ │ Prompt       │ │ Evaluations  │
+  │              │ │ Management   │ │              │
+  │ • Content    │ │              │ │ • A/B Tests  │
+  │   Filters    │ │ • Versioning │ │ • Metrics    │
+  │ • PII        │ │ • Templates  │ │ • Benchmarks │
+  │   Detection  │ │ • Variables  │ │ • Human Eval │
+  └──────────────┘ └──────────────┘ └──────────────┘
+                </pre>
+                <h3>What You'll Learn</h3>
+                <ul>
+                    <li><b>Model Access</b> - Foundation model catalog and API patterns for LLM capabilities</li>
+                    <li><b>Bedrock Agents</b> - Autonomous AI workflows with reasoning and function calling</li>
+                    <li><b>Knowledge Bases</b> - Managed RAG (Retrieval-Augmented Generation) for document integration</li>
+                    <li><b>Evaluations</b> - Performance testing and benchmarking for model quality assurance</li>
+                    <li><b>Prompt Management</b> - Version control and governance for prompt engineering workflows</li>
+                    <li><b>Guardrails</b> - Content filtering and safety controls for enterprise compliance</li>
+                </ul>
+            </div>
+            <div class="section-nav-btns">
+                <button id="back-introduction" disabled>Back</button>
+                <button id="next-introduction">Next</button>
+            </div>
+        </section>
+        <!-- Section 2: Model Access -->
+        <section id="model-access" class="module-section" style="display:none">
+            <h2>Model Access - AWS Bedrock Services</h2>
+            <h3>What It Is</h3>
+            <p>AWS Bedrock Model Access provides a unified API gateway to multiple foundation models from leading AI companies, without requiring you to manage model hosting, scaling, or infrastructure. Think of it as a "model marketplace" where you can access Claude, Amazon Nova, Meta Llama, and other state-of-the-art models through standardized APIs.</p>
+            <p><b>Core Concept:</b> Instead of deploying and managing individual models on your own infrastructure, you make API calls to pre-hosted, enterprise-ready foundation models that AWS maintains and scales automatically.</p>
+            <h3>Key Features</h3>
+            <ul>
+                <li><b>Text Generation Models:</b> Claude, Nova, Llama for conversational AI and content creation</li>
+                <li><b>Image Generation Models:</b> Stability AI models for creating visual content</li>
+                <li><b>Embedding Models:</b> Amazon Titan Embeddings, Cohere Embed for vector representations</li>
+                <li><b>Multimodal Models:</b> Nova models that can process both text and images</li>
+            </ul>
+            <h4>API Interaction Patterns</h4>
+            <pre class="code-block" style="margin-bottom:1.2em;">
+import boto3
+
+# Basic text completion
+bedrock_runtime = boto3.client('bedrock-runtime')
+
+# Synchronous invoke
+response = bedrock_runtime.invoke_model(
+    modelId='anthropic.claude-3-5-sonnet-20241022-v2:0',
+    body=json.dumps({
+        "anthropic_version": "bedrock-2023-05-31",
+        "max_tokens": 1000,
+        "messages": [{"role": "user", "content": "Analyze this contract..."}]
+    })
+)
+
+# Streaming for real-time responses
+response = bedrock_runtime.invoke_model_with_response_stream(
+    modelId='anthropic.claude-3-5-sonnet-20241022-v2:0',
+    body=json.dumps({...})
+)
+            </pre>
+            <h3>Benefits</h3>
+            <ul>
+                <li><b>Zero Infrastructure Management:</b> No EC2 instances, containers, or GPU clusters to manage</li>
+                <li><b>Auto-scaling:</b> Handles traffic spikes automatically without capacity planning</li>
+                <li><b>High Availability:</b> Built-in redundancy across AWS availability zones</li>
+                <li><b>Global Edge:</b> Low-latency access from multiple AWS regions</li>
+                <li><b>Encryption:</b> API requests and responses encrypted in transit and at rest with AWS KMS</li>
+                <li><b>VPC Support:</b> Private network access for sensitive workloads</li>
+                <li><b>Compliance:</b> SOC, HIPAA, GDPR compliance built-in</li>
+                <li><b>Consistent API:</b> Same boto3 patterns work across different model providers</li>
+                <li><b>Easy Model Switching:</b> Change <code>modelId</code> parameter to test different models</li>
+                <li><b>Version Management:</b> Access specific model versions for reproducible results</li>
+            </ul>
+            <h3>Limitations & Considerations</h3>
+            <ul>
+                <li><b>Regional Limitations:</b> Not all models available in every AWS region</li>
+                <li><b>Model Deprecation:</b> AWS may retire older model versions with notice</li>
+                <li><b>Access Requests:</b> Some models require requesting access before use</li>
+                <li><b>Quota Limits:</b> Default rate limits may require adjustment for high-volume applications</li>
+                <li><b>Pricing Models:</b> On-demand, provisioned throughput, and batch processing (see docs for details)</li>
+                <li><b>Model Parameters:</b> Limited to provided configuration options</li>
+                <li><b>Custom Fine-tuning:</b> Only available for select models</li>
+                <li><b>Response Timing:</b> Can't control exact inference hardware or response times</li>
+                <li><b>Vendor Lock-in:</b> Switching to self-hosted requires significant architectural changes</li>
+            </ul>
+            <h4>When Model Access Makes Sense</h4>
+            <ul>
+                <li><b>Good For:</b> Rapid prototyping, variable workloads, enterprise compliance needs, multi-model experimentation</li>
+                <li><b>Consider Alternatives When:</b> You need maximum cost control, custom model modifications, specific hardware requirements, or complete independence from cloud providers</li>
+            </ul>
+            <h4>References</h4>
+            <ul>
+                <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html" target="_blank">Supported Foundation Models</a></li>
+                <li><a href="https://aws.amazon.com/bedrock/pricing/" target="_blank">Amazon Bedrock Pricing</a></li>
+                <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html" target="_blank">Provisioned Throughput Guide</a></li>
+                <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html" target="_blank">Model Access Management</a></li>
+                <li><a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html" target="_blank">InvokeModel API Reference</a></li>
+            </ul>
+            <div class="section-nav-btns">
+                <button id="back-model-access">Back</button>
+                <button id="next-model-access">Next</button>
+            </div>
+        </section>
+        <!-- Section 3: Bedrock Agents -->
+        <section id="bedrock-agents" class="module-section" style="display:none">
+            <h2>Bedrock Agents - What It Is & Key Features</h2>
+            <h3>What It Is</h3>
+            <p><b>Core Concept</b>: Bedrock Agents are managed AI orchestrators that use foundation models to break down user requests, gather relevant information, and complete multi-step tasks by coordinating between APIs, data sources, and software applications.</p>
+            <h4>Observe → Plan → Act Cycle</h4>
+            <ul>
+              <li>🔍 <b>Observe</b>: Agent interprets user input with a foundation model and generates a rationale for the next step</li>
+              <li>📋 <b>Plan</b>: Agent predicts which action to invoke or which knowledge base to query</li>
+              <li>⚡ <b>Act</b>: Agent invokes action groups (APIs) or queries knowledge bases, then returns output or continues orchestration</li>
+            </ul>
+            <p><b>What AWS Handles - The Orchestration Logic</b>:<br>
+            The default orchestration strategy is <b>ReAct (Reason and Action)</b> - AWS manages the decision-making process about when to call functions, how to handle conversation context, and how to coordinate between different tools.</p>
+            <h4>Specific Examples</h4>
+            <ul>
+              <li>🏨 Hotel booking system: CreateBooking, GetBooking, CancelBooking actions</li>
+              <li>📄 Contract analysis: Read document → Extract key terms → Update legal database → Generate summary</li>
+              <li>🎧 Customer support: Query knowledge base → Check account status → Process refund → Send confirmation</li>
+            </ul>
+            <hr>
+            <h3>Key Features</h3>
+            <h4>🔧 Core Agent Capabilities</h4>
+            <ol>
+              <li><b>Action Groups & Function Calling</b><br>
+                <span style="font-size:90%">Define actions the agent can perform and connect to your business logic</span>
+                <pre class="code-block" style="margin:0.5em 0 1em 0;">
+{
+  "actionGroupName": "BookHotel",
+  "description": "Hotel booking operations", 
+  "functionSchema": {
+    "functions": [{
+      "name": "CreateBooking",
+      "parameters": {
+        "hotelName": {"type": "string", "required": true},
+        "checkIn": {"type": "string", "required": true}
+      }
+    }]
+  }
+}
+                </pre>
+              </li>
+              <li><b>Knowledge Base Integration</b><br>
+                Agents automatically query knowledge bases when they need additional context to complete tasks
+              </li>
+              <li><b>Conversation Memory</b><br>
+                Retain memory across interactions for personalized, seamless user experiences
+              </li>
+              <li><b>Advanced Orchestration Control</b><br>
+                Customize prompt templates for pre-processing, orchestration, knowledge base response generation, and post-processing steps
+              </li>
+              <li><b>Multi-Agent Collaboration</b><br>
+                Multiple specialized agents work together under supervisor agent coordination
+              </li>
+            </ol>
+            <h4>⚖️ Developer vs AWS Responsibility Matrix</h4>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+              <thead>
+                <tr><th>Feature</th><th>👨‍💻 Developer Handles</th><th>🤖 AWS Manages</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>Action Groups</b></td><td>• Write Lambda function business logic<br>• Define API schemas and parameters<br>• Handle function execution and responses</td><td>• Decide when to invoke functions<br>• Pass parameters to Lambda<br>• Handle function call orchestration</td></tr>
+                <tr><td><b>Knowledge Base Integration</b></td><td>• Provide data sources and content<br>• Configure vector databases<br>• Set up data ingestion</td><td>• Query knowledge bases automatically<br>• Context retrieval and ranking<br>• Integration with agent reasoning</td></tr>
+                <tr><td><b>Conversation Memory</b></td><td>• Define what should be remembered<br>• Set memory retention policies</td><td>• Store conversation context<br>• Manage session state<br>• Context continuity across interactions</td></tr>
+                <tr><td><b>Advanced Orchestration Control</b></td><td>• Create custom orchestration Lambda function (optional)<br>• Modify base prompt templates (optional)</td><td>• Default ReAct (Reason-Action) orchestration<br>• Automatic prompt template generation<br>• Decision-making between tools and knowledge bases</td></tr>
+                <tr><td><b>Multi-Agent Collaboration</b></td><td>• Define individual agent roles and instructions<br>• Configure which agents can collaborate</td><td>• Route requests between agents<br>• Coordinate task delegation<br>• Manage inter-agent communication</td></tr>
+              </tbody>
+            </table>
+            </div>
+            <div class="callout" style="background:#f8f9fa;border-left:4px solid #3498db;padding:12px 18px;margin:18px 0;">
+              <b>💡 Note:</b> AWS provides full Infrastructure as Code support via <b>AWS CDK</b> and <b>MCP (Model Context Protocol)</b> integration for standardized tool connections.
+            </div>
+            <hr>
+            <h3>Benefits</h3>
+            <h4>⚡ Business Value Advantages</h4>
+            <ul>
+              <li><b>🚀 Faster Time-to-Market</b>: Skip months of custom orchestration development - agents can be deployed in days</li>
+              <li><b>👥 Reduced Team Expertise Requirements</b>: No need for specialized ML orchestration engineers or ReAct implementation knowledge</li>
+              <li><b>🔄 Rapid Prototyping</b>: Test agent workflows quickly without building complex reasoning frameworks</li>
+            </ul>
+            <h4>Production-Ready Enterprise Features</h4>
+            <ul>
+              <li><b>🛡️ Built-in Security & Compliance</b>: IAM integration, encryption at rest/transit, audit logging included by default</li>
+              <li><b>📊 Monitoring & Observability</b>: CloudWatch integration, request tracing, and performance metrics out-of-the-box</li>
+              <li><b>⚖️ Governance Controls</b>: Role-based access, resource tagging, and cost allocation built into the platform</li>
+            </ul>
+            <h4>Operational Simplicity</h4>
+            <ul>
+              <li><b>🔧 Zero Infrastructure Management</b>: No Kubernetes clusters, load balancers, or scaling policies to configure</li>
+              <li><b>🏥 Automatic Reliability</b>: Built-in retry logic, error handling, and failover mechanisms</li>
+              <li><b>💰 Predictable Scaling Costs</b>: Pay-per-use pricing eliminates infrastructure over-provisioning</li>
+            </ul>
+            <h4>🔨 Technical Advantages</h4>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+              <thead>
+                <tr><th>Capability</th><th>Bedrock Agents</th><th>Custom Implementation</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Orchestration Logic</td><td>ReAct framework included, battle-tested at scale</td><td>Must implement reasoning algorithms from scratch</td></tr>
+                <tr><td>Function Integration</td><td>JSON schema → automatic parameter passing</td><td>Custom function calling, parameter validation, error handling</td></tr>
+                <tr><td>Memory Management</td><td>Conversation context automatically maintained</td><td>Build session storage, context window management</td></tr>
+                <tr><td>Multi-Modal Support</td><td>Text, images, documents supported natively</td><td>Implement separate processing pipelines</td></tr>
+              </tbody>
+            </table>
+            </div>
+            <div style="margin:1em 0 1em 0;font-size:95%"><b>Real-World Example</b>: A grocery chain's customer service agent handles "Find organic produce suppliers near our Seattle stores, check current contracts, and generate a cost comparison report" - this multi-step workflow requires no custom orchestration code.</div>
+            <hr>
+            <h3>Limitations & Considerations</h3>
+            <h4>🔒 Orchestration Constraints</h4>
+            <ul>
+              <li><b>Default ReAct Framework</b>: AWS provides optimized ReAct reasoning, but custom orchestration requires additional Lambda development</li>
+              <li><b>Custom Logic Complexity</b>: While custom orchestration Lambda functions are supported, they require significant development effort</li>
+              <li><b>Reasoning Visibility</b>: Limited insight into default orchestration decision-making, though custom orchestration provides more control</li>
+            </ul>
+            <h4>Debugging & Transparency Challenges</h4>
+            <ul>
+              <li>🔍 Limited Observability: Cannot inspect intermediate reasoning steps or decision weights in real-time</li>
+              <li>📊 Unclear Failure Modes: When agents fail to complete tasks, root cause analysis can be challenging</li>
+              <li>🎛️ Reduced Control: Difficult to fine-tune specific reasoning behaviors for edge cases</li>
+            </ul>
+            <h4>💰 Cost & Performance Considerations</h4>
+            <ul>
+              <li><b>Pricing Structure Impact</b>: Every reasoning step, knowledge base query, and function call generates billable tokens</li>
+              <li><b>Complex Workflows</b>: Multi-step agent tasks can accumulate significant costs compared to direct API calls</li>
+              <li><b>Knowledge Base Queries</b>: Additional charges for vector search operations and data storage</li>
+            </ul>
+            <div style="background:#f8f9fa;border-left:4px solid #e67e22;padding:10px 16px;margin:12px 0 18px 0;font-size:95%">
+              🕐 <b>Response Latency:</b> Varies based on workflow complexity, number of function calls, knowledge base queries, and reasoning steps required
+            </div>
+            <h4>⚖️ When to Consider Alternatives</h4>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+              <thead>
+                <tr><th>Use Case</th><th>Bedrock Agents ✅</th><th>Custom Solution ⚠️</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Standard Business Workflows</td><td>Perfect for typical customer service, data analysis, report generation</td><td>Unnecessary complexity</td></tr>
+                <tr><td>Highly Specialized Logic</td><td>Limited by default ReAct reasoning</td><td>Better control over custom algorithms</td></tr>
+                <tr><td>Budget-Constrained Applications</td><td>Can become expensive for high-volume usage</td><td>More cost-effective at scale with optimization</td></tr>
+                <tr><td>Strict Latency Requirements</td><td>Multi-second response times may not meet SLA</td><td>Optimized direct integrations can be faster</td></tr>
+                <tr><td>Regulatory Transparency Needs</td><td>Limited reasoning audit trails</td><td>Full control over decision logging and explainability</td></tr>
+              </tbody>
+            </table>
+            </div>
+            <div style="margin:1em 0 1em 0;font-size:95%"><b>Decision Framework</b>: Choose Bedrock Agents when you need rapid deployment of standard agent workflows and enterprise features outweigh customization needs. Consider custom solutions when you require specialized reasoning logic, strict cost optimization, or detailed decision transparency.</div>
+            <hr>
+            <h3>References</h3>
+            <ul>
+              <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents-how.html" target="_blank">How Amazon Bedrock Agents Works</a></li>
+              <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents-action-create.html" target="_blank">Action Groups Guide</a></li>
+              <li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-bedrock-agent.html" target="_blank">CDK/CloudFormation Support</a></li>
+              <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents-custom-orchestration.html" target="_blank">Custom Orchestration</a></li>
+              <li><a href="https://aws.amazon.com/blogs/machine-learning/harness-the-power-of-mcp-servers-with-amazon-bedrock-agents/" target="_blank">MCP Integration Blog</a></li>
+              <li><a href="https://aws.amazon.com/bedrock/pricing/" target="_blank">AWS Pricing: Amazon Bedrock Pricing for cost structure details</a></li>
+              <li><a href="https://aws.amazon.com/blogs/machine-learning/best-practices-for-building-robust-generative-ai-applications-with-amazon-bedrock-agents-part-2/" target="_blank">Building Robust Applications - Part 2</a></li>
+              <li><a href="https://aws.amazon.com/blogs/machine-learning/design-multi-agent-orchestration-with-reasoning-using-amazon-bedrock-and-open-source-frameworks/" target="_blank">Multi-Agent Orchestration</a></li>
+            </ul>
+            <div class="section-nav-btns">
+                <button id="back-bedrock-agents">Back</button>
+                <button id="next-bedrock-agents">Next</button>
+            </div>
+        </section>
+        <!-- Section 4: Knowledge Bases -->
+        <section id="knowledge-bases" class="module-section" style="display:none">
+            <h2>Knowledge Bases</h2>
+            <h3>What It Is</h3>
+            <p><b>Core Concept</b>: Amazon Bedrock Knowledge Bases provides managed Retrieval-Augmented Generation (RAG) capabilities that transform your company's documents and data into searchable knowledge, enabling foundation models to generate more accurate and contextual responses.</p>
+            <h4>Dual Architecture Approach</h4>
+            <ul>
+              <li>🗂️ <b>Unstructured Data</b>: Documents → Chunking → Vector embeddings → Semantic search</li>
+              <li>📊 <b>Structured Data</b>: Databases → Natural language → SQL queries → Direct data retrieval</li>
+            </ul>
+            <h4>Basic Workflow Examples</h4>
+            <ul>
+              <li><b>Grocery Policy Documents</b>: "What's our return policy for produce?" → Searches store manuals → Contextual answer with citations</li>
+              <li><b>Vendor Contract Analysis</b>: "Which suppliers offer organic certification?" → Queries structured vendor database → Filtered results with details</li>
+              <li><b>Product Specification Lookup</b>: "Show me gluten-free bread ingredients" → Searches product docs → Ingredient lists with allergen info</li>
+            </ul>
+            <h4>Integration Points</h4>
+            <ul>
+              <li><b>Standalone RAG Service</b>: Direct API access for custom applications</li>
+              <li><b>Bedrock Agents Integration</b>: Contextual information for multi-step agent workflows</li>
+              <li><b>Cross-Platform Support</b>: Works with LangChain, CrewAI, AutoGen, and other agent frameworks</li>
+            </ul>
+            <hr>
+            <h3>Key Features</h3>
+            <h4>📁 Data Source Support</h4>
+            <h5>Unstructured Data Sources</h5>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+              <thead>
+                <tr><th>Data Source</th><th>Use Case Example</th><th>Key Capability</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>Amazon S3</b></td><td>Product documentation, training manuals</td><td>Bulk document processing, cross-account access</td></tr>
+                <tr><td><b>Confluence</b></td><td>Internal wikis, procedure guides</td><td>Team knowledge extraction</td></tr>
+                <tr><td><b>Salesforce</b></td><td>Customer case studies, support articles</td><td>CRM knowledge integration</td></tr>
+                <tr><td><b>SharePoint</b></td><td>Policy documents, compliance materials</td><td>Enterprise document access</td></tr>
+                <tr><td><b>Web Crawler</b></td><td>Competitor analysis, industry research</td><td>External content ingestion</td></tr>
+                <tr><td><b>Custom Connectors</b></td><td>Proprietary systems, legacy databases</td><td>Streaming data ingestion</td></tr>
+              </tbody>
+            </table>
+            </div>
+            <h5>Structured Data Sources</h5>
+            <ul>
+              <li><b>Amazon Redshift</b>: Data warehouse queries ("Show me top 10 selling products last quarter")</li>
+              <li><b>SageMaker Lakehouse</b>: Analytics workload integration</li>
+              <li><b>AWS Glue Data Catalog</b>: Metadata management through Redshift query engine</li>
+            </ul>
+            <h5>Specialized Integrations</h5>
+            <ul>
+              <li><b>Amazon Kendra GenAI Index</b>: Reuse existing enterprise search investments without rebuilding</li>
+              <li><b>Cross-Account Access</b>: Combine data from multiple AWS accounts in single knowledge base</li>
+            </ul>
+            <h4>🗂️ Vector Storage Options</h4>
+            <h5>AWS-Managed Options (Quick Create)</h5>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+              <thead>
+                <tr><th>Storage Type</th><th>Best For</th><th>Cost Profile</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>OpenSearch Serverless</b></td><td>Traditional RAG applications</td><td>~$260/month minimum</td></tr>
+                <tr><td><b>Aurora PostgreSQL Serverless</b></td><td>Relational data integration</td><td>Can scale to zero</td></tr>
+                <tr><td><b>Neptune Analytics</b></td><td>GraphRAG with entity relationships</td><td>Based on graph complexity</td></tr>
+              </tbody>
+            </table>
+            </div>
+            <h5>Bring Your Own Infrastructure</h5>
+            <ul>
+              <li><b>OpenSearch Managed Cluster</b>: Custom capacity management</li>
+              <li><b>Third-Party Options</b>: Pinecone, MongoDB Atlas, Redis Enterprise Cloud</li>
+              <li><b>Aurora PostgreSQL</b>: Your account, pgvector extension</li>
+            </ul>
+            <div class="callout" style="background:#f8f9fa;border-left:4px solid #43B97F;padding:12px 18px;margin:18px 0;">
+              <b>Special Case - Neptune Analytics:</b> Unified vector + graph storage where embeddings and knowledge graphs coexist in the same system, enabling GraphRAG capabilities that combine semantic search with relationship traversal.
+            </div>
+            <h4>⚙️ Processing Pipeline</h4>
+            <h5>Advanced Chunking Strategies</h5>
+            <ul>
+              <li><b>Fixed-Size</b>: Consistent token counts with overlap</li>
+              <li><b>Semantic</b>: Meaning-based boundaries using embeddings</li>
+              <li><b>Hierarchical</b>: Parent-child chunk relationships for better context</li>
+              <li><b>Custom Lambda</b>: Full control with LangChain/LlamaIndex components</li>
+            </ul>
+            <h5>Enterprise Features</h5>
+            <ul>
+              <li><b>Multimodal Support</b>: Text, images, tables, charts processing</li>
+              <li><b>Metadata Filtering</b>: Filter results by document attributes, dates, categories</li>
+              <li><b>Reranking Models</b>: Improve retrieval relevance post-search</li>
+              <li><b>Session Management</b>: 24-hour conversation context with automatic source attribution</li>
+            </ul>
+            <h5>Integration Capabilities</h5>
+            <ul>
+              <li><b>Regional & Cross-Account</b>: Cross-region inference, multi-account data access</li>
+              <li><b>Infrastructure as Code</b>: Full AWS CDK and CloudFormation support</li>
+              <li><b>Developer Frameworks</b>: Native LangChain, CrewAI, AutoGen integration</li>
+              <li><b>MCP Protocol</b>: Standardized tool interface via stdio transport</li>
+            </ul>
+            <hr>
+            <h3>Benefits</h3>
+            <h4>⚡ Business Value Advantages</h4>
+            <ul>
+              <li><b>🚀 Zero RAG Infrastructure</b>: Skip months of custom vector database setup and chunking pipeline development</li>
+              <li><b>📋 Pre-Built Integrations</b>: 40+ enterprise data connectors eliminate custom integration work</li>
+              <li><b>🔄 Rapid Prototyping</b>: Test knowledge base concepts in hours instead of weeks</li>
+            </ul>
+            <h4>Enterprise-Ready Architecture</h4>
+            <ul>
+              <li><b>🛡️ Built-in Security</b>: IAM integration, encryption at rest/transit, audit trails included</li>
+              <li><b>🏢 Multi-Account Support</b>: Centralized knowledge bases with cross-account data ingestion</li>
+              <li><b>📊 Operational Excellence</b>: CloudWatch monitoring, Service Quotas management, infrastructure as code</li>
+            </ul>
+            <h4>Cost Optimization</h4>
+            <ul>
+              <li><b>💰 No Infrastructure Overhead</b>: Eliminate vector database administration, scaling, and maintenance costs</li>
+              <li><b>🔄 Reduced Duplicate Effort</b>: Single knowledge base serves multiple applications and teams</li>
+              <li><b>⚖️ Flexible Pricing</b>: Pay-per-use model vs fixed infrastructure costs</li>
+            </ul>
+            <h4>🔧 Technical Advantages</h4>
+            <h5>Advanced RAG Capabilities</h5>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+              <thead>
+                <tr><th>Feature</th><th>Knowledge Bases</th><th>Custom Implementation</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Dual Query Modes</td><td>Vector similarity + SQL generation built-in</td><td>Separate systems requiring integration</td></tr>
+                <tr><td>Session Context</td><td>24-hour automatic conversation memory</td><td>Custom session storage and management</td></tr>
+                <tr><td>Source Attribution</td><td>Automatic citations with visual elements</td><td>Manual citation tracking implementation</td></tr>
+                <tr><td>GraphRAG</td><td>Automatic graph generation from documents</td><td>Complex graph database setup and entity extraction</td></tr>
+                <tr><td>Cross-Modal Search</td><td>Text, images, tables searched together</td><td>Separate processing pipelines needed</td></tr>
+              </tbody>
+            </table>
+            </div>
+            <h5>Enterprise Integration Benefits</h5>
+            <ul>
+              <li><b>🔗 Kendra Investment Protection</b>: Reuse existing Kendra GenAI indexes without data migration</li>
+              <li><b>🤖 Agent Framework Ready</b>: Works seamlessly with Bedrock Agents, LangChain, CrewAI workflows</li>
+              <li><b>🌐 Multi-Cloud Strategy</b>: MCP protocol enables standardized AI tool integration across platforms</li>
+            </ul>
+            <div style="margin:1em 0 1em 0;font-size:95%"><b>Real-World Example</b>: A grocery chain's customer service system handles "Find suppliers for organic tomatoes in our Pacific Northwest stores, check current contracts, and compare pricing with market rates" by automatically querying structured vendor databases, searching contract documents, and retrieving market research—all through a single natural language interface.</div>
+            <hr>
+            <h3>Limitations & Considerations</h3>
+            <h4>🔒 Processing Constraints</h4>
+            <h5>Embedding Pipeline Limitations</h5>
+            <ul>
+              <li><b>No Pre-Existing Embeddings</b>: Cannot import embeddings created outside Bedrock—AWS always generates new ones using your chosen embedding model</li>
+              <li><b>Model Dependency</b>: Limited to Bedrock-supported embedding models (Titan, Cohere variants)</li>
+              <li><b>Chunking Strategy Constraints</b>: While customizable, cannot fundamentally alter how documents are preprocessed compared to purpose-built solutions</li>
+            </ul>
+            <h5>Structured Data Scope</h5>
+            <ul>
+              <li><b>Query Engine Limitation</b>: Redshift is the only supported query engine—no direct integration with RDS PostgreSQL, MySQL, or other databases</li>
+              <li><b>Federation Constraints</b>: Limited support for complex federated queries across multiple database systems</li>
+              <li><b>NL2SQL Accuracy</b>: Natural language to SQL conversion may struggle with highly complex schema relationships</li>
+            </ul>
+            <h4>💰 Cost & Complexity Considerations</h4>
+            <h5>Vector Storage Economics</h5>
+            <pre class="code-block" style="margin-bottom:1.2em;">
+💰 Monthly Cost Comparison (Approximate):
+• OpenSearch Serverless: ~$260 minimum (4 OCU requirement)
+• Aurora PostgreSQL Serverless: $0-$100+ (scales to zero)
+• Neptune Analytics: Variable based on graph size
+• Third-Party (Pinecone): $70+ based on usage
+            </pre>
+            <h5>Regional and Access Limitations</h5>
+            <ul>
+              <li><b>Limited Regional Availability</b>: Not available in all AWS regions—check <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-supported.html" target="_blank">current availability</a></li>
+              <li><b>Cross-Account Setup Complexity</b>: Requires careful IAM role configuration and S3 bucket policies</li>
+              <li><b>Network Requirements</b>: Some vector stores require public internet access, limiting private deployment options</li>
+            </ul>
+            <h4>⚖️ Architecture Decision Framework</h4>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+              <thead>
+                <tr><th>Use Case</th><th>Knowledge Bases ✅</th><th>Custom Solution ⚠️</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Standard Enterprise RAG</td><td>Perfect for document Q&A, policy retrieval, customer support</td><td>Unnecessary complexity and development time</td></tr>
+                <tr><td>Multi-Source Data Integration</td><td>Excellent for combining structured + unstructured data</td><td>Complex integration across different data types</td></tr>
+                <tr><td>Rapid Development</td><td>Ideal for proof-of-concepts and quick deployments</td><td>Months of infrastructure development</td></tr>
+                <tr><td>Specialized Embedding Models</td><td>Limited to Bedrock model catalog</td><td>Full control over cutting-edge models</td></tr>
+                <tr><td>High-Volume Cost Optimization</td><td>Can become expensive at massive scale</td><td>More cost-effective with custom optimization</td></tr>
+                <tr><td>Complex Query Logic</td><td>Limited customization of retrieval algorithms</td><td>Complete control over search and ranking logic</td></tr>
+                <tr><td>Regulatory Transparency</td><td>Limited visibility into retrieval decision-making</td><td>Full audit trails and explainability</td></tr>
+              </tbody>
+            </table>
+            </div>
+            <h4>🔧 Developer vs AWS Responsibility Matrix</h4>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+              <thead>
+                <tr><th>Component</th><th>👨‍💻 Developer Handles</th><th>🤖 AWS Manages</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Data Sources</td><td>• Provide documents in S3/Confluence/etc<br>• Structure data in Redshift/warehouses<br>• Configure metadata schemas<br>• Set up cross-account permissions</td><td>• Document ingestion and parsing<br>• Automatic chunking and embedding<br>• Data source connectors and sync<br>• Multimodal content extraction</td></tr>
+                <tr><td>Vector Storage</td><td>• Choose storage type and configuration<br>• Manage bring-your-own infrastructure<br>• Handle cross-account access setup<br>• Monitor storage costs and capacity</td><td>• Embedding generation and indexing<br>• Vector similarity search optimization<br>• Query performance tuning<br>• Automatic scaling (for managed options)</td></tr>
+                <tr><td>Retrieval & Generation</td><td>• Design application interfaces<br>• Configure session management<br>• Handle response formatting<br>• Implement custom filtering logic</td><td>• Semantic search execution<br>• Natural language to SQL conversion<br>• Source attribution and citations<br>• Context window management</td></tr>
+                <tr><td>Enterprise Features</td><td>• Configure Kendra GenAI index connections<br>• Set up metadata filtering schemas<br>• Customize agent integration workflows<br>• Manage MCP server configurations</td><td>• GraphRAG graph generation<br>• Cross-region inference routing<br>• Reranking and relevance optimization<br>• Session context preservation</td></tr>
+              </tbody>
+            </table>
+            </div>
+            <div style="margin:1em 0 1em 0;font-size:95%"><b>Decision Criteria</b>: Choose Knowledge Bases when you need enterprise-grade RAG capabilities with minimal infrastructure management and can work within the supported model ecosystem. Consider custom solutions when you require specialized embedding models, complex retrieval logic, or need to optimize costs at massive scale.</div>
+            <hr>
+            <h3>References</h3>
+            <ul>
+              <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-supported.html" target="_blank">Supported Regions and Models</a></li>
+              <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html" target="_blank">Knowledge Bases User Guide</a></li>
+              <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-structured-create.html" target="_blank">Structured Data Integration</a></li>
+              <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-kendra-genai-index.html" target="_blank">Kendra GenAI Index Integration</a></li>
+              <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-permissions.html" target="_blank">Cross-Account Setup Guide</a></li>
+              <li><a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_bedrock.CfnKnowledgeBase.html" target="_blank">AWS CDK Knowledge Bases Constructs</a></li>
+              <li><a href="https://awslabs.github.io/mcp/servers/bedrock-kb-retrieval-mcp-server/" target="_blank">MCP Server - AWS KB Retrieval</a></li>
+              <li><a href="https://python.langchain.com/docs/integrations/retrievers/bedrock/" target="_blank">LangChain Knowledge Base Retriever</a></li>
+              <li><a href="https://docs.crewai.com/tools/bedrockkbretriever" target="_blank">CrewAI Bedrock KB Integration</a></li>
+              <li><a href="https://aws.amazon.com/blogs/machine-learning/building-scalable-secure-and-reliable-rag-applications-using-knowledge-bases-for-amazon-bedrock/" target="_blank">Multi-Source Knowledge Bases</a></li>
+              <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-graphs.html" target="_blank">GraphRAG with Neptune Analytics</a></li>
+              <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html" target="_blank">Cross-Region Inference Setup</a></li>
+              <li><a href="https://aws.amazon.com/blogs/machine-learning/evaluate-and-improve-performance-of-amazon-bedrock-knowledge-bases/" target="_blank">Evaluation and Performance Optimization</a></li>
+            </ul>
+            <div class="section-nav-btns">
+                <button id="back-knowledge-bases">Back</button>
+                <button id="next-knowledge-bases">Next</button>
+            </div>
+        </section>
+        <!-- Section 5: Prompt Management -->
+        <section id="prompt-management" class="module-section" style="display:none">
+            <h2>Prompt Management</h2>
+            <h3>Section 5.1: Introduction to Prompt Management</h3>
+            <h4>What is Prompt Management?</h4>
+            <p><b>Prompt management is to AI applications what version control is to code</b> - a systematic approach to creating, storing, versioning, and deploying the instructions that guide LLM behavior.</p>
+            <h4>Why Prompt Management Matters in Production</h4>
+            <ul>
+              <li>🎯 <b>Consistency</b>: Prompts must behave identically across development, staging, and production environments</li>
+              <li>🔄 <b>Rapid Iteration</b>: Business teams need to refine prompts without engineering deployment cycles</li>
+              <li>♻️ <b>Reusability</b>: Well-crafted prompts become organizational assets that can be shared across teams and applications</li>
+              <li>📊 <b>Performance Tracking and Rollbacks</b>: Monitor prompt performance and quickly revert when changes cause quality degradation</li>
+            </ul>
+            <h4>Key Challenges in Production Prompt Management</h4>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+              <thead>
+                <tr><th>Challenge Type</th><th>Key Issues</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>Technical</b></td><td>Versioning complexity, environment sync, integration overhead</td></tr>
+                <tr><td><b>Business</b></td><td>Cross-functional collaboration, compliance requirements, cost control</td></tr>
+                <tr><td><b>Operational</b></td><td>Performance tracking, rollback capabilities, audit trails</td></tr>
+              </tbody>
+            </table>
+            </div>
+            <div class="callout" style="background:#f8f9fa;border-left:4px solid #3498db;padding:12px 18px;margin:18px 0;">
+              <b>🏢 Critical Insight: The Collaboration Challenge</b><br>
+              <i>Effective prompts require domain expertise. Success demands collaboration between:</i>
+              <ul style="margin:0 0 0 1.2em;">
+                <li><b>Business experts</b> (domain requirements)</li>
+                <li><b>Product teams</b> (user needs & metrics)</li>
+                <li><b>Technical teams</b> (implementation & maintenance)</li>
+              </ul>
+              <b>Prompt management is fundamentally a people and process challenge, not just a technical one.</b>
+            </div>
+            <hr>
+            <h3>Section 5.2: Bedrock Prompt Management Core Features</h3>
+            <h4>What Bedrock Prompt Management Provides</h4>
+            <p>AWS Bedrock offers <b>native prompt management</b> integrated directly into the platform, eliminating the need for external tools for basic prompt lifecycle management. Prompts are treated as first-class resources with built-in versioning, deployment, and integration capabilities.</p>
+            <h4>Core Prompt Management Features</h4>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+              <thead>
+                <tr><th>Feature</th><th>Capability</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>Template Management</b></td><td>Create reusable prompt templates with variable placeholders and structured formatting</td></tr>
+                <tr><td><b>Versioning System</b></td><td>Git-style versioning with draft/published states and version comparison</td></tr>
+                <tr><td><b>Model Configuration Bundling</b></td><td>Store model ID, parameters (temperature, max tokens), and prompt together as a unit</td></tr>
+                <tr><td><b>Deployment Controls</b></td><td>Publish specific versions, create aliases for environments (dev/prod), enable rollbacks</td></tr>
+                <tr><td><b>Integration Ready</b></td><td>Native integration with Bedrock Agents, SDK access, compatible with LangChain applications</td></tr>
+              </tbody>
+            </table>
+            </div>
+            <h4>Key Advantages of Native Integration</h4>
+            <ul>
+              <li>🏗️ <b>Infrastructure Simplicity</b>: No additional services to manage or maintain</li>
+              <li>🔐 <b>Security Alignment</b>: Inherits AWS IAM, VPC, and compliance controls automatically</li>
+              <li>⚡ <b>Performance</b>: Direct integration reduces latency and API overhead</li>
+              <li>💰 <b>Cost Efficiency</b>: No separate licensing or infrastructure costs for prompt management</li>
+              <li>👥 <b>Collaborative Interface</b>: SageMaker Unified Studio provides SSO-enabled web interface for teams to collaboratively create and evaluate prompts without deep AWS console knowledge</li>
+            </ul>
+            <div class="callout" style="background:#f8f9fa;border-left:4px solid #3498db;padding:12px 18px;margin:18px 0;">
+              <b>🎯 Bedrock's Unique Approach: Configuration as Code</b><br>
+              <i>Bedrock bundles the entire LLM configuration (model selection, parameters, and prompt) into a single versioned unit. This means when you update a prompt version, you can also update the model or adjust temperature settings simultaneously.</i><br>
+              <b>This "configuration as code" approach ensures complete reproducibility</b> - you know exactly which model, parameters, and prompt generated any specific output.
+            </div>
+            <h4>Integration Capabilities</h4>
+            <ul>
+              <li>⚡ <b>Direct API Integration</b>: Pass the prompt ARN directly in the model ID parameter with prompt variables as separate parameters. Amazon Bedrock loads prompt versions without latency overheads, eliminating manual retrieval and formatting.</li>
+              <li>🔗 <b>Open Source Framework Compatibility</b>: Integrate with LangChain and LlamaIndex using the <code>get_prompt</code> SDK method to retrieve prompts and incorporate them into existing workflows.</li>
+            </ul>
+            <hr>
+            <h3>Section 5.3: Implementation Best Practices</h3>
+            <h4>Prompt Versioning & Governance</h4>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+              <thead>
+                <tr><th>Practice</th><th>Implementation</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>Semantic Versioning</b></td><td>Use major.minor.patch format based on impact (breaking/feature/fix)</td></tr>
+                <tr><td><b>Prompt Templates</b></td><td>Use variables/placeholders (e.g., <code>{{variable_name}}</code>) for reusable, maintainable prompts</td></tr>
+                <tr><td><b>Structured Format</b></td><td>Use XML tags or clear delimiters to separate instructions, context, and examples</td></tr>
+                <tr><td><b>Mandatory Testing</b></td><td>Test all prompt changes in staging before production deployment</td></tr>
+                <tr><td><b>Change Documentation</b></td><td>Document expected impact and validation criteria for each version</td></tr>
+              </tbody>
+            </table>
+            </div>
+            <h4>Team Collaboration Workflows</h4>
+            <ul>
+              <li>🏢 <b>Role Definition</b>: Domain experts define requirements → Technical teams implement → Product teams validate</li>
+              <li>🔄 <b>Staging Pipeline</b>: All prompt changes flow through development → staging → production environments</li>
+              <li>✅ <b>Approval Gates</b>: Implement review and approval workflows before production deployment</li>
+            </ul>
+            <h4>Monitoring & Rollback Procedures</h4>
+            <ul>
+              <li>📊 <b>Performance Tracking</b>: Monitor prompt effectiveness, response quality, and cost impact continuously</li>
+              <li>🚨 <b>Automated Alerts</b>: Set up alerts for quality degradation or unexpected cost increases</li>
+              <li>⏪ <b>Rollback Strategy</b>: Maintain ability to quickly revert to previous working versions</li>
+            </ul>
+            <div class="callout" style="background:#f8f9fa;border-left:4px solid #3498db;padding:12px 18px;margin:18px 0;">
+              <b>🎯 Critical Success Factor</b><br>
+              <i>Start with governance, not technology. The most successful prompt management implementations establish clear workflows for collaboration between business experts, product teams, and technical teams before choosing tools.</i><br>
+              <b>Technology enables the process, but process drives the success.</b>
+            </div>
+            <hr>
+            <h3>Section 5.4: Open Source Alternatives & Production Decision Framework</h3>
+            <h4>Enterprise Prompt Management Options</h4>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+              <thead>
+                <tr><th>Tool</th><th>License</th><th>UI Access</th><th>Key Strengths</th><th>Best For</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>AWS Bedrock</b></td><td>Proprietary</td><td>SageMaker Unified Studio (SSO)</td><td>Configuration as code, native Bedrock Agents integration, ARN-based invocation</td><td>AWS-first teams needing tight Bedrock ecosystem integration</td></tr>
+                <tr><td><b>SageMaker Managed MLFlow</b></td><td>Apache 2.0</td><td>MLFlow UI via SageMaker Studio</td><td>Git-style versioning, prompt engineering UI, full MLFlow ecosystem</td><td>Teams using SageMaker with ML experimentation workflows</td></tr>
+                <tr><td><b>LangFuse (Self-hosted)</b></td><td>MIT Core</td><td>Web interface (self-hosted)</td><td>Strong collaboration, LLM observability, customization flexibility</td><td>Multi-cloud teams needing extensive customization</td></tr>
+              </tbody>
+            </table>
+            </div>
+            <h4>Production Decision Framework</h4>
+            <div style="overflow-x:auto;">
+            <table class="table-simple">
+              <thead>
+                <tr><th>Choose <b>AWS Bedrock</b> When</th><th>Choose <b>SageMaker MLFlow</b> When</th><th>Choose <b>LangFuse</b> When</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>✅ Primary focus on Bedrock models/agents</td><td>✅ Heavy SageMaker usage for ML workflows</td><td>✅ Multi-cloud or cloud-agnostic needs</td></tr>
+                <tr><td>✅ Need enterprise SSO collaboration</td><td>✅ Existing MLFlow investment/expertise</td><td>✅ Require extensive UI customization</td></tr>
+                <tr><td>✅ Want zero operational overhead</td><td>✅ Need Git-style prompt versioning</td><td>✅ Budget constraints (self-hosted)</td></tr>
+                <tr><td>✅ Configuration as code requirements</td><td>✅ Prompt engineering experimentation focus</td><td>✅ Integration with non-AWS ML tools</td></tr>
+                <tr><td>✅ ARN-based direct invocation needed</td><td>✅ Want managed service with MLFlow flexibility</td><td>✅ Strong open source preference</td></tr>
+              </tbody>
+            </table>
+            </div>
+            <h4>Key Considerations</h4>
+            <ul>
+              <li>🏗️ <b>Infrastructure</b>: Bedrock = zero ops; SageMaker MLFlow = managed service; LangFuse = self-hosted deployment</li>
+              <li>💰 <b>Cost</b>: Bedrock = pay-per-use; SageMaker MLFlow = managed service fees; LangFuse = hosting costs + operational effort</li>
+              <li>🔧 <b>Integration</b>: Bedrock = native AWS; SageMaker MLFlow = SageMaker Studio + MLFlow ecosystem; LangFuse = flexible but requires setup</li>
+              <li>👥 <b>Collaboration</b>: All support team workflows; Bedrock offers simplest business user experience; MLFlow provides data science focus</li>
+              <li>🎯 <b>Specialization</b>: Bedrock for LLM apps; SageMaker MLFlow for ML experimentation; LangFuse for LLM observability</li>
+            </ul>
+            <div class="callout" style="background:#f8f9fa;border-left:4px solid #3498db;padding:12px 18px;margin:18px 0;">
+              <b>🎯 Bottom Line</b><br>
+              <i>For pure LLM applications with Bedrock models, choose Bedrock Prompt Management for seamless integration and enterprise collaboration.<br><br>
+              For teams using SageMaker for ML workflows, SageMaker Managed MLFlow provides the best of both worlds - MLFlow flexibility with AWS operational simplicity.<br><br>
+              For multi-cloud teams or those requiring extensive customization, self-hosted LangFuse offers maximum flexibility and control.</i>
+            </div>
+            <div class="section-nav-btns">
+                <button id="back-prompt-management">Back</button>
+                <button id="next-prompt-management">Next</button>
+            </div>
+        </section>
+         <!-- Section 5: Evaluations -->
+         <section id="evaluations" class="module-section" style="display:none">
+            <h2>Evaluations</h2>
+            <p><em>Coming soon...</em></p>
+        </section>
+        <!-- Section 7: Guardrails -->
+        <section id="guardrails" class="module-section" style="display:none">
+            <h2>Guardrails</h2>
+            <p><em>Coming soon...</em></p>
+        </section>
+        <!-- Section 8: Quiz -->
+        <section id="quiz-section" class="module-section" style="display:none">
+            <h2>Quiz</h2>
+            <p><em>Coming soon...</em></p>
+        </section>
+    </div>
+    <script src="../assets/js/course-nav.js"></script>
+    <script src="../assets/js/module-sidebar.js"></script>
+    <script src="../assets/js/quiz.js"></script>
+    <script src="../assets/js/module-nav-bar.js"></script>
+</body>
+</html>  

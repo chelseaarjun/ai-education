@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="course-nav-dropdown">
                     <button class="course-nav-dropdown-btn">Part 2: Building AI Applications</button>
                     <div class="course-nav-dropdown-content">
-                        <a href="#" class="course-nav-dropdown-item coming-soon">AWS Bedrock <span>Coming Soon</span></a>
+                        <a href="${rootPath}pages/aws-bedrock.html" class="course-nav-dropdown-item available">AWS Bedrock</a>
                         <a href="${rootPath}pages/open-source.html" class="course-nav-dropdown-item available">Open Source Tools & Frameworks</a>
                         <a href="#" class="course-nav-dropdown-item coming-soon">LLMOps <span>Coming Soon</span></a>
                         <a href="#" class="course-nav-dropdown-item coming-soon">Prompt-Driven Dev <span>Coming Soon</span></a>

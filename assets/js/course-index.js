@@ -107,6 +107,18 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             
             // Back to home link is now added directly in the HTML
+        } else if (currentPage === 'aws-bedrock.html') {
+            indexTitle = 'AWS Bedrock Services';
+            indexContent = `
+                <li><a href="#introduction" class="nav-link">1. Introduction</a></li>
+                <li><a href="#model-access" class="nav-link">2. Model Access</a></li>
+                <li><a href="#bedrock-agents" class="nav-link">3. Bedrock Agents</a></li>
+                <li><a href="#knowledge-bases" class="nav-link">4. Knowledge Bases</a></li>
+                <li><a href="#evaluations" class="nav-link">5. Evaluations</a></li>
+                <li><a href="#prompt-management" class="nav-link">6. Prompt Management</a></li>
+                <li><a href="#guardrails" class="nav-link">7. Guardrails</a></li>
+                <li><a href="#quiz-section" class="nav-link">8. Quiz</a></li>
+            `;
         }
         
         // Create the index HTML
