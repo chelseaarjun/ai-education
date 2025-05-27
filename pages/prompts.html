@@ -364,11 +364,19 @@
                 <li><strong>Consistency</strong>: Systematic prompting leads to more predictable results</li>
                 <li><strong>Capability Unlocking</strong>: Many advanced AI capabilities are accessible only through proper prompting</li>
             </ul>
+            <div class="callout" style="background: #f8fafd; border-left: 4px solid #4a6fa5; margin: 1em 0; padding: 0.8em 1em;">
+                <b>Tip:</b> For most use cases, prompt engineering is faster, cheaper, and more transparent than fine-tuning. Only consider fine-tuning if prompt engineering cannot achieve your success criteria, or if you need to adapt the model to highly specialized data.
+            </div>
             <h3>1.3 The Prompt Engineering Mindset</h3>
+            Good prompt engineers don't just state what they want; they anticipate what the model will need to succeed.
             Successful prompt engineers think from both perspectives:
             <ul>
-                <li>As the <strong>human</strong>: What exact information or action do I need?</li>
-                <li>As the <strong>AI model</strong>: What instructions and context will help it understand my intent?</li>
+                <li>
+                    <strong>From the human's perspective:</strong> What is my goal? What outcome am I trying to achieve?
+                  </li>
+                <li>
+                    <strong>From the model's perspective:</strong> What information, context, and instructions will help the model understand my intent and reason through the steps needed to achieve that goal?
+                </li>
             </ul>
             <p>This dual perspective helps bridge the gap between human expectations and how AI systems actually process information.</p>
             <h3>1.4 Anatomy of an Effective Prompt</h3>
@@ -385,11 +393,11 @@
                     <text x="130" y="185" fill="#6b4ca5" font-size="16" font-weight="bold">CONTEXT</text>
                     <text x="130" y="205" fill="#333" font-size="14">Background information the model needs</text>
                     <rect x="120" y="230" width="560" height="60" fill="#f9e9f0" stroke="#a54c6b" stroke-width="2" rx="5" ry="5"></rect>
-                    <text x="130" y="255" fill="#a54c6b" font-size="16" font-weight="bold">INPUT</text>
+                    <text x="130" y="255" fill="#a54c6b" font-size="16" font-weight="bold">INPUT DATA</text>
                     <text x="130" y="275" fill="#333" font-size="14">Actual data to be processed</text>
                     <rect x="120" y="300" width="560" height="60" fill="#e9f9f0" stroke="#4ca56b" stroke-width="2" rx="5" ry="5"></rect>
-                    <text x="130" y="325" fill="#4ca56b" font-size="16" font-weight="bold">OUTPUT FORMAT</text>
-                    <text x="130" y="345" fill="#333" font-size="14">Specification of how responses should be structured</text>
+                    <text x="130" y="325" fill="#4ca56b" font-size="16" font-weight="bold">INPUT/OUTPUT FORMAT</text>
+                    <text x="130" y="345" fill="#333" font-size="14">Specification of how input are provided and responses should be structured</text>
                 </svg>
             </div>
             <p>An effective prompt consists of input data to be processed and three essential components that work together to guide the model toward producing desired outputs:</p>
@@ -404,7 +412,7 @@
 
 [BACKGROUND CONTEXT]: This feedback is from a user of our mobile banking app who has been a customer for 3 years and primarily uses the deposit and transfer features.
 
-[INPUT]: "The app keeps crashing when I try to deposit checks using my camera. Otherwise it's pretty good and I like the new transfer feature."
+[INPUT DATA]: "The app keeps crashing when I try to deposit checks using my camera. Otherwise it's pretty good and I like the new transfer feature."
 
 [OUTPUT STRUCTURE]: Provide a 2-sentence summary followed by bullet points for key issues and one positive aspect.
             </div>
@@ -429,6 +437,11 @@
         <!-- Section 2: Writing Effective Prompts -->
         <section id="writing-effective-prompts">
             <h2>2. Writing CRISP Prompts</h2>
+            <div class="callout" style="background: #f8f9fa; border-left: 4px solid #43B97F; padding: 12px 18px; margin: 18px 0;">
+              <b>Best Practice:</b> Before you start prompt engineering, define what success looks like for your use case. Write down specific, measurable criteria (e.g., "≥90% accuracy on a test set" or "responses rated 4/5 or higher for helpfulness"). Develop a set of test cases to evaluate your prompts against these criteria as you iterate.
+              <br>
+              <a href="https://docs.anthropic.com/en/docs/test-and-evaluate/define-success" target="_blank">See Anthropic's guide to defining success criteria</a>
+            </div>
             <p>Crafting effective prompts is both an art and a science, requiring understanding of how LLMs interpret and respond to different inputs. In this section, we'll explore the CRISP framework that provides a systematic approach to prompt design, along with key challenges that even experienced prompt engineers must navigate to achieve reliable, high-quality results.</p>
             
             <h3>2.1 Core Prompting Principles: The CRISP Framework</h3>
@@ -485,7 +498,9 @@
                 <p><strong>P - Progressive Refinement</strong></p>
                 <p>Start simple and iterate by testing and evaluating until desired accuracy and performance are achieved.</p>
             </div>
-
+            <div class="callout" style="background: #fffbe6; border-left: 4px solid #f1c40f; padding: 10px 16px; margin: 12px 0 18px 0;">
+                <b>Note:</b> Not every problem is best solved by prompt engineering. If you're struggling with latency, cost, or model limitations, consider switching models or adjusting system parameters instead of endlessly refining your prompt.
+            </div>
             <div class="example">
                 <p><strong>Example: Applying the CRISP Framework</strong></p>
                 <div class="prompt-example">
@@ -564,8 +579,10 @@
                 "Report on Acme Corp's board members. Only share information you're confident about and explicitly indicate uncertainty rather than speculating."</p>
             </div>
             <p><strong>Reference:</strong> <a href="https://arxiv.org/abs/2109.07958" target="_blank">Lin et al. (2022). "TruthfulQA: Measuring How Models Mimic Human Falsehoods." Association for Computational Linguistics.</a></p>
-            <p><strong>Important Note:</strong> For mission-critical applications where preventing hallucinations is essential, prompt design should be combined with retrieval-augmented generation (RAG), structured output formats, verification steps, and human review processes.</p>
 
+            <div class="callout" style="background: #fffbe6; border-left: 4px solid #f1c40f; padding: 10px 16px; margin: 12px 0 18px 0;">
+                <p><strong>Important Note:</strong> For mission-critical applications where preventing hallucinations is essential, prompt design should be combined with retrieval-augmented generation (RAG), structured output formats, verification steps, and human review processes.</p>
+            </div>
             <div class="note">
                 <p>With practice, you'll develop an intuition for which approaches work best in different situations, allowing you to effectively harness the power of LLM models for your applications.</p>
             </div>
@@ -641,17 +658,26 @@
             </div>
 
             <h4>3.1.4 Few-Shot Prompting</h4>
-            <p><strong>What it is:</strong> Providing examples of the desired input-output pairs before asking the model to perform the task.</p>
+            <p><strong>What it is:</strong> Providing examples of the desired input-output pairs before asking the model to perform the task. This helps the model learn the format, style, or reasoning process you want it to follow.</p>
 
             <p><strong>When to use it:</strong></p>
             <ul>
-                <li>When the format or style of response is difficult to explain but easy to demonstrate</li>
-                <li>When the model is consistently misunderstanding a nuanced task</li>
-                <li>For specialized domain tasks where showing examples clarifies expectations</li>
+                <li>When the output format or style is hard to describe but easy to demonstrate</li>
+                <li>When the model misunderstands a nuanced or domain-specific task</li>
+                <li>When you want to teach the model a specific reasoning process (e.g., chain-of-thought)</li>
+                <li>When the model's initial (zero-shot) output is inconsistent or not in the desired style</li>
             </ul>
 
-            <div class="note">
-                <p><strong>Important note:</strong> With recent reasoning-focused models, start with a zero-shot approach and only add examples if the model's initial performance is inadequate.</p>
+            <div class="callout" style="background: #fffbe6; border-left: 4px solid #f1c40f; padding: 10px 16px; margin: 12px 0 18px 0;">
+                <p>
+                    <strong>Important note:</strong> For modern reasoning-focused models (like Claude), start with a zero-shot approach—give only instructions and see how the model performs. 
+                    Add examples (few-shot) only if the initial output is inadequate or the task is highly nuanced.
+                    <br>
+                    Use XML tags (such as <code>&lt;example&gt;</code>, <code>&lt;thinking&gt;</code>, or <code>&lt;scratchpad&gt;</code>) to clearly mark examples and reasoning steps.
+                    <br>
+                    Don’t include too many or overly specific examples, or the model may mimic them instead of generalizing.
+                    <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank">See Anthropic's prompt engineering overview</a>
+                  </p>
             </div>
 
             <p><strong>Reference:</strong> <a href="https://arxiv.org/abs/2302.00093" target="_blank">Li et al. (2023). "Large Language Models Can Be Easily Distracted by Irrelevant Context." Microsoft Research & University of Washington.</a></p>
@@ -659,25 +685,26 @@
             <div class="example">
                 <div class="prompt-example">
                     Classify the following location factors as PRIMARY, SECONDARY, or TERTIARY for grocery store site selection:
-
-                    Example 1:
+                    <code>
+                    &lt;example&gt;
                     Factor: "Population density within 3-mile radius"
                     Classification: PRIMARY
                     Reasoning: Direct correlation with customer base size
-
-                    Example 2:  
+                    &lt;/example&gt;<br>
+                    &lt;example&gt;
                     Factor: "Presence of complementary businesses (pharmacy, bank)"
                     Classification: SECONDARY
                     Reasoning: Drives foot traffic but not essential
-
-                    Example 3:
+                    &lt;/example&gt;<br>
+                    &lt;example&gt;
                     Factor: "Architectural style of surrounding buildings"
                     Classification: TERTIARY
                     Reasoning: Aesthetic consideration with minimal business impact
-
+                    &lt;/example&gt;<br>
                     Now classify:
                     Factor: "Average household income within 5-mile radius"
                     Classification:
+                    </code>
                 </div>
             </div>
 
@@ -704,6 +731,11 @@
                     <li>Providing examples that demonstrate the reasoning process (few-shot approach)</li>
                 </ol>
                 <p>Modern reasoning-focused models often perform chain-of-thought reasoning implicitly, but explicitly requesting step-by-step reasoning remains valuable for auditing the model's thought process and identifying potential errors.</p>
+            </div>
+            <div class="callout" style="background: #f8fafd; border-left: 4px solid #4a6fa5; margin: 1em 0; padding: 0.8em 1em;">
+              <b>Tip: Using Extended Thinking</b><br>
+              For complex or multi-step tasks, enable extended thinking (if your model supports it) and start with high-level instructions like "Think through this problem in detail and show your reasoning." If results are inconsistent, add more step-by-step guidance or few-shot examples using tags like <code>&lt;thinking&gt;</code>. You can also ask the model to check its own work or run test cases before finalizing its answer.<br>
+              <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/extended-thinking-tips" target="_blank">See Anthropic's extended thinking tips</a>
             </div>
 
             <p><strong>Reference:</strong> <a href="https://arxiv.org/abs/2206.07682" target="_blank">Wei et al. (2022). "Emergent Abilities of Large Language Models." Transactions on Machine Learning Research.</a></p>
@@ -924,6 +956,8 @@
                 <li><a href="https://www.promptingguide.ai/" target="_blank">Prompt Engineering Guide by DAIR.AI</a></li>
                 <li><a href="https://python.langchain.com/docs/concepts/prompt_templates/" target="_blank">LangChain Prompt Templates</a></li>
                 <li><a href="https://www.kaggle.com/code/kaggle/prompt-engineering-for-developers-course" target="_blank">Kaggle Prompt Engineering for Developers Course</a></li>
+                <li><a href="https://docs.anthropic.com/en/docs/test-and-evaluate/develop-tests" target="_blank">Anthropic: Develop Test Cases for LLM Applications</a></li>
+                <li><a href="https://docs.anthropic.com/en/docs/test-and-evaluate/define-success" target="_blank">Anthropic: Define Success Criteria for LLM Applications</a></li>
             </ul>
             <h3>5.2 Recommended Tools and Libraries</h3>
             <ul>
