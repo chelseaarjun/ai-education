@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Code & End-to-End AI Agent</title>
+    <script data-goatcounter="https://ai-foundation-course.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <link rel="stylesheet" href="../assets/css/course-nav.css">
+    <link rel="stylesheet" href="../assets/css/module-nav-bar.css">
+    <link rel="stylesheet" href="../assets/css/module-sidebar.css">
+    <link rel="stylesheet" href="../assets/css/code-examples.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/course-index.css">
+    <link rel="stylesheet" href="../assets/css/mobile-fixes.css">
+    <link rel="stylesheet" href="../assets/css/introduction-fix.css">
+    <link rel="stylesheet" href="../assets/css/quiz.css">
+</head>
+<body>
+    <nav class="module-nav">
+        <button class="module-nav-btn" data-section="introduction">Introduction</button>
+        <button class="module-nav-btn" data-section="core-principles">Core Principles</button>
+        <button class="module-nav-btn" data-section="workflow">Prompt-Driven Workflow</button>
+        <button class="module-nav-btn" data-section="case-study">Case Study</button>
+        <button class="module-nav-btn" data-section="best-practices">Best Practices</button>
+        <button class="module-nav-btn" data-section="pitfalls">Pitfalls & Solutions</button>
+        <button class="module-nav-btn" data-section="capstone">Capstone Project</button>
+        <button class="module-nav-btn" data-section="resources">Resources</button>
+    </nav>
+    <nav class="module-sidebar"></nav>
+    <div class="content-inner">
+        <!-- Section: Introduction -->
+        <section id="introduction" class="module-section">
+            <div class="course-description">
+                <h2 class="module-title">Module: Vibe Code & End-to-End AI Agent</h2>
+                <h3>Learning Objectives</h3>
+                <ul>
+                    <li>Understand the principles of prompt-driven development methodology</li>
+                    <li>Learn how to collaborate effectively with AI coding assistants</li>
+                    <li>Master the art of breaking complex projects into AI-manageable tasks</li>
+                    <li>Develop skills in requirements translation for AI implementation</li>
+                    <li>Apply systematic approaches to building production-grade applications with AI assistance</li>
+                </ul>
+                <h3>What is Prompt-Driven Development?</h3>
+                <p><b>Prompt-driven development</b> (also known as "vibe coding") is a modern software development methodology where developers collaborate with AI coding assistants to build applications through natural language instructions and iterative refinement.</p>
+                <p>Unlike traditional development where you write every line of code manually, prompt-driven development leverages AI to:</p>
+                <ul>
+                    <li>Generate boilerplate and infrastructure code</li>
+                    <li>Implement business logic from specifications</li>
+                    <li>Create comprehensive test suites</li>
+                    <li>Build user interfaces and integrations</li>
+                    <li>Provide architectural guidance and best practices</li>
+                </ul>
+            </div>
+            <div class="section-nav-btns">
+                <button id="back-introduction" disabled>Back</button>
+                <button id="next-introduction">Next</button>
+            </div>
+        </section>
+        <!-- Section: Core Principles -->
+        <section id="core-principles" class="module-section" style="display:none">
+            <h2>Core Principles</h2>
+            <h3>1. Specification-First Approach</h3>
+            <p>Begin every project with comprehensive requirements and technical specifications that serve as the "source of truth" for AI collaboration.</p>
+            <pre class="code-block">## Business Requirements
+- What the system should accomplish
+- Success criteria and constraints
+- Target users and use cases
+
+## Technical Architecture  
+- System components and data flow
+- Technology stack decisions
+- Integration requirements
+
+## Implementation Details
+- API specifications
+- Database schemas
+- Security requirements
+</pre>
+            <h3>2. Progressive Decomposition</h3>
+            <p>Break complex projects into manageable phases that AI can implement incrementally.</p>
+            <ul>
+                <li><b>Phase 1</b>: Core infrastructure and foundations</li>
+                <li><b>Phase 2</b>: Data processing and storage</li>
+                <li><b>Phase 3</b>: Business logic and services</li>
+                <li><b>Phase 4</b>: User interfaces and integrations</li>
+                <li><b>Phase 5</b>: Testing, optimization, and deployment</li>
+            </ul>
+            <h3>3. Context-Rich Communication</h3>
+            <p>Provide AI assistants with comprehensive context about your project, preferences, and constraints.</p>
+            <ul>
+                <li>Project specifications and requirements</li>
+                <li>Code samples and patterns to follow</li>
+                <li>Technology constraints and preferences</li>
+                <li>Performance and cost requirements</li>
+                <li>Integration needs and dependencies</li>
+            </ul>
+            <div class="section-nav-btns">
+                <button id="back-core-principles">Back</button>
+                <button id="next-core-principles">Next</button>
+            </div>
+        </section>
+        <!-- Section: Prompt-Driven Workflow -->
+        <section id="workflow" class="module-section" style="display:none">
+            <h2>The Prompt-Driven Development Workflow</h2>
+            <h3>Stage 1: Requirements Engineering with AI</h3>
+            <p><b>Goal</b>: Translate business needs into technical specifications through AI-assisted analysis.</p>
+            <ol>
+                <li><b>Initial Concept Discussion</b>: Present your project idea to the AI</li>
+                <li><b>Requirements Clarification</b>: Allow AI to ask clarifying questions</li>
+                <li><b>Technical Architecture Design</b>: Collaborate on system design</li>
+                <li><b>Specification Documentation</b>: Create comprehensive technical specs</li>
+            </ol>
+            <pre class="code-block">Human: "I want to build a chatbot for my educational website..."
+
+AI: "Before we design the technical solution, let me understand:
+- What type of questions should the chatbot handle?
+- How should it integrate with your existing website?
+- What are your cost and performance constraints?
+- Do you need user authentication or session management?"
+</pre>
+            <h3>Stage 2: Project Structure and Setup</h3>
+            <ul>
+                <li>Establish project directory structure</li>
+                <li>Configure development tools and environments</li>
+                <li>Create context files for AI reference</li>
+                <li>Set up version control and documentation</li>
+            </ul>
+            <pre class="code-block">Create a project structure for [project type] that includes:
+- Clear separation of concerns
+- Comprehensive documentation
+- Context files for AI development
+- Deployment automation scripts
+</pre>
+            <h3>Stage 3: Iterative Implementation</h3>
+            <p><b>Interactive Prompting</b> (Recommended for complex features):</p>
+            <pre class="code-block">I want to implement [feature]. Before coding, please ask me about:
+- Architecture preferences and constraints
+- Integration requirements
+- Error handling strategies
+- Performance considerations
+
+Then implement the solution based on my responses.
+</pre>
+            <p><b>Direct Prompting</b> (For well-defined requirements):</p>
+            <pre class="code-block">Based on the specifications in @project-specs.md, implement:
+- [Specific component or feature]
+- Include comprehensive error handling
+- Follow the patterns established in @existing-code
+- Add appropriate tests and documentation
+</pre>
+            <h4>Best Practices for AI Collaboration</h4>
+            <ul>
+                <li>Reference context files in your prompts</li>
+                <li>Specify quality requirements (error handling, logging, tests)</li>
+                <li>Request explanations for architectural decisions</li>
+                <li>Iterate and refine based on feedback</li>
+            </ul>
+            <h3>Stage 4: Testing and Quality Assurance</h3>
+            <ul>
+                <li>Generate comprehensive test suites</li>
+                <li>Create performance benchmarks</li>
+                <li>Build integration and end-to-end tests</li>
+                <li>Develop monitoring and alerting systems</li>
+            </ul>
+            <pre class="code-block">Create a comprehensive test suite for @user-service.py that includes:
+- Unit tests for all public methods
+- Integration tests for database operations
+- Mock tests for external API calls
+- Performance tests for critical paths
+</pre>
+            <h3>Stage 5: Deployment and Operations</h3>
+            <ul>
+                <li>Infrastructure as code development</li>
+                <li>Deployment automation scripts</li>
+                <li>Monitoring and alerting setup</li>
+                <li>Documentation and runbooks</li>
+            </ul>
+            <h3>Technology-Agnostic Implementation</h3>
+            <ul>
+                <li><b>AWS</b>: Bedrock, Lambda, RDS, CloudFormation</li>
+                <li><b>Azure</b>: Cognitive Services, Functions, SQL Database, ARM templates</li>
+                <li><b>Google Cloud</b>: Vertex AI, Cloud Functions, Cloud SQL, Deployment Manager</li>
+                <li><b>Self-hosted</b>: Open source models, Docker, Kubernetes</li>
+            </ul>
+            <h4>AI Coding Assistants</h4>
+            <ul>
+                <li>Cursor: Integrated development environment with AI</li>
+                <li>GitHub Copilot: Code completion and generation</li>
+                <li>Claude: Conversational AI for planning and implementation</li>
+                <li>ChatGPT: General-purpose AI assistance</li>
+                <li>Local Models: Self-hosted alternatives for privacy</li>
+            </ul>
+            <h4>Programming Languages and Frameworks</h4>
+            <pre class="code-block"># Python Example
+"Create a FastAPI service that handles user authentication..."
+
+# JavaScript Example  
+"Build a React component for the chat interface..."
+
+# Infrastructure Example
+"Generate Terraform configuration for the database layer..."
+</pre>
+            <div class="section-nav-btns">
+                <button id="back-workflow">Back</button>
+                <button id="next-workflow">Next</button>
+            </div>
+        </section>
+        <!-- Section: Case Study -->
+        <section id="case-study" class="module-section" style="display:none">
+            <h2>Case Study: Educational Chatbot</h2>
+            <h3>Initial Requirements Gathering</h3>
+            <blockquote>"I want to create a chatbot for my course website that helps students navigate course content."</blockquote>
+            <ul>
+                <li>Content scope and question types</li>
+                <li>Integration requirements</li>
+                <li>Performance and cost constraints</li>
+                <li>User experience expectations</li>
+            </ul>
+            <h3>Collaborative Specification Development</h3>
+            <ul>
+                <li><b>Business Requirements</b>: Student support, content navigation, reference recommendations</li>
+                <li><b>Technical Architecture</b>: Vector database, LLM integration, popup widget</li>
+                <li><b>Implementation Plan</b>: Phase-by-phase development approach</li>
+                <li><b>Success Criteria</b>: Response accuracy, performance, cost control</li>
+            </ul>
+            <h3>Prompt Strategy Development</h3>
+            <p>We create two types of prompts for each development phase:</p>
+            <p><b>Interactive Prompts</b> for complex decisions:</p>
+            <pre class="code-block">I want to set up the infrastructure. Before implementing, ask me about:
+- Cloud provider preferences
+- Cost optimization strategies  
+- Security requirements
+- Monitoring needs
+</pre>
+            <p><b>Direct Prompts</b> for clear requirements:</p>
+            <pre class="code-block">Based on @specifications.md, create the vector database service that:
+- Stores course content embeddings
+- Performs similarity search
+- Handles concurrent queries
+- Includes proper error handling
+</pre>
+            <h3>Incremental Development</h3>
+            <ol>
+                <li>Infrastructure: Database, APIs, monitoring</li>
+                <li>Data Processing: Content extraction, embeddings</li>
+                <li>Core Services: Search, session management, LLM integration</li>
+                <li>User Interface: Chat widget, responsive design</li>
+                <li>Deployment: Automation, monitoring, maintenance</li>
+            </ol>
+            <div class="section-nav-btns">
+                <button id="back-case-study">Back</button>
+                <button id="next-case-study">Next</button>
+            </div>
+        </section>
+        <!-- Section: Best Practices -->
+        <section id="best-practices" class="module-section" style="display:none">
+            <h2>Best Practices for Prompt-Driven Development</h2>
+            <ol>
+                <li><b>Start with Clear Context</b>
+                    <ul>
+                        <li>Always provide comprehensive project specifications</li>
+                        <li>Reference existing code and patterns</li>
+                        <li>Explain constraints and preferences</li>
+                        <li>Share relevant documentation</li>
+                    </ul>
+                </li>
+                <li><b>Use Iterative Refinement</b>
+                    <ul>
+                        <li>Build and test incrementally</li>
+                        <li>Refine requirements based on AI feedback</li>
+                        <li>Validate assumptions through implementation</li>
+                        <li>Adjust specifications as you learn</li>
+                    </ul>
+                </li>
+                <li><b>Maintain Quality Standards</b>
+                    <ul>
+                        <li>Request comprehensive error handling</li>
+                        <li>Ask for testing and documentation</li>
+                        <li>Specify performance requirements</li>
+                        <li>Require security best practices</li>
+                    </ul>
+                </li>
+                <li><b>Leverage AI Strengths</b>
+                    <ul>
+                        <li>Use AI for boilerplate and infrastructure code</li>
+                        <li>Get architectural guidance and best practices</li>
+                        <li>Generate comprehensive test suites</li>
+                        <li>Create documentation and deployment scripts</li>
+                    </ul>
+                </li>
+                <li><b>Understand AI Limitations</b>
+                    <ul>
+                        <li>Verify complex business logic</li>
+                        <li>Test edge cases thoroughly</li>
+                        <li>Review security implementations</li>
+                        <li>Validate performance characteristics</li>
+                    </ul>
+                </li>
+            </ol>
+            <div class="section-nav-btns">
+                <button id="back-best-practices">Back</button>
+                <button id="next-best-practices">Next</button>
+            </div>
+        </section>
+        <!-- Section: Pitfalls & Solutions -->
+        <section id="pitfalls" class="module-section" style="display:none">
+            <h2>Common Pitfalls and Solutions</h2>
+            <h3>Pitfall 1: Vague Requirements</h3>
+            <p><b>Problem</b>: AI generates code that doesn't meet your needs</p>
+            <p><b>Solution</b>: Provide detailed specifications and context</p>
+            <h3>Pitfall 2: Monolithic Requests</h3>
+            <p><b>Problem</b>: Asking for entire systems at once</p>
+            <p><b>Solution</b>: Break requests into manageable components</p>
+            <h3>Pitfall 3: Ignoring Quality Requirements</h3>
+            <p><b>Problem</b>: Generated code lacks error handling or tests</p>
+            <p><b>Solution</b>: Always specify quality and testing requirements</p>
+            <h3>Pitfall 4: Poor Context Management</h3>
+            <p><b>Problem</b>: AI loses track of project requirements</p>
+            <p><b>Solution</b>: Use context files and reference previous work</p>
+            <div class="section-nav-btns">
+                <button id="back-pitfalls">Back</button>
+                <button id="next-pitfalls">Next</button>
+            </div>
+        </section>
+        <!-- Section: Capstone Project -->
+        <section id="capstone" class="module-section" style="display:none">
+            <h2>Capstone Project: Store Intelligence Assistant</h2>
+            <h3>Project Overview</h3>
+            <p>Your capstone project involves building a <b>Store Intelligence Assistant</b> - a conversational AI agent that helps regional managers analyze store performance, lookup policies, and access operational information across multiple retail locations.</p>
+            <h3>Business Scenario</h3>
+            <ul>
+                <li><b>Your Role</b>: Regional Manager overseeing 8 grocery stores</li>
+                <li><b>The Challenge</b>: You need quick access to store performance data, operational policies, and lease information to make informed decisions</li>
+                <li><b>The Solution</b>: An AI assistant that can query data, search documents, and maintain conversation context</li>
+            </ul>
+            <h3>Core Capabilities</h3>
+            <ol>
+                <li><b>Store Performance Analysis</b>
+                    <ul>
+                        <li>How did Store 3 perform last week?</li>
+                        <li>Which store had the highest sales growth this month?</li>
+                        <li>Compare dairy sales across all stores for the past 30 days</li>
+                        <li>What's the average sales per square foot for downtown stores?</li>
+                    </ul>
+                </li>
+                <li><b>Policy and Procedure Lookups</b>
+                    <ul>
+                        <li>What's our damaged goods policy?</li>
+                        <li>How do we handle customer complaints about expired products?</li>
+                        <li>What are the procedures for inventory discrepancies?</li>
+                        <li>What's the policy on employee scheduling conflicts?</li>
+                    </ul>
+                </li>
+                <li><b>Lease and Operational Information</b>
+                    <ul>
+                        <li>When does the downtown lease expire?</li>
+                        <li>Which stores have leases expiring in the next 6 months?</li>
+                        <li>What's the square footage of Store 5?</li>
+                        <li>Who manages the suburban location?</li>
+                    </ul>
+                </li>
+            </ol>
+            <h3>Technical Requirements</h3>
+            <ul>
+                <li>Multi-turn Conversation: Maintain context across multiple exchanges</li>
+                <li>Tool Integration: Orchestrate between data queries and document search</li>
+                <li>Memory Management: Remember previous interactions and user preferences</li>
+                <li>Decision Logic: Choose appropriate tools based on query type</li>
+            </ul>
+            <h4>Core Components</h4>
+            <ol>
+                <li>Data Query Tool: Execute structured queries on CSV data with aggregations</li>
+                <li>Document Search Tool: Perform semantic search across PDF documents</li>
+                <li>Memory System: Store and retrieve conversation history and context</li>
+                <li>Decision Engine: Coordinate tool usage and response generation</li>
+            </ol>
+            <h4>Provided Datasets</h4>
+            <ul>
+                <li><b>stores.csv</b>: Store directory (8 stores)</li>
+                <li><b>sales_data.csv</b>: Historical sales performance (~2,000 records)</li>
+                <li><b>store_policy_manual.pdf</b>: Operational procedures (8 pages)</li>
+                <li><b>lease_[store_name].pdf</b>: Individual lease agreements (8 files, 6 pages each)</li>
+            </ul>
+            <h4>Implementation Phases</h4>
+            <ol>
+                <li>Foundation (Week 1): Setup, data analysis, architecture, specs</li>
+                <li>Tool Development (Week 2): Data query, document search, interface, error handling</li>
+                <li>Agent Integration (Week 3): Memory, decision logic, orchestration, interface</li>
+                <li>Enhancement & Deployment (Week 4): Advanced features, error handling, deployment, monitoring</li>
+            </ol>
+            <h4>Success Criteria</h4>
+            <ul>
+                <li>Functional: Accurate answers, context retention, ambiguity handling</li>
+                <li>Technical: Clean code, error handling, orchestration, memory, deployment</li>
+                <li>User Experience: Conversational style, response time, clarity, suggestions, professionalism</li>
+            </ul>
+            <h4>Technology Flexibility</h4>
+            <ul>
+                <li>AI/LLM Services: AWS Bedrock, Azure OpenAI, Google Vertex AI, OpenAI API, or self-hosted models</li>
+                <li>Development Environment: Cursor, VS Code, PyCharm, or your preferred IDE</li>
+                <li>Cloud Platform: AWS, Azure, Google Cloud, or local deployment</li>
+                <li>Programming Language: Python, JavaScript/Node.js, Java, or others</li>
+                <li>Database: Vector databases, traditional SQL, or in-memory solutions</li>
+            </ul>
+            <h4>Learning Outcomes</h4>
+            <ol>
+                <li>End-to-End AI Application Development</li>
+                <li>Agent Architecture Design</li>
+                <li>Prompt-Driven Development</li>
+                <li>Production Considerations</li>
+                <li>Business Application</li>
+            </ol>
+            <h4>Getting Started</h4>
+            <ol>
+                <li>Choose your technology stack</li>
+                <li>Analyze the data</li>
+                <li>Apply prompt-driven methodology</li>
+                <li>Document your process</li>
+            </ol>
+            <div class="section-nav-btns">
+                <button id="back-capstone">Back</button>
+                <button id="next-capstone">Next</button>
+            </div>
+        </section>
+        <!-- Section: Resources -->
+        <section id="resources" class="module-section" style="display:none">
+            <h2>Additional Resources</h2>
+            <h3>AI-Powered Development Tools</h3>
+            <ul>
+                <li><b>Amazon Q Developer</b>: <a href="https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/cli.html" target="_blank">Amazon Q CLI User Guide</a></li>
+                <li><b>Cline (formerly Claude Dev)</b>: <a href="https://github.com/clinebot/cline" target="_blank">Cline - Autonomous Coding Agent</a></li>
+                <li><b>Cursor IDE</b>: <a href="https://cursor.sh/" target="_blank">Cursor.sh</a></li>
+                <li><b>GitHub Copilot</b>: <a href="https://docs.github.com/en/copilot" target="_blank">GitHub Copilot Docs</a></li>
+                <li><b>Claude Code (Anthropic)</b>: <a href="https://www.anthropic.com/news/claude-code" target="_blank">Introducing Claude Code</a></li>
+            </ul>
+            <h3>Prompt-Driven Development Resources</h3>
+            <ul>
+                <li><a href="https://www.anthropic.com/news/ai-assistant-development" target="_blank">The AI-First Developer</a></li>
+                <li><a href="https://simonwillison.net/2023/Oct/26/vibe-driven-development/" target="_blank">Vibe-Based Programming</a></li>
+                <li><a href="https://platform.openai.com/docs/guides/prompt-engineering" target="_blank">Prompt Engineering for Developers</a></li>
+            </ul>
+            <h3>Community Resources</h3>
+            <ul>
+                <li><a href="https://reddit.com/r/ChatGPTCoding" target="_blank">r/ChatGPTCoding</a></li>
+                <li><a href="https://discord.gg/ai-coding" target="_blank">AI Coding Discord</a></li>
+                <li><a href="https://stackoverflow.com/questions/tagged/ai-assisted-development" target="_blank">Stack Overflow: AI-Assisted Development Tag</a></li>
+            </ul>
+            <h3>Learning Materials</h3>
+            <ul>
+                <li><a href="https://buildingwithai.dev" target="_blank">Building with AI Course</a></li>
+                <li><a href="https://promptengineering.org/" target="_blank">The Prompt Engineer's Handbook</a></li>
+                <li><a href="https://youtube.com/@aijason" target="_blank">AI Jason - Cursor Tutorials</a></li>
+                <li><a href="https://youtube.com/@aiadvantage" target="_blank">The AI Advantage - Coding with AI</a></li>
+                <li><a href="https://youtube.com/@fireship" target="_blank">Fireship - AI Development</a></li>
+            </ul>
+            <h3>Development Workflow Templates</h3>
+            <ul>
+                <li><a href="https://github.com/cursor-community/templates" target="_blank">Cursor Project Templates</a></li>
+                <li><a href="https://github.com/github-copilot-resources/copilot-workspaces" target="_blank">GitHub Copilot Workspaces</a></li>
+                <li><a href="https://github.com/ai-first-development/project-templates" target="_blank">AI-First Project Structure</a></li>
+            </ul>
+            <h3>Prompt Libraries</h3>
+            <ul>
+                <li><a href="https://github.com/f/awesome-chatgpt-prompts" target="_blank">Awesome ChatGPT Prompts</a></li>
+                <li><a href="https://github.com/promptslab/engineering-prompts" target="_blank">Engineering Prompts</a></li>
+                <li><a href="https://github.com/microsoft/prompt-engine-py" target="_blank">Code Generation Prompts</a></li>
+            </ul>
+            <h3>Evaluation and Quality Tools</h3>
+            <ul>
+                <li><a href="https://sourcery.ai/" target="_blank">Sourcery</a></li>
+                <li><a href="https://www.codiga.io/" target="_blank">Codiga</a></li>
+                <li><a href="https://www.sonarsource.com/products/sonarqube/" target="_blank">SonarQube</a></li>
+            </ul>
+            <h3>Testing with AI</h3>
+            <ul>
+                <li><a href="https://github.com/microsoft/testgpt" target="_blank">Test Generation</a></li>
+                <li><a href="https://testim.io/ai-testing/" target="_blank">Automated QA</a></li>
+                <li><a href="https://k6.io/blog/ai-assisted-performance-testing/" target="_blank">Performance Testing</a></li>
+            </ul>
+            <h3>Industry Insights</h3>
+            <ul>
+                <li><a href="https://github.blog/2022-09-07-research-quantifying-github-copilots-impact-on-developer-productivity-and-happiness/" target="_blank">GitHub Copilot Study</a></li>
+                <li><a href="https://survey.stackoverflow.co/2023/#section-ai" target="_blank">AI Coding Survey</a></li>
+                <li><a href="https://www.anthropic.com/research" target="_blank">Anthropic Research</a></li>
+                <li><a href="https://martinfowler.com/articles/ai-pair-programming.html" target="_blank">Effective AI Pair Programming</a></li>
+                <li><a href="https://cacm.acm.org/magazines/2023/11/the-future-of-software-development/" target="_blank">The Future of Software Development</a></li>
+                <li><a href="https://www.thoughtworks.com/insights/blog/generative-ai/prompt-driven-development" target="_blank">Prompt-Driven Development at Scale</a></li>
+            </ul>
+            <div class="section-nav-btns">
+                <button id="back-resources">Back</button>
+                <button id="next-resources" disabled>Next</button>
+            </div>
+        </section>
+    </div>
+    <script src="../assets/js/course-nav.js"></script>
+    <script src="../assets/js/module-sidebar.js"></script>
+    <script src="../assets/js/quiz.js"></script>
+    <script src="../assets/js/module-nav-bar.js"></script>
+</body>
+</html> 
