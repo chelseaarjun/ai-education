@@ -8,6 +8,136 @@ A comprehensive educational resource for learning about Large Language Models (L
 
 This repository contains interactive web-based lessons designed to teach fundamental concepts about Large Language Models and prompt engineering. The materials are suitable for students, developers, and professionals looking to understand how LLMs work and how to effectively interact with them.
 
+## Running the Part 1: Foundations Hands-On Lab Notebooks
+
+You can run the labs in any of these environments. Follow the instructions for your preferred setup:
+
+---
+
+### 1. AWS SageMaker Studio
+
+1. **Get the Course Files**
+   - **Option A: If `git` is available**
+     - Open a terminal in SageMaker Studio and run:
+       ```bash
+       git clone https://github.com/yourusername/ai-education.git
+       cd ai-education
+       ```
+   - **Option B: If `git` is not available**
+     - Download the repository as a ZIP from GitHub ([Download ZIP](https://github.com/yourusername/ai-education/archive/refs/heads/main.zip)).
+     - Upload the ZIP file in the SageMaker file browser.
+     - Extract it in a terminal:
+       ```bash
+       unzip ai-education-main.zip
+       mv ai-education-main ai-education
+       cd ai-education
+       ```
+
+2. **Install Dependencies**
+   - In a terminal or notebook cell, run:
+     ```bash
+     pip install -r requirements.txt
+     ```
+
+3. **AWS Credentials**
+   - SageMaker Studio usually has credentials pre-configured. If you need to override, set them in a notebook cell as shown below.
+
+4. **Open the Notebooks**
+   - Navigate to `lab/notebooks/` and open the desired notebook for your module.
+---
+
+### 2. MyBinder (Cloud, No Install Required)
+
+1. **Launch Binder**
+   - [Click this Binder link](https://mybinder.org/v2/gh/chelseaarjun/ai-education/HEAD?filepath=notebooks)
+
+2. **Open the Notebooks**
+   - In the Jupyter interface, navigate to `lab/notebooks/` and open the notebook for your module.
+
+3. **Install Dependencies**
+   - Dependencies are usually pre-installed, but you can run:
+     ```bash
+     pip install -r requirements.txt
+     ```
+
+4. **AWS Credentials**
+   - Set your credentials in a notebook cell (see the setup section in each notebook):
+     ```python
+     import os
+     os.environ['AWS_ACCESS_KEY_ID'] = 'YOUR_ACCESS_KEY'
+     os.environ['AWS_SECRET_ACCESS_KEY'] = 'YOUR_SECRET_KEY'
+     os.environ['AWS_DEFAULT_REGION'] = 'us-west-2'  # or your region
+     ```
+
+---
+
+### 3. Local Jupyter Notebook/Lab
+
+1. **Install Git (if not already installed)**
+   - **macOS:**
+     ```bash
+     brew install git
+     ```
+   - **Ubuntu/Linux:**
+     ```bash
+     sudo apt-get install git
+     ```
+   - **Windows:**
+     Download and install from [git-scm.com](https://git-scm.com/).
+
+2. **Get the Course Files**
+   - **Option A: Using git**
+     ```bash
+     git clone https://github.com/yourusername/ai-education.git
+     cd ai-education
+     ```
+   - **Option B: Without git**
+     - Download the repository as a ZIP from GitHub ([Download ZIP](https://github.com/yourusername/ai-education/archive/refs/heads/main.zip)).
+     - Extract the ZIP file:
+       - **macOS/Linux (in terminal):**
+         ```bash
+         unzip ai-education-main.zip
+         mv ai-education-main ai-education
+         cd ai-education
+         ```
+       - **Windows:**
+         - Right-click the ZIP file and select "Extract All..."
+         - Or use a tool like [7-Zip](https://www.7-zip.org/)
+         - Open the extracted `ai-education` folder
+
+3. **Install Python Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Open Jupyter and the Notebooks**
+   - Start Jupyter:
+     ```bash
+     jupyter notebook
+     ```
+   - In the Jupyter interface, navigate to `lab/notebooks/` and open the notebook for your module.
+
+5. **AWS Credentials**
+   - Set your credentials in a notebook cell (see the setup section in each notebook):
+     ```python
+     import os
+     os.environ['AWS_ACCESS_KEY_ID'] = 'YOUR_ACCESS_KEY'
+     os.environ['AWS_SECRET_ACCESS_KEY'] = 'YOUR_SECRET_KEY'
+     os.environ['AWS_DEFAULT_REGION'] = 'us-west-2'  # or your region
+     ```
+
+---
+
+**Note on Data Files:**
+- If you cloned or downloaded the full repository, all required data files (in `lab/data/`) are already present.
+- If you only uploaded individual notebooks, you must also upload the `lab/data/` directory for the labs to work correctly.
+
+---
+
+**Tip:** For a fully cloud-based experience, use the [Binder link](https://mybinder.org/v2/gh/chelseaarjun/ai-education/HEAD?filepath=notebooks) to launch all notebooks in your browser—no installation required!
+
+---
+
 ## Repository Structure
 
 ```
@@ -102,18 +232,6 @@ A comprehensive module on key open-source libraries and frameworks for building 
 - No server required - all lessons run client-side
 - For code examples: Python 3.8+ with appropriate libraries (LangChain, Pydantic, etc.)
 
-## Using the Code Examples
-
-The code examples in the lessons demonstrate integration with AWS Bedrock and Claude models. To run these examples:
-
-1. Install required Python packages:
-   ```
-   pip install langchain boto3 pydantic jinja2
-   ```
-
-2. Configure AWS credentials for Bedrock access
-3. Modify region and model parameters as needed for your environment
-
 ## Contributing
 
 Contributions to improve the lessons or add new content are welcome! Please feel free to submit pull requests or open issues for discussion.
@@ -124,11 +242,15 @@ This project is licensed under the terms of the included LICENSE file.
 
 ## Acknowledgments
 
-- AWS for providing the Bedrock platform and Claude model access
-- Anthropic for developing the Claude models referenced in the materials
-- The LangChain team for their excellent framework
-- Model Context Protocol team for [protocol documentation and SDKs](https://modelcontextprotocol.io/)
-- Open Source Tools module for curated library references and examples
+- **AWS** for providing the Bedrock platform and Claude model access
+- **Anthropic** for developing the Claude models referenced in the materials
+- **LangChain** and **LangGraph** teams for their excellent frameworks
+- **LlamaIndex**, **CrewAI**, **FAISS**, **Unstructured**, **Langfuse**, and **MLflow** teams for their open-source libraries and LLMOps tools
+- **FastAPI**, **Streamlit**, **Pydantic**, **Jinja2**, and other Python open-source library authors for enabling modern AI application development
+- **Hugging Face**, **DSPy**, **Ragas**, **OpenLLMetry**, **Giskard**, **Guidance**, **Instructor**, **Supabase**, **Ollama**, and the broader open-source AI community for their contributions and inspiration
+- **Model Context Protocol** team for [protocol documentation and SDKs](https://modelcontextprotocol.io/)
+- **Project Binder** for providing free cloud-based Jupyter notebook hosting
+- All contributors, testers, and the open-source community for feedback and improvements
 
 ## Run All Companion Notebooks on Binder
 
