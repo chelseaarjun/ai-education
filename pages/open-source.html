@@ -131,24 +131,21 @@
     <nav class="module-nav">
         <button class="module-nav-btn" data-section="introduction">Introduction</button>
         <button class="module-nav-btn" data-section="core-frameworks">Core Frameworks</button>
+        <button class="module-nav-btn" data-section="rag-frameworks">RAG Frameworks</button>
+        <button class="module-nav-btn" data-section="llmops-frameworks">LLMOps Frameworks</button>
         <button class="module-nav-btn" data-section="general-purpose">General Purpose</button>
         <button class="module-nav-btn" data-section="additional-libraries">Additional Libraries</button>
-        <button class="module-nav-btn" data-section="quiz-section">Quiz</button>
+        <!-- <button class="module-nav-btn" data-section="quiz-section">Quiz</button> -->
+
     </nav>
     <nav class="module-sidebar"></nav>
     <div class="content-inner">
         <section id="introduction" class="module-section">
             <div class="course-description">
-                <h2 class="module-title">Module 3: Open Source Tools & Frameworks for AWS Bedrock</h2>
-                <p>Welcome to this module! Here, you'll discover how open-source tools can supercharge your AWS Bedrock projects, streamline development, and add powerful new capabilities to your AI workflows.</p>
+                <h2 class="module-title">Module 2: Open Source Tools & Frameworks Reference Guide</h2>
+                <p>Welcome to this module! Here, you'll discover the open-source tools that can supercharge your AI projects, streamline development, and add powerful new capabilities to your AI workflows.</p>
                 <h3 class="section-title">What You'll Learn</h3>
-                <p>In this module, you'll master the following key areas:</p>
-                <ul>
-                    <li><b>Core Frameworks:</b> Key open-source frameworks for building LLM applications</li>
-                    <li><b>Integration:</b> How to integrate AWS Bedrock with popular libraries</li>
-                    <li><b>Best Practices:</b> Using open-source tools in production</li>
-                    <li><b>Evaluation:</b> How to select the right tools for your needs</li>
-                </ul>
+                <p>This module is structured as a reference guide/index of popular the open-source tools and frameworks and not focused on learning materials for using them. There are no hands-on labs or exercises in this module.</p>
             </div>
             <div class='section-nav-btns'>
                 <button id='back-introduction' disabled>Back</button>
@@ -249,6 +246,140 @@ response = agent.invoke(
                 </div>
                 
                 <div class="library">
+                    <h3 id="crewai">CrewAI <span class="library-tag">MIT License</span></h3>
+                    <p>CrewAI is a framework for orchestrating multiple AI agents in collaborative workflows, allowing them to work together to solve complex tasks.</p>
+                    
+                    <div class="library-details">
+                        <div class="features">
+                            <h4>Key Features:</h4>
+                            <ul>
+                                <li><strong>Multi-Agent Collaboration</strong> - Enables creation of agent teams with specialized roles and responsibilities</li>
+                                <li><strong>Task Orchestration</strong> - Coordinate complex workflows across multiple agents</li>
+                                <li><strong>AWS Bedrock Support</strong> - Compatible with Bedrock models for enterprise-grade agent capabilities</li>
+                                <li><strong>Local LLM Integration</strong> - Supports running with local models via Ollama and other providers</li>
+                            </ul>
+                        </div>
+                        <div class="links">
+                            <h4>Resources:</h4>
+                            <ul>
+                                <li><a href="https://github.com/crewAIInc/crewAI" target="_blank">GitHub Repository</a></li>
+                                <li><a href="https://docs.crewai.com/" target="_blank">Documentation</a></li>
+                                <li><a href="https://community.crewai.com/" target="_blank">Community</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="library-code">
+                        <pre><code># Example: Creating a collaborative agent crew with CrewAI
+from crewai import Agent, Task, Crew
+from langchain_aws import BedrockChat
+
+# Initialize the Bedrock model
+bedrock = BedrockChat(
+    model="anthropic.claude-3-sonnet-20240229-v1",
+    region_name="us-east-1"
+)
+
+# Create specialized agents
+researcher = Agent(
+    role="Research Analyst",
+    goal="Find the latest information on AWS Bedrock features",
+    backstory="You are an AI expert specializing in cloud technologies",
+    llm=bedrock
+)
+
+writer = Agent(
+    role="Technical Writer",
+    goal="Create clear documentation on AWS Bedrock",
+    backstory="You are a skilled technical writer with AWS expertise",
+    llm=bedrock
+)
+
+# Define tasks for each agent
+research_task = Task(
+    description="Research the latest AWS Bedrock features and capabilities",
+    agent=researcher
+)
+
+document_task = Task(
+    description="Create comprehensive documentation based on research findings",
+    agent=writer,
+    dependencies=[research_task]
+)
+
+# Form a crew and execute the tasks
+crew = Crew(
+    agents=[researcher, writer],
+    tasks=[research_task, document_task]
+)
+
+result = crew.kickoff()</code></pre>
+                    </div>
+                </div>
+
+                <div class="library">
+                    <h3 id="modelcontextprotocol">MCP <span class="library-tag">MIT License</span></h3>
+                    <p>ModelContextProtocol is a standardized interface for working with context-aware LLMs, providing a unified approach to tracking and managing context windows across different models.</p>
+                    
+                    <div class="library-details">
+                        <div class="features">
+                            <h4>Key Features:</h4>
+                            <ul>
+                                <li><strong>Context Management</strong> - Track and optimize token usage in LLM context windows</li>
+                                <li><strong>Cross-Model Compatibility</strong> - Consistent interface across different LLM providers</li>
+                                <li><strong>Context Prioritization</strong> - Intelligent handling of context when approaching token limits</li>
+                                <li><strong>AWS Bedrock Integration</strong> - Support for Bedrock models and their specific context requirements</li>
+                            </ul>
+                        </div>
+                        <div class="links">
+                            <h4>Resources:</h4>
+                            <ul>
+                                <li><a href="https://github.com/microsoft/modelcontextprotocol" target="_blank">GitHub Repository</a></li>
+                                <li><a href="https://modelcontextprotocol.github.io/" target="_blank">Documentation</a></li>
+                                <li><a href="https://pypi.org/project/modelcontextprotocol/" target="_blank">PyPI Package</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="library-code">
+                        <pre><code># Example: Managing context with ModelContextProtocol
+from modelcontextprotocol import ContextManager
+from langchain_aws import ChatBedrock
+
+# Initialize the Bedrock model
+llm = ChatBedrock(
+    model="anthropic.claude-3-sonnet-20240229-v1:0",
+    region_name="us-east-1"
+)
+
+# Create a context manager for the model
+context_manager = ContextManager(llm)
+
+# Add content to the context
+context_manager.add_to_context("User query: How can I implement RAG with AWS Bedrock?")
+context_manager.add_to_context("Additional context: User is building a Q&A system.")
+
+# Get the complete context
+full_context = context_manager.get_context()
+
+# Check token usage
+tokens_used = context_manager.get_token_count()
+print(f"Tokens used: {tokens_used}")</code></pre>
+                    </div>
+                </div>
+                
+            </div>
+            <div class='section-nav-btns'>
+                <button id='back-core-frameworks'>Back</button>
+                <button id='next-core-frameworks'>Next</button>
+            </div>
+        </section>
+        <section id="rag-frameworks" class="module-section" style="display:none">
+            <div class="section" id="rag-frameworks-section">
+                <h2>RAG Framework Libraries</h2>
+                <p></p>
+                
+                <div class="library">
                     <h3 id="llamaindex">LlamaIndex <span class="library-tag">MIT License</span></h3>
                     <p>LlamaIndex is a data framework specialized in connecting LLMs to external data sources, with powerful capabilities for data ingestion, indexing, and retrieval.</p>
                     
@@ -342,78 +473,6 @@ print(f"Distances: {distances}")</code></pre>
                 </div>
                 
                 <div class="library">
-                    <h3 id="crewai">CrewAI <span class="library-tag">MIT License</span></h3>
-                    <p>CrewAI is a framework for orchestrating multiple AI agents in collaborative workflows, allowing them to work together to solve complex tasks.</p>
-                    
-                    <div class="library-details">
-                        <div class="features">
-                            <h4>Key Features:</h4>
-                            <ul>
-                                <li><strong>Multi-Agent Collaboration</strong> - Enables creation of agent teams with specialized roles and responsibilities</li>
-                                <li><strong>Task Orchestration</strong> - Coordinate complex workflows across multiple agents</li>
-                                <li><strong>AWS Bedrock Support</strong> - Compatible with Bedrock models for enterprise-grade agent capabilities</li>
-                                <li><strong>Local LLM Integration</strong> - Supports running with local models via Ollama and other providers</li>
-                            </ul>
-                        </div>
-                        <div class="links">
-                            <h4>Resources:</h4>
-                            <ul>
-                                <li><a href="https://github.com/crewAIInc/crewAI" target="_blank">GitHub Repository</a></li>
-                                <li><a href="https://docs.crewai.com/" target="_blank">Documentation</a></li>
-                                <li><a href="https://community.crewai.com/" target="_blank">Community</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="library-code">
-                        <pre><code># Example: Creating a collaborative agent crew with CrewAI
-from crewai import Agent, Task, Crew
-from langchain_aws import BedrockChat
-
-# Initialize the Bedrock model
-bedrock = BedrockChat(
-    model="anthropic.claude-3-sonnet-20240229-v1",
-    region_name="us-east-1"
-)
-
-# Create specialized agents
-researcher = Agent(
-    role="Research Analyst",
-    goal="Find the latest information on AWS Bedrock features",
-    backstory="You are an AI expert specializing in cloud technologies",
-    llm=bedrock
-)
-
-writer = Agent(
-    role="Technical Writer",
-    goal="Create clear documentation on AWS Bedrock",
-    backstory="You are a skilled technical writer with AWS expertise",
-    llm=bedrock
-)
-
-# Define tasks for each agent
-research_task = Task(
-    description="Research the latest AWS Bedrock features and capabilities",
-    agent=researcher
-)
-
-document_task = Task(
-    description="Create comprehensive documentation based on research findings",
-    agent=writer,
-    dependencies=[research_task]
-)
-
-# Form a crew and execute the tasks
-crew = Crew(
-    agents=[researcher, writer],
-    tasks=[research_task, document_task]
-)
-
-result = crew.kickoff()</code></pre>
-                    </div>
-                </div>
-                
-                <div class="library">
                     <h3 id="unstructured">Unstructured <span class="library-tag">Apache 2.0 License</span></h3>
                     <p>Unstructured is a library for extracting and processing content from raw documents across multiple formats, essential for building robust data ingestion pipelines for LLMs.</p>
                     
@@ -454,70 +513,29 @@ for i, element in enumerate(elements[:5]):
     print("-" * 50)</code></pre>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="library">
-                    <h3 id="modelcontextprotocol">ModelContextProtocol <span class="library-tag">MIT License</span></h3>
-                    <p>ModelContextProtocol is a standardized interface for working with context-aware LLMs, providing a unified approach to tracking and managing context windows across different models.</p>
-                    
-                    <div class="library-details">
-                        <div class="features">
-                            <h4>Key Features:</h4>
-                            <ul>
-                                <li><strong>Context Management</strong> - Track and optimize token usage in LLM context windows</li>
-                                <li><strong>Cross-Model Compatibility</strong> - Consistent interface across different LLM providers</li>
-                                <li><strong>Context Prioritization</strong> - Intelligent handling of context when approaching token limits</li>
-                                <li><strong>AWS Bedrock Integration</strong> - Support for Bedrock models and their specific context requirements</li>
-                            </ul>
-                        </div>
-                        <div class="links">
-                            <h4>Resources:</h4>
-                            <ul>
-                                <li><a href="https://github.com/microsoft/modelcontextprotocol" target="_blank">GitHub Repository</a></li>
-                                <li><a href="https://modelcontextprotocol.github.io/" target="_blank">Documentation</a></li>
-                                <li><a href="https://pypi.org/project/modelcontextprotocol/" target="_blank">PyPI Package</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="library-code">
-                        <pre><code># Example: Managing context with ModelContextProtocol
-from modelcontextprotocol import ContextManager
-from langchain_aws import ChatBedrock
-
-# Initialize the Bedrock model
-llm = ChatBedrock(
-    model="anthropic.claude-3-sonnet-20240229-v1:0",
-    region_name="us-east-1"
-)
-
-# Create a context manager for the model
-context_manager = ContextManager(llm)
-
-# Add content to the context
-context_manager.add_to_context("User query: How can I implement RAG with AWS Bedrock?")
-context_manager.add_to_context("Additional context: User is building a Q&A system.")
-
-# Get the complete context
-full_context = context_manager.get_context()
-
-# Check token usage
-tokens_used = context_manager.get_token_count()
-print(f"Tokens used: {tokens_used}")</code></pre>
-                    </div>
-                </div>
+        <section id="llmops-frameworks" class="module-section" style="display:none">
+            <div class="section" id="llmops-frameworks-section">
+                <h2>LLMOps Libraries</h2>
+                <p></p>
                 
                 <div class="library">
                     <h3 id="langfuse">Langfuse <span class="library-tag">MIT License</span></h3>
-                    <p>Langfuse is a comprehensive observability platform for LLM applications, providing powerful tools for tracing, evaluating, and analyzing your AI systems.</p>
-                    
+                    <p><b>Langfuse</b> is a leading open-source platform for LLM observability, tracing, evaluation, and prompt management. It provides a full suite of tools for monitoring, debugging, and improving LLM, RAG, and agentic applications in production and development.</p>
                     <div class="library-details">
                         <div class="features">
-                            <h4>Key Features:</h4>
+                            <h4>Key Features (2025):</h4>
                             <ul>
-                                <li><strong>Tracing</strong> - Detailed visibility into every step of your LLM application's execution</li>
-                                <li><strong>Evaluation Framework</strong> - Tools for assessing response quality, accuracy, and relevance</li>
-                                <li><strong>Cost Tracking</strong> - Monitor token usage and associated costs across your application</li>
-                                <li><strong>Framework Integrations</strong> - Seamless integration with LangChain, LlamaIndex, and other frameworks</li>
+                                <li><strong>LLM Tracing & Observability</strong> – Capture detailed, nested traces of every LLM, RAG, or agent workflow, including context, prompts, tool calls, and parallelism</li>
+                                <li><strong>Evaluation Framework</strong> – Run LLM-as-a-judge, human, or custom evaluations on traces; collect user feedback and bulk score outputs</li>
+                                <li><strong>Prompt Management</strong> – Version, deploy, and monitor prompts with full traceability and rollback support</li>
+                                <li><strong>Datasets & Experiments</strong> – Build, label, and evaluate datasets for continuous improvement and regression testing</li>
+                                <li><strong>LLM Playground</strong> – Experiment with prompts and models interactively, linked to production traces</li>
+                                <li><strong>Cost & Usage Analytics</strong> – Track model usage, latency, and costs per user, session, or environment</li>
+                                <li><strong>Deep Integrations</strong> – Works natively with LangChain, LlamaIndex, Bedrock, OpenAI, CrewAI, DSPy, and more</li>
+                                <li><strong>OpenTelemetry & API</strong> – Export traces and metrics to any observability stack; public API for custom workflows</li>
                             </ul>
                         </div>
                         <div class="links">
@@ -525,43 +543,119 @@ print(f"Tokens used: {tokens_used}")</code></pre>
                             <ul>
                                 <li><a href="https://github.com/langfuse/langfuse" target="_blank">GitHub Repository</a></li>
                                 <li><a href="https://langfuse.com/docs" target="_blank">Documentation</a></li>
-                                <li><a href="https://langfuse.com/docs/integrations/frameworks/langchain" target="_blank">LangChain Integration</a></li>
+                                <li><a href="https://langfuse.com/docs/integrations/langchain" target="_blank">LangChain Integration</a></li>
+                                <li><a href="https://langfuse.com/blog/2024-04-introducing-langfuse-2.0" target="_blank">Langfuse 2.0 Overview</a></li>
                             </ul>
                         </div>
                     </div>
-                    
                     <div class="library-code">
-                        <pre><code># Example: Using Langfuse with LangChain and AWS Bedrock
-import langfuse
+                        <pre><code># Example: Tracing and evaluating a LangChain workflow with Langfuse
+from langfuse.callback import CallbackHandler
 from langchain_aws import ChatBedrock
-from langchain_core.callbacks import LangfuseCallbackHandler
+from langchain_core.runnables import RunnablePassthrough
 
-# Initialize Langfuse
-langfuse.init(
-    public_key="pk-lf-...",
+# Initialize Langfuse callback handler
+langfuse_handler = CallbackHandler(
     secret_key="sk-lf-...",
+    public_key="pk-lf-...",
+    host="https://cloud.langfuse.com"
 )
 
-# Set up Langfuse callback
-handler = LangfuseCallbackHandler()
-
-# Initialize Bedrock chat model with tracing
+# Set up Bedrock LLM
 llm = ChatBedrock(
     model="anthropic.claude-3-sonnet-20240229-v1:0",
-    region_name="us-east-1",
-    callbacks=[handler]
+    region_name="us-east-1"
 )
 
-# Traced conversation
-response = llm.invoke("What are the benefits of LLM observability?")</code></pre>
+# Wrap LLM in a runnable chain for tracing
+chain = RunnablePassthrough() | llm
+
+# Invoke with tracing and metadata
+result = chain.invoke(
+    "What are the benefits of LLM observability?",
+    config={
+        "callbacks": [langfuse_handler],
+        "metadata": {"langfuse_session_id": "demo-session", "langfuse_user_id": "user-42"}
+    }
+)
+
+# Optionally, add evaluation/feedback to the trace
+from langfuse import Langfuse
+langfuse = Langfuse()
+langfuse.score(
+    trace_id=langfuse_handler.last_trace_id,  # get the trace ID from the handler
+    name="answer-quality",
+    value=1,
+    comment="Accurate and clear response."
+)
+</code></pre>
                     </div>
                 </div>
             </div>
-            <div class='section-nav-btns'>
-                <button id='back-core-frameworks'>Back</button>
-                <button id='next-core-frameworks'>Next</button>
+
+            <div class="library">
+                <h3 id="mlflow">MLflow <span class="library-tag">Apache 2.0 License</span></h3>
+                <p><b>MLflow</b> is the leading open-source platform for end-to-end MLOps and LLMOps, supporting traditional ML, deep learning, and GenAI/LLM workflows. MLflow provides robust tools for tracking, packaging, evaluating, and deploying LLMs, prompts, and RAG applications at scale.</p>
+                <div class="library-details">
+                    <div class="features">
+                        <h4>Key Features (2025):</h4>
+                        <ul>
+                            <li><strong>LLM Experiment Tracking</strong> – Track prompts, models, parameters, traces, and evaluation metrics for every LLM run</li>
+                            <li><strong>Prompt & Version Management</strong> – Built-in prompt engineering UI, versioning, and configuration-as-code for reproducibility</li>
+                            <li><strong>Tracing & Observability</strong> – Native tracing for LLM, RAG, and agent workflows; OpenTelemetry compatible</li>
+                            <li><strong>Evaluation Framework</strong> – Built-in and custom metrics (toxicity, correctness, clarity, latency, etc.), LLM-as-a-judge, and bulk evaluation</li>
+                            <li><strong>Model Packaging & Registry</strong> – Register, version, and deploy LLMs, RAG pipelines, and prompt bundles</li>
+                            <li><strong>AI Gateway</strong> – Unified API for OpenAI, Bedrock, Hugging Face, and custom LLMs with secure credential management</li>
+                            <li><strong>Deep Integrations</strong> – Works seamlessly with LangChain, LlamaIndex, DSPy, Bedrock, OpenAI, and more</li>
+                        </ul>
+                    </div>
+                    <div class="links">
+                        <h4>Resources:</h4>
+                        <ul>
+                            <li><a href="https://github.com/mlflow/mlflow" target="_blank">GitHub Repository</a></li>
+                            <li><a href="https://mlflow.org/" target="_blank">MLflow Homepage</a></li>
+                            <li><a href="https://mlflow.org/docs/latest/llms/" target="_blank">LLM/GenAI Docs</a></li>
+                            <li><a href="https://mlflow.org/docs/latest/llms/llm-tracking/index.html" target="_blank">LLM Tracking</a></li>
+                            <li><a href="https://mlflow.org/docs/latest/llms/evaluation/index.html" target="_blank">LLM Evaluation</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="library-code">
+                    <pre><code># Example: Tracking and evaluating LLM runs with MLflow
+import mlflow
+from mlflow.metrics.genai import answer_correctness, latency
+
+# Start an experiment for LLM evaluation
+mlflow.set_experiment("llmops-demo")
+
+with mlflow.start_run():
+    # Log prompt, model, and parameters
+    mlflow.log_param("prompt", "Summarize the benefits of MLflow for LLMOps.")
+    mlflow.log_param("model", "openai/gpt-4o-mini")
+    mlflow.log_param("temperature", 0.2)
+    
+    # Log predictions and ground truth
+    mlflow.log_table(
+        {
+            "inputs": ["Summarize the benefits of MLflow for LLMOps."],
+            "ground_truth": ["MLflow enables experiment tracking, evaluation, and deployment for LLMs and RAG workflows."]
+        },
+        artifact_file="predictions.csv"
+    )
+    # Evaluate with built-in metrics
+    result = mlflow.evaluate(
+        model="openai/gpt-4o-mini",
+        data="predictions.csv",
+        targets="ground_truth",
+        extra_metrics=[latency(), answer_correctness("openai:/gpt-4o-mini")],
+        evaluator_config={"col_mapping": {"inputs": "inputs"}}
+    )
+    print(result.metrics)
+</code></pre>
+                </div>
             </div>
         </section>
+        
         <section id="general-purpose" class="module-section" style="display:none">
             <div class="section" id="general-purpose-section">
                 <h2>General Purpose Libraries</h2>
@@ -569,7 +663,9 @@ response = llm.invoke("What are the benefits of LLM observability?")</code></pre
                 
                 <div class="library">
                     <h3 id="fastapi">FastAPI <span class="library-tag">MIT License</span></h3>
-                    <p>FastAPI is a modern, high-performance web framework for building APIs with Python, ideal for creating robust backends for your AI applications.</p>
+                    <p>FastAPI is a modern, high-performance web framework for building APIs following the 
+                        <a href="https://www.openapis.org/" target="_blank">OpenAPI</a> 
+                        specification with Python, ideal for creating robust backends for your AI applications.</p>
                     
                     <div class="library-details">
                         <div class="features">
