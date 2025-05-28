@@ -20,6 +20,8 @@ function showSection(id) {
     });
     // Update sidebar
     updateSidebar(id);
+    // Update module nav bar visibility for minimized state
+    if (window.updateModuleNavVisibility) window.updateModuleNavVisibility();
 }
 
 function updateSidebar(sectionId) {

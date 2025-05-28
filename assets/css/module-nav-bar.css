@@ -179,4 +179,12 @@ li {
 h2, h3, h4 {
   margin-top: 1.5em;
   margin-bottom: 0.7em;
+}
+
+.module-nav-dropdown-content {
+    display: none;
+}
+.module-nav-dropdown.active .module-nav-dropdown-content,
+.module-nav-dropdown:hover .module-nav-dropdown-content {
+    display: block;
 } 
