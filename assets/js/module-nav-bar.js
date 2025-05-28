@@ -83,4 +83,15 @@ function updateModuleNavVisibility() {
     });
   });
 }
-window.updateModuleNavVisibility = updateModuleNavVisibility; 
+window.updateModuleNavVisibility = updateModuleNavVisibility;
+
+function adjustContentInnerBottomPadding() {
+  const content = document.querySelector('.content-inner');
+  const footer = document.querySelector('.site-footer');
+  if (content && footer) {
+    const footerHeight = footer.offsetHeight;
+    content.style.paddingBottom = (footerHeight + 8) + 'px';
+  }
+}
+document.addEventListener('DOMContentLoaded', adjustContentInnerBottomPadding);
+window.addEventListener('resize', adjustContentInnerBottomPadding); 

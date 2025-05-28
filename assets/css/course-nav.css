@@ -375,3 +375,7 @@ body {
 .site-footer .footer-chat-btn > .footer-label {
     margin-left: 0.33em;
 }
+
+.content-inner {
+  padding-bottom: 70px !important;
+}
