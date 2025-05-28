@@ -377,5 +377,34 @@ body {
 }
 
 .content-inner {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  box-sizing: border-box;
   padding-bottom: 70px !important;
+}
+
+/* Ensure all block elements inside .content-inner/section never overflow */
+.content-inner section,
+.content-inner .diagram,
+.content-inner .example,
+.content-inner .prompt-example,
+.content-inner .response-example,
+.content-inner .code-block,
+.content-inner canvas,
+.content-inner img,
+.content-inner table {
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
+@media (max-width: 900px) {
+  .content-inner {
+    max-width: 100%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 }
