@@ -224,7 +224,7 @@
             <div class="callout-info" style="background:#f8fafd;border-left:4px solid #4a6fa5;margin:1.2em 0 0.5em 0;padding:1em 1.2em;"><span class="callout-icon">🤖</span>
                 <strong>Agentic LLM application</strong> is a software system that wraps around the LLM, operating in a loop—observing its environment, using the LLM's reasoning to decide what to do next, and taking actions to achieve its goals.
             </div>
-            <p>LLM-powered agents build upon the foundation of Large Language Models by extending them with critical capabilities:            </p>
+            <p>LLM-powered agents build upon the foundation of Large Language Models by extending them with followingcritical capabilities:            </p>
             <ul class="enhanced-list">
                 <li><strong>Tool Use:</strong> While base LLMs can only process and generate text, LLM-powered agents can interact with the world by using external tools, APIs, and services to retrieve information or perform actions.</li>
                 <li><strong>Persistent Memory:</strong> Unlike base LLMs limited to their context window, agents remember past actions, user preferences, or important facts (short-term and long-term). They can also use it to improve future actions.</li>
@@ -237,10 +237,12 @@
             These three capabilities transform LLMs from reactive language models into semi-autonomous systems that can reason, remember, and act to accomplish complex real-world tasks.            
             <div class="callout-info" style="background:#fffbe6;border-left:4px solid #ffd700;margin:1em 0 1.2em 0;padding:1em 1.2em;">
               <span style="font-size:1.2em;margin-right:0.3em;">⚡</span>
-              For the remainder of this module, <b>"agents"</b> refers to <b>Agentic LLM applications</b>. The key differentiator from <b>Single-Step or Workflow Based LLM Applications</b> is the use of LLM for orchestration, and optionally, persistent memory for feedback loop and learning. These require careful engineering and enable agents to adapt to handle complex tasks flexibly at the cost of increased implementation complexity.
+              For the remainder of this module, <b>"agents"</b> refers to <b>Agentic LLM applications</b>. 
+              The key differentiator from <b>Single-Step or Workflow Based LLM Applications</b> is the use of LLM to decide the control flow, and optionally, persistent memory for feedback loop and learning. 
+              These require careful engineering and enable agents to adapt to handle complex tasks flexibly at the cost of increased implementation complexity.
             </div>
             <h3>The Engineering Challenge: From Prompts to Orchestration</h3>
-            <p>While prompt engineering remains important, building LLM-powered agents shifts the primary engineering focus to orchestration design:</p>
+            <p>While prompt engineering remains important, building LLM-powered agents increases the engineering complexity to also include orchestration design:</p>
             <ul>
                 <li><b>Decision Logic:</b> When should the agent call external tools versus generate responses using the LLM's training knowledge? How does it choose between multiple available tools for the same task?</li>
                 <li><b>Error Handling:</b> What happens when a tool call fails, returns incomplete data, or produces unexpected results? How should the agent recover and continue?</li>
@@ -255,12 +257,12 @@
         </section>
     <section id="when-to-use-agents" class="module-section">
             <h2>Agentic LLM Applications: When Are They Needed?</h2>
-            <p>Not every application needs the complexity of an agent. Many tasks—like summarization, classification, or Q&A—can be solved with just prompt engineering and an LLM.</p>
+            <p>Not every application needs the complexity of an agent. Many tasks that can be completed in a single step or predefined workflows— like summarization, classification, or Q&A—can be solved with just prompt engineering and a workflow-based approach.</p>
             <p>However, agents become essential when achieving your goals requires handling multi-step complex tasks and the workflow cannot be fully specified in advance—demanding adaptive, dynamic decision-making.</p>
             <div class="callout" style="background: #fffbe6; border-left: 4px solid #ffd700; margin: 1em 0 1.2em 0; padding: 0.5em 1em;">
               <strong>Guiding Principles for Using Agents:</strong>
               <ul style="margin-top: 0.5em;">
-                <li><b>Don't Build Agents for Everything:</b> Use agents only for complex, ambiguous, high-value tasks; prefer Single-Step or orkflows for simple cases.</li>
+                <li><b>Don't Build Agents for Everything:</b> Use agents only for complex, ambiguous, high-value tasks; prefer Single-Step or workflows for simple cases.</li>
                 <li><b>Keep It Simple:</b> Start with a minimal architecture (environment, tools, prompt); iterate before adding complexity.</li>
               </ul>
             </div>
