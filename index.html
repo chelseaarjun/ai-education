@@ -298,15 +298,19 @@
                 <h4>Multimodal Models</h4>
                 <p>The latest generation of foundation models (as of 2025) can process and generate multiple types of data simultaneously - understanding images, text, audio, and video in an integrated way. This multimodal capability enables more natural and comprehensive AI applications.</p>
                 
-                <h3>Adapting Foundation Models:</h3>
-                <p>While foundation models provide powerful general-purpose capabilities, they typically need adaptation for specific applications. The three primary techniques for customizing these models are:</p>
-                
+                <h3>Adapting Foundation Models</h3>
+                <p>While foundation models provide powerful general-purpose capabilities, they typically need adaptation for specific applications. The two primary techniques for customizing these models are:</p>
                 <ol>
-                    <li><strong>Prompt Engineering:</strong> The art of crafting text instructions to guide the model toward desired outputs. Advanced prompting techniques include few-shot learning, chain-of-thought prompting, and retrieval-augmented generation (RAG) - where models are connected to external knowledge sources to enhance their responses with accurate, up-to-date information.</li>
-                    
-                    <li><strong>Agents:</strong> AI systems that can autonomously perform complex tasks by combining reasoning capabilities with external tools and persistent memory. Agents can decompose problems, plan solutions, execute actions, and learn from feedback, enabling more sophisticated applications than prompt engineering alone.</li>
-                    
-                    <li><strong>Fine-Tuning:</strong> The process of retraining models on domain-specific data to specialize them for particular tasks or industries. Advanced approaches include parameter-efficient fine-tuning and context distillation. <em>(Note: Fine-tuning is outside the scope of this introductory course but is mentioned for completeness.)</em></li>
+                    <li><strong>Prompt Engineering:</strong> The art of crafting text instructions to guide the model toward desired outputs. For most use cases, prompt engineering is faster, cheaper, and more transparent than fine-tuning. Always start with prompt engineering to achieve your desired results.</li>
+                    <li><strong>Fine-Tuning:</strong> The process of retraining models on domain-specific data to specialize them for particular tasks or industries. Only consider fine-tuning if prompt engineering cannot achieve your success criteria, or if you need to adapt the model to highly specialized data. <em>(Note: Fine-tuning is outside the scope of this introductory course but is mentioned for completeness.)</em></li>
+                </ol>
+
+                <h3>LLM Application Development Approaches</h3>
+                <p>Once you have an adapted model, there are three primary approaches for building applications. All three approaches require effective, well-crafted prompts and can leverage either foundational or fine-tuned models as their reasoning engine:</p>
+                <ol>
+                    <li><strong>Single-Step LLM Applications:</strong> The LLM is used in a single, atomic step to complete a task (e.g., summarization, classification, Q&amp;A). The application logic is simple, and the LLM is called once per user request. With advanced reasoning models, the LLM may use its own internal workflow and control flow to break down complex tasks, but this happens transparently within the single call.</li>
+                    <li><strong>Workflow-Based LLM Applications:</strong> The application consists of multiple, code-defined steps, each of which may involve an LLM call or tool use. The sequence of steps is predetermined and controlled by the developer, not the LLM. Examples include retrieval-augmented generation (RAG), multi-stage data processing, or document extraction pipelines.</li>
+                    <li><strong>Agentic LLM Applications:</strong> A software system that wraps around the LLM, operating in a loop—observing its environment, using the LLM's reasoning to decide what to do next, and taking actions to achieve its goals. Agentic applications often use workflow-based patterns internally but differ by allowing the LLM to participate in the control flow, making autonomous decisions to achieve objectives.</li>
                 </ol>
             </div>
         </section>
