@@ -33,10 +33,15 @@ You can run the labs in any of these environments. Follow the instructions for y
        cd ai-education
        ```
 
-2. **Install Dependencies**
+2. **Install Dependencies with Conda**
    - In a terminal or notebook cell, run:
      ```bash
-     pip install -r requirements.txt
+     conda env create -f environment.yml
+     conda activate ai-education
+     ```
+   - (Optional, recommended) Register the environment as a Jupyter kernel:
+     ```bash
+     python -m ipykernel install --user --name ai-education --display-name "Python (ai-education)"
      ```
 
 3. **AWS Credentials**
@@ -54,11 +59,8 @@ You can run the labs in any of these environments. Follow the instructions for y
 2. **Open the Notebooks**
    - In the Jupyter interface, navigate to `lab/notebooks/` and open the notebook for your module.
 
-3. **Install Dependencies**
-   - Dependencies are usually pre-installed, but you can run:
-     ```bash
-     pip install -r requirements.txt
-     ```
+3. **Dependencies**
+   - Binder will automatically use `environment.yml` to install all dependencies in a conda environment. No manual installation is needed.
 
 4. **AWS Credentials**
    - Set your credentials in a notebook cell (see the setup section in each notebook):
@@ -73,17 +75,17 @@ You can run the labs in any of these environments. Follow the instructions for y
 
 ### 3. Local Jupyter Notebook/Lab
 
-1. **Install Git (if not already installed)**
-   - **macOS:**
+1. **Install Conda (Miniconda/Miniforge/Anaconda)**
+   - [Miniforge (recommended)](https://github.com/conda-forge/miniforge#miniforge3) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
+   - Or, on macOS with Homebrew:
      ```bash
-     brew install git
+     brew install --cask miniforge
      ```
-   - **Ubuntu/Linux:**
+   - After install, run:
      ```bash
-     sudo apt-get install git
+     conda init zsh  # or bash/fish, depending on your shell
+     exec $SHELL
      ```
-   - **Windows:**
-     Download and install from [git-scm.com](https://git-scm.com/).
 
 2. **Get the Course Files**
    - **Option A: Using git**
@@ -105,15 +107,22 @@ You can run the labs in any of these environments. Follow the instructions for y
          - Or use a tool like [7-Zip](https://www.7-zip.org/)
          - Open the extracted `ai-education` folder
 
-3. **Install Python Dependencies**
+3. **Install Python Dependencies with Conda**
    ```bash
-   pip install -r requirements.txt
+   conda env create -f environment.yml
+   conda activate ai-education
    ```
+   - (Optional, recommended) Register the environment as a Jupyter kernel:
+     ```bash
+     python -m ipykernel install --user --name ai-education --display-name "Python (ai-education)"
+     ```
 
 4. **Open Jupyter and the Notebooks**
    - Start Jupyter:
      ```bash
      jupyter notebook
+     # or
+     jupyter lab
      ```
    - In the Jupyter interface, navigate to `lab/notebooks/` and open the notebook for your module.
 
