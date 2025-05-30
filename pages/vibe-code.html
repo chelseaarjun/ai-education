@@ -20,6 +20,7 @@
         <button class="module-nav-btn" data-section="introduction">Introduction</button>
         <button class="module-nav-btn" data-section="core-principles">Core Principles</button>
         <button class="module-nav-btn" data-section="workflow">Prompt-Driven Workflow</button>
+        <button class="module-nav-btn" data-section="assistants">AI Coding Assitants</button>
         <button class="module-nav-btn" data-section="case-study">Case Study</button>
         <button class="module-nav-btn" data-section="best-practices">Best Practices</button>
         <button class="module-nav-btn" data-section="pitfalls">Pitfalls & Solutions</button>
@@ -175,36 +176,129 @@ Then implement the solution based on my responses.
                 <li>Monitoring and alerting setup</li>
                 <li>Documentation and runbooks</li>
             </ul>
-            <h3>Technology-Agnostic Implementation</h3>
-            <ul>
-                <li><b>AWS</b>: Bedrock, Lambda, RDS, CloudFormation</li>
-                <li><b>Azure</b>: Cognitive Services, Functions, SQL Database, ARM templates</li>
-                <li><b>Google Cloud</b>: Vertex AI, Cloud Functions, Cloud SQL, Deployment Manager</li>
-                <li><b>Self-hosted</b>: Open source models, Docker, Kubernetes</li>
-            </ul>
-            <h4>AI Coding Assistants</h4>
-            <ul>
-                <li>Cursor: Integrated development environment with AI</li>
-                <li>GitHub Copilot: Code completion and generation</li>
-                <li>Claude: Conversational AI for planning and implementation</li>
-                <li>ChatGPT: General-purpose AI assistance</li>
-                <li>Local Models: Self-hosted alternatives for privacy</li>
-            </ul>
-            <h4>Programming Languages and Frameworks</h4>
-            <pre class="code-block"># Python Example
-"Create a FastAPI service that handles user authentication..."
-
-# JavaScript Example  
-"Build a React component for the chat interface..."
-
-# Infrastructure Example
-"Generate Terraform configuration for the database layer..."
-</pre>
+        
             <div class="section-nav-btns">
                 <button id="back-workflow">Back</button>
                 <button id="next-workflow">Next</button>
             </div>
         </section>
+        
+        <section id="assistants" class="module-section" style="display:none">
+            <h2>AI Coding Assistants: Features &amp; Best Practices</h2>
+            <p>
+                This guide highlights some of the features, configuration files, commands, and actionable tips for the leading AI coding assistants: <b>Claude Code</b>, <b>GitHub Copilot</b>, <b>Cursor</b>, <b>Amazon Q Developer</b>, and <b>Cline</b>. This is just a reference—the space is evolving rapidly, so always consult the official documentation of these assistants for the most up-to-date information.
+            </p>
+
+            <h3>Claude Code</h3>
+            <ul>
+                <li><b>CLAUDE.md</b>: Special file (repo root, subfolders, or <code>~/.claude/CLAUDE.md</code>) automatically pulled into context. <a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank">Best Practices &amp; Examples</a></li>
+                <li>Custom Slash Commands: Store prompt templates in <code>.claude/commands/</code> and access via <code>/</code> in Claude.</li>
+                <li>Safe YOLO Mode: Fewer permission prompts (allowlist or CLI flags).</li>
+                <li>Headless Mode: Run Claude non-interactively for CI/automation (<code>claude -p "prompt"</code>).</li>
+                <li>Tool Allowlist: Control tool access via <code>/allowed-tools</code>, settings, or CLI flags.</li>
+                <li>MCP Integration: Use <code>.mcp.json</code> for project-wide tool/server access.</li>
+            </ul>
+            <b>Tips:</b>
+            <ul>
+                <li>Use <code>/clear</code> to reset context between tasks.</li>
+                <li>Use checklists and scratchpads (Markdown or GitHub issues) for complex workflows.</li>
+                <li>Pipe data into Claude (<code>cat file.txt | claude</code>).</li>
+                <li>Use multiple sessions or worktrees for parallel tasks and code review.</li>
+                <li>Iterate on your <code>CLAUDE.md</code> for best results.</li>
+            </ul>
+
+            <h3>GitHub Copilot</h3>
+            <ul>
+                <li><b>.github/copilot-instructions.md</b>: Project-level custom instructions for Copilot Chat and coding agent. <a href="https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot" target="_blank">How to use</a></li>
+                <li>Prompt Files: Store reusable prompt instructions in <code>.github/prompts/</code> (public preview).</li>
+                <li>Copilot Chat: Conversational AI for code explanations, debugging, and learning APIs.</li>
+                <li>Copilot CLI: Shell command suggestions and explanations.</li>
+                <li>Pull Request Support: PR descriptions, code reviews, and explanations.</li>
+            </ul>
+            <b>Tips:</b>
+            <ul>
+                <li>Reference files and style guides in <code>.github/copilot-instructions.md</code> for consistency.</li>
+                <li>Use prompt files for complex, repeatable instructions.</li>
+                <li>Always review and edit generated code.</li>
+                <li>Leverage test generation, but validate coverage and correctness.</li>
+                <li>Keep your codebase clean and well-documented.</li>
+            </ul>
+
+            <h3>Cursor</h3>
+            <ul>
+                <li><b>.cursorrules.md</b>: Project-level rules for coding standards and workflow.</li>
+                <li>Slash Commands: <code>/explain</code>, <code>/test</code>, etc., for quick actions.</li>
+                <li>MCP Integration: Connect to external data, live docs, and more.</li>
+                <li>Project Templates: Start new projects with AI-powered templates.</li>
+            </ul>
+            <b>Tips:</b>
+            <ul>
+                <li>Use <code>@cursorrules</code> for project standards.</li>
+                <li>Reference files/functions in chat for precise help.</li>
+                <li>Use MCP for live data/external context.</li>
+                <li>Try <code>/</code> commands for quick actions.</li>
+                <li>Use project templates for fast setup.</li>
+            </ul>
+
+            <h3>Amazon Q Developer</h3>
+            <ul>
+                <li><b>AWS Context</b>: Deep integration with AWS services and resources.</li>
+                <li>Security Analysis: Automated code security and compliance checks.</li>
+                <li>Infrastructure as Code: Generate and explain CloudFormation, CDK, and Terraform templates.</li>
+                <li>CLI Integration: Amazon Q CLI for command-line productivity and automation.</li>
+                <li>No project-level config file: Context managed via AWS project settings and credentials.</li>
+            </ul>
+            <b>Tips:</b>
+            <ul>
+                <li>Use Q for generating and explaining AWS infrastructure code.</li>
+                <li>Leverage security analysis for compliance and best practices.</li>
+                <li>Use the CLI for automating repetitive AWS tasks.</li>
+                <li>Provide clear AWS context (region, service, resource names) for best results.</li>
+                <li>Always review generated infrastructure code for security and cost implications.</li>
+            </ul>
+
+            <h3>Cline</h3>
+            <ul>
+                <li><b>.clinerules/ directory</b>: Place Markdown files with coding standards, documentation requirements, and workflow rules here. <a href="https://docs.cline.bot/features/cline-rules" target="_blank">Cline Rules Guide</a></li>
+                <li><b>.clineignore</b>: Exclude files and folders from Cline's context (like <code>.gitignore</code>). <a href="https://docs.cline.bot/prompting/prompt-engineering-guide" target="_blank">Prompt Engineering Guide</a></li>
+                <li>Custom Slash Commands: Store prompt templates and workflows in <code>.clinerules/</code> or use slash commands in chat.</li>
+                <li>Plan &amp; Act: Structured, multi-step planning and execution for complex tasks. <a href="https://docs.cline.bot/features/plan-and-act" target="_blank">Plan &amp; Act</a></li>
+                <li>@ Mentions: Reference files, folders, or people in prompts for precise context. <a href="https://docs.cline.bot/features/at-mentions/overview" target="_blank">@ Mentions</a></li>
+                <li>Workflows: Automate multi-step coding or project tasks. <a href="https://docs.cline.bot/features/slash-commands/workflows" target="_blank">Workflows</a></li>
+                <li>MCP Servers: Integrate with external databases, live docs, and more via MCP protocol. <a href="https://docs.cline.bot/features/mcp-servers/overview" target="_blank">MCP Overview</a></li>
+                <li>Memory Bank: Persistent memory for context and project knowledge. <a href="https://docs.cline.bot/prompting/prompt-engineering-guide#cline-memory-bank" target="_blank">Memory Bank</a></li>
+                <li>Drag &amp; Drop: Drag files into chat for context or analysis.</li>
+                <li>Checkpoints: Save and restore project states during development.</li>
+                <li>Auto Approve: Automatically approve certain actions for faster workflows.</li>
+            </ul>
+            <b>Tips:</b>
+            <ul>
+                <li>Use @-mentions for precise context in prompts.</li>
+                <li>Store standards and rules in <code>.clinerules/</code> for team-wide consistency.</li>
+                <li>Use Plan &amp; Act for breaking down and executing complex tasks.</li>
+                <li>Integrate MCP for external data and live documentation.</li>
+                <li>Use drag &amp; drop for quick context sharing.</li>
+                <li>Try checkpoints for safe experimentation and easy rollback.</li>
+                <li>Regularly update <code>.clineignore</code> to keep context relevant and secure.</li>
+            </ul>
+
+            <h3>General Tips for All AI Coding Assistants</h3>
+            <ul>
+                <li><b>Give URLs to fetch</b>: Many assistants can fetch and analyze content from URLs.</li>
+                <li><b>Give images</b>: Some can analyze images if provided.</li>
+                <li><b>Mention/reference files in prompts</b>: Use file names, or copy and paste code or docs into your prompt for best results.</li>
+                <li><b>Clear context/start over</b>: Use commands like <code>/clear</code> or start a new chat to reset the assistant's context.</li>
+                <li><b>Use checklists and scratchpads</b>: For complex workflows, have the assistant use a Markdown file or issue as a checklist and working scratchpad.</li>
+                <li><b>Break down large tasks</b>: Divide complex requests into smaller, focused prompts for better results.</li>
+                <li><b>Iterate and refine</b>: Review, test, and refine the assistant's output—don't expect perfection on the first try.</li>
+            </ul>
+
+            <div class="section-nav-btns">
+                <button id="back-assistants">Back</button>
+                <button id="next-assistants">Next</button>
+            </div>
+        </section>
+
         <!-- Section: Case Study -->
         <section id="case-study" class="module-section" style="display:none">
             <h2>Case Study: Educational Chatbot</h2>

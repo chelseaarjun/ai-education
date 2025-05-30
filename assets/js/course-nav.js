@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <a href="${rootPath}pages/aws-bedrock.html" class="course-nav-dropdown-item available">AWS Bedrock</a>
                         <a href="${rootPath}pages/open-source.html" class="course-nav-dropdown-item available">Open Source Tools & Frameworks</a>
                         <a href="#" class="course-nav-dropdown-item coming-soon">LLMOps <span>Coming Soon</span></a>
-                        <a href="#" class="course-nav-dropdown-item coming-soon">Prompt-Driven Dev <span>Coming Soon</span></a>
+                        <a href="${rootPath}pages/vibe-code.html" class="course-nav-dropdown-item available">Vibe Code & End-to-End AI Agent</a>
                     </div>
                 </div>
             </div>
