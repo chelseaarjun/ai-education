@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="course-nav-dropdown">
                     <button class="course-nav-dropdown-btn">Part 2: Building AI Applications</button>
                     <div class="course-nav-dropdown-content">
-                        <a href="#" class="course-nav-dropdown-item coming-soon">AWS Bedrock <span>Coming Soon</span></a>
-                        <a href="#" class="course-nav-dropdown-item coming-soon">Open Source Tools & Frameworks <span>Coming Soon</span></a>
+                        <a href="#" class="course-nav-dropdown-item coming-soon">LLM Workflows<span>Coming Soon</span></a>
+                        <a href="#" class="course-nav-dropdown-item coming-soon">Knowledge Bases <span>Coming Soon</span></a>
                         <a href="#" class="course-nav-dropdown-item coming-soon">LLMOps <span>Coming Soon</span></a>
                         <a href="${rootPath}pages/vibe-code.html" class="course-nav-dropdown-item available">Vibe Code & End-to-End AI Agent</a>
                     </div>
