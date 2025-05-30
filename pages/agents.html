@@ -177,7 +177,7 @@
                 </p>
                 <ul class="enhanced-list">
                     <li><b>Agent Fundamentals:</b> The key characteristics that define agents</li>
-                    <li><b>When to use Agents:</b> What makes agents different from Single-Step or Workflow-Based LLM applications.</li>
+                    <li><b>When to use Agents:</b> What makes agents different from Workflow-Based LLM applications.</li>
                     <li><b>Memory:</b> Types of memory and how agents use them</li>
                     <li><b>Tools:</b> How agents use external tools to extend their capabilities</li>
                     <li><b>Decision Cycle:</b> How agents observe, plan, and act in iterative loops</li>
@@ -238,7 +238,7 @@
             <div class="callout-info" style="background:#fffbe6;border-left:4px solid #ffd700;margin:1em 0 1.2em 0;padding:1em 1.2em;">
               <span style="font-size:1.2em;margin-right:0.3em;">⚡</span>
               For the remainder of this module, <b>"agents"</b> refers to <b>Agentic LLM applications</b>. 
-              The key differentiator from <b>Single-Step or Workflow Based LLM Applications</b> is the use of LLM to decide the control flow, and optionally, persistent memory for feedback loop and learning. 
+              The key differentiator from <b>Workflow Based LLM Applications</b> is the use of LLM to decide the control flow, and optionally, persistent memory for feedback loop and learning. 
               These require careful engineering and enable agents to adapt to handle complex tasks flexibly at the cost of increased implementation complexity.
             </div>
             <h3>The Engineering Challenge: From Prompts to Orchestration</h3>
@@ -262,19 +262,19 @@
             <div class="callout" style="background: #fffbe6; border-left: 4px solid #ffd700; margin: 1em 0 1.2em 0; padding: 0.5em 1em;">
               <strong>Guiding Principles for Using Agents:</strong>
               <ul style="margin-top: 0.5em;">
-                <li><b>Don't Build Agents for Everything:</b> Use agents only for complex, ambiguous, high-value tasks; prefer Single-Step or workflows for simple cases.</li>
+                <li><b>Don't Build Agents for Everything:</b> Use agents only for complex, ambiguous, high-value tasks; prefer non-agentic workflows for simple cases.</li>
                 <li><b>Keep It Simple:</b> Start with a minimal architecture (environment, tools, prompt); iterate before adding complexity.</li>
               </ul>
             </div>
-            <p>The following table compares traditional workflows, single-step or workflow-based LLM applications, and agentic LLM applications to help clarify when each approach is most appropriate.</p>
+            <p>The following table compares traditional workflows, LLM workflows, and agentic LLM Workflow based applications to help clarify when each approach is most appropriate.</p>
             <div class="table-responsive">
             <table>
                 <thead>
                     <tr>
                         <th>Dimension</th>
                         <th>Traditional Workflows</th>
-                        <th>Single-Step or Workflow Based LLM Applications</th>
-                        <th>Agentic LLM Applications</th>
+                        <th>LLM Workflows</th>
+                        <th>Agentic Workflows</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -359,8 +359,8 @@
             <h3>Example: Document Extraction</h3>
             <ul>
                 <li><strong>Traditional Workflow:</strong> Extracts fixed fields from one type of document that always follows the same structure (e.g., always pulls "Name" and "Date" from a standard lease form).</li>
-                <li><strong>Single-Step or Workflow-Based LLM Applications:</strong> Can flexibly extract different fields based on the prompt, but still processes one document at a time and does not adapt its process or use external tools.</li>
-                <li><strong>Agentic Application:</strong> Can interact with tools to translate documents, convert between different document types, and extract relevant fields—even adapting its approach based on the document's structure or missing information.</li>
+                <li><strong>LLM Workflow:</strong> Can flexibly extract different fields based on the prompt, but still processes one document at a time and does not adapt its process or use external tools.</li>
+                <li><strong>Agentic Workflow:</strong> Can interact with tools to translate documents, convert between different document types, and extract relevant fields—even adapting its approach based on the document's structure or missing information.</li>
             </ul>
             <div class="code-examples-row">
                 <div class="code-example-col">
