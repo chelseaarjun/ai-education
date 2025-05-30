@@ -84,7 +84,12 @@
       </div>
       <div style="display:flex;align-items:center;padding:8px 16px 8px 16px;border-top:1px solid #f0f0f0;">
         <input id="chatbot-input" type="text" placeholder="How can I help?..." style="flex:1;padding:7px 10px;border:1px solid #ccc;border-radius:4px;font-size:14px;">
-        <button id="chatbot-send" style="padding:7px 14px;background:${PRIMARY_COLOR};color:white;border:none;border-radius:4px;margin-left:8px;font-weight:500;">Send</button>
+        <button id="chatbot-send" style="padding:6px;min-width:36px;height:36px;background:${PRIMARY_COLOR};color:white;border:none;border-radius:4px;margin-left:8px;display:flex;align-items:center;justify-content:center;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(45deg);">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
       </div>
       <div style="padding:6px 16px 0px 16px;border-top:1px solid #f0f0f0;">
         <div id="proficiency-selector" style="display:flex;gap:8px;margin-bottom:8px;">
@@ -107,6 +112,90 @@
           border-color: ${PRIMARY_COLOR} !important;
           font-weight: 500 !important;
           box-shadow: 0 2px 4px rgba(37,99,235,0.2) !important;
+        }
+        
+        /* Responsive design for mobile devices */
+        @media (max-width: 768px) {
+          #chatbot-modal {
+            width: 90% !important;
+            max-width: 400px !important;
+            right: 5% !important;
+            left: 5% !important;
+            margin: 0 auto !important;
+            bottom: 70px !important;
+            height: 60% !important;
+            max-height: 500px !important;
+          }
+          
+          #new-chat-btn {
+            font-size: 12px !important;
+            padding: 3px 6px !important;
+          }
+          
+          #chatbot-send {
+            min-width: 32px !important;
+            height: 32px !important;
+          }
+          
+          #chatbot-send svg {
+            width: 16px !important;
+            height: 16px !important;
+          }
+          
+          #proficiency-selector {
+            gap: 4px !important;
+          }
+          
+          .proficiency-btn {
+            font-size: 12px !important;
+            padding: 4px 2px !important;
+          }
+        }
+        
+        /* Small phones */
+        @media (max-width: 480px) {
+          #chatbot-modal {
+            width: 95% !important;
+            height: 70% !important;
+            right: 2.5% !important;
+            left: 2.5% !important;
+            bottom: 60px !important;
+          }
+          
+          #chatbot-messages {
+            max-height: 38vh !important;
+          }
+          
+          #chatbot-input {
+            flex: 1 1 auto !important;
+            padding: 6px 6px !important;
+            font-size: 13px !important;
+            width: calc(100% - 42px) !important;
+          }
+          
+          #chatbot-send {
+            min-width: unset !important;
+            width: 26px !important;
+            height: 26px !important;
+            padding: 2px !important;
+            margin-left: 4px !important;
+            flex: 0 0 auto !important;
+          }
+          
+          #chatbot-send svg {
+            width: 13px !important;
+            height: 13px !important;
+          }
+          
+          .proficiency-btn {
+            padding: 4px 0px !important;
+            font-size: 11px !important;
+          }
+          
+          /* Adjust the container padding */
+          #chatbot-modal > div:nth-of-type(4) {
+            padding: 8px 12px 8px 12px !important;
+          }
         }
       </style>
     `;
