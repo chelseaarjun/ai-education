@@ -1,0 +1,141 @@
+/* Footer and Chat Button Styles */
+
+/* --- Footer Styles (shared across all pages) --- */
+.site-footer {
+    width: 100%;
+    background: #f8f9fa;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+    padding: 6px 0;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+    font-size: 0.97em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+
+.footer-feedback-btn, .footer-chat-btn, .footer-contact-link {
+    background: none;
+    color: #222;
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+    font-size: 1.2em;
+    box-shadow: none;
+    cursor: pointer;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.18s, background 0.18s;
+}
+
+.footer-feedback-btn:hover:not(:disabled), .footer-feedback-btn:focus-visible {
+    color: #0a66c2;
+    background: #eaf2f8;
+    outline: none;
+}
+
+.footer-contact-link:hover, .footer-contact-link:focus-visible {
+    color: #0a66c2;
+    background: #eaf2f8;
+    outline: none;
+    text-decoration: underline;
+}
+
+.footer-chat-btn {
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.footer-chat-btn:hover, .footer-chat-btn:focus-visible {
+    color: #aaa;
+    background: none;
+    outline: none;
+}
+
+.site-footer svg + .footer-label,
+.site-footer .footer-feedback-btn > .footer-label,
+.site-footer .footer-chat-btn > .footer-label {
+    margin-left: 0.33em;
+}
+
+/* Floating Chat Button Styles */
+.floating-chat-btn {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: fixed;
+    bottom: 80px; /* Positioned above the footer */
+    right: 20px;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    z-index: 1000;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.floating-chat-btn:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+}
+
+.floating-chat-btn .btn-label {
+    display: inline;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 600px) {
+    .site-footer {
+        font-size: 0.93em;
+        padding: 4px 0;
+        gap: 8px;
+        justify-content: space-evenly;
+        padding: 10px 5px;
+    }
+    
+    .footer-feedback-btn, .footer-contact-link {
+        min-width: 40px;
+        width: 40px;
+        padding: 8px 0;
+        margin: 0;
+    }
+    
+    .footer-label {
+        display: none !important;
+    }
+    
+    .floating-chat-btn {
+        width: 50px;
+        height: 50px;
+        padding: 0;
+        border-radius: 50%;
+        bottom: 20px;
+        right: 20px;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+    
+    .floating-chat-btn svg {
+        margin: 0;
+    }
+    
+    .floating-chat-btn .btn-label {
+        display: none;
+    }
+} 

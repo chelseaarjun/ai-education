@@ -31,9 +31,20 @@
   // Track conversation summary
   let conversationSummary = sessionStorage.getItem(SUMMARY_KEY) || '';
 
-  // Find the chat button and fix styling immediately
-  const btn = document.querySelector('.footer-chat-btn');
+  // Debug info about what we're looking for
+  console.log("Chat widget initializing - looking for chat buttons");
+  
+  // Try to find any chat button - let's try multiple selectors
+  let btn = document.querySelector('.footer-chat-btn');
+  if (!btn) {
+    console.log("No .footer-chat-btn found, trying .floating-chat-btn");
+    btn = document.querySelector('.floating-chat-btn');
+  }
+  
+  // Log which button was found
   if (btn) {
+    console.log("Chat button found with class: " + btn.className);
+    
     // Remove disabled attribute
     btn.removeAttribute('disabled');
     
@@ -56,13 +67,21 @@
     btn.style.setProperty('opacity', '1', 'important');
     btn.style.setProperty('pointer-events', 'auto', 'important');
     btn.style.setProperty('filter', 'none', 'important');
+    btn.style.setProperty('z-index', '1000', 'important');
     
-    // Update content with SVG icon
+    // Debug click handler
+    const originalClickHandler = btn.onclick;
+    if (originalClickHandler) {
+      console.log("Button already had a click handler - replacing it");
+    }
+    
+    // Update content with SVG icon - check if it has .btn-label or .footer-label
+    const labelClass = btn.querySelector('.btn-label') ? 'btn-label' : 'footer-label';
     btn.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
       </svg>
-      <span class="footer-label">Ask AI Assistant</span>
+      <span class="${labelClass}">Ask AI Assistant</span>
     `;
     
     // Add hover effect for better feedback
@@ -78,13 +97,38 @@
       btn.style.setProperty('box-shadow', '0 4px 12px rgba(37, 99, 235, 0.2)', 'important');
     });
     
-    // Add click event
-    btn.addEventListener('click', openChatModal);
+    // Add click event that toggles the chat modal
+    btn.onclick = function(e) {
+      console.log("Chat button clicked");
+      toggleChatModal();
+    };
     
     // Debug info
     console.log("Chat button found and enabled!");
+    
+    // Log the button HTML
+    console.log("Button HTML: " + btn.outerHTML);
   } else {
-    console.error("Chat button not found!");
+    console.error("Chat button not found! Looking for .footer-chat-btn or .floating-chat-btn");
+    console.log("Available buttons on page:");
+    document.querySelectorAll('button').forEach(b => {
+      console.log("- Button with class: " + b.className);
+    });
+  }
+
+  // Toggle function to open or close the chat modal
+  function toggleChatModal() {
+    const existingModal = document.getElementById('chatbot-modal');
+    
+    if (existingModal) {
+      // If modal exists, close it
+      console.log("Closing existing chat modal");
+      existingModal.remove();
+    } else {
+      // If no modal exists, open a new one
+      console.log("Opening new chat modal");
+      openChatModal();
+    }
   }
 
   function getHistory() {
@@ -99,7 +143,6 @@
   }
 
   function openChatModal() {
-    if (document.getElementById('chatbot-modal')) return;
     const modal = document.createElement('div');
     modal.id = 'chatbot-modal';
     modal.style.position = 'fixed';

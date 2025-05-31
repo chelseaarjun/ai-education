@@ -6,11 +6,16 @@
     <script data-goatcounter="https://ai-foundation-course.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
     <title>AI Foundations Course</title>
+    <!-- Base Styles -->
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    
     <link rel="stylesheet" href="assets/css/course-nav.css">
     <link rel="stylesheet" href="assets/css/module-nav-bar.css">
     <link rel="stylesheet" href="assets/css/course-index.css">
     <link rel="stylesheet" href="assets/css/mobile-fixes.css">
     <link rel="stylesheet" href="assets/css/introduction-fix.css">
+    <link rel="stylesheet" href="assets/css/footer-chat.css">
     <style>
         .navigation {
             text-align: center;
@@ -235,7 +240,7 @@
         }
         
         /* Chat button styled like in test-chatbot.html */
-        .footer-chat-btn {
+        .floating-chat-btn {
             background-color: #2563eb;
             color: white;
             border: none;
@@ -254,16 +259,16 @@
             z-index: 1000;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
-        .footer-chat-btn:hover {
+        .floating-chat-btn:hover {
             background-color: #1d4ed8;
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
         }
-        .footer-chat-btn .footer-label {
+        .floating-chat-btn .btn-label {
             display: inline;
         }
         @media (max-width: 600px) {
-            .footer-chat-btn {
+            .floating-chat-btn {
                 width: 50px;
                 height: 50px;
                 padding: 0;
@@ -273,10 +278,10 @@
                 justify-content: center;
                 box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
             }
-            .footer-chat-btn svg {
+            .floating-chat-btn svg {
                 margin: 0;
             }
-            .footer-chat-btn .footer-label {
+            .floating-chat-btn .btn-label {
                 display: none;
             }
             
@@ -602,11 +607,11 @@
     </footer>
     
     <!-- Chat button outside the footer -->
-    <button class="footer-chat-btn" aria-label="Ask AI Assistant">
+    <button class="floating-chat-btn" aria-label="Ask AI Assistant">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
       </svg>
-      <span class="footer-label">Ask AI Assistant</span>
+      <span class="btn-label">Ask AI Assistant</span>
     </button>
     
     <script src="assets/js/course-nav.js"></script>
