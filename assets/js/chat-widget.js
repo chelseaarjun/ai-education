@@ -402,31 +402,58 @@
       .then(data => {
         typing.style.display = 'none';
         
+        // Handle potential malformed response
+        let processedData = data;
+        
+        // Check if we received a string instead of a parsed object
+        if (typeof data === 'string') {
+          try {
+            // Try to parse it as JSON
+            processedData = JSON.parse(data);
+          } catch (e) {
+            console.error('Failed to parse response as JSON:', e);
+            // Extract content from malformed string if possible
+            const textMatch = data.match(/"text":\s*"([^"]*)"/);
+            if (textMatch && textMatch[1]) {
+              processedData = {
+                answer: { text: textMatch[1] },
+                followUpQuestions: [],
+                sources: []
+              };
+            }
+          }
+        }
+        
+        // Check if we need to clean up the answer text
+        if (processedData.answer && typeof processedData.answer === 'string') {
+          try {
+            // Sometimes answer might be a JSON string instead of an object
+            processedData.answer = JSON.parse(processedData.answer);
+          } catch (e) {
+            // If it fails, create a proper answer object
+            processedData.answer = { text: processedData.answer };
+          }
+        }
+        
         // Extract response data
-        const reply = data.answer && data.answer.text ? data.answer.text : (data.reply || JSON.stringify(data));
+        const reply = processedData.answer && processedData.answer.text 
+          ? processedData.answer.text 
+          : (processedData.reply || JSON.stringify(processedData));
         
         // Create bot message with new styling
         const botMsgDiv = document.createElement('div');
         botMsgDiv.className = 'chatbot-bot-msg';
-        botMsgDiv.textContent = reply;
+        botMsgDiv.innerHTML = formatMessageWithCitations(reply);
         messages.appendChild(botMsgDiv);
         
-        // Add citations if present
-        if (data.answer && data.answer.citations && data.answer.citations.length > 0) {
-          const citationsDiv = document.createElement('div');
-          citationsDiv.className = 'chatbot-citation';
-          
-          const citationsList = data.answer.citations.map(citation => 
-            `[${citation.id}] ${citation.text} (${citation.location || 'Unknown location'})`
-          ).join('<br>');
-          
-          citationsDiv.innerHTML = `<strong>Sources:</strong><br>${citationsList}`;
-          botMsgDiv.appendChild(citationsDiv);
+        // Add sources/citations if present
+        if (processedData.sources && processedData.sources.length > 0) {
+          addSourcesSection(botMsgDiv, processedData.sources);
         }
         
         // Add follow-up questions if present
-        if (data.followUpQuestions && data.followUpQuestions.length > 0) {
-          displayFollowUpQuestions(data.followUpQuestions);
+        if (processedData.followUpQuestions && processedData.followUpQuestions.length > 0) {
+          displayFollowUpQuestions(processedData.followUpQuestions);
         }
         
         // Update conversation history
@@ -434,14 +461,14 @@
         history.push({
           role: 'assistant',
           content: reply,
-          followUpQuestions: data.followUpQuestions || [],
-          citations: data.answer && data.answer.citations ? data.answer.citations : []
+          followUpQuestions: processedData.followUpQuestions || [],
+          sources: processedData.sources || []
         });
         setHistory(history);
         
         // Update conversation summary if provided
-        if (data.conversationSummary) {
-          conversationSummary = data.conversationSummary;
+        if (processedData.conversationSummary) {
+          conversationSummary = processedData.conversationSummary;
           sessionStorage.setItem(SUMMARY_KEY, conversationSummary);
         }
         
@@ -453,6 +480,86 @@
         messages.innerHTML += `<div style='color:red;text-align:center;padding:8px;'>Error: ${escapeHTML(err.message)}</div>`;
         messages.scrollTop = messages.scrollHeight;
       });
+  }
+
+  // Format message text with citation numbers highlighted and clickable
+  function formatMessageWithCitations(text) {
+    if (!text) return '';
+    // Highlight citation numbers [1], [2], etc. and make them clickable
+    return escapeHTML(text).replace(/\[(\d+)\]/g, function(match, citationNumber) {
+      return `<a href="#" class="citation-link" data-citation="${citationNumber}" style="color:${PRIMARY_COLOR};font-weight:bold;text-decoration:none;cursor:pointer;">${match}</a>`;
+    });
+  }
+
+  // Add sources/citations if present
+  function addSourcesSection(botMsgDiv, sources) {
+    if (!sources || sources.length === 0) return;
+    
+    const citationsDiv = document.createElement('div');
+    citationsDiv.className = 'chatbot-citation';
+    
+    const citationsList = sources
+      .filter(source => source.relevance_score > 0.5) // Only show relevant sources
+      .map(source => {
+        // Simple fix for duplicate pages/ in URLs
+        let sourceUrl = source.url || '';
+        
+        // Replace any occurrence of pages/pages/ with just pages/
+        while (sourceUrl.includes('pages/pages/')) {
+          sourceUrl = sourceUrl.replace('pages/pages/', 'pages/');
+        }
+        
+        return `<div id="citation-${source.id}">
+          <a href="${sourceUrl}" class="source-link" data-url="${sourceUrl}" style="color:${PRIMARY_COLOR};text-decoration:none;font-weight:bold;">[${source.id}]</a> 
+          ${source.title}${source.section_title ? ` - ${source.section_title}` : ''}
+          (<a href="${sourceUrl}" class="source-link" data-url="${sourceUrl}" style="color:${PRIMARY_COLOR};">${sourceUrl}</a>)
+        </div>`;
+      }).join('');
+    
+    citationsDiv.innerHTML = `<strong>Sources:</strong><br>${citationsList}`;
+    botMsgDiv.appendChild(citationsDiv);
+    
+    // Add event listeners for citation links in the text
+    setTimeout(() => {
+      document.querySelectorAll('.citation-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const citationId = this.getAttribute('data-citation');
+          const citationElement = document.getElementById(`citation-${citationId}`);
+          if (citationElement) {
+            citationElement.scrollIntoView({ behavior: 'smooth' });
+            citationElement.style.backgroundColor = '#fffde7';
+            setTimeout(() => {
+              citationElement.style.backgroundColor = 'transparent';
+              citationElement.style.transition = 'background-color 1.5s ease';
+            }, 100);
+          }
+        });
+      });
+      
+      // Add event listeners for source links
+      document.querySelectorAll('.source-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const url = this.getAttribute('data-url');
+          
+          // Save chat state before navigating
+          saveState();
+          
+          // Navigate to the source URL in the same tab
+          window.location.href = url;
+        });
+      });
+    }, 100);
+  }
+  
+  // Save chat state before navigating away
+  function saveState() {
+    // Already handled by our existing session storage mechanism
+    // Just make sure everything is saved before navigating
+    setHistory(getHistory());
+    sessionStorage.setItem(SUMMARY_KEY, conversationSummary);
+    sessionStorage.setItem(PROFICIENCY_KEY, proficiencyLevel);
   }
 
   function clearHistory() {

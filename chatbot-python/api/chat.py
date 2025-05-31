@@ -60,36 +60,46 @@ async def retrieve_relevant_content(query, proficiency_level="Intermediate", num
         if hasattr(response, 'error') and response.error:
             raise Exception(response.error)
         
-        # Format results for prompt
-        return [
-            {
+        # Format results for prompt and citations
+        sources = []
+        for i, item in enumerate(response.data):
+            sources.append({
+                "id": i + 1,  # 1-based indexing for citations
                 "content": item.get("content", ""),
-                "source": item.get("title", "Unknown"),
-                "location": item.get("url", "Unknown")
-            }
-            for item in response.data
-        ]
+                "title": item.get("title", "Unknown"),
+                "url": item.get("url", "Unknown"),
+                "relevance_score": item.get("similarity", 0.0),
+                "section_title": item.get("section_title", "")
+            })
+        
+        return sources
     except Exception as e:
         print(f"Error retrieving content: {str(e)}")
         # Return fallback data
         return [
             {
+                "id": 1,
                 "content": "Large Language Models (LLMs) are sophisticated AI systems trained on vast amounts of text data to understand and generate human-like language.",
-                "source": "AI Foundations",
-                "location": "module1/llms.html"
+                "title": "AI Foundations",
+                "url": "module1/llms.html",
+                "relevance_score": 0.85,
+                "section_title": "Introduction to LLMs"
             },
             {
+                "id": 2,
                 "content": "LLMs work through a process called transformer architecture, which allows them to process text in parallel and learn complex relationships between words and concepts.",
-                "source": "AI Technical Concepts",
-                "location": "module2/transformers.html"
+                "title": "AI Technical Concepts",
+                "url": "module2/transformers.html",
+                "relevance_score": 0.75,
+                "section_title": "Transformer Architecture"
             }
         ]
 
 def generate_prompt(question, proficiency_level, conversation_history, conversation_summary, retrieved_content):
     """Generate the system prompt with context and retrieved content"""
     formatted_content = "\n\n".join([
-        f"[{i+1}] {item['content']}\nSource: {item['source']} ({item['location']})"
-        for i, item in enumerate(retrieved_content)
+        f"[{item['id']}] {item['content']}\nSource: {item['title']} ({item['url']})"
+        for item in retrieved_content
     ])
     
     return f"""
@@ -112,14 +122,22 @@ GUIDELINES:
 - If technical explanations are needed, provide examples
 - Use your general knowledge of AI and ML to provide accurate information
 
+CITATION INSTRUCTIONS:
+- When using information from the provided course content, cite your sources using numbered references: [1], [2], etc.
+- If answering from your general knowledge, explicitly state "Based on my general knowledge:"
+- Only cite course materials that directly inform your answer
+- For each citation number, indicate the exact source being referenced
+- You MUST cite sources when directly using course content
+
 COURSE KNOWLEDGE:
 {formatted_content or "No specific course content available for this query."}
 
 ANSWER FORMAT:
 1. Provide a clear, direct answer to the question
-2. Suggest at least 1 to max 3 relevant follow-up questions
+2. Include numbered citations [1], [2], etc. where appropriate
+3. Suggest at least 1 to max 3 relevant follow-up questions
 
-IMPORTANT: Do not cite specific sources in your responses. You MUST use the response_formatter tool to structure your response with the exact JSON schema provided.
+IMPORTANT: You MUST use the response_formatter tool to structure your response with the exact JSON schema provided.
 Your answer should have 'answer.text', 'followUpQuestions', and 'conversationSummary'.
 """
 
@@ -202,32 +220,57 @@ async def chat(request: Request):
             if formatted_history and len(formatted_history) > 0:
                 messages = formatted_history + messages
             
-            # Call Anthropic API with Tools
-            response = anthropic.messages.create(
-                model="claude-3-5-haiku-latest",
-                max_tokens=1000,
-                system=system_prompt,
-                messages=messages,
-                tools=[{
-                    "name": "response_formatter",
-                    "input_schema": response_schema
-                }],
-                tool_choice={
-                    "type": "tool",
-                    "name": "response_formatter"
-                }
-            )
-            
-            # Extract structured data
-            if (response.content and 
-                response.content[0].type == 'tool_use' and 
-                response.content[0].name == 'response_formatter'):
+            try:
+                # Call Anthropic API with Tools
+                response = anthropic.messages.create(
+                    model="claude-3-5-haiku-latest",
+                    max_tokens=1000,
+                    system=system_prompt,
+                    messages=messages,
+                    tools=[{
+                        "name": "response_formatter",
+                        "input_schema": response_schema
+                    }],
+                    tool_choice={
+                        "type": "tool",
+                        "name": "response_formatter"
+                    }
+                )
                 
-                structured_response = response.content[0].input
-                return structured_response
-            else:
-                # Fallback to mock response if extraction fails
-                return get_fallback_response("Could not parse model response")
+                # Extract structured data
+                if (response.content and 
+                    response.content[0].type == 'tool_use' and 
+                    response.content[0].name == 'response_formatter'):
+                    
+                    structured_response = response.content[0].input
+                    
+                    # Ensure we have proper JSON structure
+                    if isinstance(structured_response, str):
+                        try:
+                            structured_response = json.loads(structured_response)
+                        except json.JSONDecodeError:
+                            print(f"Error parsing response as JSON: {structured_response}")
+                            return get_fallback_response("Invalid response format")
+                    
+                    # Add sources information to the response
+                    structured_response["sources"] = [
+                        {
+                            "id": source["id"],
+                            "title": source["title"],
+                            "url": source["url"],
+                            "section_title": source.get("section_title", ""),
+                            "relevance_score": source.get("relevance_score", 0.0)
+                        }
+                        for source in retrieved_content
+                    ]
+                    
+                    return structured_response
+                else:
+                    # Fallback to mock response if extraction fails
+                    return get_fallback_response("Could not parse model response")
+            except Exception as e:
+                print(f"Error calling Anthropic API: {str(e)}")
+                return get_fallback_response(f"API error: {str(e)}")
         else:
             # Return mock response if Anthropic API key is not available
             return get_fallback_response("API key not configured")
