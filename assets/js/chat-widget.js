@@ -5,9 +5,13 @@
   const MODAL_HEIGHT = '500px';
   const SESSION_KEY = 'chatbot_conversation_history';
   const PROFICIENCY_KEY = 'chatbot_proficiency_level';
+  const SUMMARY_KEY = 'chatbot_conversation_summary';
   
   // Default proficiency level
   let proficiencyLevel = sessionStorage.getItem(PROFICIENCY_KEY) || 'Intermediate';
+  
+  // Track conversation summary
+  let conversationSummary = sessionStorage.getItem(SUMMARY_KEY) || '';
 
   // Find the chat button and fix styling immediately
   const btn = document.querySelector('.footer-chat-btn');
@@ -112,6 +116,56 @@
           border-color: ${PRIMARY_COLOR} !important;
           font-weight: 500 !important;
           box-shadow: 0 2px 4px rgba(37,99,235,0.2) !important;
+        }
+        
+        /* Message styling */
+        .chatbot-user-msg {
+          background-color: #e2f2ff;
+          padding: 10px 12px;
+          border-radius: 12px 12px 0 12px;
+          margin: 8px 0 8px auto;
+          max-width: 85%;
+          align-self: flex-end;
+          text-align: right;
+        }
+        
+        .chatbot-bot-msg {
+          background-color: #f0f2f5;
+          padding: 10px 12px;
+          border-radius: 12px 12px 12px 0;
+          margin: 8px auto 8px 0;
+          max-width: 85%;
+          align-self: flex-start;
+        }
+        
+        .chatbot-citation {
+          font-size: 12px;
+          color: #666;
+          margin-top: 6px;
+          font-style: italic;
+          text-align: left;
+        }
+        
+        .chatbot-suggestions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          margin: 8px 0;
+        }
+        
+        .chatbot-suggestion-btn {
+          background-color: #f0f2f5;
+          color: ${PRIMARY_COLOR};
+          font-size: 12px;
+          padding: 6px 10px;
+          border-radius: 12px;
+          border: 1px solid #e5e7eb;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+        
+        .chatbot-suggestion-btn:hover {
+          background-color: #e2f2ff;
         }
         
         /* Responsive design for mobile devices */
@@ -247,16 +301,60 @@
     
     // Show initial proficiency level message
     if (history.length === 0) {
-      messages.innerHTML = `<div style="text-align:center;padding:8px;color:#6b7280;font-size:12px;background:#f9fafb;border-radius:4px;margin:8px 0;">Proficiency level is set to: ${proficiencyLevel}</div>`;
+      messages.innerHTML = `<div style="text-align:center;padding:15px;color:#6b7280;font-size:13px;">Welcome to the AI Education Chatbot! I can answer questions about AI concepts from the course. What would you like to know?</div>`;
     }
     
     history.forEach(msg => {
       if (msg.role === 'user') {
-        messages.innerHTML += `<div style='margin-bottom:4px;'><b>You:</b> ${escapeHTML(msg.content)}</div>`;
-      } else {
-        messages.innerHTML += `<div style='margin-bottom:4px;'><b>Bot:</b> ${escapeHTML(msg.content)}</div>`;
+        messages.innerHTML += `<div class="chatbot-user-msg">${escapeHTML(msg.content)}</div>`;
+      } else if (msg.role === 'assistant') {
+        const botMsg = document.createElement('div');
+        botMsg.className = 'chatbot-bot-msg';
+        botMsg.textContent = escapeHTML(msg.content);
+        
+        // Add citations if present
+        if (msg.citations && msg.citations.length > 0) {
+          const citationsDiv = document.createElement('div');
+          citationsDiv.className = 'chatbot-citation';
+          
+          const citationsList = msg.citations.map(citation => 
+            `[${citation.id}] ${citation.text} (${citation.location || 'Unknown location'})`
+          ).join('<br>');
+          
+          citationsDiv.innerHTML = `<strong>Sources:</strong><br>${citationsList}`;
+          botMsg.appendChild(citationsDiv);
+        }
+        
+        messages.appendChild(botMsg);
+        
+        // Add follow-up questions if present
+        if (msg.followUpQuestions && msg.followUpQuestions.length > 0) {
+          displayFollowUpQuestions(msg.followUpQuestions);
+        }
       }
     });
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function displayFollowUpQuestions(questions) {
+    const messages = document.getElementById('chatbot-messages');
+    if (!messages) return;
+    
+    const suggestionsDiv = document.createElement('div');
+    suggestionsDiv.className = 'chatbot-suggestions';
+    
+    questions.forEach(question => {
+      const btn = document.createElement('button');
+      btn.className = 'chatbot-suggestion-btn';
+      btn.textContent = question;
+      btn.onclick = () => {
+        document.getElementById('chatbot-input').value = question;
+        sendMessage();
+      };
+      suggestionsDiv.appendChild(btn);
+    });
+    
+    messages.appendChild(suggestionsDiv);
     messages.scrollTop = messages.scrollHeight;
   }
 
@@ -266,39 +364,104 @@
     const typing = document.getElementById('chatbot-typing');
     const text = input.value.trim();
     if (!text) return;
+    
+    // Add user message to UI with new styling
+    const userMsgDiv = document.createElement('div');
+    userMsgDiv.className = 'chatbot-user-msg';
+    userMsgDiv.textContent = text;
+    messages.appendChild(userMsgDiv);
+    messages.scrollTop = messages.scrollHeight;
+    
+    // Format conversation history
     let history = getHistory();
     history.push({ role: 'user', content: text });
     setHistory(history);
-    renderHistory();
+    
+    // Clear input and show typing indicator
     input.value = '';
     typing.style.display = 'flex';
-    fetch('/chatbot/api/chat', {
+    
+    // For testing with local endpoint
+    const apiUrl = 'http://localhost:3000/api/chat/';  // Updated to point to the Python API
+    
+    // Format request based on new Python API format
+    fetch(apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         message: text,
-        history: history,
-        proficiencyLevel: proficiencyLevel
+        conversationHistory: history.map(msg => ({
+          role: msg.role,
+          content: msg.content
+        })),
+        proficiencyLevel: proficiencyLevel,
+        conversationSummary: conversationSummary
       })
     })
       .then(r => r.json())
       .then(data => {
         typing.style.display = 'none';
-        const reply = data.reply || JSON.stringify(data);
+        
+        // Extract response data
+        const reply = data.answer && data.answer.text ? data.answer.text : (data.reply || JSON.stringify(data));
+        
+        // Create bot message with new styling
+        const botMsgDiv = document.createElement('div');
+        botMsgDiv.className = 'chatbot-bot-msg';
+        botMsgDiv.textContent = reply;
+        messages.appendChild(botMsgDiv);
+        
+        // Add citations if present
+        if (data.answer && data.answer.citations && data.answer.citations.length > 0) {
+          const citationsDiv = document.createElement('div');
+          citationsDiv.className = 'chatbot-citation';
+          
+          const citationsList = data.answer.citations.map(citation => 
+            `[${citation.id}] ${citation.text} (${citation.location || 'Unknown location'})`
+          ).join('<br>');
+          
+          citationsDiv.innerHTML = `<strong>Sources:</strong><br>${citationsList}`;
+          botMsgDiv.appendChild(citationsDiv);
+        }
+        
+        // Add follow-up questions if present
+        if (data.followUpQuestions && data.followUpQuestions.length > 0) {
+          displayFollowUpQuestions(data.followUpQuestions);
+        }
+        
+        // Update conversation history
         history = getHistory();
-        history.push({ role: 'bot', content: reply });
+        history.push({
+          role: 'assistant',
+          content: reply,
+          followUpQuestions: data.followUpQuestions || [],
+          citations: data.answer && data.answer.citations ? data.answer.citations : []
+        });
         setHistory(history);
-        renderHistory();
+        
+        // Update conversation summary if provided
+        if (data.conversationSummary) {
+          conversationSummary = data.conversationSummary;
+          sessionStorage.setItem(SUMMARY_KEY, conversationSummary);
+        }
+        
+        // Scroll to bottom
+        messages.scrollTop = messages.scrollHeight;
       })
       .catch(err => {
         typing.style.display = 'none';
-        messages.innerHTML += `<div style='color:red;'>Error: ${escapeHTML(err.message)}</div>`;
+        messages.innerHTML += `<div style='color:red;text-align:center;padding:8px;'>Error: ${escapeHTML(err.message)}</div>`;
+        messages.scrollTop = messages.scrollHeight;
       });
   }
 
   function clearHistory() {
     // Clear session storage
     sessionStorage.removeItem(SESSION_KEY);
+    sessionStorage.removeItem(SUMMARY_KEY);
+    
+    // Reset conversation summary
+    conversationSummary = '';
     
     // Clear messages display
     const messages = document.getElementById('chatbot-messages');
@@ -310,6 +473,7 @@
   }
 
   function escapeHTML(str) {
+    if (!str) return '';
     return str.replace(/[&<>"']/g, function(tag) {
       const charsToReplace = {
         '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
