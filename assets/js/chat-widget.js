@@ -1,11 +1,50 @@
 // Enhanced Chatbot Widget with session history, typing indicator, and disclaimer
 (function() {
+  // Check if GoatCounter is already initialized
+  if (typeof window.goatcounter === 'undefined') {
+    // Function to initialize GoatCounter
+    const initGoatCounter = function() {
+      // Only initialize if not already loaded
+      if (typeof window.goatcounter === 'undefined') {
+        // Check if on localhost
+        const isLocalhost = window.location.hostname === 'localhost' || 
+                           window.location.hostname === '127.0.0.1';
+        
+        // Skip actual tracking on localhost, just log to console
+        if (isLocalhost) {
+          // Create mock goatcounter for development
+          window.goatcounter = {
+            count: function(params) {
+              console.log('GoatCounter (DEV MODE):', params);
+            }
+          };
+          console.log('GoatCounter initialized in development mode');
+          return;
+        }
+        
+        // Add GoatCounter script
+        const script = document.createElement('script');
+        script.async = true;
+        script.dataset.goatcounter = 'https://aieducation.goatcounter.com/count'; // Replace with your actual GoatCounter URL
+        script.src = '//gc.zgo.at/count.js';
+        
+        // Append script to document
+        document.head.appendChild(script);
+        console.log('GoatCounter script added to page');
+      }
+    };
+    
+    // Initialize GoatCounter
+    initGoatCounter();
+  }
+
   const PRIMARY_COLOR = '#2563eb';
   const MODAL_WIDTH = '350px';
   const MODAL_HEIGHT = '500px';
   const SESSION_KEY = 'chatbot_conversation_history';
   const PROFICIENCY_KEY = 'chatbot_proficiency_level';
   const SUMMARY_KEY = 'chatbot_conversation_summary';
+  const SESSION_START_KEY = 'chatbot_session_start_time';
   
   // API URL configuration - select based on environment
   const API_CONFIG = {
@@ -13,17 +52,59 @@
     production: 'https://ai-education-ryuu.onrender.com/api/chat/'
   };
   
-  // Determine current environment based on hostname
-  function getApiUrl() {
-    const hostname = window.location.hostname;
-    if (hostname === 'localhost' || hostname === '127.0.0.1') {
-      console.log('Using local API endpoint');
-      return API_CONFIG.local;
-    } else {
-      console.log('Using production API endpoint');
-      return API_CONFIG.production;
+  // Analytics tracking functions
+  const Analytics = {
+    // Initialize session data
+    initSession: function() {
+      if (!sessionStorage.getItem(SESSION_START_KEY)) {
+        sessionStorage.setItem(SESSION_START_KEY, Date.now().toString());
+        this.trackEvent('chatbot_session_start');
+      }
+    },
+    
+    // Track a user question
+    trackQuestion: function(question) {
+      this.trackEvent('chatbot_question', {
+        // Optional: truncate long questions to avoid URL length issues
+        question: question.substring(0, 100) + (question.length > 100 ? '...' : '')
+      });
+    },
+    
+    // Track session end with duration
+    trackSessionEnd: function() {
+      const startTime = parseInt(sessionStorage.getItem(SESSION_START_KEY) || Date.now());
+      const duration = Math.floor((Date.now() - startTime) / 1000); // duration in seconds
+      
+      // Get number of questions in this session
+      const history = JSON.parse(sessionStorage.getItem(SESSION_KEY) || '[]');
+      const questionCount = history.filter(item => item.role === 'user').length;
+      
+      this.trackEvent('chatbot_session_end', {
+        duration_seconds: duration,
+        questions_count: questionCount
+      });
+    },
+    
+    // Generic event tracking function using GoatCounter
+    trackEvent: function(eventName, params = {}) {
+      if (typeof window.goatcounter !== 'undefined') {
+        // Convert params to URL query parameters
+        const paramString = Object.entries(params)
+          .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+          .join('&');
+          
+        // Track event in GoatCounter
+        window.goatcounter.count({
+          path: `${eventName}${paramString ? '?' + paramString : ''}`,
+          event: true
+        });
+        
+        console.log(`Tracked event: ${eventName}`, params);
+      } else {
+        console.log('GoatCounter not available, event not tracked:', eventName, params);
+      }
     }
-  }
+  };
   
   // Default proficiency level
   let proficiencyLevel = sessionStorage.getItem(PROFICIENCY_KEY) || 'Intermediate';
@@ -123,11 +204,13 @@
     if (existingModal) {
       // If modal exists, close it
       console.log("Closing existing chat modal");
+      Analytics.trackSessionEnd(); // Track session end when closing
       existingModal.remove();
     } else {
       // If no modal exists, open a new one
       console.log("Opening new chat modal");
       openChatModal();
+      Analytics.initSession(); // Initialize session when opening
     }
   }
 
@@ -434,6 +517,11 @@
       btn.className = 'chatbot-suggestion-btn';
       btn.textContent = question;
       btn.onclick = () => {
+        // Track follow-up question selection
+        Analytics.trackEvent('chatbot_followup_click', {
+          question: question.substring(0, 100) + (question.length > 100 ? '...' : '')
+        });
+        
         document.getElementById('chatbot-input').value = question;
         sendMessage();
       };
@@ -450,6 +538,9 @@
     const typing = document.getElementById('chatbot-typing');
     const text = input.value.trim();
     if (!text) return;
+    
+    // Track the user question
+    Analytics.trackQuestion(text);
     
     // Add user message to UI with new styling
     const userMsgDiv = document.createElement('div');
@@ -613,6 +704,11 @@
           const citationId = this.getAttribute('data-citation');
           const citationElement = document.getElementById(`citation-${citationId}`);
           if (citationElement) {
+            // Track citation click
+            Analytics.trackEvent('chatbot_citation_click', {
+              citation_id: citationId
+            });
+            
             citationElement.scrollIntoView({ behavior: 'smooth' });
             citationElement.style.backgroundColor = '#fffde7';
             setTimeout(() => {
@@ -628,6 +724,11 @@
         link.addEventListener('click', function(e) {
           e.preventDefault();
           const url = this.getAttribute('data-url');
+          
+          // Track source navigation
+          Analytics.trackEvent('chatbot_source_navigation', {
+            url: url.substring(0, 100)
+          });
           
           // Save chat state before navigating
           saveState();
@@ -649,9 +750,13 @@
   }
 
   function clearHistory() {
+    // Track session end before clearing
+    Analytics.trackSessionEnd();
+    
     // Clear session storage
     sessionStorage.removeItem(SESSION_KEY);
     sessionStorage.removeItem(SUMMARY_KEY);
+    sessionStorage.removeItem(SESSION_START_KEY); // Also clear session start time
     
     // Reset conversation summary
     conversationSummary = '';
@@ -661,6 +766,9 @@
     if (messages) {
       messages.innerHTML = '<div style="text-align:center;padding:15px;color:#6b7280;font-size:13px;">Welcome to the AI Education Chatbot! I can answer questions about AI concepts from the course. What would you like to know?</div>';
     }
+    
+    // Start a new session
+    Analytics.initSession();
     
     console.log("Chat history cleared");
   }
@@ -673,5 +781,17 @@
       };
       return charsToReplace[tag] || tag;
     });
+  }
+
+  // Determine current environment based on hostname
+  function getApiUrl() {
+    const hostname = window.location.hostname;
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      console.log('Using local API endpoint');
+      return API_CONFIG.local;
+    } else {
+      console.log('Using production API endpoint');
+      return API_CONFIG.production;
+    }
   }
 })(); 
