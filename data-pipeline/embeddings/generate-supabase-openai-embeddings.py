@@ -20,6 +20,7 @@ import json
 import time
 import uuid
 import argparse
+import re
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 
@@ -35,9 +36,19 @@ load_dotenv()
 ROOT_DIR = Path(__file__).resolve().parents[2] # ai-education root directory
 DATA_DIR = ROOT_DIR / "data-pipeline" / "data"
 INPUT_FILE = DATA_DIR / "structured-content.json"
-EMBEDDING_MODEL = os.getenv('EMBEDDING_MODEL', "text-embedding-ada-002")  # OpenAI model (1536 dimensions)
+EMBEDDING_MODEL = os.getenv('EMBEDDING_MODEL', "text-embedding-3-small")  # Updated default to newer model
 BATCH_SIZE = int(os.getenv('BATCH_SIZE', 20))  # OpenAI recommends batches of 20
 MAX_TOKENS = int(os.getenv('MAX_TOKENS', 8191))  # OpenAI token limit for embeddings
+
+# Set a higher token limit for text-embedding-3-large model if used
+if EMBEDDING_MODEL == "text-embedding-3-large":
+    MAX_TOKENS = 8191  # Maximum for text-embedding-3-large
+elif EMBEDDING_MODEL == "text-embedding-3-small":
+    MAX_TOKENS = 8191  # Maximum for text-embedding-3-small
+elif EMBEDDING_MODEL == "text-embedding-ada-002":
+    MAX_TOKENS = 8191  # Maximum for text-embedding-ada-002
+
+print(f"Using maximum token limit of {MAX_TOKENS} for model {EMBEDDING_MODEL}")
 
 # OpenAI API configuration
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -220,7 +231,10 @@ class SupabaseClient:
         return response
 
 def chunk_text(text: str, max_tokens: int = MAX_TOKENS) -> List[str]:
-    """Split text into chunks of approximately max_tokens."""
+    """
+    Use entire sections as chunks, only splitting if they exceed max_tokens.
+    This preserves the semantic coherence of sections.
+    """
     # Simple approximation: ~4 chars per token for English text
     chars_per_token = 4
     max_chars = max_tokens * chars_per_token
@@ -228,12 +242,81 @@ def chunk_text(text: str, max_tokens: int = MAX_TOKENS) -> List[str]:
     # If text is short enough, return as is
     if len(text) <= max_chars:
         return [text]
+    
+    # For longer sections, we need to split but we'll try to do it intelligently
+    # Look for natural breakpoints like headers, bullet points, or paragraph breaks
+    
+    # First try splitting by headers (indicated by numbers followed by period and space)
+    header_pattern = r'(\d+\.\s+[A-Z][^\.]+\.)'
+    header_splits = re.split(header_pattern, text)
+    
+    if len(header_splits) > 1:
+        # We found headers to split on
+        chunks = []
+        current_chunk = ""
+        current_length = 0
         
-    # Split into sentences and combine into chunks
+        for i in range(len(header_splits)):
+            segment = header_splits[i]
+            segment_length = len(segment)
+            
+            # If adding this segment would exceed max_chars, start a new chunk
+            if current_length + segment_length > max_chars and current_chunk:
+                chunks.append(current_chunk.strip())
+                current_chunk = segment
+                current_length = segment_length
+            else:
+                current_chunk += segment
+                current_length += segment_length
+        
+        # Add the last chunk
+        if current_chunk:
+            chunks.append(current_chunk.strip())
+        
+        return chunks
+    
+    # If no headers found, try paragraph breaks
+    paragraphs = text.split('\n\n')
+    if len(paragraphs) > 1:
+        chunks = []
+        current_chunk = ""
+        current_length = 0
+        
+        for paragraph in paragraphs:
+            paragraph = paragraph.strip()
+            if not paragraph:
+                continue
+                
+            paragraph_length = len(paragraph)
+            
+            # If adding this paragraph exceeds max_chars, start a new chunk
+            if current_length + paragraph_length > max_chars and current_chunk:
+                chunks.append(current_chunk)
+                current_chunk = paragraph
+                current_length = paragraph_length
+            else:
+                if current_chunk:
+                    current_chunk += "\n\n" + paragraph
+                else:
+                    current_chunk = paragraph
+                current_length += paragraph_length
+                
+        # Add the last chunk
+        if current_chunk:
+            chunks.append(current_chunk)
+            
+        return chunks
+    
+    # If no natural breaks found, fall back to sentence-based chunking
+    # but with larger chunks and more overlap
     sentences = text.split('. ')
     chunks = []
     current_chunk = []
     current_length = 0
+    
+    # Use a 20% overlap between chunks
+    overlap_chars = int(max_chars * 0.2)
+    overlap_sentences = []
     
     for sentence in sentences:
         sentence = sentence.strip()
@@ -248,9 +331,22 @@ def chunk_text(text: str, max_tokens: int = MAX_TOKENS) -> List[str]:
         
         # If adding this sentence exceeds max_chars, start a new chunk
         if current_length + sentence_length > max_chars and current_chunk:
+            # Add the current chunk with any overlap sentences from previous chunk
             chunks.append(' '.join(current_chunk))
-            current_chunk = [sentence]
-            current_length = sentence_length
+            
+            # Start new chunk with overlap from previous chunk (for context continuity)
+            overlap_length = 0
+            for s in reversed(current_chunk):
+                if overlap_length + len(s) <= overlap_chars:
+                    overlap_sentences.insert(0, s)
+                    overlap_length += len(s)
+                else:
+                    break
+            
+            # New chunk starts with overlap sentences plus current sentence
+            current_chunk = overlap_sentences + [sentence]
+            current_length = sum(len(s) for s in current_chunk)
+            overlap_sentences = []
         else:
             current_chunk.append(sentence)
             current_length += sentence_length
@@ -285,22 +381,36 @@ def process_structured_content(input_file: Path, embedding_generator: OpenAIEmbe
     all_texts = []
     id_to_index_map = {}
     
-    # First pass: collect all texts for embedding generation
+    print("Using section-level chunking strategy for improved context retention")
+    
+    # First pass: collect all sections for embedding generation
     for page in pages:
         page_id = page.get("id", str(uuid.uuid4()))
         sections = page.get("sections", [])
         
+        print(f"Processing page: {page.get('title', 'Untitled')} with {len(sections)} sections")
+        
         for section in sections:
             section_content = section.get("content", "")
+            section_id = section.get("id", str(uuid.uuid4()))
+            
             if not section_content:
+                print(f"  Skipping empty section: {section.get('title', 'Untitled')}")
                 continue
-                
-            # Chunk content if needed
+            
+            print(f"  Processing section: {section.get('title', 'Untitled')} ({len(section_content)} chars)")
+            
+            # Try to keep each section as a single chunk if possible
+            # Only split if it exceeds the token limit
             chunks = chunk_text(section_content)
+            print(f"    Split into {len(chunks)} chunks")
+            
+            # Create a parent item for the first chunk to maintain the section relationship
+            parent_chunk_id = str(uuid.uuid4())
             
             for i, chunk in enumerate(chunks):
                 # Generate a unique ID for this chunk
-                chunk_id = str(uuid.uuid4())
+                chunk_id = parent_chunk_id if i == 0 else str(uuid.uuid4())
                 
                 # Store the text and its index
                 all_texts.append(chunk)
@@ -309,30 +419,33 @@ def process_structured_content(input_file: Path, embedding_generator: OpenAIEmbe
                 # Prepare content item (without embedding for now)
                 content_items.append({
                     "id": chunk_id,
-                    "title": section.get("title", ""),
+                    "title": section.get("title", "") + (f" (part {i+1})" if len(chunks) > 1 and i > 0 else ""),
                     "content": chunk,
                     "url": section.get("url", ""),
                     "content_type": section.get("type", ""),
                     "part_id": page.get("part_id", ""),
                     "module_id": page.get("module_id", ""),
-                    "parent_id": page_id if i > 0 else None,  # Link chunks to parent page
-                    "importance": section.get("importance", 0.7)
+                    # Only set parent_id for continuation chunks, not the first chunk
+                    "parent_id": parent_chunk_id if i > 0 else None,  
+                    "importance": section.get("importance", 0.7) * (1.0 if i == 0 else 0.9)  # Slightly lower importance for continuation chunks
                 })
                 
-                # Process links if available
-                links = section.get("links", [])
-                for link in links:
-                    link_id = str(uuid.uuid4())
-                    content_links.append({
-                        "id": link_id,
-                        "content_id": chunk_id,
-                        "link_text": link.get("text", ""),
-                        "url": link.get("url", ""),
-                        "is_internal": link.get("is_internal", False),
-                        "is_reference": link.get("is_reference", False)
-                    })
+                # Process links if available - only attach to the primary chunk
+                if i == 0:  # Only add links to the first chunk of a section
+                    links = section.get("links", [])
+                    for link in links:
+                        link_id = str(uuid.uuid4())
+                        content_links.append({
+                            "id": link_id,
+                            "content_id": chunk_id,
+                            "link_text": link.get("text", ""),
+                            "url": link.get("url", ""),
+                            "is_internal": link.get("is_internal", False),
+                            "is_reference": link.get("is_reference", False)
+                        })
     
     print(f"Collected {len(all_texts)} text chunks for embedding")
+    print(f"  Average chunk size: {sum(len(text) for text in all_texts) / len(all_texts):.1f} chars")
     
     # Generate embeddings for all texts
     embeddings = embedding_generator.generate_embeddings(all_texts)

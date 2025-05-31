@@ -82,7 +82,12 @@ def main():
             "How do agents use tools?",
             "What is tokenization?",
             "How do I build an AI application?",
-            "Explain embedding dimensions"
+            "Explain embedding dimensions",
+            "What is CRISP Prompts?",
+            "What is agentic AI?",
+            "What is an LLM Workflow?",
+            "What is an Agentic LLM Workflow?",
+            "What is an LLM Workflow?",
         ]
         
         # Run searches for each query

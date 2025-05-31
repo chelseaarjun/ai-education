@@ -54,15 +54,15 @@ def generate_embedding(text):
         print(f"Error generating embedding: {str(e)}")
         raise
 
-async def retrieve_relevant_content(query, proficiency_level="Intermediate", num_results=5):
+async def retrieve_relevant_content(query, proficiency_level="Intermediate", num_results=3):
     """Retrieve relevant content from Supabase based on the query"""
     global supabase
     
     # Set minimum relevance threshold based on proficiency
     relevance_threshold = {
         "Beginner": 0.7,
-        "Intermediate": 0.5,
-        "Expert": 0.3
+        "Intermediate": 0.6,
+        "Expert": 0.6
     }.get(proficiency_level, 0.5)
     
     try:
