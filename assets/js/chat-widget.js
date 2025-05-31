@@ -7,6 +7,24 @@
   const PROFICIENCY_KEY = 'chatbot_proficiency_level';
   const SUMMARY_KEY = 'chatbot_conversation_summary';
   
+  // API URL configuration - select based on environment
+  const API_CONFIG = {
+    local: 'http://localhost:3000/api/chat/',
+    production: 'https://ai-education-ryuu.onrender.com/api/chat/'
+  };
+  
+  // Determine current environment based on hostname
+  function getApiUrl() {
+    const hostname = window.location.hostname;
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      console.log('Using local API endpoint');
+      return API_CONFIG.local;
+    } else {
+      console.log('Using production API endpoint');
+      return API_CONFIG.production;
+    }
+  }
+  
   // Default proficiency level
   let proficiencyLevel = sessionStorage.getItem(PROFICIENCY_KEY) || 'Intermediate';
   
@@ -381,8 +399,8 @@
     input.value = '';
     typing.style.display = 'flex';
     
-    // For testing with local endpoint
-    const apiUrl = 'http://localhost:3000/api/chat/';  // Updated to point to the Python API
+    // Get API URL based on current environment
+    const apiUrl = getApiUrl();
     
     // Format request based on new Python API format
     fetch(apiUrl, {

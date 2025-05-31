@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Education Chatbot Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2563eb;
+            margin-top: 0;
+        }
+        .footer-chat-btn {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .footer-chat-btn:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+        }
+        pre {
+            background-color: #f0f2f5;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+        #status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #d1fae5;
+            color: #047857;
+        }
+        .error {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Education Chatbot Test</h1>
+        <p>This page tests the AI Education chatbot with the following configuration:</p>
+        <pre>
+- OpenAI embeddings (text-embedding-3-small)
+- Supabase for vector search
+- API running locally on port 3000
+        </pre>
+        <p>Click the chat button in the bottom right corner to start a conversation!</p>
+        
+        <div id="status"></div>
+    </div>
+
+    <button class="footer-chat-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        Ask AI Assistant
+    </button>
+
+    <!-- Include the chat widget -->
+    <script src="assets/js/chat-widget.js"></script>
+    
+    <script>
+        // Check API connection
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusDiv = document.getElementById('status');
+            
+            // Try to connect to the API
+            fetch('http://localhost:3000/')
+                .then(response => {
+                    if (response.ok) {
+                        statusDiv.innerHTML = '✅ Local API server is running and accessible';
+                        statusDiv.className = 'success';
+                        console.log('API connection successful');
+                    } else {
+                        throw new Error('API server returned status: ' + response.status);
+                    }
+                })
+                .catch(error => {
+                    statusDiv.innerHTML = '❌ Error connecting to local API server: ' + error.message;
+                    statusDiv.className = 'error';
+                    console.error('API connection error:', error);
+                });
+        });
+    </script>
+</body>
+</html> 

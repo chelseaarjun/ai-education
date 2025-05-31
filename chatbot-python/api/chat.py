@@ -1,37 +1,62 @@
 from fastapi import FastAPI, Request, HTTPException
-from sentence_transformers import SentenceTransformer
 import os
 import json
 import time
+import openai
 from supabase import create_client, Client
 from dotenv import load_dotenv
 from anthropic import Anthropic
+from tenacity import retry, wait_exponential, stop_after_attempt
 
 app = FastAPI()
 load_dotenv()
 
 # Initialize clients
-supabase_url = os.environ.get("SUPABASE_URL")
-supabase_key = os.environ.get("SUPABASE_KEY")
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+EMBEDDING_MODEL = os.environ.get("EMBEDDING_MODEL", "text-embedding-3-small")
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
 anthropic_api_key = os.environ.get("ANTHROPIC_API_KEY")
 
-# Initialize model - will be loaded on first request
-model = None
-anthropic = None
+# Initialize OpenAI
+openai.api_key = OPENAI_API_KEY
+
+# Initialize anthropic
+anthropic = None if not anthropic_api_key else Anthropic(api_key=anthropic_api_key)
+
+# Initialize Supabase client - will be loaded on first request
+supabase = None
+
+@app.on_event("startup")
+async def startup():
+    """Initialize Supabase client on startup."""
+    global supabase
+    try:
+        supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+        print(f"Connected to Supabase: {SUPABASE_URL}")
+    except Exception as e:
+        print(f"Error initializing Supabase: {str(e)}")
 
 @app.get("/")
 def read_root():
     return {"message": "AI Education Chat API"}
 
+@retry(wait=wait_exponential(min=1, max=10), stop=stop_after_attempt(3))
+def generate_embedding(text):
+    """Generate embedding using OpenAI API with retries."""
+    try:
+        response = openai.embeddings.create(
+            model=EMBEDDING_MODEL,
+            input=text
+        )
+        return response.data[0].embedding
+    except Exception as e:
+        print(f"Error generating embedding: {str(e)}")
+        raise
+
 async def retrieve_relevant_content(query, proficiency_level="Intermediate", num_results=5):
     """Retrieve relevant content from Supabase based on the query"""
-    global model
-    
-    # Initialize model if not already loaded
-    if model is None:
-        start_time = time.time()
-        model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
-        print(f"Model loaded in {time.time() - start_time:.2f} seconds")
+    global supabase
     
     # Set minimum relevance threshold based on proficiency
     relevance_threshold = {
@@ -41,11 +66,12 @@ async def retrieve_relevant_content(query, proficiency_level="Intermediate", num
     }.get(proficiency_level, 0.5)
     
     try:
-        # Initialize Supabase client
-        supabase = create_client(supabase_url, supabase_key)
+        # Initialize Supabase client if not already loaded
+        if supabase is None:
+            supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
         
-        # Generate embedding for the query
-        embedding = model.encode(query).tolist()
+        # Generate embedding using OpenAI
+        embedding = generate_embedding(query)
         
         # Search Supabase
         response = supabase.rpc(
@@ -69,7 +95,7 @@ async def retrieve_relevant_content(query, proficiency_level="Intermediate", num
                 "title": item.get("title", "Unknown"),
                 "url": item.get("url", "Unknown"),
                 "relevance_score": item.get("similarity", 0.0),
-                "section_title": item.get("section_title", "")
+                "section_title": item.get("title", "")  # Use title as section_title
             })
         
         return sources
@@ -154,7 +180,6 @@ def format_conversation_history(history):
 @app.post("/")
 async def chat(request: Request):
     """Main chat handler function"""
-    global anthropic
     
     try:
         # Parse request
@@ -166,10 +191,6 @@ async def chat(request: Request):
         
         if not message:
             raise HTTPException(status_code=400, detail="Message is required")
-        
-        # Initialize Anthropic client if not already loaded
-        if anthropic is None and anthropic_api_key:
-            anthropic = Anthropic(api_key=anthropic_api_key)
         
         # Retrieve relevant content
         retrieved_content = await retrieve_relevant_content(

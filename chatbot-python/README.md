@@ -1,12 +1,13 @@
 # AI Education Chatbot API
 
-A Python-based backend for the AI Education chatbot using sentence-transformers for embeddings, Supabase for vector search, and Anthropic Claude for response generation.
+A Python-based backend for the AI Education chatbot using OpenAI embeddings, Supabase for vector search, and Anthropic Claude for response generation.
 
 ## Setup
 
 ### Prerequisites
-- Conda (Anaconda or Miniconda)
+- Python 3.9+ or Conda (Anaconda or Miniconda)
 - Supabase account with pgvector extension enabled
+- OpenAI API key (for embeddings)
 - Anthropic API key (optional, for Claude integration)
 
 ### Installation
@@ -33,6 +34,13 @@ python server.py
 ```
 
 The API will be available at http://localhost:3000
+
+## Testing
+
+To test the search functionality with OpenAI embeddings:
+```
+python test_openai_supabase.py
+```
 
 ## API Endpoints
 
@@ -74,4 +82,8 @@ npm install -g vercel
 vercel
 ```
 
-The `vercel.json` file contains the necessary configuration for Python serverless functions. 
+The `vercel.json` file contains the necessary configuration for Python serverless functions.
+
+## Technical Notes
+
+This application now uses OpenAI's embedding models (text-embedding-3-small by default) instead of sentence-transformers. The embedding dimension is 1536, which is compatible with the Supabase pgvector extension. The database schema has been updated to support these embeddings. 
