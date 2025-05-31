@@ -1,19 +1,15 @@
 {
-  "version": 3,
-  "env": {
-    "ANTHROPIC_API_KEY": "",
-    "KV_REST_API_URL": "",
-    "KV_REST_API_TOKEN": ""
-  },
-  "functions": {
-    "chatbot/api/**/*.js": {
-      "runtime": "nodejs18.x"
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
     }
-  },
+  ],
   "routes": [
     {
-      "src": "/chatbot/api/(.*)",
-      "dest": "/chatbot/api/$1",
+      "src": "/api/(.*)",
+      "dest": "/api/$1",
       "methods": ["GET", "POST", "OPTIONS"],
       "headers": {
         "Access-Control-Allow-Origin": "https://ai-course.arjunasoknair.com",
@@ -22,11 +18,14 @@
       }
     },
     {
-      "src": "/chatbot/frontend/(.*)",
-      "dest": "/chatbot/frontend/$1",
+      "src": "/frontend/(.*)",
+      "dest": "/frontend/$1",
       "headers": {
         "Cache-Control": "public, max-age=31536000, immutable"
       }
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 } 
