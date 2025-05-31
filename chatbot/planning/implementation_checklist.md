@@ -15,17 +15,17 @@ mkdir -p tests/manual
 ```
 
 ### Copy Planning Docs
-- [ ] Save this documentation in `chatbot/planning/`
-- [ ] Reference these docs when prompting Cursor
-- [ ] Update checklist as you progress
+- [X] Save this documentation in `chatbot/planning/`
+- [X] Reference these docs when prompting Cursor
+- [X] Update checklist as you progress
 
 ## Phase 1: Foundation (Day 1)
 
 ### 1.1 Vercel Configuration
-- [ ] **Cursor Prompt**: "Create Vercel setup" (from prompts doc)
-- [ ] Create `vercel.json`
-- [ ] Create `package.json` with dependencies
-- [ ] Test: Deploy basic "Hello World" function
+- [X] **Cursor Prompt**: "Create Vercel setup" (from prompts doc)
+- [X] Create `vercel.json`
+- [X] Create `package.json` with dependencies
+- [X] Test: Deploy basic "Hello World" function
 
 ### 1.2 Content Extraction
 - [ ] **Cursor Prompt**: "Create content extraction script"

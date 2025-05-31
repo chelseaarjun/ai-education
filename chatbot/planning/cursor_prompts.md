@@ -70,6 +70,7 @@ Create a vanilla JavaScript chat widget that:
 - Integrates with existing chatbot placeholder in the course website
 - Maintains conversation history within session
 - Shows typing indicators during API calls
+- Support Begin, Intermediate, Expert 
 - Displays follow-up question buttons
 - Handles errors gracefully with retry options
 - Matches the existing site design (clean, educational)
