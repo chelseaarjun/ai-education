@@ -155,9 +155,50 @@ ai-education/
 │   ├── css/           # Stylesheet files
 │   ├── js/            # JavaScript files
 │   └── images/        # Images and diagrams
+├── chatbot/           # AI-powered chatbot for the education platform
+│   ├── api/           # API handlers for the chatbot
+│   ├── frontend/      # Frontend components
+│   └── utils/         # Utility functions
+├── data-pipeline/     # Data processing pipeline for the chatbot
+│   ├── extraction/    # Scripts for extracting structured content
+│   ├── embeddings/    # Scripts for generating embeddings
+│   ├── supabase/      # Setup scripts and schema for Supabase
+│   └── utils/         # Utility functions for embeddings
+├── lab/               # Hands-on lab materials
+│   ├── data/          # Data files for labs
+│   └── notebooks/     # Jupyter notebooks
+├── modules/           # Course modules content
 ├── pages/             # Individual lesson pages
 └── index.html         # Main course homepage
 ```
+
+## AI Education Chatbot
+
+The repository includes an AI-powered chatbot that helps students learn about AI concepts:
+
+- **Serverless Architecture**: Uses Supabase with pgvector for vector search
+- **Context-Aware Responses**: Retrieves relevant course content to answer questions
+- **Proficiency Level Adaptation**: Adjusts responses based on user's knowledge level
+- **Follow-up Suggestions**: Provides relevant follow-up questions to deepen learning
+
+To set up and use the chatbot:
+
+```bash
+# Install dependencies for both components
+npm install
+
+# Set up environment files
+npm run setup
+
+# Process content and generate embeddings
+npm run extract-content
+npm run generate-embeddings
+
+# Start the chatbot server
+npm run dev
+```
+
+For more details, see the [chatbot README](chatbot/README-supabase.md).
 
 ## Contents
 
