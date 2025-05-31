@@ -37,20 +37,45 @@
     // Remove disabled attribute
     btn.removeAttribute('disabled');
     
-    // Force override any disabled styling with !important
-    btn.style.setProperty('opacity', '1', 'important');
+    // Apply new styles that match test-chatbot.html
+    btn.style.setProperty('background-color', '#2563eb', 'important');
+    btn.style.setProperty('color', 'white', 'important');
+    btn.style.setProperty('border', 'none', 'important');
+    btn.style.setProperty('padding', '10px 20px', 'important');
+    btn.style.setProperty('border-radius', '50px', 'important');
     btn.style.setProperty('cursor', 'pointer', 'important');
+    btn.style.setProperty('position', 'fixed', 'important');
+    btn.style.setProperty('bottom', '20px', 'important');
+    btn.style.setProperty('right', '20px', 'important');
+    btn.style.setProperty('box-shadow', '0 4px 12px rgba(37, 99, 235, 0.2)', 'important');
+    btn.style.setProperty('display', 'flex', 'important');
+    btn.style.setProperty('align-items', 'center', 'important');
+    btn.style.setProperty('gap', '8px', 'important');
+    btn.style.setProperty('font-weight', '500', 'important');
+    btn.style.setProperty('transition', 'all 0.2s ease', 'important');
+    btn.style.setProperty('opacity', '1', 'important');
     btn.style.setProperty('pointer-events', 'auto', 'important');
     btn.style.setProperty('filter', 'none', 'important');
-    btn.style.setProperty('color', 'inherit', 'important');
-    btn.style.setProperty('background-color', 'transparent', 'important');
+    
+    // Update content with SVG icon
+    btn.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+      <span class="footer-label">Ask AI Assistant</span>
+    `;
     
     // Add hover effect for better feedback
     btn.addEventListener('mouseenter', () => {
-      btn.style.setProperty('opacity', '0.8', 'important');
+      btn.style.setProperty('background-color', '#1d4ed8', 'important');
+      btn.style.setProperty('transform', 'translateY(-2px)', 'important');
+      btn.style.setProperty('box-shadow', '0 6px 16px rgba(37, 99, 235, 0.3)', 'important');
     });
+    
     btn.addEventListener('mouseleave', () => {
-      btn.style.setProperty('opacity', '1', 'important');
+      btn.style.setProperty('background-color', '#2563eb', 'important');
+      btn.style.setProperty('transform', 'translateY(0)', 'important');
+      btn.style.setProperty('box-shadow', '0 4px 12px rgba(37, 99, 235, 0.2)', 'important');
     });
     
     // Add click event
