@@ -1,0 +1,14 @@
+name: ai-education-chatbot-python
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - pip=24.0
+  - fastapi=0.110.0
+  - uvicorn=0.29.0
+  - python-dotenv=1.0.1
+  - sentence-transformers==2.5.1
+  - pip:
+    - supabase==2.15.2
+    - anthropic==0.52.1
