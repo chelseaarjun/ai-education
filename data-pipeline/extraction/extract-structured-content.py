@@ -40,11 +40,9 @@ print(f"OUTPUT_FILE: {OUTPUT_FILE}")
 # Ensure output directory exists
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-# Elements to ignore (these contain navigation, footers, etc.)
+# Elements to ignore after extracting their information (navigation, footers, etc.)
 IGNORE_SELECTORS = [
     '.course-nav',
-    '.module-nav',
-    'nav',
     '.site-footer',
     'footer',
     'script',
@@ -94,6 +92,39 @@ def get_content_type(file_path):
         return CONTENT_TYPES["MODULE"]
     return CONTENT_TYPES["SECTION"]
 
+def extract_nav_sections(soup, url):
+    """Extract section IDs and titles from module-nav elements."""
+    nav_sections = []
+    module_nav = soup.select_one('.module-nav')
+    
+    if module_nav:
+        print(f"  Found module-nav in {url}")
+        
+        # First try to find buttons with data-section attributes (in newer modules)
+        for button in module_nav.find_all('button', attrs={'data-section': True}):
+            section_id = button.get('data-section')
+            if section_id:
+                nav_sections.append({
+                    "id": section_id,
+                    "title": clean_text(button.get_text()),
+                    "url": f"{url}#{section_id}"
+                })
+                print(f"    Found nav section (button): {section_id} - {clean_text(button.get_text())}")
+        
+        # Also check for regular anchor links with href="#section-id" (in older modules)
+        for link in module_nav.find_all('a'):
+            href = link.get('href', '')
+            if href.startswith('#'):
+                section_id = href[1:]  # Remove the # character
+                nav_sections.append({
+                    "id": section_id,
+                    "title": clean_text(link.get_text()),
+                    "url": f"{url}#{section_id}"
+                })
+                print(f"    Found nav section (link): {section_id} - {clean_text(link.get_text())}")
+    
+    return nav_sections
+
 def extract_links(element, base_url):
     """Extract all links from an HTML element."""
     links = []
@@ -138,41 +169,86 @@ def extract_links(element, base_url):
     return links
 
 def extract_sections(soup, url, content_type):
-    """Extract sections from the page based on module-section class and headings."""
+    """Extract sections from the page based on module-nav and section IDs."""
     sections = []
+    
+    # First, extract section IDs from module-nav
+    nav_sections = extract_nav_sections(soup, url)
+    nav_section_ids = {section["id"] for section in nav_sections}
+    
+    # Create a mapping of section ID to nav title
+    nav_titles = {section["id"]: section["title"] for section in nav_sections}
+    
+    # Clone the soup to keep original for later
+    soup_copy = BeautifulSoup(str(soup), 'html.parser')
     
     # Remove elements we want to ignore
     for selector in IGNORE_SELECTORS:
-        for element in soup.select(selector):
+        for element in soup_copy.select(selector):
             element.decompose()
     
-    # Find all module-section elements
-    module_sections = soup.select('.module-section')
+    # Process each section with an ID from navigation
+    processed_sections = set()
     
-    # If no module-section found, try content-inner or main content
-    if not module_sections:
-        main_content = soup.select_one('.content-inner, main, #content-inner, .content, body')
-        if main_content:
-            module_sections = [main_content]
-    
-    # Process each module section
-    for module_section in module_sections:
-        # Get section ID if it exists or generate one from its position
-        section_id = module_section.get('id', f"section-{len(sections)}")
-        
-        # Get section title from first heading or element with class "section-title"
-        section_title_elem = module_section.find(class_="section-title") or module_section.find(['h1', 'h2', 'h3'])
-        section_title = clean_text(section_title_elem.get_text()) if section_title_elem else "Untitled Section"
-        
-        # Find all headings within this section to identify subsections
-        headings = module_section.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
-        
-        # If no headings, treat the entire section as one content block
-        if not headings:
-            section_text = clean_text(module_section.get_text())
-            section_type = CONTENT_TYPES["SECTION"]
+    # Find all sections with IDs matching nav_section_ids
+    for section_id in nav_section_ids:
+        section_elem = soup_copy.find(id=section_id)
+        if section_elem:
+            # Get section title from navigation or from first heading
+            section_title = nav_titles.get(section_id)
+            if not section_title:
+                heading = section_elem.find(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
+                section_title = clean_text(heading.get_text()) if heading else "Untitled Section"
             
-            # Extract links
+            # Extract content
+            section_text = clean_text(section_elem.get_text())
+            links = extract_links(section_elem, url)
+            
+            if section_text:
+                sections.append({
+                    "id": section_id,
+                    "title": section_title,
+                    "content": section_text,
+                    "type": CONTENT_TYPES["SECTION"],
+                    "importance": 0.9,  # High importance for nav sections
+                    "links": links,
+                    "url": f"{url}#{section_id}"
+                })
+                processed_sections.add(section_id)
+                print(f"    Processed section: {section_id}")
+    
+    # If no sections were found from nav, try finding module-section elements
+    if not sections:
+        module_sections = soup_copy.select('.module-section')
+        
+        # If no module-section found, try content-inner or main content
+        if not module_sections:
+            main_content = soup_copy.select_one('.content-inner, main, #content-inner, .content, body')
+            if main_content:
+                module_sections = [main_content]
+        
+        # Process each module section
+        for i, module_section in enumerate(module_sections):
+            # Get section ID if it exists
+            section_id = module_section.get('id')
+            
+            # Skip already processed sections
+            if section_id in processed_sections:
+                continue
+            
+            # If no ID, generate one (but don't use it in URL)
+            if not section_id:
+                section_id = f"section-{i}"
+                section_url = url  # No fragment if no ID
+            else:
+                section_url = f"{url}#{section_id}"
+            
+            # Get section title
+            section_title_elem = module_section.find(['h1', 'h2', 'h3'])
+            section_title = clean_text(section_title_elem.get_text()) if section_title_elem else f"Section {i+1}"
+            
+            # Extract content
+            section_text = clean_text(module_section.get_text())
             links = extract_links(module_section, url)
             
             if section_text:
@@ -180,76 +256,17 @@ def extract_sections(soup, url, content_type):
                     "id": section_id,
                     "title": section_title,
                     "content": section_text,
-                    "type": section_type,
-                    "importance": 0.8,  # Default importance for sections
+                    "type": CONTENT_TYPES["SECTION"],
+                    "importance": 0.8,
                     "links": links,
-                    "url": f"{url}#{section_id}"
+                    "url": section_url
                 })
-            continue
-        
-        # Process each heading as a potential subsection
-        for i, heading in enumerate(headings):
-            # Get heading text
-            title = clean_text(heading.get_text())
-            if not title:
-                continue
-                
-            # Generate a stable section ID from the heading text or use the heading ID if available
-            subsection_id = heading.get('id', re.sub(r'[^a-z0-9]+', '-', title.lower()))
-            
-            # Get importance based on heading level
-            importance = HEADING_IMPORTANCE.get(heading.name, 0.5)
-            
-            # Determine section type based on heading level
-            if heading.name in ['h1', 'h2']:
-                section_type = CONTENT_TYPES["SECTION"]
-            else:
-                section_type = CONTENT_TYPES["SUBSECTION"]
-                
-            # Find all content until the next heading
-            content_elements = []
-            links = []
-            
-            # Get the next sibling elements until we hit another heading or the end of the section
-            next_elem = heading.next_sibling
-            while next_elem:
-                # Stop if we hit the next heading in our list
-                if next_elem.name in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] and i < len(headings) - 1:
-                    if next_elem == headings[i + 1]:
-                        break
-                
-                # Extract text if it's a content element
-                if hasattr(next_elem, 'get_text'):
-                    text = clean_text(next_elem.get_text())
-                    if text and next_elem.name not in ['script', 'style', 'nav']:
-                        content_elements.append(text)
-                        
-                    # Extract links from this element
-                    if hasattr(next_elem, 'find_all'):
-                        element_links = extract_links(next_elem, url)
-                        links.extend(element_links)
-                
-                next_elem = next_elem.next_sibling
-            
-            # Join content elements
-            content = " ".join(content_elements)
-            
-            # Only add if there's actual content
-            if content:
-                sections.append({
-                    "id": subsection_id,
-                    "title": title,
-                    "content": content,
-                    "type": section_type,
-                    "importance": importance,
-                    "links": links,
-                    "url": f"{url}#{subsection_id}"
-                })
+                processed_sections.add(section_id)
     
     # If we still don't have any sections, try to process the whole page
     if not sections:
         print(f"Warning: No sections found in {url}, processing as a single section")
-        page_content = clean_text(soup.get_text())
+        page_content = clean_text(soup_copy.get_text())
         if page_content:
             sections.append({
                 "id": "page-content",
@@ -257,9 +274,26 @@ def extract_sections(soup, url, content_type):
                 "content": page_content,
                 "type": CONTENT_TYPES["SECTION"],
                 "importance": 0.7,
-                "links": extract_links(soup, url),
+                "links": extract_links(soup_copy, url),
                 "url": url
             })
+    
+    # Add module URL as the first "section" for module pages
+    if content_type == CONTENT_TYPES["MODULE"] and len(sections) > 0:
+        # Create a "whole page" section that represents the entire module
+        page_title = soup.title.string if soup.title else os.path.basename(url)
+        module_name = os.path.splitext(os.path.basename(url))[0].replace('-', ' ').title()
+        
+        # Insert as the first section
+        sections.insert(0, {
+            "id": "module-overview",
+            "title": f"{module_name} Overview",
+            "content": f"This is the main page for the {module_name} module.",
+            "type": CONTENT_TYPES["SECTION"],
+            "importance": 1.0,  # Highest importance
+            "links": [],
+            "url": url  # URL without fragment for the main module page
+        })
     
     return sections
 
@@ -329,6 +363,12 @@ def extract_parent_child_relationships(pages):
     # Map of URL to page
     url_to_page = {page["url"]: page for page in pages}
     
+    # Also map URLs with fragments to their base pages
+    for page in pages:
+        base_url = page["url"].split("#")[0]
+        if base_url != page["url"]:
+            url_to_page[base_url] = page
+    
     # For each page, look for links to other pages
     for page in pages:
         page["children"] = []
@@ -351,10 +391,18 @@ def extract_parent_child_relationships(pages):
             
             for link in section["links"]:
                 if link["is_internal"]:
+                    # Handle both URLs with and without fragments
+                    target_url = link["url"]
+                    base_url = target_url.split("#")[0]
+                    
                     # Try to find the target page
-                    target_url = link["url"].split("#")[0]  # Remove fragment
+                    target_page = None
                     if target_url in url_to_page:
                         target_page = url_to_page[target_url]
+                    elif base_url in url_to_page:
+                        target_page = url_to_page[base_url]
+                    
+                    if target_page:
                         # Add as child if not already present
                         if target_page["id"] not in [child["id"] for child in page["children"]]:
                             page["children"].append({

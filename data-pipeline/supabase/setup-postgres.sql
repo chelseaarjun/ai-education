@@ -1,15 +1,10 @@
--- AI Education Vector Database Schema
--- For use with Supabase and pgvector
+-- pgvector setup script for Render PostgreSQL
+-- Run this script to initialize the database schema for the AI Education chatbot
 
--- Enable vector extension (if not already enabled)
+-- Enable pgvector extension
 CREATE EXTENSION IF NOT EXISTS vector;
 
--- Drop existing tables and functions
-DROP TABLE IF EXISTS content_links;
-DROP TABLE IF EXISTS course_content;
-DROP FUNCTION IF EXISTS match_course_content;
-
--- Create course_content table with 1536 dimensions for OpenAI embeddings
+-- Course content table with vector support for OpenAI embeddings (1536 dimensions)
 CREATE TABLE IF NOT EXISTS course_content (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     title TEXT NOT NULL,
@@ -20,10 +15,10 @@ CREATE TABLE IF NOT EXISTS course_content (
     module_id TEXT,
     parent_id UUID,
     importance REAL DEFAULT 0.7,
-    embedding VECTOR(1536)
+    embedding vector(1536)
 );
 
--- Create content_links table
+-- Links table for tracking references
 CREATE TABLE IF NOT EXISTS content_links (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     content_id UUID REFERENCES course_content(id) ON DELETE CASCADE,
@@ -33,9 +28,9 @@ CREATE TABLE IF NOT EXISTS content_links (
     is_reference BOOLEAN DEFAULT FALSE
 );
 
--- Create similarity search function for 1536 dimensions
+-- Function for similarity search with cosine distance
 CREATE OR REPLACE FUNCTION match_course_content(
-    query_embedding VECTOR(1536),
+    query_embedding vector(1536),
     match_threshold FLOAT DEFAULT 0.5,
     match_count INT DEFAULT 5
 )
@@ -65,12 +60,37 @@ BEGIN
 END;
 $$;
 
--- Create index for faster search
-CREATE INDEX IF NOT EXISTS course_content_embedding_idx ON course_content 
+-- Create vector search index
+CREATE INDEX IF NOT EXISTS course_content_embedding_idx 
+ON course_content 
 USING ivfflat (embedding vector_cosine_ops)
 WITH (lists = 100);
 
--- Grant access to the Supabase service role
-GRANT ALL ON TABLE course_content TO service_role;
-GRANT ALL ON TABLE content_links TO service_role;
-GRANT EXECUTE ON FUNCTION match_course_content TO service_role; 
+-- Optional: Add helper functions for content management
+
+-- Function to clear all data (for re-indexing)
+CREATE OR REPLACE FUNCTION clear_course_content()
+RETURNS void
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    DELETE FROM content_links;
+    DELETE FROM course_content;
+END;
+$$;
+
+-- Function to count indexed content
+CREATE OR REPLACE FUNCTION count_indexed_content()
+RETURNS TABLE (
+    content_count BIGINT,
+    links_count BIGINT
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN QUERY
+    SELECT
+        (SELECT COUNT(*) FROM course_content) AS content_count,
+        (SELECT COUNT(*) FROM content_links) AS links_count;
+END;
+$$; 

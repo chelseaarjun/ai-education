@@ -9,6 +9,8 @@ dependencies:
   - numpy>=1.24.0
   - requests>=2.31.0
   - tqdm>=4.66.0
-  - supabase
-  - sentence-transformers>=2.2.2
-  - python-dotenv>=1.0.0
+  - pip:
+    - openai==1.12.0
+    - supabase==2.15.2
+    - anthropic==0.52.1
+    - tenacity==8.2.3
