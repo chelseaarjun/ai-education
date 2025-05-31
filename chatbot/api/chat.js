@@ -117,18 +117,17 @@ GUIDELINES:
 - For off-topic questions, politely redirect to course material
 - If uncertain, indicate when you need more information
 - If technical explanations are needed, provide examples
-- Include citations when referencing specific content
+- Use your general knowledge of AI and ML to provide accurate information 
 
 COURSE KNOWLEDGE:
 ${formattedContent || "No specific course content available for this query."}
 
 ANSWER FORMAT:
 1. Provide a clear, direct answer to the question
-2. Include citations where appropriate, using [1], [2], etc.
-3. Suggest 1-3 relevant follow-up questions
+2. Suggest at least 1 to max 3 relevant follow-up questions
 
-IMPORTANT: You MUST use the response_formatter tool to structure your response with the exact JSON schema provided.
-Your answer should have 'answer.text', 'answer.citations', 'followUpQuestions', and 'conversationSummary'.
+IMPORTANT: Do not cite specific sources in your responsesYou MUST use the response_formatter tool to structure your response with the exact JSON schema provided.
+Your answer should have 'answer.text', 'followUpQuestions', and 'conversationSummary'.
 `;
 }
 
@@ -156,19 +155,7 @@ async function generateResponse(systemPrompt, formattedHistory, userQuestion) {
       answer: {
         type: "object",
         properties: {
-          text: { type: "string" },
-          citations: {
-            type: "array",
-            items: {
-              type: "object",
-              properties: {
-                id: { type: "number" },
-                text: { type: "string" },
-                location: { type: "string" }
-              },
-              required: ["id", "text"]
-            }
-          }
+          text: { type: "string" }
         },
         required: ["text"]
       },
@@ -281,11 +268,7 @@ async function generateResponse(systemPrompt, formattedHistory, userQuestion) {
     // Note: This matches the format we extract from the real API
     return {
       answer: {
-        text: "Large Language Models (LLMs) are sophisticated AI systems trained on vast amounts of text data to understand and generate human-like language. They work by predicting the next word in a sequence based on patterns learned during training.",
-        citations: [
-          { id: 1, text: "AI Foundations - LLM Introduction", location: "module1/llms.html" },
-          { id: 2, text: "Machine Learning Basics", location: "module2/ml_basics.html" }
-        ]
+        text: "Large Language Models (LLMs) are sophisticated AI systems trained on vast amounts of text data to understand and generate human-like language. They work by predicting the next word in a sequence based on patterns learned during training."
       },
       followUpQuestions: [
         "How do LLMs work?",
@@ -357,8 +340,7 @@ function parseResponse(response) {
 function getFallbackResponse(reason) {
   return {
     answer: {
-      text: `I'm sorry, I couldn't generate a proper response. ${reason}. Please try again.`,
-      citations: []
+      text: `I'm sorry, I couldn't generate a proper response. ${reason}. Please try again.`
     },
     followUpQuestions: [
       "What are Large Language Models?",

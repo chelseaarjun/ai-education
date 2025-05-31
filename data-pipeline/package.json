@@ -1,0 +1,17 @@
+{
+  "name": "ai-education-data-pipeline",
+  "version": "1.0.0",
+  "description": "Data processing pipeline for AI Education chatbot",
+  "private": true,
+  "scripts": {
+    "setup-supabase": "node supabase/setup.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.6",
+    "@xenova/transformers": "^2.15.1",
+    "dotenv": "^16.4.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+} 
