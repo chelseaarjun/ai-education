@@ -303,7 +303,7 @@
     // Clear messages display
     const messages = document.getElementById('chatbot-messages');
     if (messages) {
-      messages.innerHTML = '<div style="text-align:center;padding:15px;color:#6b7280;font-size:13px;">Chat history cleared. Ask a new question to start the conversation.</div>';
+      messages.innerHTML = '<div style="text-align:center;padding:15px;color:#6b7280;font-size:13px;">Welcome to the AI Education Chatbot! I can answer questions about AI concepts from the course. What would you like to know?</div>';
     }
     
     console.log("Chat history cleared");
