@@ -738,21 +738,82 @@
     const citationsDiv = document.createElement('div');
     citationsDiv.className = 'chatbot-citation';
     
+    console.log('Current page path:', window.location.pathname);
+    
+    // Function to resolve URLs properly
+    function resolveUrl(url) {
+      // If it's already an absolute URL, return it as is
+      if (url.startsWith('http://') || url.startsWith('https://')) {
+        return url;
+      }
+      
+      // Get the base URL for the site
+      const origin = window.location.origin;
+      console.log(`Original URL: ${url}`);
+      
+      // Handle index.html - it should always be at the root
+      if (url === 'index.html' || url.startsWith('index.html#')) {
+        return `${origin}/${url}`;
+      }
+      
+      // Remove any duplicate 'pages/' paths
+      let cleanUrl = url;
+      while (cleanUrl.includes('pages/pages/')) {
+        cleanUrl = cleanUrl.replace('pages/pages/', 'pages/');
+      }
+      
+      // If the URL doesn't explicitly start with 'pages/' but references a page
+      // that should be in the pages directory, add the 'pages/' prefix
+      if (!cleanUrl.startsWith('/') && 
+          !cleanUrl.startsWith('pages/') && 
+          !cleanUrl.startsWith('assets/') &&
+          cleanUrl.endsWith('.html')) {
+        cleanUrl = `pages/${cleanUrl}`;
+      }
+      
+      // Ensure URL starts with a slash for joining with origin
+      if (!cleanUrl.startsWith('/')) {
+        cleanUrl = `/${cleanUrl}`;
+      }
+      
+      // Remove any double slashes (except for protocol://)
+      cleanUrl = cleanUrl.replace(/([^:])\/\//g, '$1/');
+      
+      // Join with origin
+      const fullUrl = `${origin}${cleanUrl}`;
+      console.log(`Resolved URL: ${fullUrl}`);
+      
+      return fullUrl;
+    }
+    
     const citationsList = sources
       .filter(source => source.relevance_score > 0.5) // Only show relevant sources
       .map(source => {
-        // Simple fix for duplicate pages/ in URLs
-        let sourceUrl = source.url || '';
+        const sourceUrl = resolveUrl(source.url || '');
         
-        // Replace any occurrence of pages/pages/ with just pages/
-        while (sourceUrl.includes('pages/pages/')) {
-          sourceUrl = sourceUrl.replace('pages/pages/', 'pages/');
+        // Create a display version of the URL that's shorter and more readable
+        let displayUrl = source.url || '';
+        
+        // For displayUrl, we want to show a clean path like "pages/mcp.html#connections-lifecycle"
+        // or for index.html, just show the anchor like "index.html#ai-evolution"
+        
+        // First remove any http/https and domain parts
+        displayUrl = displayUrl.replace(/^(https?:\/\/)?([^\/]+\/)?/, '');
+        
+        // If there's no path (just hash), make sure we show the file
+        if (displayUrl.startsWith('#')) {
+          displayUrl = 'index.html' + displayUrl;
+        }
+        
+        // If no hash, but it's a simple file, use that
+        if (!displayUrl.includes('#') && !displayUrl.includes('/')) {
+          displayUrl = displayUrl;
         }
         
         return `<div id="citation-${source.id}">
           <a href="${sourceUrl}" class="source-link" data-url="${sourceUrl}" style="color:${PRIMARY_COLOR};text-decoration:none;font-weight:bold;">[${source.id}]</a> 
           ${source.title}${source.section_title ? ` - ${source.section_title}` : ''}
-          (<a href="${sourceUrl}" class="source-link" data-url="${sourceUrl}" style="color:${PRIMARY_COLOR};">${sourceUrl}</a>)
+          (<a href="${sourceUrl}" class="source-link" data-url="${sourceUrl}" style="color:${PRIMARY_COLOR};">${displayUrl}</a>)
         </div>`;
       }).join('');
     
