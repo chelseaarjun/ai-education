@@ -88,6 +88,14 @@ async def startup():
     """Initialize Supabase client on startup."""
     global supabase
     try:
+        # Log environment variable status (sanitized)
+        print("=== Environment Status ===")
+        print(f"SUPABASE_URL set: {bool(SUPABASE_URL)}")
+        print(f"SUPABASE_KEY set: {bool(SUPABASE_KEY)}")
+        print(f"OPENAI_API_KEY set: {bool(OPENAI_API_KEY)}")
+        print(f"ANTHROPIC_API_KEY set: {bool(anthropic_api_key)}")
+        print("========================")
+        
         supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
         print(f"Connected to Supabase: {SUPABASE_URL}")
     except Exception as e:
@@ -124,12 +132,16 @@ async def retrieve_relevant_content(query, proficiency_level="Intermediate", num
     try:
         # Initialize Supabase client if not already loaded
         if supabase is None:
+            print("Supabase client not initialized during startup, attempting now...")
             supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
         
         # Generate embedding using OpenAI
+        print(f"Generating embedding for query: '{query[:30]}...'")
         embedding = generate_embedding(query)
+        print("Successfully generated embedding")
         
         # Search Supabase
+        print("Calling Supabase RPC function 'match_course_content'")
         response = supabase.rpc(
             'match_course_content',
             {
@@ -140,7 +152,10 @@ async def retrieve_relevant_content(query, proficiency_level="Intermediate", num
         ).execute()
         
         if hasattr(response, 'error') and response.error:
+            print(f"Supabase RPC returned error: {response.error}")
             raise Exception(response.error)
+        
+        print(f"Supabase returned {len(response.data)} results")
         
         # Format results for prompt and citations
         sources = []
@@ -156,16 +171,21 @@ async def retrieve_relevant_content(query, proficiency_level="Intermediate", num
         
         # Deduplicate sources before returning them
         deduplicated_sources = deduplicate_citations(sources)
+        print(f"Returning {len(deduplicated_sources)} deduplicated sources")
         return deduplicated_sources
     except Exception as e:
         print(f"Error retrieving content: {str(e)}")
+        print(f"Exception type: {type(e).__name__}")
+        import traceback
+        print(f"Traceback: {traceback.format_exc()}")
+        print("Returning fallback data instead")
         # Return fallback data
         return [
             {
                 "id": 1,
                 "content": "Large Language Models (LLMs) are sophisticated AI systems trained on vast amounts of text data to understand and generate human-like language.",
                 "title": "AI Foundations",
-                "url": "module1/llms.html",
+                "url": "pages/llms.html#introduction",
                 "relevance_score": 0.85,
                 "section_title": "Introduction to LLMs"
             },
@@ -173,7 +193,7 @@ async def retrieve_relevant_content(query, proficiency_level="Intermediate", num
                 "id": 2,
                 "content": "LLMs work through a process called transformer architecture, which allows them to process text in parallel and learn complex relationships between words and concepts.",
                 "title": "AI Technical Concepts",
-                "url": "module2/transformers.html",
+                "url": "pages/llms.html#architecture",
                 "relevance_score": 0.75,
                 "section_title": "Transformer Architecture"
             }
