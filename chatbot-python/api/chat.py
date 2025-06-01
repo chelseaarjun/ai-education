@@ -373,7 +373,7 @@ async def chat(request: Request):
                             structured_data = json.loads(structured_data)
                         except json.JSONDecodeError:
                             print(f"Error parsing response as JSON: {structured_data}")
-                            return get_fallback_response("Invalid response format")
+                            return get_fallback_response("Invalid response format", conversation_summary)
                     
                     # Check if answer is a JSON string and parse it
                     if isinstance(structured_data.get("answer"), str):
@@ -407,22 +407,38 @@ async def chat(request: Request):
                         return chat_response.model_dump()
                     except Exception as e:
                         print(f"Error validating response with Pydantic: {str(e)}")
-                        return get_fallback_response(f"Data validation error: {str(e)}")
+                        return get_fallback_response(f"Data validation error: {str(e)}", conversation_summary)
                 else:
                     # Fallback to mock response if extraction fails
-                    return get_fallback_response("Could not parse model response")
+                    return get_fallback_response("Could not parse model response", conversation_summary)
             except Exception as e:
-                print(f"Error calling Anthropic API: {str(e)}")
-                return get_fallback_response(f"API error: {str(e)}")
+                error_message = str(e)
+                print(f"Error calling Anthropic API: {error_message}")
+                
+                # Check for overloaded error (code 529)
+                if "overloaded_error" in error_message or "529" in error_message:
+                    return ChatResponse(
+                        answer=Answer(text="Antropio's service is currently experiencing high traffic. This is a temporary issue with our provider. Please wait a moment and try your question again."),
+                        followUpQuestions=[
+                            "What are Large Language Models?",
+                            "How does AI help in education?",
+                            "What are the basics of machine learning?"
+                        ],
+                        conversationSummary=conversation_summary or "Conversation about AI education topics.",
+                        sources=[]
+                    ).model_dump()
+                
+                # For other errors, use the regular fallback
+                return get_fallback_response(f"API error: {error_message}", conversation_summary)
         else:
             # Return mock response if Anthropic API key is not available
-            return get_fallback_response("API key not configured")
+            return get_fallback_response("API key not configured", conversation_summary)
     
     except Exception as e:
         print(f"Error in chat handler: {str(e)}")
-        return get_fallback_response(f"Error: {str(e)}")
+        return get_fallback_response(f"Error: {str(e)}", conversation_summary)
 
-def get_fallback_response(reason):
+def get_fallback_response(reason, conversation_summary=None):
     """Get a fallback response when structured response parsing fails"""
     return ChatResponse(
         answer=Answer(text=f"I'm sorry, I couldn't generate a proper response. {reason}. Please try again."),
@@ -431,5 +447,5 @@ def get_fallback_response(reason):
             "How does AI help in education?",
             "What are the basics of machine learning?"
         ],
-        conversationSummary="Conversation about AI education topics."
+        conversationSummary=conversation_summary or "Conversation about AI education topics."
     ).model_dump() 
