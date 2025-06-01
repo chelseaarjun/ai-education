@@ -7,7 +7,7 @@ from supabase import create_client, Client
 from dotenv import load_dotenv
 from anthropic import Anthropic
 from tenacity import retry, wait_exponential, stop_after_attempt
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 from typing import List, Optional
 
 app = FastAPI()
@@ -32,6 +32,20 @@ supabase = None
 # Define Pydantic models for response structure
 class Answer(BaseModel):
     text: str = Field(description="The main text response to the user's question")
+    
+    @classmethod
+    def validate_answer(cls, v):
+        if isinstance(v, str):
+            try:
+                # Try to parse it as JSON
+                parsed = json.loads(v)
+                if isinstance(parsed, dict) and "text" in parsed:
+                    return cls(text=parsed["text"])
+            except (json.JSONDecodeError, TypeError):
+                pass
+        elif isinstance(v, dict) and "text" in v:
+            return cls(text=v["text"])
+        return v
 
 class Source(BaseModel):
     id: int = Field(description="Unique identifier for the source")
@@ -55,6 +69,20 @@ class ChatResponse(BaseModel):
         default_factory=list, 
         description="List of sources referenced in the answer"
     )
+    
+    @model_validator(mode='before')
+    def parse_answer(cls, data):
+        if isinstance(data, dict) and 'answer' in data:
+            if isinstance(data['answer'], str):
+                try:
+                    # Try to parse as JSON
+                    answer_json = json.loads(data['answer'])
+                    if isinstance(answer_json, dict):
+                        data['answer'] = answer_json
+                except (json.JSONDecodeError, TypeError):
+                    # If it's not valid JSON, create an answer object
+                    data['answer'] = {'text': data['answer']}
+        return data
 
 @app.on_event("startup")
 async def startup():
@@ -312,6 +340,17 @@ async def chat(request: Request):
                         except json.JSONDecodeError:
                             print(f"Error parsing response as JSON: {structured_data}")
                             return get_fallback_response("Invalid response format")
+                    
+                    # Check if answer is a JSON string and parse it
+                    if isinstance(structured_data.get("answer"), str):
+                        try:
+                            # Try to parse as JSON
+                            answer_json = json.loads(structured_data["answer"])
+                            if isinstance(answer_json, dict):
+                                structured_data["answer"] = answer_json
+                        except (json.JSONDecodeError, TypeError):
+                            # If it's not valid JSON, create an answer object
+                            structured_data["answer"] = {"text": structured_data["answer"]}
                     
                     # Add sources information
                     source_list = [

@@ -1,7 +1,15 @@
+# Main dependencies
 fastapi==0.110.0
-openai==1.12.0
+pydantic==2.3.0
+uvicorn==0.23.2
+python-dotenv==1.0.0
+anthropic==0.4.0
 supabase==2.15.2
+openai==1.12.0
 tenacity==8.2.3
-python-dotenv==1.0.1
-uvicorn==0.29.0
-anthropic==0.52.1 
+
+# Testing dependencies
+pytest==7.4.2
+requests==2.31.0
+psycopg==3.1.10
+psycopg_pool==3.1.7 
