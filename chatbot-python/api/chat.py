@@ -117,9 +117,9 @@ async def retrieve_relevant_content(query, proficiency_level="Intermediate", num
     
     # Set minimum relevance threshold based on proficiency
     relevance_threshold = {
-        "Beginner": 0.7,
-        "Intermediate": 0.6,
-        "Expert": 0.6
+        "Beginner": 0.5,
+        "Intermediate": 0.5,
+        "Expert": 0.5
     }.get(proficiency_level, 0.5)
     
     try:
@@ -155,7 +155,9 @@ async def retrieve_relevant_content(query, proficiency_level="Intermediate", num
                 "section_title": item.get("title", "")  # Use title as section_title
             })
         
-        return sources
+        # Deduplicate sources before returning them
+        deduplicated_sources = deduplicate_citations(sources)
+        return deduplicated_sources
     except Exception as e:
         print(f"Error retrieving content: {str(e)}")
         # Return fallback data
@@ -177,6 +179,39 @@ async def retrieve_relevant_content(query, proficiency_level="Intermediate", num
                 "section_title": "Transformer Architecture"
             }
         ]
+
+def deduplicate_citations(results):
+    """
+    Deduplicate citation sources by URL, keeping only the highest-scoring version of each.
+    
+    # IMPLEMENTATION NOTE:
+    # Current approach: Keep highest relevance score only for each unique URL
+    # Alternative approach: Merge content from duplicate URLs to provide more comprehensive context
+    # Consider switching to merge logic if:
+    #  1. You observe answers missing important context from duplicate chunks
+    #  2. You find many closely scored duplicates with complementary information
+    #  3. You have increased the LLM's context window to handle larger prompts
+    """
+    unique_results = {}
+    
+    for result in results:
+        url = result['url']
+        
+        if url not in unique_results:
+            unique_results[url] = result
+        elif result['relevance_score'] > unique_results[url]['relevance_score']:
+            # POTENTIAL ENHANCEMENT: Instead of replacing, merge the content
+            # while keeping the higher relevance score
+            unique_results[url] = result
+    
+    # Convert back to list and reassign IDs
+    deduplicated = list(unique_results.values())
+    deduplicated.sort(key=lambda x: x['relevance_score'], reverse=True)
+    
+    for i, item in enumerate(deduplicated):
+        item['id'] = i + 1
+        
+    return deduplicated
 
 def generate_prompt(question, proficiency_level, conversation_history, conversation_summary, retrieved_content):
     """Generate the system prompt with context and retrieved content"""
