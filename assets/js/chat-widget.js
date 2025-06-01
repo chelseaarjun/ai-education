@@ -300,12 +300,47 @@
         
         .chatbot-bot-msg {
           background-color: #f0f2f5;
-          padding: 10px 12px;
+          padding: 12px 16px;
           border-radius: 12px 12px 12px 0;
           margin: 8px auto 8px 0;
           max-width: 85%;
           align-self: flex-start;
-          line-height: 1.4;
+          line-height: 1.5;
+          font-size: 15px;
+        }
+        
+        /* Enhanced formatting styles */
+        .paragraph-break {
+          height: 12px;
+        }
+        
+        .list-item {
+          display: flex;
+          margin: 8px 0;
+          align-items: flex-start;
+        }
+        
+        .list-number, .bullet-point {
+          display: inline-block;
+          color: ${PRIMARY_COLOR};
+          font-weight: 600;
+          margin-right: 8px;
+          min-width: 24px;
+        }
+        
+        .bullet-point {
+          font-size: 18px;
+          line-height: 1;
+          padding-left: 8px;
+        }
+        
+        .list-content {
+          flex: 1;
+        }
+        
+        .highlighted-term {
+          font-weight: 500;
+          color: #1a56db;
         }
         
         .chatbot-bot-msg br {
@@ -676,11 +711,19 @@
     // Convert line breaks to <br> tags
     formattedText = formattedText.replace(/\n/g, '<br>');
     
-    // Add spacing for numbered lists (1. 2. 3. etc)
-    formattedText = formattedText.replace(/(\d+\.\s)/g, '<br>$1');
+    // Add clear paragraph spacing
+    formattedText = formattedText.replace(/(<br>){2,}/g, '<div class="paragraph-break"></div>');
     
-    // Add spacing for bullet points
-    formattedText = formattedText.replace(/(\s-\s)/g, '<br> • ');
+    // Format numbered lists with improved styling (matches patterns like "1. " or "1) ")
+    formattedText = formattedText.replace(/(\d+[\.\)]\s)([^<]+)/g, 
+      '<div class="list-item"><span class="list-number">$1</span><span class="list-content">$2</span></div>');
+    
+    // Format bullet points with improved styling
+    formattedText = formattedText.replace(/(\s-\s)([^<]+)/g, 
+      '<div class="list-item"><span class="bullet-point">•</span><span class="list-content">$2</span></div>');
+    
+    // Highlight important terms (text in quotes)
+    formattedText = formattedText.replace(/"([^"]+)"/g, '<span class="highlighted-term">"$1"</span>');
     
     // Highlight citation numbers [1], [2], etc. and make them clickable
     return formattedText.replace(/\[(\d+)\]/g, function(match, citationNumber) {
