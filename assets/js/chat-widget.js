@@ -521,22 +521,13 @@
       } else if (msg.role === 'assistant') {
         const botMsg = document.createElement('div');
         botMsg.className = 'chatbot-bot-msg';
-        botMsg.textContent = escapeHTML(msg.content);
-        
-        // Add citations if present
-        if (msg.citations && msg.citations.length > 0) {
-          const citationsDiv = document.createElement('div');
-          citationsDiv.className = 'chatbot-citation';
-          
-          const citationsList = msg.citations.map(citation => 
-            `[${citation.id}] ${citation.text} (${citation.location || 'Unknown location'})`
-          ).join('<br>');
-          
-          citationsDiv.innerHTML = `<strong>Sources:</strong><br>${citationsList}`;
-          botMsg.appendChild(citationsDiv);
-        }
-        
+        botMsg.innerHTML = formatMessageWithCitations(msg.content);
         messages.appendChild(botMsg);
+        
+        // Add sources if present (instead of looking for citations)
+        if (msg.sources && msg.sources.length > 0) {
+          addSourcesSection(botMsg, msg.sources);
+        }
         
         // Add follow-up questions if present
         if (msg.followUpQuestions && msg.followUpQuestions.length > 0) {
