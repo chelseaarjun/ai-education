@@ -9,7 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
     <nav class="course-nav">
         <div class="course-nav-container">
             <div class="course-nav-logo-container">
-                <a href="${rootPath}index.html#introduction" class="course-nav-logo">AI Foundations Course</a>
+                <a href="${rootPath}index.html#introduction" class="course-nav-logo">
+                    <img src="${rootPath}assets/images/AI Foundations Logo V2.png" alt="AI Foundations" height="50" style="margin-right: 8px;">
+                    <span>AI Foundations Course</span>
+                </a>
             </div>
             <button class="course-nav-mobile-toggle" aria-label="Toggle navigation menu">☰</button>
             <div class="course-nav-menu">
