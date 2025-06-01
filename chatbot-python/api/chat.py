@@ -7,6 +7,8 @@ from supabase import create_client, Client
 from dotenv import load_dotenv
 from anthropic import Anthropic
 from tenacity import retry, wait_exponential, stop_after_attempt
+from pydantic import BaseModel, Field
+from typing import List, Optional
 
 app = FastAPI()
 load_dotenv()
@@ -26,6 +28,23 @@ anthropic = None if not anthropic_api_key else Anthropic(api_key=anthropic_api_k
 
 # Initialize Supabase client - will be loaded on first request
 supabase = None
+
+# Define Pydantic models for response structure
+class Answer(BaseModel):
+    text: str
+
+class Source(BaseModel):
+    id: int
+    title: str
+    url: str
+    section_title: str = ""
+    relevance_score: float = 0.0
+
+class ChatResponse(BaseModel):
+    answer: Answer
+    followUpQuestions: List[str] = Field(min_items=1, max_items=3)
+    conversationSummary: Optional[str] = None
+    sources: List[Source] = []
 
 @app.on_event("startup")
 async def startup():
@@ -240,27 +259,8 @@ async def chat(request: Request):
         # Format conversation history
         formatted_history = format_conversation_history(conversation_history)
         
-        # Response schema
-        response_schema = {
-            "type": "object",
-            "properties": {
-                "answer": {
-                    "type": "object",
-                    "properties": {
-                        "text": {"type": "string"}
-                    },
-                    "required": ["text"]
-                },
-                "followUpQuestions": {
-                    "type": "array",
-                    "items": {"type": "string"},
-                    "minItems": 1,
-                    "maxItems": 3
-                },
-                "conversationSummary": {"type": "string"}
-            },
-            "required": ["answer", "followUpQuestions"]
-        }
+        # Get response schema from Pydantic model
+        response_schema = ChatResponse.model_json_schema()
         
         # Generate response with Claude if API key is available
         if anthropic:
@@ -293,18 +293,18 @@ async def chat(request: Request):
                     response.content[0].type == 'tool_use' and 
                     response.content[0].name == 'response_formatter'):
                     
-                    structured_response = response.content[0].input
+                    structured_data = response.content[0].input
                     
-                    # Ensure we have proper JSON structure
-                    if isinstance(structured_response, str):
+                    # If it's a string, parse it to dict
+                    if isinstance(structured_data, str):
                         try:
-                            structured_response = json.loads(structured_response)
+                            structured_data = json.loads(structured_data)
                         except json.JSONDecodeError:
-                            print(f"Error parsing response as JSON: {structured_response}")
+                            print(f"Error parsing response as JSON: {structured_data}")
                             return get_fallback_response("Invalid response format")
                     
-                    # Add sources information to the response
-                    structured_response["sources"] = [
+                    # Add sources information
+                    source_list = [
                         {
                             "id": source["id"],
                             "title": source["title"],
@@ -314,8 +314,17 @@ async def chat(request: Request):
                         }
                         for source in retrieved_content
                     ]
+                    structured_data["sources"] = source_list
                     
-                    return structured_response
+                    # Validate and parse through Pydantic model
+                    try:
+                        # This will convert any nested JSON strings to Python objects
+                        chat_response = ChatResponse(**structured_data)
+                        # Convert back to dict for JSON response
+                        return chat_response.model_dump()
+                    except Exception as e:
+                        print(f"Error validating response with Pydantic: {str(e)}")
+                        return get_fallback_response(f"Data validation error: {str(e)}")
                 else:
                     # Fallback to mock response if extraction fails
                     return get_fallback_response("Could not parse model response")
@@ -332,14 +341,12 @@ async def chat(request: Request):
 
 def get_fallback_response(reason):
     """Get a fallback response when structured response parsing fails"""
-    return {
-        "answer": {
-            "text": f"I'm sorry, I couldn't generate a proper response. {reason}. Please try again."
-        },
-        "followUpQuestions": [
+    return ChatResponse(
+        answer=Answer(text=f"I'm sorry, I couldn't generate a proper response. {reason}. Please try again."),
+        followUpQuestions=[
             "What are Large Language Models?",
             "How does AI help in education?",
             "What are the basics of machine learning?"
         ],
-        "conversationSummary": "Conversation about AI education topics."
-    } 
+        conversationSummary="Conversation about AI education topics."
+    ).model_dump() 
