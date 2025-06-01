@@ -56,16 +56,15 @@ class Source(BaseModel):
 
 class ChatResponse(BaseModel):
     answer: Answer = Field(description="The main answer object containing the response text")
-    followUpQuestions: List[str] = Field(
-        min_items=1, 
-        max_items=3, 
+    followUpQuestions: Optional[List[str]] = Field(
+        default_factory=list,
         description="List of 1-3 relevant follow-up questions the user might want to ask next"
     )
     conversationSummary: Optional[str] = Field(
         default=None, 
         description="A concise summary (2-3 sentences) of the entire conversation so far, highlighting key topics discussed"
     )
-    sources: List[Source] = Field(
+    sources: Optional[List[Source]] = Field(
         default_factory=list, 
         description="List of sources referenced in the answer"
     )
