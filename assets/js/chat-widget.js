@@ -59,15 +59,40 @@
       if (!sessionStorage.getItem(SESSION_START_KEY)) {
         sessionStorage.setItem(SESSION_START_KEY, Date.now().toString());
         this.trackEvent('chatbot_session_start');
+        
+        // Also track a pageview for chatbot usage (aggregated stat)
+        if (typeof window.goatcounter !== 'undefined') {
+          window.goatcounter.count({
+            path: 'chatbot/usage',
+            title: 'Chatbot Usage',
+            event: false
+          });
+        }
       }
     },
     
-    // Track a user question
+    // Track a user question - use event type without question text in URL
     trackQuestion: function(question) {
-      this.trackEvent('chatbot_question', {
-        // Optional: truncate long questions to avoid URL length issues
-        question: question.substring(0, 100) + (question.length > 100 ? '...' : '')
-      });
+      // Track as a standard event without parameters in path
+      this.trackEvent('chatbot/question');
+      
+      // Log the question to console only (for debugging)
+      console.log('Question asked:', question.substring(0, 100) + (question.length > 100 ? '...' : ''));
+    },
+    
+    // Track follow-up question clicks (without the text in the URL)
+    trackFollowUpClick: function() {
+      this.trackEvent('chatbot/followup_click');
+    },
+    
+    // Track citation clicks (without specific citation in URL)
+    trackCitationClick: function(citationId) {
+      this.trackEvent('chatbot/citation_click');
+    },
+    
+    // Track source navigation (without URL in the path)
+    trackSourceNavigation: function() {
+      this.trackEvent('chatbot/source_navigation');
     },
     
     // Track session end with duration
@@ -79,29 +104,25 @@
       const history = JSON.parse(sessionStorage.getItem(SESSION_KEY) || '[]');
       const questionCount = history.filter(item => item.role === 'user').length;
       
-      this.trackEvent('chatbot_session_end', {
-        duration_seconds: duration,
-        questions_count: questionCount
-      });
+      // Track only the event without parameters in the path
+      this.trackEvent('chatbot/session_end');
+      
+      // Also log stats to console
+      console.log('Chat session ended - Duration:', duration, 'seconds, Questions:', questionCount);
     },
     
     // Generic event tracking function using GoatCounter
     trackEvent: function(eventName, params = {}) {
       if (typeof window.goatcounter !== 'undefined') {
-        // Convert params to URL query parameters
-        const paramString = Object.entries(params)
-          .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-          .join('&');
-          
-        // Track event in GoatCounter
+        // Track the event with clean path, no parameters in URL
         window.goatcounter.count({
-          path: `${eventName}${paramString ? '?' + paramString : ''}`,
+          path: eventName, // Use clean path names without parameters
           event: true
         });
         
-        console.log(`Tracked event: ${eventName}`, params);
+        console.log(`Tracked event: ${eventName}`);
       } else {
-        console.log('GoatCounter not available, event not tracked:', eventName, params);
+        console.log('GoatCounter not available, event not tracked:', eventName);
       }
     }
   };
@@ -551,9 +572,7 @@
       btn.textContent = question;
       btn.onclick = () => {
         // Track follow-up question selection
-        Analytics.trackEvent('chatbot_followup_click', {
-          question: question.substring(0, 100) + (question.length > 100 ? '...' : '')
-        });
+        Analytics.trackFollowUpClick();
         
         document.getElementById('chatbot-input').value = question;
         sendMessage();
@@ -808,9 +827,7 @@
           const citationElement = document.getElementById(`citation-${citationId}`);
           if (citationElement) {
             // Track citation click
-            Analytics.trackEvent('chatbot_citation_click', {
-              citation_id: citationId
-            });
+            Analytics.trackCitationClick(citationId);
             
             citationElement.scrollIntoView({ behavior: 'smooth' });
             citationElement.style.backgroundColor = '#fffde7';
@@ -829,9 +846,7 @@
           const url = this.getAttribute('data-url');
           
           // Track source navigation
-          Analytics.trackEvent('chatbot_source_navigation', {
-            url: url.substring(0, 100)
-          });
+          Analytics.trackSourceNavigation();
           
           // Save chat state before navigating
           saveState();
