@@ -25,7 +25,7 @@
         // Add GoatCounter script
         const script = document.createElement('script');
         script.async = true;
-        script.dataset.goatcounter = 'https://aieducation.goatcounter.com/count'; // Replace with your actual GoatCounter URL
+        script.dataset.goatcounter = 'https://ai-foundation-course.goatcounter.com/count'; // Replace with your actual GoatCounter URL
         script.src = '//gc.zgo.at/count.js';
         
         // Append script to document
