@@ -305,6 +305,13 @@
           margin: 8px auto 8px 0;
           max-width: 85%;
           align-self: flex-start;
+          line-height: 1.4;
+        }
+        
+        .chatbot-bot-msg br {
+          display: block;
+          margin-top: 5px;
+          content: "";
         }
         
         .chatbot-citation {
@@ -662,8 +669,21 @@
   // Format message text with citation numbers highlighted and clickable
   function formatMessageWithCitations(text) {
     if (!text) return '';
+    
+    // First escape HTML
+    let formattedText = escapeHTML(text);
+    
+    // Convert line breaks to <br> tags
+    formattedText = formattedText.replace(/\n/g, '<br>');
+    
+    // Add spacing for numbered lists (1. 2. 3. etc)
+    formattedText = formattedText.replace(/(\d+\.\s)/g, '<br>$1');
+    
+    // Add spacing for bullet points
+    formattedText = formattedText.replace(/(\s-\s)/g, '<br> • ');
+    
     // Highlight citation numbers [1], [2], etc. and make them clickable
-    return escapeHTML(text).replace(/\[(\d+)\]/g, function(match, citationNumber) {
+    return formattedText.replace(/\[(\d+)\]/g, function(match, citationNumber) {
       return `<a href="#" class="citation-link" data-citation="${citationNumber}" style="color:${PRIMARY_COLOR};font-weight:bold;text-decoration:none;cursor:pointer;">${match}</a>`;
     });
   }
