@@ -696,30 +696,18 @@
   function formatMessageWithCitations(text) {
     if (!text) return '';
     
-    // First escape HTML
+    // Escape HTML to prevent XSS
     let formattedText = escapeHTML(text);
     
-    // Convert line breaks to <br> tags
+    // Simply convert line breaks to <br> tags without extra formatting
     formattedText = formattedText.replace(/\n/g, '<br>');
     
-    // Add clear paragraph spacing
-    formattedText = formattedText.replace(/(<br>){2,}/g, '<div class="paragraph-break"></div>');
-    
-    // Format numbered lists with improved styling (matches patterns like "1. " or "1) ")
-    formattedText = formattedText.replace(/(\d+[\.\)]\s)([^<]+)/g, 
-      '<div class="list-item"><span class="list-number">$1</span><span class="list-content">$2</span></div>');
-    
-    // Format bullet points with improved styling
-    formattedText = formattedText.replace(/(\s-\s)([^<]+)/g, 
-      '<div class="list-item"><span class="bullet-point">•</span><span class="list-content">$2</span></div>');
-    
-    // Highlight important terms (text in quotes)
-    formattedText = formattedText.replace(/"([^"]+)"/g, '<span class="highlighted-term">"$1"</span>');
-    
     // Highlight citation numbers [1], [2], etc. and make them clickable
-    return formattedText.replace(/\[(\d+)\]/g, function(match, citationNumber) {
+    formattedText = formattedText.replace(/\[(\d+)\]/g, function(match, citationNumber) {
       return `<a href="#" class="citation-link" data-citation="${citationNumber}" style="color:${PRIMARY_COLOR};font-weight:bold;text-decoration:none;cursor:pointer;">${match}</a>`;
     });
+    
+    return formattedText;
   }
 
   // Add sources/citations if present
