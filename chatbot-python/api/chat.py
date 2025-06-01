@@ -31,20 +31,30 @@ supabase = None
 
 # Define Pydantic models for response structure
 class Answer(BaseModel):
-    text: str
+    text: str = Field(description="The main text response to the user's question")
 
 class Source(BaseModel):
-    id: int
-    title: str
-    url: str
-    section_title: str = ""
-    relevance_score: float = 0.0
+    id: int = Field(description="Unique identifier for the source")
+    title: str = Field(description="Title of the source document")
+    url: str = Field(description="URL or path to the source document")
+    section_title: str = Field(description="Title of the specific section within the document")
+    relevance_score: float = Field(description="Relevance score between 0.0 and 1.0")
 
 class ChatResponse(BaseModel):
-    answer: Answer
-    followUpQuestions: List[str] = Field(min_items=1, max_items=3)
-    conversationSummary: Optional[str] = None
-    sources: List[Source] = []
+    answer: Answer = Field(description="The main answer object containing the response text")
+    followUpQuestions: List[str] = Field(
+        min_items=1, 
+        max_items=3, 
+        description="List of 1-3 relevant follow-up questions the user might want to ask next"
+    )
+    conversationSummary: Optional[str] = Field(
+        default=None, 
+        description="A concise summary (2-3 sentences) of the entire conversation so far, highlighting key topics discussed"
+    )
+    sources: List[Source] = Field(
+        default_factory=list, 
+        description="List of sources referenced in the answer"
+    )
 
 @app.on_event("startup")
 async def startup():
